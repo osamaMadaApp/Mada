@@ -1,0 +1,106 @@
+<!--<!DOCTYPE html>-->
+<html>
+<head>
+
+    <base href="/">
+    <script src="https://unpkg.com/canvaskit-wasm@0.33.0/bin/canvaskit.js"></script>
+    <link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.33.0/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
+    <script>
+        // Configuration for CanvasKit
+        window.flutterConfiguration = {
+          canvasKitBaseUrl: "./canvaskit/"
+        };
+    </script>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MyCar">
+    <meta http-equiv="Cache-Control" content="max-age=31536000, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <meta name="robots" content="noindex"/>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png"/>
+
+    <!-- Open Graph & SEO tags -->
+    <meta property="og:title" content="MyCar"/>
+    <meta property="og:description" content="Built with UsamaCo."/>
+
+
+    <title> MyCar </title>
+    <meta name="description" content="Built with UsamaCo."/>
+
+
+    <!-- Status Bar color in Safari browser (iOS) and PWA -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1f4f8">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d2428">
+
+    <link rel="manifest" href="manifest.json">
+    <script>
+        // The value below is injected by flutter build, do not touch.
+        var serviceWorkerVersion = null;
+    </script>
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="main.dart.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.21.1/minified.js"></script>
+
+</head>
+<body>
+
+<script>
+    window.onload = () => document.getElementById('loading').style.display = 'none';
+</script>
+<script src="flutter.js"></script>
+<script>
+    // Initialize Flutter web
+    window.addEventListener('load', function () {
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: 'flutter_service_worker.js',
+      }).then(function (engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function (appRunner) {
+        return appRunner.runApp();
+      });
+    });
+</script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    const firebaseConfig = {
+ apiKey: "AIzaSyALFp2rlma2tV4qmpAfndLHYElxjpNdDxs",
+  authDomain: "mycar-5128d.firebaseapp.com",
+  projectId: "mycar-5128d",
+  storageBucket: "mycar-5128d.firebasestorage.app",
+  messagingSenderId: "159616523246",
+  appId: "1:159616523246:web:1ffbb5e091d120b710ccff",
+  measurementId: "G-KW4S20P6MK"};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+</script>
+
+<script>
+    if (
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1
+    ) {
+      var originalGetContext = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function () {
+        var contextType = arguments[0];
+        if (contextType === "webgl2") {
+          return;
+        }
+        return originalGetContext.apply(
+          this,
+          [contextType].concat(Array.prototype.slice.call(arguments, 1)),
+        );
+      };
+    }
+</script>
+
+</body>
+</html>

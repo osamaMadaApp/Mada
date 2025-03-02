@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "159616523246",
+    "project_id": "mycar-5128d",
+    "storage_bucket": "mycar-5128d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159616523246:android:632852316c24259810ccff",
+        "android_client_info": {
+          "package_name": "com.usama.mycar.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159616523246-1g0le1pl5ssvmejcbrfd0ciaqkfuioud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9uyRdCaLnsX1APYv_K0_2dQr49ewV7Vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159616523246-1g0le1pl5ssvmejcbrfd0ciaqkfuioud.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "159616523246-92qhqr5tnig7t789mds33udmb1219c6b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.usama.mycar.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
