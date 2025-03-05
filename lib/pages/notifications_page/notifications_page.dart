@@ -31,6 +31,8 @@ class _NotificationsPageWidgetState extends State<NotificationsPage> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
