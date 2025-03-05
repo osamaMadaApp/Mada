@@ -1,5 +1,9 @@
+import 'package:Mada/main.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../structure_main_flow/flutter_mada_model.dart';
+import '../../structure_main_flow/flutter_mada_theme.dart';
+import '../../structure_main_flow/flutter_mada_widgets.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import 'package:flutter/material.dart';
 import 'login_side_component_model.dart';
@@ -32,13 +36,58 @@ class _LoginSideComponent extends State<LoginSideComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: Column(
-          children: [],
-        ));
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+              FocusScope.of(context).unfocus();
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+          child: Container(
+            decoration: BoxDecoration(
+              color: FlutterMadaTheme.of(context).secondaryBackground,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 33),
+            child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(FFLocalizations.of(context).getText('login'),
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                            fontFamily: AppFonts.workSans,
+                            fontWeight: AppFonts.w700,
+                          )),
+                    ],
+                  ),
+                  FFButtonWidget(
+                    onPressed: () {
+                      context.pushNamed('HomePage');
+                    }, 
+                    text: FFLocalizations.of(context).getText('login'),
+                    options: FFButtonOptions(
+                      height: 48,
+                      padding:   EdgeInsetsDirectional.fromSTEB(181.sp, 0, 181.sp, 0),
+                      color: FlutterMadaTheme.of(context).color8EC24D,
+                      textStyle: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.white,
+                        fontFamily: AppFonts.workSans,
+                        fontWeight: AppFonts.w600,
+                      ),
+                      elevation: 0,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                ],
+              ),
+          ),
+        ),
+      ],
+    );
   }
 }

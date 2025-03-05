@@ -5,6 +5,7 @@ import 'package:Mada/pages/menu_page/menu_page.dart';
 import 'package:Mada/pages/my_order_page/my_order_page.dart';
 import 'package:Mada/pages/notifications_page/notifications_page.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -93,29 +94,36 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Mada',
-      localizationsDelegates: const [
-        FFLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: _locale,
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ],
-      theme: ThemeData(
-        brightness: Brightness.light,
-        useMaterial3: false,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.light,
-        useMaterial3: false,
-      ),
-      themeMode: _themeMode,
-      routerConfig: _router,
+    return ScreenUtilInit(
+      designSize: const Size(1024, 1366),
+      minTextAdapt: true, // Ensures text scales properly
+      splitScreenMode: true, // Helps with split-screen support
+      builder: (context, child) {
+        return MaterialApp.router(
+          title: 'Mada',
+          localizationsDelegates: const [
+            FFLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: _locale,
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+          ],
+          theme: ThemeData(
+            brightness: Brightness.light,
+            useMaterial3: false,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.light,
+            useMaterial3: false,
+          ),
+          themeMode: _themeMode,
+          routerConfig: _router,
+        );
+      },
     );
   }
 }
@@ -148,7 +156,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': const HomePage(),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
-      'MenuPage': const  MenuPage(),
+      'MenuPage': const MenuPage(),
     };
     var currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -285,7 +293,6 @@ class _NavBarPageState extends State<NavBarPage> {
                         label: Container(),
                       ),
                     ],
-
                   ),
                 ),
                 Padding(
