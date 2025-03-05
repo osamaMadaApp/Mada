@@ -50,13 +50,13 @@ class _LoginSideComponent extends State<LoginSideComponent> {
               color: FlutterMadaTheme.of(context).secondaryBackground,
               borderRadius: BorderRadius.circular(12.0),
             ),
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 33),
+            padding:   EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 33.h),
             child: Column(
                 children: [
                   Row(
                     children: [
                       Text(FFLocalizations.of(context).getText('login'),
-                          style: const TextStyle(
+                          style:   const TextStyle(
                             fontSize: 16.0,
                             color: Colors.black,
                             fontFamily: AppFonts.workSans,
@@ -67,13 +67,13 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                   FFButtonWidget(
                     onPressed: () {
                       context.pushNamed('HomePage');
-                    }, 
+                    },
                     text: FFLocalizations.of(context).getText('login'),
                     options: FFButtonOptions(
-                      height: 48,
-                      padding:   EdgeInsetsDirectional.fromSTEB(181.sp, 0, 181.sp, 0),
+                      height: 48.h,
+                      padding:   EdgeInsetsDirectional.fromSTEB(181.w, 0, 181.w, 0),
                       color: FlutterMadaTheme.of(context).color8EC24D,
-                      textStyle: const TextStyle(
+                      textStyle:   const TextStyle(
                         fontSize: 14.0,
                         color: Colors.white,
                         fontFamily: AppFonts.workSans,
