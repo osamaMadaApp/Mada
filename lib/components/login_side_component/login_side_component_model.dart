@@ -1,13 +1,12 @@
 import '../../backend/api_requests/api_manager.dart';
 import '../../structure_main_flow/flutter_mada_model.dart';
-import 'details_page.dart' show DetailsPage;
+import 'login_side_component.dart' show LoginSideComponent;
 import 'package:flutter/material.dart';
 
-class DetailsPageModel extends FlutterMadaModel<DetailsPage> {
+class LoginSideComponentModel extends FlutterMadaModel<LoginSideComponent> {
 
 
-  ApiCallResponse? getUserByIdCall;
-
+  ApiCallResponse? leaveListApiCall;
 
   @override
   void initState(BuildContext context) {

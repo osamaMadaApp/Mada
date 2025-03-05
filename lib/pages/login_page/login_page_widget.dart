@@ -36,7 +36,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 

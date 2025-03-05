@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
-import '../../pages/create_page/create_page.dart';
-import '../../pages/details/details_page.dart';
-import '../../pages/home/home_page.dart';
 import '../../pages/login_page/login_page_widget.dart';
-import '../flutter_mada_theme.dart';
 import '/auth/base_auth_user_provider.dart';
 import '/backend/schema/structs/index.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
@@ -85,33 +81,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>  FFAppState().UserModelAppState.id != 0
-          ? const NavBarPage()
-          : const LoginPageWidget(),
+      errorBuilder: (context, state) =>  const NavBarPage(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => FFAppState().UserModelAppState.id != 0
-              ? const NavBarPage()
-              : const LoginPageWidget(),
+          builder: (context, _) => const NavBarPage(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePage(),
-        ),
-        FFRoute(
-          name: 'DetailsPage',
-          path: '/detailsPage',
-          builder: (context, params) => const DetailsPage(),
-        ),
-        FFRoute(
-          name: 'CreatePage',
-          path: '/createPage',
-          builder: (context, params) => const CreatePage(),
+          builder: (context, params) => const NavBarPage(initialPage: 'HomePage'),
         ),
         FFRoute(
           name: 'LoginPage',
