@@ -1,20 +1,22 @@
 import 'dart:io' show Platform;
 
-import 'package:Mada/pages/home/home_page.dart';
-import 'package:Mada/pages/menu_page/menu_page.dart';
-import 'package:Mada/pages/my_order_page/my_order_page.dart';
-import 'package:Mada/pages/notifications_page/notifications_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'auth/firebase_auth/firebase_user_provider.dart';
-import 'auth/firebase_auth/auth_util.dart';
-import 'backend/firebase/firebase_config.dart';
+import 'package:provider/provider.dart';
+
 import '/structure_main_flow/flutter_mada_theme.dart';
+import 'auth/firebase_auth/auth_util.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'backend/firebase/firebase_config.dart';
+import 'general_constants.dart';
+import 'pages/home/home_page.dart';
+import 'pages/menu_page/menu_page.dart';
+import 'pages/my_order_page/my_order_page.dart';
+import 'pages/notifications_page/notifications_page.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';
 
@@ -35,11 +37,11 @@ void main() async {
 
   await FlutterMadaTheme.initialize();
 
-  final appState = FFAppState(); // Initialize FFAppState
+  final FFAppState appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
-    create: (context) => appState,
+    create: (BuildContext context) => appState,
     child: const MyApp(),
   ));
 }
@@ -73,12 +75,12 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier); // navigation
     setLocale(FFAppState().getSelectedLanguge());
     userStream = madaFirebaseUserStream()
-      ..listen((user) {
+      ..listen((BaseAuthUser user) {
         _appStateNotifier.update(user);
       });
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      const Duration(milliseconds: 0),
+      const Duration(),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -98,17 +100,17 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(1024, 1366),
       minTextAdapt: true, // Ensures text scales properly
       splitScreenMode: true, // Helps with split-screen support
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return MaterialApp.router(
           title: 'Mada',
-          localizationsDelegates: const [
+          localizationsDelegates: const <LocalizationsDelegate>[
             FFLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: _locale,
-          supportedLocales: const [
+          supportedLocales: const <Locale>[
             Locale('en'),
             Locale('ar'),
           ],
@@ -152,19 +154,20 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = {
+    setIsRTL(context);
+    final Map<String, StatefulWidget> tabs = <String, StatefulWidget>{
       'HomePage': const HomePage(),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
       'MenuPage': const MenuPage(),
     };
-    var currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+    int currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
       body: Row(
-        children: [
+        children: <Widget>[
           Container(
             child: Column(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: NavigationRail(
                     selectedIndex: currentIndex,
@@ -175,7 +178,7 @@ class _NavBarPageState extends State<NavBarPage> {
                       });
                     },
                     labelType: NavigationRailLabelType.none,
-                    destinations: [
+                    destinations: <NavigationRailDestination>[
                       NavigationRailDestination(
                         icon: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -193,13 +196,11 @@ class _NavBarPageState extends State<NavBarPage> {
                                     'assets/images/home.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   )
                                 : SvgPicture.asset(
                                     'assets/images/home_disabled.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   ),
                           ),
                         ),
@@ -222,13 +223,11 @@ class _NavBarPageState extends State<NavBarPage> {
                                     'assets/images/my_orders.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   )
                                 : SvgPicture.asset(
                                     'assets/images/my_orders_disabeld.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   ),
                           ),
                         ),
@@ -251,13 +250,11 @@ class _NavBarPageState extends State<NavBarPage> {
                                     'assets/images/notification.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   )
                                 : SvgPicture.asset(
                                     'assets/images/notification_disabled.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   ),
                           ),
                         ),
@@ -280,13 +277,11 @@ class _NavBarPageState extends State<NavBarPage> {
                                     'assets/images/menu.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   )
                                 : SvgPicture.asset(
                                     'assets/images/menu_disabeld.svg',
                                     width: 24.0,
                                     height: 24.0,
-                                    fit: BoxFit.contain,
                                   ),
                           ),
                         ),
@@ -301,14 +296,13 @@ class _NavBarPageState extends State<NavBarPage> {
                     'assets/images/mada_logo.svg',
                     width: 56.0,
                     height: 56.0,
-                    fit: BoxFit.contain,
                   ),
                 )
               ],
             ),
           ),
-          Expanded(
-            child: (_currentPage ?? tabs[_currentPageName]) ?? Container(),
+          const Expanded(
+            child: HomePage(),
           ),
         ],
       ),

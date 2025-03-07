@@ -1,7 +1,9 @@
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import '/structure_main_flow/flutter_mada_util.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
+import '/structure_main_flow/flutter_mada_util.dart';
+import '../../components/header_widget/header_widget.dart';
+import '../../general_exports.dart';
+import '../../index.dart';
 import 'home_page_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,15 +16,12 @@ class HomePage extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePage>
     with TickerProviderStateMixin {
   late HomePageModel _model;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
   @override
@@ -34,17 +33,24 @@ class _HomePageWidgetState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterMadaTheme.of(context).info,
-
-          body: SafeArea(
-              top: true,
-              child:  Container()),
-        ));
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+          vertical: 50.h,
+        ),
+        child: const Column(
+          children: <Widget>[
+            HeaderWidget(
+              profilePicture: testImage,
+              firstName: 'John Doe',
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
