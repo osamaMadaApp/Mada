@@ -1,4 +1,3 @@
-import 'package:Mada/main.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../structure_main_flow/flutter_mada_model.dart';

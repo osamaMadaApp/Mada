@@ -1,3 +1,4 @@
+import '../../backend/api_requests/api_calls.dart';
 import '../../structure_main_flow/flutter_mada_theme.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,10 @@ class _HomePageWidgetState extends State<HomePage>
     super.initState();
     _model = createModel(context, () => HomePageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.getDataCall = await MyCarApiGroupGroup.getSliderCall.call(authorization: "");
+      if(_model.getDataCall?.succeeded == true){
+        ///
+      }
 
     });
   }
