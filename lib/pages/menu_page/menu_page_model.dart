@@ -1,15 +1,31 @@
-import '/structure_main_flow/flutter_mada_util.dart';
-import 'menu_page.dart' show MenuPage;
-import 'package:flutter/material.dart';
+import '../../general_exports.dart';
 
-class MenuPageModel extends FlutterMadaModel<MenuPage> {
+class MenuPageModel extends ChangeNotifier implements TickerProvider {
+  MenuPageModel() {
+    tabController = TabController(
+      length: 5,
+      vsync: this,
+    );
+    tabController.addListener(() {
+      notifyListeners();
+    });
+  }
 
+  late TabController tabController;
 
   @override
-  void initState(BuildContext context) {
+  Ticker createTicker(TickerCallback onTick) {
+    return Ticker(onTick);
+  }
+
+  void changeTab(int index) {
+    tabController.animateTo(index);
+    notifyListeners();
   }
 
   @override
   void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 }

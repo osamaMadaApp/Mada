@@ -24,4 +24,6 @@ class LoginPageModel extends FlutterMadaModel<LoginPageWidget> {
   void dispose() {
     loginSideComponentModel.dispose();
   }
+
+  
 }

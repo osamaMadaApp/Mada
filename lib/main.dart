@@ -1,20 +1,15 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:provider/provider.dart';
 
-import '/structure_main_flow/flutter_mada_theme.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'general_constants.dart';
+import 'general_exports.dart';
 import 'pages/home/home_page_widget.dart';
-import 'pages/menu_page/menu_page.dart';
 import 'pages/my_order_page/my_order_page.dart';
 import 'pages/notifications_page/notifications_page.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
@@ -114,6 +109,7 @@ class _MyAppState extends State<MyApp> {
             Locale('en'),
             Locale('ar'),
           ],
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             textTheme: const TextTheme(
               headlineMedium: TextStyle(
@@ -177,7 +173,7 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     setIsRTL(context);
-    final Map<String, StatefulWidget> tabs = <String, StatefulWidget>{
+    final Map<String, dynamic> tabs = <String, dynamic>{
       'HomePage': const HomePage(),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
@@ -187,144 +183,142 @@ class _NavBarPageState extends State<NavBarPage> {
     return Scaffold(
       body: Row(
         children: <Widget>[
-          Container(
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: NavigationRail(
-                    selectedIndex: currentIndex,
-                    onDestinationSelected: (int index) {
-                      setState(() {
-                        currentIndex = index;
-                        _currentPageName = tabs.keys.toList()[index];
-                      });
-                    },
-                    labelType: NavigationRailLabelType.none,
-                    destinations: <NavigationRailDestination>[
-                      NavigationRailDestination(
-                        icon: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: currentIndex == 0
-                              ? FlutterMadaTheme.of(context).coloreff5e6
-                              : FlutterMadaTheme.of(context).colorFFFFFF,
-                          elevation: currentIndex == 0 ? 4.0 : 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                            child: currentIndex == 0
-                                ? SvgPicture.asset(
-                                    'assets/images/home.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  )
-                                : SvgPicture.asset(
-                                    'assets/images/home_disabled.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  ),
-                          ),
+          Column(
+            children: <Widget>[
+              Expanded(
+                child: NavigationRail(
+                  selectedIndex: currentIndex,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      currentIndex = index;
+                      _currentPageName = tabs.keys.toList()[index];
+                    });
+                  },
+                  labelType: NavigationRailLabelType.none,
+                  destinations: <NavigationRailDestination>[
+                    NavigationRailDestination(
+                      icon: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: currentIndex == 0
+                            ? FlutterMadaTheme.of(context).coloreff5e6
+                            : FlutterMadaTheme.of(context).colorFFFFFF,
+                        elevation: currentIndex == 0 ? 4.0 : 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                        label: Container(),
-                      ),
-                      NavigationRailDestination(
-                        icon: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: currentIndex == 1
-                              ? FlutterMadaTheme.of(context).coloreff5e6
-                              : FlutterMadaTheme.of(context).colorFFFFFF,
-                          elevation: currentIndex == 1 ? 4.0 : 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                            child: currentIndex == 1
-                                ? SvgPicture.asset(
-                                    'assets/images/my_orders.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  )
-                                : SvgPicture.asset(
-                                    'assets/images/my_orders_disabeld.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  ),
-                          ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: currentIndex == 0
+                              ? SvgPicture.asset(
+                                  'assets/images/home.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/images/home_disabled.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                ),
                         ),
-                        label: Container(),
                       ),
-                      NavigationRailDestination(
-                        icon: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: currentIndex == 2
-                              ? FlutterMadaTheme.of(context).coloreff5e6
-                              : FlutterMadaTheme.of(context).colorFFFFFF,
-                          elevation: currentIndex == 2 ? 4.0 : 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                            child: currentIndex == 2
-                                ? SvgPicture.asset(
-                                    'assets/images/notification.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  )
-                                : SvgPicture.asset(
-                                    'assets/images/notification_disabled.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  ),
-                          ),
+                      label: Container(),
+                    ),
+                    NavigationRailDestination(
+                      icon: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: currentIndex == 1
+                            ? FlutterMadaTheme.of(context).coloreff5e6
+                            : FlutterMadaTheme.of(context).colorFFFFFF,
+                        elevation: currentIndex == 1 ? 4.0 : 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                        label: Container(),
-                      ),
-                      NavigationRailDestination(
-                        icon: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: currentIndex == 3
-                              ? FlutterMadaTheme.of(context).coloreff5e6
-                              : FlutterMadaTheme.of(context).colorFFFFFF,
-                          elevation: currentIndex == 3 ? 4.0 : 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                            child: currentIndex == 3
-                                ? SvgPicture.asset(
-                                    'assets/images/menu.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  )
-                                : SvgPicture.asset(
-                                    'assets/images/menu_disabeld.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                  ),
-                          ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: currentIndex == 1
+                              ? SvgPicture.asset(
+                                  'assets/images/my_orders.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/images/my_orders_disabeld.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                ),
                         ),
-                        label: Container(),
                       ),
-                    ],
-                  ),
+                      label: Container(),
+                    ),
+                    NavigationRailDestination(
+                      icon: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: currentIndex == 2
+                            ? FlutterMadaTheme.of(context).coloreff5e6
+                            : FlutterMadaTheme.of(context).colorFFFFFF,
+                        elevation: currentIndex == 2 ? 4.0 : 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: currentIndex == 2
+                              ? SvgPicture.asset(
+                                  'assets/images/notification.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/images/notification_disabled.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                ),
+                        ),
+                      ),
+                      label: Container(),
+                    ),
+                    NavigationRailDestination(
+                      icon: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: currentIndex == 3
+                            ? FlutterMadaTheme.of(context).coloreff5e6
+                            : FlutterMadaTheme.of(context).colorFFFFFF,
+                        elevation: currentIndex == 3 ? 4.0 : 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: currentIndex == 3
+                              ? SvgPicture.asset(
+                                  'assets/images/menu.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/images/menu_disabeld.svg',
+                                  width: 24.0,
+                                  height: 24.0,
+                                ),
+                        ),
+                      ),
+                      label: Container(),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                  child: SvgPicture.asset(
-                    'assets/images/logo.svg',
-                    width: 56.0,
-                    height: 56.0,
-                  ),
-                )
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                child: SvgPicture.asset(
+                  'assets/images/logo.svg',
+                  width: 56.0,
+                  height: 56.0,
+                ),
+              )
+            ],
           ),
-          const Expanded(
-            child: HomePage(),
+          Expanded(
+            child: tabs[_currentPageName] ?? const HomePage(),
           ),
         ],
       ),
