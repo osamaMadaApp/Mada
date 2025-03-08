@@ -115,6 +115,28 @@ class _MyAppState extends State<MyApp> {
             Locale('ar'),
           ],
           theme: ThemeData(
+            textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              bodySmall: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyLarge: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             brightness: Brightness.light,
             useMaterial3: false,
           ),

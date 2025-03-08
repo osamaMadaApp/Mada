@@ -91,6 +91,7 @@ const String iconDeleteAccountWarning =
 
 const String imageHome = '${imagesPath}Rectangle 9.png';
 const String imageUser = '${imagesPath}user.png';
+const String imageGrayLogo = '${imagesPath}gray_logo.png';
 const String imageExclusive = '${imagesPath}Exclusive.png';
 const String imageAuctions = '${imagesPath}Auctions.png';
 const String imageSearch = '${imagesPath}Search.png';

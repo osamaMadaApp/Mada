@@ -22,7 +22,7 @@ class MadaText extends StatelessWidget {
       text ?? '',
       style: style ??
           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: FlutterMadaTheme.of(context).primary,
+                color: FlutterMadaTheme.of(context).color292D32,
               ),
       softWrap: softWarp,
       textAlign: textAlign,
