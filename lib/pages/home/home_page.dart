@@ -210,6 +210,7 @@ class MostPopularProjects extends StatelessWidget {
                     final int index = mostPopularProject.indexOf(item);
                     return ProjectCard(
                       horizontalPadding: 0,
+                      scrollPhysics: const NeverScrollableScrollPhysics(),
                       images:
                           mostPopularProject[index][keyPhotos] ?? <dynamic>[],
                       projectImage: mostPopularProject[index]
