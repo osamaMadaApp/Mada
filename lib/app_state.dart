@@ -95,8 +95,8 @@ class FFAppState extends ChangeNotifier {
 
 
   Map<String, dynamic> _UserJsonModel =  {};
-  Map<String, dynamic> get UserModelWithJsonState => _UserJsonModel;
-  set UserModelWithJsonState(Map<String, dynamic> value) {
+  Map<String, dynamic> get userModel => _UserJsonModel;
+  set userModel(Map<String, dynamic> value) {
     _UserJsonModel = value;
     prefs.setString('ff_UserModelWithJson', jsonEncode(value) );
   }

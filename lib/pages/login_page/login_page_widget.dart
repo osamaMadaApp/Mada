@@ -161,7 +161,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           ).request(
             onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
               if (response[keySuccess] == true) {
-                  FFAppState().UserModelWithJsonState = response['results'];
+                  FFAppState().userModel = response['results'];
                   context.pushNamed('HomePage');
               } else {
                 showToast(message: response[keyMsg]);
