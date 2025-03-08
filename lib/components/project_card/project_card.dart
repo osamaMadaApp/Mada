@@ -57,7 +57,7 @@ class ProjectCard extends StatelessWidget {
               vertical: verticalPadding ?? 8.w,
               horizontal: horizontalPadding ?? 6.w,
             ),
-            width: width ?? 280.w,
+            width: width ?? 290.w,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),

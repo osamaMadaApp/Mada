@@ -13,7 +13,7 @@ import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'general_constants.dart';
-import 'pages/home/home_page.dart';
+import 'pages/home/home_page_widget.dart';
 import 'pages/menu_page/menu_page.dart';
 import 'pages/my_order_page/my_order_page.dart';
 import 'pages/notifications_page/notifications_page.dart';

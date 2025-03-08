@@ -1,11 +1,5 @@
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import '/structure_main_flow/flutter_mada_util.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../../backend/api_requests/api_calls.dart';
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import '/structure_main_flow/flutter_mada_util.dart';
-import 'package:flutter/material.dart';
+
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../components/header_widget/header_widget.dart';
 import '../../general_exports.dart';
@@ -27,7 +21,25 @@ class _HomePageWidgetState extends State<HomePage>
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) async {
+        ApiRequest(
+          path: apiHomeScreen,
+          formatResponse: true,
+          className: 'HomeController/getHomeScreenResult',
+        ).request(
+          onSuccess: (dynamic data, dynamic response) {
+            _model.homeData = data;
+            for (dynamic image in _model.homeData[keyResults][keyHomeBanner]) {
+              _model.homeBanner.add(image[keyBannerImage]);
+            }
+            _model.mostPopularProjects =
+                _model.homeData[keyResults][keyMostPopularProject];
+            setState(() {});
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -43,96 +55,100 @@ class _HomePageWidgetState extends State<HomePage>
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 50.h,
-        ),
-        child: _model.homeData == null
-            ? const Center()
-            : SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const HeaderWidget(
-                      profilePicture: testImage,
-                      firstName: 'John Doe',
-                    ),
-                    SizedBox(height: 25.h),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          height: 700.h,
-                          constraints: BoxConstraints(
-                            maxWidth: 330.w,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 20.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterMadaTheme.of(context).colorF5F5F5,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Image.asset(imageGrayLogo),
-                                SizedBox(height: 20.h),
-                                MadaText(
-                                  FFLocalizations.of(context).getText(
-                                    'your_gateway_to_premium_life',
+      child: wrapWithModel(
+        model: _model,
+        updateCallback: () => setState(() {}),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 50.h,
+          ),
+          child: _model.homeData == null
+              ? const Center()
+              : SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      HeaderWidget(
+                        profilePicture: FFAppState().userModel[keyProfilePic],
+                        firstName: FFAppState().userModel[keyFirstName],
+                      ),
+                      SizedBox(height: 25.h),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            height: 700.h,
+                            constraints: BoxConstraints(
+                              maxWidth: 330.w,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 20.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: FlutterMadaTheme.of(context).colorF5F5F5,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Image.asset(imageGrayLogo),
+                                  SizedBox(height: 20.h),
+                                  MadaText(
+                                    FFLocalizations.of(context).getText(
+                                      'your_gateway_to_premium_life',
+                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                          color: FlutterMadaTheme.of(context)
+                                              .color292D32,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 30,
+                                        ),
                                   ),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        color: FlutterMadaTheme.of(context)
-                                            .color292D32,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                      ),
-                                ),
-                                SizedBox(height: 40.h),
-                                MadaText(
-                                  FFLocalizations.of(context).getText(
-                                    'browse_out_main_categories',
+                                  SizedBox(height: 40.h),
+                                  MadaText(
+                                    FFLocalizations.of(context).getText(
+                                      'browse_out_main_categories',
+                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                          color: FlutterMadaTheme.of(context)
+                                              .color292D32,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        color: FlutterMadaTheme.of(context)
-                                            .color292D32,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                                SizedBox(height: 20.h),
-                                HomeCategories(
-                                  menu: _model.homeData[keyResults][keyMenu],
-                                ),
-                              ],
+                                  SizedBox(height: 20.h),
+                                  HomeCategories(
+                                    menu: _model.homeData[keyResults][keyMenu],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 20.w),
-                        Expanded(
-                          child: SliderComponent(
-                            items: _model.homeBanner,
-                            height: 700.h,
+                          SizedBox(width: 20.w),
+                          Expanded(
+                            child: SliderComponent(
+                              items: _model.homeBanner,
+                              height: 700.h,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40.h),
-                    MostPopularProjects(
-                      mostPopularProject: _model.mostPopularProjects,
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 40.h),
+                      MostPopularProjects(
+                        mostPopularProject: _model.mostPopularProjects,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }
