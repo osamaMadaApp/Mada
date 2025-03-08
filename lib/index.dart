@@ -1,2 +1,1 @@
-// Export pages
-
+export 'general_constants.dart';
