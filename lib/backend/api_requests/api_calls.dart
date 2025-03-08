@@ -1,12 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-
-// import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-
-import '../../structure_main_flow/upload_data.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import 'api_manager.dart';
 import 'interceptors.dart';

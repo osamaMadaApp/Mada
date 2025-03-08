@@ -10,7 +10,9 @@ class HomePageModel extends FlutterMadaModel<HomePage> {
       formatResponse: true,
       className: 'HomeController/getHomeScreenResult',
     ).request(
-      onSuccess: (dynamic data, dynamic response) {},
+      onSuccess: (dynamic data, dynamic response) {
+
+      },
     );
   }
 

@@ -72,6 +72,9 @@ abstract class FlutterMadaTheme {
   late Color colorFF627921;
   late Color coloreff5e6;
   late Color color8EC24D;
+  late Color color989898;
+  late Color colorE1E1E1;
+  late Color colorD9D9D9;
 }
 
 DeviceSize getDeviceSize(BuildContext context) {
@@ -95,12 +98,12 @@ class LightModeTheme extends FlutterMadaTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFFD20001);
+  late Color primary = const Color(0xFF8EC24D);
   late Color color91605DEC = const Color(0xA039AFA9);
   late Color secondary = const Color(0xFF928163);
   late Color tertiary = const Color(0xFF6D604A);
   late Color alternate = const Color(0xFFC8D7E4);
-  late Color primaryText = const Color(0xFF6E7491);
+  late Color primaryText = const Color(0xFF8EC24D);
   late Color secondaryText = const Color(0xFF384E58);
   late Color primaryBackground = const Color(0xFFF1F4F8);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
@@ -112,6 +115,7 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color warning = const Color(0xFFF3C344);
   late Color error = const Color(0xFFC4454D);
   late Color info = const Color(0xFFFFFFFF);
+  late Color colorD9D9D9 = const Color(0xFFD9D9D9);
 
   late Color gray600 = const Color(0xFF6E7491);
   late Color colorFFE4E5E8 = const Color(0x80757575);
@@ -122,6 +126,8 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color colorFF627921 = const Color(0xFF626971);
   late Color coloreff5e6 = const Color(0xFFeff5e6);
   late Color color8EC24D = const Color(0xFF8EC24D);
+  late Color color989898 = const Color(0xFF989898);
+  late Color colorE1E1E1 = const Color(0xFFE1E1E1);
 }
 
 class DarkModeTheme extends FlutterMadaTheme {

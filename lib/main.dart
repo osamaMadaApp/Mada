@@ -298,7 +298,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                   child: SvgPicture.asset(
-                    'assets/images/mada_logo.svg',
+                    'assets/images/logo.svg',
                     width: 56.0,
                     height: 56.0,
                     fit: BoxFit.contain,

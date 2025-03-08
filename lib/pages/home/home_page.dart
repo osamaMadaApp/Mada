@@ -22,11 +22,6 @@ class _HomePageWidgetState extends State<HomePage>
     super.initState();
     _model = createModel(context, () => HomePageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.getDataCall = await MyCarApiGroupGroup.getSliderCall.call(authorization: "");
-      if(_model.getDataCall?.succeeded == true){
-        ///
-      }
-
     });
   }
 
