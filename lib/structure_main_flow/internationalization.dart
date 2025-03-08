@@ -180,5 +180,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Resend the code',
       'ar': 'اعادة ارسال الرمز',
     },
+    'your_gateway_to_premium_life': <String, String>{
+      'en': 'Your gateway to premium life',
+      'ar': 'بوابتك إلى الحياة المتميزة',
+    },
+    'browse_out_main_categories': <String, String>{
+      'en': 'Browse our main categories',
+      'ar': 'تصفح الفئات الرئيسية لدينا',
+    },
+    'most_popular_projects': <String, String>{
+      'en': 'Most popular projects',
+      'ar': 'المشاريع الأكثر شعبية',
+    },
   },
 ].reduce((a, b) => a..addAll(b));
