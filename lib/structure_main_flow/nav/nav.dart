@@ -81,17 +81,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>  const NavBarPage(),
+      errorBuilder: (context, state) => const LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const LoginPageWidget(),
+          builder: (context, _) => FFAppState().isLoggedIn() == true
+              ? const NavBarPage(initialPage: 'HomePage')
+              : const LoginPageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => const NavBarPage(initialPage: 'HomePage'),
+          builder: (context, params) =>
+              const NavBarPage(initialPage: 'HomePage'),
         ),
         FFRoute(
           name: 'LoginPage',

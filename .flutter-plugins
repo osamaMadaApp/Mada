@@ -1,5 +1,6 @@
 # This is a generated file; do not edit or check into version control.
 audio_session=/Users/usamaomar/.pub-cache/hosted/pub.dev/audio_session-0.1.24/
+client_information=/Users/usamaomar/.pub-cache/hosted/pub.dev/client_information-2.2.0/
 file_picker=/Users/usamaomar/.pub-cache/hosted/pub.dev/file_picker-8.1.7/
 file_selector_linux=/Users/usamaomar/.pub-cache/hosted/pub.dev/file_selector_linux-0.9.3+2/
 file_selector_macos=/Users/usamaomar/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.4+2/
@@ -8,12 +9,15 @@ firebase_auth=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_auth-5.4.1/
 firebase_auth_web=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_auth_web-5.13.7/
 firebase_core=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_core-3.11.0/
 firebase_core_web=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_core_web-2.20.0/
+firebase_messaging=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_messaging-15.2.2/
+firebase_messaging_web=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.10.2/
 firebase_performance=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_performance-0.10.1+2/
 firebase_performance_web=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_performance_web-0.1.7+8/
 firebase_storage=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_storage-12.4.1/
 firebase_storage_web=/Users/usamaomar/.pub-cache/hosted/pub.dev/firebase_storage_web-3.10.8/
 flutter_credit_card=/Users/usamaomar/.pub-cache/hosted/pub.dev/flutter_credit_card-4.0.1/
 flutter_plugin_android_lifecycle=/Users/usamaomar/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.20/
+fluttertoast=/Users/usamaomar/.pub-cache/hosted/pub.dev/fluttertoast-8.2.12/
 geolocator=/Users/usamaomar/.pub-cache/hosted/pub.dev/geolocator-12.0.0/
 geolocator_android=/Users/usamaomar/.pub-cache/hosted/pub.dev/geolocator_android-4.6.1/
 geolocator_apple=/Users/usamaomar/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.8+1/

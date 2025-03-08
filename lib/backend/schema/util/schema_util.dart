@@ -1,17 +1,24 @@
 import 'dart:convert';
+import 'dart:io';
 
 // import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
+import 'package:client_information/client_information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../../api/api_keys.dart';
+import '../../../utils/log.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../../auth/firebase_auth/auth_util.dart';
 import '../../../structure_main_flow/flutter_mada_theme.dart';
@@ -254,6 +261,64 @@ Future successErrorDialog(
   }
 }
 
+void showToast({
+  String message = '',
+}) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.CENTER,
+  );
+}
+
+Future<Map<String, dynamic>> getDeviceInfo() async {
+  String? fcId;
+
+  try {
+    fcId = await FirebaseMessaging.instance.getToken();
+
+    // ignore: avoid_catches_without_on_clauses
+  } catch (e) {
+    // Handle FormatException
+    consoleLog('Caught a FormatException: $e');
+  }
+
+  final ClientInformation deviceInfo = await ClientInformation.fetch();
+  Map<String, dynamic> data = <String, dynamic>{};
+  data = <String, dynamic>{
+    keyDeviceToken: fcId ?? '',
+    keyDeviceType: Platform.isAndroid ? platformAndroid : platformIOS,
+    keyDeviceId: deviceInfo.deviceId,
+  };
+  return data;
+}
+
+Future<String?>? getFcmToken() async {
+  try {
+    final String? token = await FirebaseMessaging.instance.getToken();
+    return token;
+    // ignore: avoid_catches_without_on_clauses
+  } catch (e) {
+    // Handle FormatException
+    consoleLog('Caught a FormatException: $e');
+    return null;
+  }
+}
+
+Future<Map<String, dynamic>> getDeviceQueryParams() async {
+  final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  final ClientInformation deviceInfo = await ClientInformation.fetch();
+  Map<String, dynamic> data = <String, dynamic>{};
+  data = <String, dynamic>{
+    keyDeviceModel: deviceInfo.osName,
+    keyDeviceName: deviceInfo.deviceName,
+    keyDeviceId: deviceInfo.deviceId,
+    keyOsVersion: deviceInfo.osVersion,
+    keyReleaseNo: packageInfo.buildNumber,
+  };
+  return data;
+}
+
 // Future performLogin(
 //     {required BuildContext context,
 //       String? email,
@@ -412,24 +477,24 @@ Future successErrorDialog(
 //   return Future.value("error");
 // }
 
-Future creatingEvent(
-    {required String typeOfBusiness, Position? position}) async {
-  ApiCallResponse? createInvolvingCall;
-  createInvolvingCall = await MyCarApiGroupGroup.createInvolvingCall.call(
-      authorization: FFAppState().UserModel.auth,
-      email: FFAppState().UserModel.emailAddress,
-      firstName: FFAppState().UserModel.name,
-      lastName: FFAppState().UserModel.name,
-      phoneNumber: FFAppState().UserModel.phoneNumber,
-      latitude: position?.latitude.toString(),
-      longitude: position?.longitude.toString(),
-      involvingType: typeOfBusiness);
-  if (createInvolvingCall.statusCode == 200) {
-    return Future.value("Success");
-  } else {
-    return Future.value("error");
-  }
-}
+// Future creatingEvent(
+//     {required String typeOfBusiness, Position? position}) async {
+//   ApiCallResponse? createInvolvingCall;
+//   createInvolvingCall = await MyCarApiGroupGroup.createInvolvingCall.call(
+//       authorization: FFAppState().UserModel.auth,
+//       email: FFAppState().UserModel.emailAddress,
+//       firstName: FFAppState().UserModel.name,
+//       lastName: FFAppState().UserModel.name,
+//       phoneNumber: FFAppState().UserModel.phoneNumber,
+//       latitude: position?.latitude.toString(),
+//       longitude: position?.longitude.toString(),
+//       involvingType: typeOfBusiness);
+//   if (createInvolvingCall.statusCode == 200) {
+//     return Future.value("Success");
+//   } else {
+//     return Future.value("error");
+//   }
+// }
 
 openNewTab({required String setUrl, required String setTitle}) {
   return html.window.open(

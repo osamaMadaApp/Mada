@@ -14,7 +14,7 @@ class OtpComponent extends StatefulWidget {
     this.onConfnfirm
   });
 
-  final void Function()? onConfnfirm;
+  final Future<void> Function()? onConfnfirm;
 
   @override
   State<OtpComponent> createState() => _OtpComponentWidgetState();
@@ -127,7 +127,7 @@ class _OtpComponentWidgetState extends State<OtpComponent>
                         ),
                       ),
                       InkWell(
-                        onTap: widget.onConfnfirm,
+                        onTap: (){},
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(0.w, 42.h, 0.w, 0.h),
                           child: Text(
@@ -147,7 +147,7 @@ class _OtpComponentWidgetState extends State<OtpComponent>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           InkWell(
-                            onTap: widget.onConfnfirm,
+                            onTap: (){},
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(0.w, 12.h, 0.w, 0.h),
                               child: Text(
@@ -171,8 +171,8 @@ class _OtpComponentWidgetState extends State<OtpComponent>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      widget.onConfnfirm?.call();
+                    onPressed: () async{
+                     await widget.onConfnfirm?.call();
                     },
                     text: FFLocalizations.of(context).getText('confirm'),
                     options: FFButtonOptions(

@@ -1,8 +1,8 @@
 // Live
-String baseUrl = 'https://api.madaproperties.sa/';
+// String baseUrl = 'https://api.madaproperties.sa/';
 
 // Staging
-// String baseUrl = 'http://api.madafinder.com/';
+String baseUrl = 'http://api.madafinder.com/';
 
 bool isLab = false;
 

@@ -20,40 +20,41 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
-    _safeInit(() {
-      if (prefs.containsKey('ff_TokenModel')) {
-        try {
-          final serializedData = prefs.getString('ff_TokenModel') ?? '{}';
-          _TokenModel =
-              TokenModelStruct.fromSerializableMap(jsonDecode(serializedData));
-        } catch (e) {
-          print("Can't decode persisted data type. Error: $e.");
-        }
-      }
-    });
+    // _safeInit(() {
+    //   if (prefs.containsKey('ff_TokenModel')) {
+    //     try {
+    //       final serializedData = prefs.getString('ff_TokenModel') ?? '{}';
+    //       _TokenModel =
+    //           TokenModelStruct.fromSerializableMap(jsonDecode(serializedData));
+    //     } catch (e) {
+    //       print("Can't decode persisted data type. Error: $e.");
+    //     }
+    //   }
+    // });
     _safeInit(() {
       if (prefs.containsKey('ff_UserModelWithJson')) {
         try {
-          final serializedData =
+          final String? serializedData =
               prefs.getString('ff_UserModelWithJson') ?? '{}';
-          _UserModelWithJson = jsonDecode(serializedData);
+         _UserJsonModel = jsonDecode(serializedData ?? '');
+         print('');
         } catch (e) {
           print("Can't decode persisted data type. Error: $e.");
         }
       }
     });
-    _safeInit(() {
-      if (prefs.containsKey('ff_UserModelAppState')) {
-        try {
-          final serializedData =
-              prefs.getString('ff_UserModelAppState') ?? '{}';
-          _UserModelAppState =
-              UserModelStruct.fromSerializableMap(jsonDecode(serializedData));
-        } catch (e) {
-          print("Can't decode persisted data type. Error: $e.");
-        }
-      }
-    });
+    // _safeInit(() {
+    //   if (prefs.containsKey('ff_UserModelAppState')) {
+    //     try {
+    //       final serializedData =
+    //           prefs.getString('ff_UserModelAppState') ?? '{}';
+    //       _UserModelAppState =
+    //           UserModelStruct.fromSerializableMap(jsonDecode(serializedData));
+    //     } catch (e) {
+    //       print("Can't decode persisted data type. Error: $e.");
+    //     }
+    //   }
+    // });
     _safeInit(() {
       _selectedLangugeAppState = prefs.getInt('ff_selectedLangugeAppState') ??
           _selectedLangugeAppState;
@@ -64,17 +65,17 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _isGust = prefs.getBool('ff_isGust') ?? _isGust;
     });
-    _safeInit(() {
-      if (prefs.containsKey('ff_UserModel')) {
-        try {
-          final serializedData = prefs.getString('ff_UserModel') ?? '{}';
-          _UserModel =
-              UserModelStruct.fromSerializableMap(jsonDecode(serializedData));
-        } catch (e) {
-          print("Can't decode persisted data type. Error: $e.");
-        }
-      }
-    });
+    // _safeInit(() {
+    //   if (prefs.containsKey('ff_UserModel')) {
+    //     try {
+    //       final serializedData = prefs.getString('ff_UserModel') ?? '{}';
+    //       _UserModel =
+    //           UserModelStruct.fromSerializableMap(jsonDecode(serializedData));
+    //     } catch (e) {
+    //       print("Can't decode persisted data type. Error: $e.");
+    //     }
+    //   }
+    // });
   }
 
   static void reset() {
@@ -88,12 +89,16 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
+  bool isLoggedIn(){
+    return  _UserJsonModel['_id']!=null;
+  }
 
-  Map<String, dynamic> _UserModelWithJson =  {};
-  Map<String, dynamic> get UserModelWithJsonState => _UserModelWithJson;
+
+  Map<String, dynamic> _UserJsonModel =  {};
+  Map<String, dynamic> get UserModelWithJsonState => _UserJsonModel;
   set UserModelWithJsonState(Map<String, dynamic> value) {
-    _UserModelWithJson = value;
-    prefs.setString('ff_UserModelWithJson', value.toString());
+    _UserJsonModel = value;
+    prefs.setString('ff_UserModelWithJson', jsonEncode(value) );
   }
 
   // void updateUserModelWithJson(Function(UserModelWithJson) updateFn) {
@@ -116,17 +121,17 @@ class FFAppState extends ChangeNotifier {
     return _selectedLangugeAppState == 1 ? 'en' : 'ar';
   }
 
-  TokenModelStruct _TokenModel = TokenModelStruct();
-  TokenModelStruct get TokenModel => _TokenModel;
-  set TokenModel(TokenModelStruct value) {
-    _TokenModel = value;
-    prefs.setString('ff_TokenModel', value.serialize());
-  }
+  // TokenModelStruct _TokenModel = TokenModelStruct();
+  // TokenModelStruct get TokenModel => _TokenModel;
+  // set TokenModel(TokenModelStruct value) {
+  //   _TokenModel = value;
+  //   prefs.setString('ff_TokenModel', value.serialize());
+  // }
 
-  void updateTokenModelStruct(Function(TokenModelStruct) updateFn) {
-    updateFn(_TokenModel);
-    prefs.setString('ff_TokenModel', _TokenModel.serialize());
-  }
+  // void updateTokenModelStruct(Function(TokenModelStruct) updateFn) {
+  //   updateFn(_TokenModel);
+  //   prefs.setString('ff_TokenModel', _TokenModel.serialize());
+  // }
 
   bool get allowCookies => _allowCookies;
   set allowCookies(bool value) {
@@ -143,28 +148,28 @@ class FFAppState extends ChangeNotifier {
     updateFn(_isGust);
     prefs.setBool('ff_isGust', _isGust);
   }
+  //
+  // UserModelStruct _UserModel = UserModelStruct();
+  // UserModelStruct get UserModel => _UserModel;
+  // set UserModel(UserModelStruct value) {
+  //   _UserModel = value;
+  //   prefs.setString('ff_UserModel', value.serialize());
+  // }
 
-  UserModelStruct _UserModel = UserModelStruct();
-  UserModelStruct get UserModel => _UserModel;
-  set UserModel(UserModelStruct value) {
-    _UserModel = value;
-    prefs.setString('ff_UserModel', value.serialize());
-  }
 
-
-  UserModelStruct _UserModelAppState = UserModelStruct();
-
-  UserModelStruct get UserModelAppState => _UserModelAppState;
-
-  set UserModelAppState(UserModelStruct value) {
-    _UserModelAppState = value;
-    prefs.setString('ff_UserModelAppState', value.serialize());
-  }
-
-  void updateUserModelAppStateStruct(Function(UserModelStruct) updateFn) {
-    updateFn(_UserModelAppState);
-    prefs.setString('ff_UserModelAppState', _UserModelAppState.serialize());
-  }
+  // UserModelStruct _UserModelAppState = UserModelStruct();
+  //
+  // UserModelStruct get UserModelAppState => _UserModelAppState;
+  //
+  // set UserModelAppState(UserModelStruct value) {
+  //   _UserModelAppState = value;
+  //   prefs.setString('ff_UserModelAppState', value.serialize());
+  // }
+  //
+  // void updateUserModelAppStateStruct(Function(UserModelStruct) updateFn) {
+  //   updateFn(_UserModelAppState);
+  //   prefs.setString('ff_UserModelAppState', _UserModelAppState.serialize());
+  // }
 
 }
 

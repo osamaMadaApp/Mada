@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import '../../api/api_keys.dart';
+import '../../api/api_request.dart';
+import '../../api/api_routes.dart';
+import '../../backend/schema/util/schema_util.dart';
 import '../../components/forget_password_component/forget_password_component.dart';
 import '../../components/otp_component/otp_component.dart';
 import '/structure_main_flow/flutter_mada_theme.dart';
@@ -45,17 +49,25 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       },
       child: Stack(
         children: [
-          Image.asset(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            'assets/images/login_main_image.png',
-            fit: BoxFit.cover,
+          Stack(
+            children: [
+              Image.asset(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                'assets/images/login_main_image.png',
+                fit: BoxFit.cover,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
+              ),
+            ],
           ),
           Scaffold(
             resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
             key: scaffoldKey,
-            backgroundColor:
-                FlutterMadaTheme.of(context).colorFFFFFF.withOpacity(0.0),
             body: SafeArea(
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
@@ -90,10 +102,32 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             _model.currentModelName = 'ForgetPasswordComponent';
           });
         },
-        onConfirmTap: () {
-          setState(() {
-            _model.currentModelName = 'OtpComponent';
-          });
+        onConfirmTap: () async{
+          final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
+         await ApiRequest(
+            path: apiLogin,
+            method: ApiMethods.post,
+            className: 'MyAppController/login',
+            header: {
+              keyLanguage: FFAppState().getSelectedLanguge(),
+            },
+            defaultHeadersValue: false,
+            body: {
+              keyCountryCode: 966,
+              keyMobile:595106753 ,
+              ...deviceInfoDetails,
+            },
+          ).request(
+            onSuccess: (dynamic data, dynamic response) {
+              if (response[keySuccess] == true) {
+                setState(() {
+                  _model.currentModelName = 'OtpComponent';
+                });
+              } else {
+                showToast(message: response[keyMsg]);
+              }
+            },
+          );
         },
       ),
     );
@@ -105,10 +139,35 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       model: _model.otpComponent,
       updateCallback: () => setState(() {}),
       child: OtpComponent(
-        onConfnfirm: () {
-          setState(() {
-            _model.currentModelName = 'OtpComponent';
-          });
+        onConfnfirm: () async{
+          final Map<String, dynamic> deviceInfo = await getDeviceQueryParams();
+          final String fcId = await getFcmToken() ?? '';
+          ApiRequest(
+            path: apiVerifyOtp,
+            method: ApiMethods.post,
+            className: 'MyAppController/verifyOtp',
+            header: {
+              keyLanguage: FFAppState().getSelectedLanguge(),
+            },
+            defaultHeadersValue: false,
+            body: {
+              keyCountryCode: 966,
+              keyMobile:595106753 ,
+              keyOtpPhone: 1234,
+              keyDeviceId: deviceInfo[keyDeviceId],
+              keyDeviceType: deviceInfo[keyDeviceModel],
+              keyDeviceToken: fcId,
+            },
+          ).request(
+            onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
+              if (response[keySuccess] == true) {
+                  FFAppState().UserModelWithJsonState = response['results'];
+                  context.pushNamed('HomePage');
+              } else {
+                showToast(message: response[keyMsg]);
+              }
+            },
+          );
         },
       ),
     );
@@ -124,7 +183,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           setState(() {
             _model.currentModelName = 'LoginSideComponent';
           });
-        }, onConfirmTap: () {
+        },
+        onConfirmTap: () {
           setState(() {
             _model.currentModelName = 'OtpComponent';
           });

@@ -7,6 +7,9 @@ PODS:
     - AppAuth/Core
   - audio_session (0.0.1):
     - Flutter
+  - client_information (1.0.0):
+    - Flutter
+    - SAMKeychain
   - DKImagePickerController/Core (4.3.9):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -46,6 +49,9 @@ PODS:
     - FirebaseAuth (~> 11.7.0)
   - Firebase/CoreOnly (11.7.0):
     - FirebaseCore (~> 11.7.0)
+  - Firebase/Messaging (11.7.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 11.7.0)
   - Firebase/Performance (11.7.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 11.7.0)
@@ -58,6 +64,10 @@ PODS:
     - Flutter
   - firebase_core (3.11.0):
     - Firebase/CoreOnly (= 11.7.0)
+    - Flutter
+  - firebase_messaging (15.2.2):
+    - Firebase/Messaging (= 11.7.0)
+    - firebase_core
     - Flutter
   - firebase_performance (0.10.1-2):
     - Firebase/Performance (= 11.7.0)
@@ -114,6 +124,15 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
+  - FirebaseMessaging (11.7.0):
+    - FirebaseCore (~> 11.7.0)
+    - FirebaseInstallations (~> 11.0)
+    - GoogleDataTransport (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Reachability (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - nanopb (~> 3.30910.0)
   - FirebasePerformance (11.7.0):
     - FirebaseCore (~> 11.7.0)
     - FirebaseInstallations (~> 11.0)
@@ -152,6 +171,8 @@ PODS:
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - Flutter (1.0.0)
   - flutter_credit_card (0.0.1):
+    - Flutter
+  - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.12):
     - FMDB/standard (= 2.7.12)
@@ -231,6 +252,7 @@ PODS:
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
   - RecaptchaInterop (100.0.0)
+  - SAMKeychain (1.5.3)
   - SDWebImage (5.20.0):
     - SDWebImage/Core (= 5.20.0)
   - SDWebImage/Core (5.20.0)
@@ -256,14 +278,17 @@ PODS:
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
+  - client_information (from `.symlinks/plugins/client_information/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.7.0`)
   - Flutter (from `Flutter`)
   - flutter_credit_card (from `.symlinks/plugins/flutter_credit_card/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
@@ -300,6 +325,7 @@ SPEC REPOS:
     - FirebaseFirestoreGRPCCPPBinary
     - FirebaseFirestoreInternalBinary
     - FirebaseInstallations
+    - FirebaseMessaging
     - FirebasePerformance
     - FirebaseRemoteConfig
     - FirebaseRemoteConfigInterop
@@ -317,18 +343,23 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - RecaptchaInterop
+    - SAMKeychain
     - SDWebImage
     - SwiftyGif
 
 EXTERNAL SOURCES:
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
+  client_information:
+    :path: ".symlinks/plugins/client_information/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_performance:
     :path: ".symlinks/plugins/firebase_performance/ios"
   firebase_storage:
@@ -340,6 +371,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_credit_card:
     :path: ".symlinks/plugins/flutter_credit_card/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   google_sign_in_ios:
@@ -379,12 +412,14 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   audio_session: 32a33910dd5bb35d54297e4b50006481071f196b
+  client_information: cd2088b683015ea782082d6562d17e0320ae7097
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
   file_picker: 09aa5ec1ab24135ccd7a1621c46c84134bfd6655
   Firebase: a64bf6a8546e6eab54f1c715cd6151f39d2329f4
   firebase_auth: 6997563f7652d7c4ce0d817c8a24282595e31a6d
   firebase_core: aa979ae726f00b3ef4ccf59dfb96170af84efbd4
+  firebase_messaging: 3af84b6a90aeac4d7a67fbf4c43a91e7083bea1f
   firebase_performance: 7ee36a1eae98c09f747a8a33024146a249a82b21
   firebase_storage: 3f6b5fcd7cc0329b2a846e262f279b45e24328c2
   FirebaseABTesting: 08b3e19b28504632a9cd03e7a796b355c5d39b27
@@ -402,6 +437,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreGRPCCPPBinary: db76d83d2b7517623f8426ed7f7a17bad2478084
   FirebaseFirestoreInternalBinary: 1850c8c72f3d7933a00a4d0bae88021df87c9e10
   FirebaseInstallations: 9347e719c3d52d8d7b9074b2c32407dd027305e9
+  FirebaseMessaging: 00ece041b71ddb52a2862ffdee73fb6e9824bd0c
   FirebasePerformance: 0c6fe140f24967b09a59c40c5ad54a623b740ad8
   FirebaseRemoteConfig: aa1d4cb05ef4caad203448dfc87842de12f1ea8d
   FirebaseRemoteConfigInterop: 98897a64aa372eac3c5b3fe2816594ccfaac55ef
@@ -410,6 +446,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: d35da127dd49edcbd07b8c07cf651a70161558b2
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_credit_card: 48fb35065294868bc6a3e7f18a42f28929b84f48
+  fluttertoast: 21eecd6935e7064cc1fcb733a4c5a428f3f24f0f
   FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   geolocator_apple: 9bcea1918ff7f0062d98345d238ae12718acfbc1
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
@@ -429,6 +466,7 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440

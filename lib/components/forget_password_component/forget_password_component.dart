@@ -86,7 +86,7 @@ class _ForgetPasswordComponentWidgetState extends State<ForgetPasswordComponent>
                         Text(FFLocalizations.of(context).getText('rest'),
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: FlutterMadaTheme.of(context).color989898,
+                              color: FlutterMadaTheme.of(context).color000000,
                               fontFamily: AppFonts.outfit,
                               fontWeight: AppFonts.w400,
                             )),

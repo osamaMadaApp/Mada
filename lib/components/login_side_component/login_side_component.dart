@@ -1,4 +1,3 @@
-
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,15 +10,11 @@ import 'package:flutter/material.dart';
 import 'login_side_component_model.dart';
 
 class LoginSideComponent extends StatefulWidget {
-
-    const LoginSideComponent({
-    super.key,
-    this.onForgetPasswordTap,
-    this.onConfirmTap
-  });
+  const LoginSideComponent(
+      {super.key, this.onForgetPasswordTap, this.onConfirmTap});
 
   final void Function()? onForgetPasswordTap;
-  final void Function()? onConfirmTap;
+  final Future<void> Function()? onConfirmTap;
 
   @override
   State<LoginSideComponent> createState() => _LoginSideComponent();
@@ -74,7 +69,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(0.w, 56.h, 0.w, 0.h),
-                        child: Text(FFLocalizations.of(context).getText('login'),
+                        child: Text(
+                            FFLocalizations.of(context).getText('login'),
                             style: TextStyle(
                               fontSize: 28.0.h,
                               color: FlutterMadaTheme.of(context).color000000,
@@ -84,14 +80,14 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0.w, 16.h, 0.w, 0.h),
-                        child:
-                            Text(FFLocalizations.of(context).getText('enterEmail'),
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: FlutterMadaTheme.of(context).color989898,
-                                  fontFamily: AppFonts.outfit,
-                                  fontWeight: AppFonts.w400,
-                                )),
+                        child: Text(
+                            FFLocalizations.of(context).getText('enterEmail'),
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: FlutterMadaTheme.of(context).color000000,
+                              fontFamily: AppFonts.outfit,
+                              fontWeight: AppFonts.w400,
+                            )),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2.5,
@@ -125,7 +121,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               labelText: FFLocalizations.of(context)
                                   .getText('emailAddress'),
                               floatingLabelStyle: TextStyle(
-                                  color: FlutterMadaTheme.of(context).color989898),
+                                  color:
+                                      FlutterMadaTheme.of(context).color989898),
                               hintStyle: TextStyle(
                                 fontSize: 16.0,
                                 color: FlutterMadaTheme.of(context).color989898,
@@ -134,13 +131,15 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterMadaTheme.of(context).colorE1E1E1,
+                                  color:
+                                      FlutterMadaTheme.of(context).colorE1E1E1,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterMadaTheme.of(context).colorE1E1E1,
+                                  color:
+                                      FlutterMadaTheme.of(context).colorE1E1E1,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
@@ -157,8 +156,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor:
-                                  FlutterMadaTheme.of(context).secondaryBackground,
+                              fillColor: FlutterMadaTheme.of(context)
+                                  .secondaryBackground,
                             ),
                             style: TextStyle(
                               fontSize: 16.0,
@@ -166,7 +165,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               fontFamily: AppFonts.outfit,
                               fontWeight: AppFonts.w400,
                             ),
-                            cursorColor: FlutterMadaTheme.of(context).primaryText,
+                            cursorColor:
+                                FlutterMadaTheme.of(context).primaryText,
                             validator: _model.textControllerValidator1
                                 .asValidator(context),
                           ),
@@ -196,8 +196,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                             decoration: InputDecoration(
                               suffixIcon: InkWell(
                                 onTap: () => safeSetState(
-                                      () => _model.passwordVisibility =
-                                  !_model.passwordVisibility,
+                                  () => _model.passwordVisibility =
+                                      !_model.passwordVisibility,
                                 ),
                                 focusNode: FocusNode(skipTraversal: true),
                                 child: Icon(
@@ -221,10 +221,11 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                                 fontFamily: AppFonts.outfit,
                                 fontWeight: AppFonts.w400,
                               ),
-                              labelText:
-                                  FFLocalizations.of(context).getText('password'),
+                              labelText: FFLocalizations.of(context)
+                                  .getText('password'),
                               floatingLabelStyle: TextStyle(
-                                  color: FlutterMadaTheme.of(context).color989898),
+                                  color:
+                                      FlutterMadaTheme.of(context).color989898),
                               hintStyle: TextStyle(
                                 fontSize: 16.0,
                                 color: FlutterMadaTheme.of(context).color989898,
@@ -233,13 +234,15 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterMadaTheme.of(context).colorE1E1E1,
+                                  color:
+                                      FlutterMadaTheme.of(context).colorE1E1E1,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterMadaTheme.of(context).colorE1E1E1,
+                                  color:
+                                      FlutterMadaTheme.of(context).colorE1E1E1,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
@@ -256,8 +259,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor:
-                                  FlutterMadaTheme.of(context).secondaryBackground,
+                              fillColor: FlutterMadaTheme.of(context)
+                                  .secondaryBackground,
                             ),
                             style: TextStyle(
                               fontSize: 16.0,
@@ -265,7 +268,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               fontFamily: AppFonts.outfit,
                               fontWeight: AppFonts.w400,
                             ),
-                            cursorColor: FlutterMadaTheme.of(context).primaryText,
+                            cursorColor:
+                                FlutterMadaTheme.of(context).primaryText,
                             validator: _model.textControllerValidator1
                                 .asValidator(context),
                           ),
@@ -276,7 +280,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(0.w, 16.h, 0.w, 0.h),
                           child: Text(
-                              FFLocalizations.of(context).getText('forgetPassword?'),
+                              FFLocalizations.of(context)
+                                  .getText('forgetPassword?'),
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: FlutterMadaTheme.of(context).color8EC24D,
@@ -286,7 +291,6 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                               )),
                         ),
                       ),
-
                     ],
                   ),
                 ],
@@ -295,19 +299,23 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   FFButtonWidget(
-                    onPressed: _model.buttonEnabled() == true ? () {
-                      setState(() {
-                        _model.textController1State =  (_model.isValidEmail ?? false);
-                      });
-                      if(_model.textController1State == false){
-                        return;
-                      }
-                      widget.onConfirmTap?.call();
-                    } : null,
+                    onPressed: _model.buttonEnabled() == true
+                        ? () async {
+                            setState(() {
+                              _model.textController1State =
+                                  (_model.isValidEmail ?? false);
+                            });
+                            if (_model.textController1State == false) {
+                              return;
+                            }
+                            await widget.onConfirmTap?.call();
+                          }
+                        : null,
                     text: FFLocalizations.of(context).getText('login'),
                     options: FFButtonOptions(
                       height: 48.h,
-                      padding:  EdgeInsetsDirectional.fromSTEB(181.w, 0, 181.w, 0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(181.w, 0, 181.w, 0),
                       color: FlutterMadaTheme.of(context).color8EC24D,
                       textStyle: const TextStyle(
                         fontSize: 14.0,
