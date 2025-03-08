@@ -71,7 +71,7 @@ class _HomePageWidgetState extends State<HomePage>
                     children: <Widget>[
                       HeaderWidget(
                         profilePicture: FFAppState().userModel[keyProfilePic],
-                        firstName: FFAppState().userModel[keyFirstName],
+                        title: FFAppState().userModel[keyFirstName],
                       ),
                       SizedBox(height: 25.h),
                       Row(

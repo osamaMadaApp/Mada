@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -102,9 +104,10 @@ abstract class FlutterMadaTheme {
 
   /// Green
   late Color color97BE5A;
+
   /// Gray
   late Color colorF5F5F5;
-
+  late Color colorD2D2D2;
 }
 
 DeviceSize getDeviceSize(BuildContext context) {
@@ -165,6 +168,7 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color error = const Color(0xFFC4454D);
   @override
   late Color info = const Color(0xFFFFFFFF);
+  @override
   late Color colorD9D9D9 = const Color(0xFFD9D9D9);
 
   @override
@@ -193,9 +197,12 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color colorF5F5F5 = const Color(0xFFF5F5F5);
   @override
   late Color color989898 = const Color(0xFF989898);
+  @override
   late Color colorE1E1E1 = const Color(0xFFE1E1E1);
   @override
   late Color color97BE5A = const Color(0xFF97BE5A);
+  @override
+  late Color colorD2D2D2 = const Color(0xFFD2D2D2);
 }
 
 class DarkModeTheme extends FlutterMadaTheme {
@@ -213,7 +220,6 @@ class DarkModeTheme extends FlutterMadaTheme {
 
   @override
   late Color primary = const Color(0xFF605DEC);
-
 }
 
 class AppFonts {

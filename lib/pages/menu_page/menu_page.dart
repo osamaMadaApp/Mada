@@ -1,193 +1,102 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nested/nested.dart';
 
-import '../../structure_main_flow/flutter_mada_theme.dart';
+import '../../components/header_widget/header_widget.dart';
+import '../../general_exports.dart';
+import '../../index.dart';
+import '../../structure_main_flow/internationalization.dart';
 
-class MenuPage extends StatefulWidget {
+class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   @override
-  State<MenuPage> createState() => _MenuPageWidgetState();
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider<MenuPageModel>(
+          create: (BuildContext context) => MenuPageModel(),
+        ),
+      ],
+      child: const Menu(),
+    );
+  }
 }
 
-class _MenuPageWidgetState extends State<MenuPage> {
-  // late MenuPageModel _model;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _model = createModel(context, () => MenuPageModel());
-  //   SchedulerBinding.instance.addPostFrameCallback((_) async {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   _model.dispose();
-  //   super.dispose();
-  // }
+class Menu extends StatelessWidget {
+  const Menu({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final MenuPageModel menuPageModel = Provider.of<MenuPageModel>(context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
-        FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        key: scaffoldKey,
         backgroundColor: FlutterMadaTheme.of(context).info,
         body: Column(
           children: <Widget>[
-            SizedBox(
-              height: 100.h,
+            SizedBox(height: 60.h),
+            Padding(
+              padding: EdgeInsets.only(
+                left: isRTL ? 30.w : 0.w,
+                right: !isRTL ? 30.w : 0.w,
+              ),
+              child: HeaderWidget(
+                title: FFLocalizations.of(context).getText('menu'),
+                subTitle:
+                    FFLocalizations.of(context).getText('mada_properties'),
+                showProfilePic: false,
+              ),
             ),
+            SizedBox(height: 55.h),
             Expanded(
               child: CustomTabs(
                 tabs: <TabItem>[
                   TabItem(
-                    label: 'Home',
-                    icon: Icons.home,
+                    label: FFLocalizations.of(context).getText('view_profile'),
+                    icon: iconViewProfile,
                     content: const Center(
                       child: Text('Home Page'),
                     ),
                   ),
                   TabItem(
-                    label: 'Search',
-                    icon: Icons.search,
+                    label: FFLocalizations.of(context).getText('favorites'),
+                    icon: iconLovely,
                     content: const Center(
                       child: Text('Search Page'),
                     ),
                   ),
                   TabItem(
-                    label: 'Profile',
-                    icon: Icons.person,
+                    label: FFLocalizations.of(context).getText('contact_us'),
+                    icon: iconCallCalling,
+                    content: const Center(
+                      child: Text('Profile Page'),
+                    ),
+                  ),
+                  TabItem(
+                    label: FFLocalizations.of(context)
+                        .getText('terms_and_conditions'),
+                    icon: iconJudge,
+                    content: const Center(
+                      child: Text('Profile Page'),
+                    ),
+                  ),
+                  TabItem(
+                    label: FFLocalizations.of(context)
+                        .getText('fal_license_awards'),
+                    icon: iconFAL,
                     content: const Center(
                       child: Text('Profile Page'),
                     ),
                   ),
                 ],
-                activeColor: Colors.black,
-                inactiveColor: Colors.black54,
-                borderRadius: 16.r,
-                backgroundColor: Colors.black12,
+                tabController: menuPageModel.tabController,
+                onTabChanged: menuPageModel.changeTab,
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class CustomTabs extends StatefulWidget {
-  const CustomTabs({
-    required this.tabs,
-    super.key,
-    this.activeColor = Colors.blue,
-    this.inactiveColor = Colors.grey,
-    this.tabHeight = 50,
-    this.borderRadius = 12,
-    this.isScrollable = false,
-    this.showIndicator = true,
-    this.indicatorColor = Colors.blue,
-    this.backgroundColor = Colors.white,
-  });
-  final List<TabItem> tabs;
-  final Color activeColor;
-  final Color inactiveColor;
-  final double tabHeight;
-  final double borderRadius;
-  final bool isScrollable;
-  final bool showIndicator;
-  final Color indicatorColor;
-  final Color backgroundColor;
-
-  @override
-  _CustomTabsState createState() => _CustomTabsState();
-}
-
-class _CustomTabsState extends State<CustomTabs>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: widget.tabs.length, vsync: this);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // Tab Bar
-        Container(
-          width: 400.w,
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-          ),
-          decoration: BoxDecoration(
-            color: widget.backgroundColor,
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-          ),
-          child: TabBar(
-            controller: _tabController,
-            isScrollable: widget.isScrollable,
-            indicator: widget.showIndicator
-                ? BoxDecoration(
-                    color: widget.indicatorColor,
-                    borderRadius: BorderRadius.circular(widget.borderRadius),
-                  )
-                : null,
-            labelColor: widget.activeColor,
-            unselectedLabelColor: widget.inactiveColor,
-            tabs: widget.tabs
-                .map(
-                  (TabItem tab) => TabItemWidget(tab: tab),
-                )
-                .toList(),
-          ),
-        ),
-
-        // Tab Views
-        Expanded(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _tabController,
-            children: widget.tabs.map((TabItem tab) => tab.content).toList(),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-}
-
-class TabItem {
-  TabItem({required this.label, required this.content, this.icon});
-  final String label;
-  final IconData? icon;
-  final Widget content;
-}
-
-class TabItemWidget extends StatelessWidget {
-  const TabItemWidget({required this.tab, super.key});
-  final TabItem tab;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Icon(tab.icon),
-        Text(tab.label),
-      ],
     );
   }
 }

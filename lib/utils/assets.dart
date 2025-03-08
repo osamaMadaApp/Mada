@@ -84,6 +84,7 @@ const String iconReset = '${iconsPath}reset_filter.svg';
 const String iconCloseButton = '${iconsPath}close_button.svg';
 const String iconViewPaymentPlan = '${iconsPath}view_paymnt_plan.svg';
 const String iconArrowRightPlan = '${iconsPath}arrow-right_plan.svg';
+const String iconFAL = '${iconsPath}fal.svg';
 const String iconDeleteAccountWarning =
     '${iconsPath}delete_account_warning.svg';
 

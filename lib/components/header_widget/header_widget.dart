@@ -7,12 +7,16 @@ class HeaderWidget extends StatelessWidget {
     super.key,
     this.onCountryChange,
     this.profilePicture,
-    this.firstName,
+    this.title,
+    this.showProfilePic = true,
+    this.subTitle,
   });
 
   final Function()? onCountryChange;
   final String? profilePicture;
-  final String? firstName;
+  final String? title;
+  final bool showProfilePic;
+  final String? subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -21,46 +25,71 @@ class HeaderWidget extends StatelessWidget {
         Expanded(
           child: Row(
             children: <Widget>[
-              if (profilePicture != null && profilePicture!.isNotEmpty)
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                  child: SizedBox(
+              if (showProfilePic)
+                if (profilePicture != null && profilePicture!.isNotEmpty)
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    child: SizedBox(
+                      height: 50.w,
+                      width: 50.w,
+                      child: CachedImage(image: profilePicture),
+                    ),
+                  )
+                else
+                  Container(
                     height: 50.w,
                     width: 50.w,
-                    child: CachedImage(image: profilePicture),
-                  ),
-                )
-              else
-                Container(
-                  height: 50.w,
-                  width: 50.w,
-                  decoration: BoxDecoration(
-                    color: FlutterMadaTheme.of(context).info,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Center(
-                    child: GestureDetector(
-                      child: Image.asset(imageUser),
+                    decoration: BoxDecoration(
+                      color: FlutterMadaTheme.of(context).info,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: GestureDetector(
+                        child: Image.asset(imageUser),
+                      ),
                     ),
                   ),
-                ),
               SizedBox(width: 10.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MadaText(
-                    firstName != null
-                        ? '${'hi'.tr}, ${firstName!.capitalize ?? ''}'
-                        : 'hi_guest'.tr,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: FlutterMadaTheme.of(context).color292D32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ],
-              ),
+              if (subTitle == null)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    MadaText(
+                      title != null
+                          ? '${'hi'.tr}, ${title!.capitalize ?? ''}'
+                          : 'hi_guest'.tr,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: FlutterMadaTheme.of(context).color292D32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                )
+              else
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    MadaText(
+                      title ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: FlutterMadaTheme.of(context).color292D32,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    MadaText(
+                      subTitle ?? '',
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: FlutterMadaTheme.of(context).color292D32,
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
@@ -81,7 +110,6 @@ class HeaderWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               child: CountryFlag.fromCountryCode(
                 'sa',
-                // myAppController.appCountry,
               ),
             ),
           ),
