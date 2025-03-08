@@ -116,7 +116,6 @@ class _HomePageWidgetState extends State<HomePage>
                           child: SliderComponent(
                             items: _model.homeBanner,
                             height: 700.h,
-                            showIndicator: false,
                           ),
                         ),
                       ],

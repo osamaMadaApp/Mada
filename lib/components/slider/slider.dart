@@ -4,6 +4,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../general_exports.dart';
+import '../../index.dart';
 
 class SliderComponent extends StatefulWidget {
   SliderComponent({
@@ -287,9 +288,9 @@ class _SliderComponentState extends State<SliderComponent> {
               ),
             if (widget.showIndicator && !widget.sliderScreen)
               Positioned(
-                bottom: 45.h,
-                right: 0,
-                left: 0,
+                bottom: 30.h,
+                right: isRTL ? 12.w : null,
+                left: isRTL ? null : 12.w,
                 child: SmoothIndicatorWidget(
                   itemCount: widget._items.length,
                   currentIndex: currentIndex,
@@ -326,11 +327,12 @@ class SmoothIndicatorWidget extends StatelessWidget {
             activeIndex: currentIndex,
             count: itemCount,
             effect: WormEffect(
-              dotColor: FlutterMadaTheme.of(context).primary.withOpacity(0.2),
-              activeDotColor: FlutterMadaTheme.of(context).primary,
+              dotColor:
+                  FlutterMadaTheme.of(context).colorFFFFFF.withOpacity(0.2),
+              activeDotColor: FlutterMadaTheme.of(context).color97BE5A,
               offset: 12.h,
-              dotHeight: 1.h,
-              dotWidth: 1.h,
+              dotHeight: 16.h,
+              dotWidth: 16.h,
             ),
           ),
         ],
