@@ -1,15 +1,28 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_model.dart';
-import 'home_page_widget.dart' show HomePage;
 
-class HomePageModel extends FlutterMadaModel<HomePage> {
+class HomePageModel extends ChangeNotifier {
+  HomePageModel() {
+    getHomeScreenResult();
+  }
+
   dynamic homeData;
   List<String> homeBanner = <String>[];
   List<dynamic> mostPopularProjects = <dynamic>[];
 
-  @override
-  void initState(BuildContext context) {}
-
-  @override
-  void dispose() {}
+  void getHomeScreenResult() {
+    ApiRequest(
+      path: apiHomeScreen,
+      formatResponse: true,
+      className: 'HomeController/getHomeScreenResult',
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        homeData = data;
+        for (dynamic image in homeData[keyResults][keyHomeBanner]) {
+          homeBanner.add(image[keyBannerImage]);
+        }
+        mostPopularProjects = homeData[keyResults][keyMostPopularProject];
+        notifyListeners();
+      },
+    );
+  }
 }
