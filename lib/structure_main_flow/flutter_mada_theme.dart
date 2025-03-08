@@ -63,17 +63,45 @@ abstract class FlutterMadaTheme {
   late Color info;
 
   late Color gray600;
+
+  /// Black
   late Color color000000;
+
+  /// Light Gray
   late Color colorFFE4E5E8;
+
+  /// Dark Blue
   late Color color3252a2;
+
+  /// White
   late Color colorFFFFFF;
+
+  /// Light Blue
   late Color colorFF605DEC;
+
+  /// Light Gray
   late Color color91605DEC;
+
+  /// Gray
   late Color colorFF627921;
+
+  /// Light Green
   late Color coloreff5e6;
+
+  /// Green
   late Color color8EC24D;
+
+  /// Dark Gray
   late Color color292D32;
+
+  /// Light Blue
   late Color colorE6EEF3;
+
+  /// Gray
+  late Color colorF5F5F5;
+
+  /// Gray
+  late Color color989898;
 }
 
 DeviceSize getDeviceSize(BuildContext context) {
@@ -157,6 +185,10 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color color292D32 = const Color(0xFF292D32);
   @override
   late Color colorE6EEF3 = const Color(0xFFE6EEF3);
+  @override
+  late Color colorF5F5F5 = const Color(0xFFF5F5F5);
+  @override
+  late Color color989898 = const Color(0xFF989898);
 }
 
 class DarkModeTheme extends FlutterMadaTheme {

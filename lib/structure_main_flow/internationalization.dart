@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const _kLocaleStorageKey = '__locale_key__';
+const String _kLocaleStorageKey = '__locale_key__';
 
 class FFLocalizations {
   FFLocalizations(this.locale);
@@ -12,7 +12,7 @@ class FFLocalizations {
   static FFLocalizations of(BuildContext context) =>
       Localizations.of<FFLocalizations>(context, FFLocalizations)!;
 
-  static List<String> languages() => ['en', 'ar'];
+  static List<String> languages() => <String>['en', 'ar'];
 
   static late SharedPreferences _prefs;
   static Future initialize() async =>
@@ -20,7 +20,7 @@ class FFLocalizations {
   static Future storeLocale(String locale) =>
       _prefs.setString(_kLocaleStorageKey, locale);
   static Locale? getStoredLocale() {
-    final locale = _prefs.getString(_kLocaleStorageKey);
+    final String? locale = _prefs.getString(_kLocaleStorageKey);
     return locale != null && locale.isNotEmpty ? createLocale(locale) : null;
   }
 
@@ -34,15 +34,15 @@ class FFLocalizations {
       : 0;
 
   String getText(String key) =>
-      (kTranslationsMap[key] ?? {})[locale.toString()] ?? '';
+      (kTranslationsMap[key] ?? <String, String>{})[locale.toString()] ?? '';
 
   String getVariableText({
     String? enText = '',
     String? arText = '',
   }) =>
-      [enText, arText][languageIndex] ?? '';
+      <String?>[enText, arText][languageIndex] ?? '';
 
-  static const Set<String> _languagesWithShortCode = {
+  static const Set<String> _languagesWithShortCode = <String>{
     'ar',
     'az',
     'ca',
@@ -81,7 +81,7 @@ class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
 
   @override
   bool isSupported(Locale locale) {
-    final language = locale.toString();
+    final String language = locale.toString();
     return FFLocalizations.languages().contains(
       language.endsWith('_')
           ? language.substring(0, language.length - 1)
@@ -104,25 +104,39 @@ Locale createLocale(String language) => language.contains('_')
       )
     : Locale(language);
 
-final kTranslationsMap = <Map<String, Map<String, String>>>[
+final Map<String, Map<String, String>> kTranslationsMap =
+    <Map<String, Map<String, String>>>[
   // LoginPage
-  {
-    'login': {
+  <String, Map<String, String>>{
+    'login': <String, String>{
       'en': 'Login',
       'ar': 'تسجيل الدخول',
     },
-    'bcdkouru': {
+    'bcdkouru': <String, String>{
       'en': 'Sign in',
       'ar': 'تسجيل دخول',
     },
-    '0wasfjru': {
+    '0wasfjru': <String, String>{
       'en': 'Sign up',
       'ar': 'انشاء حساب',
     },
-    'lggdo661': {
+    'lggdo661': <String, String>{
       'en': 'Home',
       'ar': '',
     },
+    'your_gateway_to_premium_life': <String, String>{
+      'en': 'Your gateway to premium life',
+      'ar': 'بوابتك إلى الحياة المتميزة',
+    },
+    'browse_out_main_categories': <String, String>{
+      'en': 'Browse our main categories',
+      'ar': 'تصفح الفئات الرئيسية لدينا',
+    },
+    'most_popular_projects': <String, String>{
+      'en': 'Most popular projects',
+      'ar': 'المشاريع الأكثر شعبية',
+    },
   },
-
-].reduce((a, b) => a..addAll(b));
+].reduce((Map<String, Map<String, String>> a,
+            Map<String, Map<String, String>> b) =>
+        a..addAll(b));
