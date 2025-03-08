@@ -109,6 +109,16 @@ dependencies:
   panorama: ^0.4.1
   image: ^4.2.0
   flutter_screenutil: ^5.9.3
+  pinput: ^5.0.0
+  country_picker: ^2.0.26
+  country_flags: ^3.0.0
+  client_information: ^2.1.4
+  firebase_messaging: ^15.2.1
+  fluttertoast: ^8.2.8
+  package_info_plus: ^8.0.2
+  smooth_page_indicator: ^1.2.0+3
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
