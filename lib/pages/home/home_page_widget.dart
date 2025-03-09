@@ -1,10 +1,5 @@
-import 'package:nested/nested.dart';
-
-import '/structure_main_flow/flutter_mada_util.dart';
-import '../../components/header_widget/header_widget.dart';
 import '../../general_exports.dart';
-import '../../index.dart';
-import 'home_page_model.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
