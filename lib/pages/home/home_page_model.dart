@@ -10,12 +10,14 @@ class HomePageModel extends ChangeNotifier {
   List<dynamic> mostPopularProjects = <dynamic>[];
 
   void getHomeScreenResult() {
+    startLoading();
     ApiRequest(
       path: apiHomeScreen,
       formatResponse: true,
       className: 'HomeController/getHomeScreenResult',
     ).request(
       onSuccess: (dynamic data, dynamic response) {
+        dismissLoading();
         homeData = data;
         for (dynamic image in homeData[keyResults][keyHomeBanner]) {
           homeBanner.add(image[keyBannerImage]);
