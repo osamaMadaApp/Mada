@@ -221,6 +221,30 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'MADA Properties',
       'ar': 'مدى العقارية',
     },
+    'settings': <String, String>{
+      'en': 'Settings',
+      'ar': 'الاعدادات',
+    },
+    'logout': <String, String>{
+      'en': 'Logout',
+      'ar': 'تسجيل الخروج',
+    },
+    'delete_account': <String, String>{
+      'en': 'Delete Account',
+      'ar': 'حذف الحساب',
+    },
+    'language': <String, String>{
+      'en': 'Language',
+      'ar': 'اللغة',
+    },
+    'english': <String, String>{
+      'en': 'English',
+      'ar': 'الإنجليزية',
+    },
+    'arabic': <String, String>{
+      'en': 'Arabic',
+      'ar': 'العربية',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
