@@ -583,6 +583,13 @@ enum TopUpType {
   CANCEL_FEES,
 }
 
+extension RoutePathExtension on String {
+  String toRoutePath() {
+    if (isEmpty) return '/';
+    return '/${this[0].toLowerCase()}${substring(1)}';
+  }
+}
+
 enum TicketType { airline, hotel }
 
 extension DateChecker on int {

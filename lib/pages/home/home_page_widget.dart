@@ -1,3 +1,4 @@
+import '../../api/routes_keys.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -148,8 +149,7 @@ class HomeCategories extends StatelessWidget {
               onTap: () {
                 switch (menu[index][keyLink]) {
                   case 'projects/exclusive-projects':
-                    // Get.toNamed(routeExclusiveProjects);
-                    // routeExclusiveProjects
+                    context.pushNamed(routeExclusiveProjects);
                   case 'propeties/list':
                     // Get.toNamed(routeSearchScreen);
                   case 'request-property':

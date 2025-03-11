@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:Mada/pages/exclusive_projects/exclusive_projects_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -48,6 +49,8 @@ void main() async {
               create: (BuildContext context) => LoginSideComponentModel()),
           ChangeNotifierProvider(
               create: (BuildContext context) => ForgetPasswordComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ExclusiveProjectsModel()),
         ],
         child: const MyApp(),
       ),
@@ -187,7 +190,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     setIsRTL(context);
     final Map<String, dynamic> tabs = <String, dynamic>{
-      'HomePage': const FlutterSmartDialog(child:   HomePage()),
+      'HomePage': const FlutterSmartDialog(child: HomePage()),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
       'MenuPage': const MenuPage(),
