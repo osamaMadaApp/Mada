@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import '../../api/api_routes.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import 'api_manager.dart';
 import 'interceptors.dart';
@@ -12,7 +13,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 /// Start BlockToBookApiGroup Group Code
 
-class MyCarApiGroupGroup {
+class MadaApiGroupGroup {
   // static String getBaseUrl() => 'http://localhost:8080';
 
   static String getBaseUrl() => 'https://mycar.completechaintech.com';
@@ -35,6 +36,7 @@ class MyCarApiGroupGroup {
   static GetAllEventTypsCall getAllEventTypsCall = GetAllEventTypsCall();
   static MultiListCall multiListCall = MultiListCall();
   static CreateVehicleCall createVehicleCall = CreateVehicleCall();
+  static RefreshApiCall refreshApiCall = RefreshApiCall();
   static UploadMainImageIdApiCall uploadMainImageIdApiCall =
       UploadMainImageIdApiCall();
   static UploadSecImageIdApiCall uploadSecImageIdApiCall =
@@ -62,7 +64,7 @@ class POSTEVENTCall {
     String? toTime,
     bool? isVisible = true,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
@@ -99,10 +101,46 @@ class POSTEVENTCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
+
+class RefreshApiCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? refreshToken = '',
+    int? languageId = 1,
+    String? path
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "token": "$token" ,
+  "refresh_token": "$refreshToken"
+}''';
+    return FFApiInterceptor.makeApiCall(
+      ApiCallOptions(
+        callName: 'GoogleLoginApi',
+        apiUrl: path ?? '',
+        callType: ApiCallType.POST,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        params: const {},
+        body: ffApiRequestBody,
+        bodyType: BodyType.JSON,
+        returnBody: true,
+        encodeBodyUtf8: false,
+        decodeUtf8: false,
+        cache: false,
+        alwaysAllowBody: false,
+      ),
+      MadaApiGroupGroup.interceptors,
+    );
+  }
+}
+
 
 class CreateInvolvingCall {
   Future<ApiCallResponse> call(
@@ -114,7 +152,7 @@ class CreateInvolvingCall {
       String? involvingType = '',
       String? latitude,
       String? longitude}) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
@@ -145,7 +183,7 @@ class CreateInvolvingCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -167,7 +205,7 @@ class CreateGiftCall {
     bool? aSchoolInSeniorCenter,
     bool? aFriendInNeed,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
@@ -202,7 +240,7 @@ class CreateGiftCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -214,7 +252,7 @@ class UploadMainImageIdApiCall {
     int? mainImageId,
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
         ApiCallOptions(
           callName: 'UploudImageApi',
@@ -233,7 +271,7 @@ class UploadMainImageIdApiCall {
           cache: false,
           alwaysAllowBody: false,
         ),
-        MyCarApiGroupGroup.interceptors);
+        MadaApiGroupGroup.interceptors);
   }
 }
 
@@ -244,7 +282,7 @@ class UploadSecImageIdApiCall {
     int? mainImageId,
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
         ApiCallOptions(
           callName: 'UploudImageApi',
@@ -263,7 +301,7 @@ class UploadSecImageIdApiCall {
           cache: false,
           alwaysAllowBody: false,
         ),
-        MyCarApiGroupGroup.interceptors);
+        MadaApiGroupGroup.interceptors);
   }
 }
 
@@ -274,7 +312,7 @@ class UploadMedia {
     int? mainImageId,
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
         ApiCallOptions(
           callName: 'UploudImageApi',
@@ -293,7 +331,7 @@ class UploadMedia {
           cache: false,
           alwaysAllowBody: false,
         ),
-        MyCarApiGroupGroup.interceptors);
+        MadaApiGroupGroup.interceptors);
   }
 }
 
@@ -307,7 +345,7 @@ class CreateShilfCall {
     String? address,
     bool? isShilfDonation,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     final ffApiRequestBody = '''
 {
       "hostAShilf": $hostAShilf,
@@ -333,7 +371,7 @@ class CreateShilfCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -383,7 +421,7 @@ class GetAllInvolvingCall {
     String? searchText = '',
     String? authorization,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
@@ -406,7 +444,7 @@ class GetAllInvolvingCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -418,7 +456,7 @@ class GetAllEventTypsCall {
     int? involvingType = 0,
     String? authorization,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
@@ -441,14 +479,14 @@ class GetAllEventTypsCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
 
 class MultiListCall {
   Future<ApiCallResponse> call({required String url}) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'getAllEventTypsCall',
@@ -465,14 +503,14 @@ class MultiListCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
 
 class LoginCall {
   Future<ApiCallResponse> call({String? tokenId}) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
@@ -494,7 +532,7 @@ class LoginCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -510,7 +548,7 @@ class CreateVehicleCall {
     bool recommended = false,
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final Map<String, dynamic> requestBody = {
       'brand_id': brandId,
@@ -552,14 +590,14 @@ class CreateVehicleCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
 
 class LoginAnonymouslyUserCall {
   Future<ApiCallResponse> call({String? tokenId}) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
@@ -581,7 +619,7 @@ class LoginAnonymouslyUserCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -590,7 +628,7 @@ class GetUserByIdCall {
   Future<ApiCallResponse> call({
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
 
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
@@ -608,7 +646,7 @@ class GetUserByIdCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -617,7 +655,7 @@ class GetSliderCall {
   Future<ApiCallResponse> call({
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'GetSliderCall',
@@ -635,7 +673,7 @@ class GetSliderCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -646,7 +684,7 @@ class GetCarsCall {
     bool? top,
     bool? recommended,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'GetSliderCall',
@@ -668,7 +706,7 @@ class GetCarsCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -677,7 +715,7 @@ class GetFavList {
   Future<ApiCallResponse> call({
     String? authorization = '',
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'getFavList',
@@ -696,7 +734,7 @@ class GetFavList {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -707,7 +745,7 @@ class AddFavList {
     String? authorization = '',
     int? id,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'getFavList',
@@ -726,7 +764,7 @@ class AddFavList {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }
@@ -737,7 +775,7 @@ class RemoveFavList {
     String? authorization = '',
     int? id,
   }) async {
-    final baseUrl = MyCarApiGroupGroup.getBaseUrl();
+    final baseUrl = MadaApiGroupGroup.getBaseUrl();
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'getFavList',
@@ -756,7 +794,7 @@ class RemoveFavList {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
-      MyCarApiGroupGroup.interceptors,
+      MadaApiGroupGroup.interceptors,
     );
   }
 }

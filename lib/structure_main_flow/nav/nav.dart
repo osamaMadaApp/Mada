@@ -1,8 +1,13 @@
+import '../../api/routes_keys.dart';
+import '../../pages/exclusive_projects/exclusive_projects.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/api_keys.dart';
+import '../../api/api_request.dart';
+import '../../api/api_routes.dart';
 import '../../main.dart';
 import '../../pages/login_page/login_page_widget.dart';
 import '/auth/base_auth_user_provider.dart';
@@ -60,6 +65,7 @@ class AppStateNotifier extends ChangeNotifier {
         user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
     initialUser ??= newUser;
     user = newUser;
+    getMasterData();
 
     // Refresh the app on auth change unless explicitly marked otherwise.
     // No need to update unless the user has changed.
@@ -75,6 +81,20 @@ class AppStateNotifier extends ChangeNotifier {
     showSplashImage = false;
     notifyListeners();
   }
+
+  Future<void> getMasterData() async {
+    await ApiRequest(
+      path: apiMasterData,
+      className: 'SplashController/getMasterData',
+      defaultHeadersValue: true,
+      formatResponse: true,
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+       FFAppState().masterDateJsonModel = response[keyResults];
+      },
+    );
+  }
+
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
@@ -84,17 +104,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       errorBuilder: (context, state) => const LoginPageWidget(),
       routes: [
         FFRoute(
+          name: routeExclusiveProjects,
+          path: routeExclusiveProjects.toRoutePath(),
+          builder: (context, params) => const ExclusiveProjects(),
+        ),
+        FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => FFAppState().isLoggedIn() == true
-              ? const NavBarPage(initialPage: 'HomePage')
+              ? const NavBarPage(initialPage: routeHome)
               : const LoginPageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
+          name: routeHome,
+          path: routeHome.toRoutePath(),
           builder: (context, params) =>
-              const NavBarPage(initialPage: 'HomePage'),
+              const NavBarPage(initialPage: routeHome),
         ),
         FFRoute(
           name: 'LoginPage',

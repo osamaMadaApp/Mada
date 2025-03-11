@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 
 import '../general_exports.dart';
+import '../structure_main_flow/flutter_mada_util.dart';
 
 void hideKeyboard() {
   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -249,6 +250,25 @@ TextStyle textPrimaryStyle(BuildContext context) =>
     Theme.of(Get.context!).textTheme.bodySmall!.copyWith(
           color: FlutterMadaTheme.of(context).color000000,
         );
+
+String getFormattedPrice(double price) {
+  return NumberFormat('#,##0').format(price);
+}
+
+String getCurrency() {
+  return 'SAR';
+  // final MyAppController myAppController = Get.find<MyAppController>();
+  // return myAppController.masterData[keyCurrency];
+}
+
+String getUnitOfMeasure() {
+  // final MyAppController myAppController = Get.find<MyAppController>();
+  // if (myAppController.appCountry == 'SA') {
+  //   return 'sqm'.tr;
+  // } else {
+  return 'sqft'.tr;
+  // }
+}
 
 void openScreenBasedOnScreenName(String screenName, dynamic value) {
   // if (screenName == projectDetailsScreen) {

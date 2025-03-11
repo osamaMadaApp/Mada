@@ -1,8 +1,14 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
+import '../app_state.dart';
+import '../auth/firebase_auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../backend/api_requests/api_manager.dart';
 import '../general_exports.dart';
+import '../structure_main_flow/flutter_mada_util.dart';
 
 class ApiRequest {
   ApiRequest({
@@ -36,16 +42,17 @@ class ApiRequest {
   dynamic response;
   final bool withAuth;
   final bool defaultHeadersValue;
-  // String authorization() => myAppController.userData != null
-  //     ? 'Bearer ${myAppController.userData[keyToken]}'
-  //     : '';
+
+  String authorization() => FFAppState().userModel.isNotEmpty
+      ? 'Bearer ${FFAppState().userModel[keyToken]}'
+      : '';
 
   Future<Dio> _dio() async {
     final Map<String, dynamic> defaultHeaders = <String, dynamic>{
       'Content-Type': '*/*',
       'Accept': '*/*',
       'platform': Platform.isAndroid ? 'android' : 'ios',
-      // keyLanguage: Get.find<MyAppController>().appLocale,
+      keyLanguage: FFAppState().getSelectedLanguge(),
     };
 
     final Map<String, dynamic> mergedHeaders = <String, dynamic>{
@@ -54,19 +61,59 @@ class ApiRequest {
     };
 
     if (withAuth) {
-      // mergedHeaders['Authorization'] = authorization();
+      mergedHeaders['Authorization'] = authorization();
     }
 
     // final Map<String, dynamic> defaultQueryParams = getDefaultQueryParams();
-    return Dio(
+    final Dio dio = Dio(
       BaseOptions(
         headers: mergedHeaders,
         queryParameters: <String, dynamic>{
-          // ...defaultQueryParams,
           ...queryParameters ?? <String, dynamic>{},
         },
       ),
     );
+
+    // Adding interceptor
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
+        if (options.headers['Authorization'] != null) {
+          if (options.headers['Authorization']
+              .toString()
+              .replaceAll('Bearer ', '')
+              .replaceAll('null', '')
+              .isNotEmpty) {
+            var header = options.headers['Authorization'];
+            bool isExpired = JwtDecoder.isExpired(
+                header.toString().replaceAll('Bearer ', ''));
+            if (isExpired) {
+              ApiCallResponse refreshApiCall =
+                  await MadaApiGroupGroup.refreshApiCall.call(
+                      path : baseUrl + apiRefreshToken,
+                      token: FFAppState().userModel[keyToken],
+                      refreshToken: FFAppState().userModel[keyRefreshToken]);
+              if (refreshApiCall.succeeded == true) {
+                FFAppState().userModel[keyToken] = refreshApiCall.jsonBody[keyResults][keyToken];
+                FFAppState().userModel[keyRefreshToken] = refreshApiCall.jsonBody[keyResults][keyToken];
+                options.headers['Authorization'] =
+                    'Bearer ${FFAppState().userModel[keyToken]}';
+              }
+              return handler.next(options);
+            } else {
+              return handler.next(options);
+            }
+          } else {
+            FFAppState().prefs.clear();
+            await authManager.signOut();
+            return handler.next(options);
+          }
+        } else {
+          return handler.next(options);
+        }
+      }
+    ));
+
+    return dio;
   }
 
   Future<void> request({
@@ -83,7 +130,7 @@ class ApiRequest {
 
     try {
       if (withLoading) {
-        // startLoading();
+        startLoading();
       }
       switch (method) {
         case ApiMethods.get:
@@ -135,7 +182,7 @@ class ApiRequest {
       }
 
       if (withLoading) {
-        // dismissLoading();
+        dismissLoading();
       }
 
       if (onSuccess != null) {
@@ -147,7 +194,7 @@ class ApiRequest {
     } on Exception catch (error) {
       consoleLog(error);
 
-      // dismissLoading();
+      dismissLoading();
       // request time
       final int time = DateTime.now().difference(startTime).inMilliseconds;
 
@@ -184,6 +231,7 @@ class ApiRequest {
 
         //handle DioError here by error type or by error code
         if (shouldShowMessage) {
+          consoleLogPretty(errorData['message']);
           showMessage(
             description:
                 errorData['errors'] != null && errorData['errors'].length > 0

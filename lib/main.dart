@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:Mada/pages/exclusive_projects/exclusive_projects_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -8,7 +9,11 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
+import 'components/forget_password_component/forget_password_component_model.dart';
+import 'components/login_side_component/login_side_component_model.dart';
+import 'components/otp_component/otp_component_model.dart';
 import 'general_exports.dart';
+import 'pages/login_page/login_page_model.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';
 
@@ -33,9 +38,20 @@ void main() async {
   await appState.initializePersistedState();
 
   runApp(
-    MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (BuildContext context) => appState,
+    GetMaterialApp(
+      home: MultiProvider(
+        providers: <SingleChildWidget>[
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginPageModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => OtpComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginSideComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ForgetPasswordComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ExclusiveProjectsModel()),
+        ],
         child: const MyApp(),
       ),
     ),
@@ -66,7 +82,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier); // navigation
     setLocale(FFAppState().getSelectedLanguge());
@@ -97,54 +112,52 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true, // Ensures text scales properly
       splitScreenMode: true, // Helps with split-screen support
       builder: (BuildContext context, Widget? child) {
-        return FlutterSmartDialog(
-          child: MaterialApp.router(
-            title: 'Mada',
-            localizationsDelegates: const <LocalizationsDelegate>[
-              FFLocalizationsDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            locale: _locale,
-            supportedLocales: const <Locale>[
-              Locale('en'),
-              Locale('ar'),
-            ],
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              textTheme: const TextTheme(
-                headlineMedium: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                bodySmall: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-                bodyMedium: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-                bodyLarge: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
+        return MaterialApp.router(
+          title: 'Mada',
+          localizationsDelegates: const <LocalizationsDelegate>[
+            FFLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: _locale,
+          supportedLocales: const <Locale>[
+            Locale('en'),
+            Locale('ar'),
+          ],
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              brightness: Brightness.light,
-              useMaterial3: false,
+              bodySmall: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyLarge: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-            darkTheme: ThemeData(
-              brightness: Brightness.light,
-              useMaterial3: false,
-            ),
-            themeMode: _themeMode,
-            routerConfig: _router,
+            brightness: Brightness.light,
+            useMaterial3: false,
           ),
+          darkTheme: ThemeData(
+            brightness: Brightness.light,
+            useMaterial3: false,
+          ),
+          themeMode: _themeMode,
+          routerConfig: _router,
         );
       },
     );
@@ -177,7 +190,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     setIsRTL(context);
     final Map<String, dynamic> tabs = <String, dynamic>{
-      'HomePage': const HomePage(),
+      'HomePage': const FlutterSmartDialog(child: HomePage()),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
       'MenuPage': const MenuPage(),
@@ -213,12 +226,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 0
                               ? SvgPicture.asset(
-                                  'assets/images/home.svg',
+                                  home,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/home_disabled.svg',
+                                  homeDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -240,12 +253,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 1
                               ? SvgPicture.asset(
-                                  'assets/images/my_orders.svg',
+                                  myOrders,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/my_orders_disabeld.svg',
+                                  myOrdersDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -267,12 +280,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 2
                               ? SvgPicture.asset(
-                                  'assets/images/notification.svg',
+                                  notification,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/notification_disabled.svg',
+                                  notificationDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -294,12 +307,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 3
                               ? SvgPicture.asset(
-                                  'assets/images/menu.svg',
+                                  menu,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/menu_disabeld.svg',
+                                  menuDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -313,7 +326,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                 child: SvgPicture.asset(
-                  'assets/images/logo.svg',
+                  logo,
                   width: 56.0,
                   height: 56.0,
                 ),
