@@ -1,6 +1,5 @@
 import 'dart:io' show Platform;
 
-import 'package:Mada/pages/exclusive_projects/exclusive_projects_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -13,6 +12,7 @@ import 'components/forget_password_component/forget_password_component_model.dar
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
 import 'general_exports.dart';
+import 'pages/exclusive_projects/exclusive_projects_model.dart';
 import 'pages/login_page/login_page_model.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';

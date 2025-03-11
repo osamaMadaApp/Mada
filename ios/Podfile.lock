@@ -451,6 +451,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: d35da127dd49edcbd07b8c07cf651a70161558b2
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_credit_card: 75489579678755891ccb1ddcc13415defcea4f01
+  flutter_email_sender: 2397f5e84aaacfb61af569637a963e7c687858d8
   fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
   FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   geolocator_apple: 1560c3c875af2a412242c7a923e15d0d401966ff

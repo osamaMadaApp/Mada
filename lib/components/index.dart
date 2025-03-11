@@ -1,5 +1,6 @@
 export 'cached_image/index.dart';
 export 'contact_us_buttons/index.dart';
+export 'custom_button/index.dart';
 export 'custom_input/index.dart';
 export 'custom_tabs/index.dart';
 export 'header_widget/index.dart';

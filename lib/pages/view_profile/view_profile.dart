@@ -7,17 +7,15 @@ class ViewProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <SingleChildWidget>[
-        ChangeNotifierProvider<ViewProfileModel>(
-          create: (BuildContext context) => ViewProfileModel(),
-        ),
-      ],
+    return ChangeNotifierProvider<ViewProfileModel>(
+      create: (BuildContext context) => ViewProfileModel(),
       child: Consumer<ViewProfileModel>(
-        builder: (BuildContext context, ViewProfileModel model, Widget? child) {
-          return Center(
-            child: model.isLoading ? const Center() : const ViewProfile(),
-          );
+        builder: (
+          BuildContext context,
+          ViewProfileModel model,
+          Widget? child,
+        ) {
+          return model.data == null ? const Center() : const ViewProfile();
         },
       ),
     );
@@ -37,11 +35,17 @@ class ViewProfile extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              const Profile(),
+              const Expanded(
+                flex: 5,
+                child: Profile(),
+              ),
               SizedBox(
                 width: 20.w,
               ),
-              const Settings(),
+              const Expanded(
+                flex: 3,
+                child: Settings(),
+              ),
             ],
           ),
         ],
@@ -104,7 +108,7 @@ class Profile extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: FlutterMadaTheme.of(context)
                             .color8EC24D
-                            .withOpacity(0.4),
+                            .withValues(alpha: 0.4),
                       ),
                     ),
                   ),
@@ -155,14 +159,30 @@ class Profile extends StatelessWidget {
                   ViewProfileCard(
                     text: FFLocalizations.of(context).getText('email'),
                     value: viewProfileModel.data[keyEmail] ?? '',
+                    withLine: false,
                   ),
                 ],
               ),
             ),
           ),
           SizedBox(
+            height: 20.h,
+          ),
+          CustomContainerButton(
+            onPressed: () {},
+            text: FFLocalizations.of(context).getText('edit_profile'),
+            textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: FlutterMadaTheme.of(context).color8EC24D,
+                ),
+            backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
+            borderColor: FlutterMadaTheme.of(context).color8EC24D,
+            borderRadius: 10.r,
+            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
+          ),
+          SizedBox(
             height: 10.h,
           ),
+          const Spacer(),
           if (viewProfileModel.data[keyShowNafathSection] != null &&
               viewProfileModel.data[keyShowNafathSection])
             SizedBox(
@@ -174,13 +194,17 @@ class Profile extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: FlutterMadaTheme.of(context).colorFFFFFF,
+                    color: FlutterMadaTheme.of(context).colorFAFAFA,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: ViewProfileCard(
-                    text: viewProfileModel.data[keyIsNafathVerified] == 0
-                        ? 'verify_with_nafath'.tr
-                        : 'nafath_verified'.tr,
+                    horizontalPadding: 20.w,
+                    backGroundColor: Colors.transparent,
+                    text: FFLocalizations.of(context).getText(
+                      viewProfileModel.data[keyIsNafathVerified] == 0
+                          ? 'verify_with_nafath'
+                          : 'nafath_verified',
+                    ),
                     withLine: false,
                     fontSize: 16,
                     image: imageNafath2,
@@ -260,9 +284,11 @@ class Settings extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             if (FFAppState().getSelectedLanguge() != 'en') {
-                              FFAppState().update(() {
-                                FFAppState().selectedLangugeAppState = 1;
-                              });
+                              FFAppState().update(
+                                () {
+                                  FFAppState().selectedLangugeAppState = 1;
+                                },
+                              );
 
                               MyApp.of(context).setLocale('en');
                               // should call master data again
@@ -285,9 +311,11 @@ class Settings extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             if (FFAppState().getSelectedLanguge() != 'ar') {
-                              FFAppState().update(() {
-                                FFAppState().selectedLangugeAppState = 0;
-                              });
+                              FFAppState().update(
+                                () {
+                                  FFAppState().selectedLangugeAppState = 0;
+                                },
+                              );
 
                               MyApp.of(context).setLocale('ar');
 
@@ -461,6 +489,8 @@ class ViewProfileCard extends StatelessWidget {
     this.image,
     this.suffixIcon,
     this.valueWidth,
+    this.backGroundColor,
+    this.horizontalPadding,
   });
   final String text;
   final String? value;
@@ -470,6 +500,8 @@ class ViewProfileCard extends StatelessWidget {
   final String? image;
   final Widget? suffixIcon;
   final double? valueWidth;
+  final Color? backGroundColor;
+  final double? horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -486,7 +518,9 @@ class ViewProfileCard extends StatelessWidget {
               onPressed?.call();
             },
             child: Container(
-              color: Colors.white,
+              padding:
+                  EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0.w),
+              color: backGroundColor ?? Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -501,7 +535,7 @@ class ViewProfileCard extends StatelessWidget {
                     Container(
                       alignment:
                           isRTL ? Alignment.centerLeft : Alignment.centerRight,
-                      width: valueWidth ?? 110.w,
+                      width: valueWidth ?? 180.w,
                       child: MadaText(
                         value!,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -515,6 +549,9 @@ class ViewProfileCard extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          SizedBox(
+            height: 10.h,
           ),
           if (withLine)
             Padding(
@@ -537,76 +574,128 @@ class ViewProfileCard extends StatelessWidget {
   }
 }
 
-// class DeleteAccountSheet extends StatelessWidget {
-//   const DeleteAccountSheet({
-//     super.key,
-//     this.onDeleteAccount,
-//   });
+class CustomContainerButton extends StatelessWidget {
+  const CustomContainerButton({
+    required this.onPressed,
+    required this.text,
+    super.key,
+    this.textStyle,
+    this.backgroundColor = Colors.white,
+    this.borderColor,
+    this.borderRadius = 10.0,
+    this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+  });
+  final VoidCallback onPressed;
+  final String text;
+  final TextStyle? textStyle;
+  final Color backgroundColor;
+  final Color? borderColor;
+  final double borderRadius;
+  final EdgeInsets padding;
 
-//   final Function()? onDeleteAccount;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: Border.all(
+            color: borderColor ?? backgroundColor,
+          ),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: textStyle ??
+                Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.stretch,
-//       children: <Widget>[
-//         Container(
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(5.w),
-//             // color: const Color(AppColors.red).withOpacity(0.03),
-//           ),
-//           child: Padding(
-//             padding: EdgeInsets.symmetric(
-//               horizontal: 10.w,
-//               vertical: 5.h,
-//             ),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: <Widget>[
-//                 SvgPicture.asset(iconDeleteAccountWarning),
-//                 SizedBox(
-//                   height: 10.h,
-//                 ),
-//                 Text(
-//                   'delete_account_desc'.tr,
-//                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-//                         color: const Color(AppColors.black),
-//                         fontWeight: FontWeight.w400,
-//                       ),
-//                 )
-//               ],
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: DEVICE_HEIGHT * 0.04,
-//         ),
-//         SizedBox(
-//           width: DEVICE_WIDTH,
-//           child: CustomButton(
-//             text: 'confirm_delete'.tr,
-//             style: ElevatedButton.styleFrom(
-//               backgroundColor: const Color(AppColors.red).withOpacity(0.15),
-//               padding: EdgeInsets.symmetric(
-//                 vertical: DEVICE_HEIGHT * 0.017,
-//                 horizontal: DEVICE_WIDTH * 0.1,
-//               ),
-//               shadowColor: Colors.transparent,
-//               shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(DEVICE_WIDTH * 0.08),
-//               ),
-//             ),
-//             textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-//                   color: const Color(AppColors.red),
-//                   fontWeight: FontWeight.w600,
-//                 ),
-//             onPressed: onDeleteAccount,
-//           ),
-//         ),
-//         SizedBox(
-//           height: DEVICE_HEIGHT * 0.02,
-//         ),
-//       ],
-//     );
-//   }
-// }
+class DeleteAccountSheet extends StatelessWidget {
+  const DeleteAccountSheet({
+    super.key,
+    this.onDeleteAccount,
+  });
+
+  final Function()? onDeleteAccount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.r),
+            color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                  alpha: 0.3,
+                ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 5.h,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SvgPicture.asset(iconDeleteAccountWarning),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  'delete_account_desc'.tr,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: FlutterMadaTheme.of(context).color000000,
+                        fontWeight: FontWeight.w400,
+                      ),
+                )
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 16.h,
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: CustomButton(
+            text: 'confirm_delete'.tr,
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  FlutterMadaTheme.of(context).colorFF0000.withValues(
+                        alpha: 0.25,
+                      ),
+              padding: EdgeInsets.symmetric(
+                vertical: 5.h,
+                horizontal: 10.w,
+              ),
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+            ),
+            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: FlutterMadaTheme.of(context).colorFF0000,
+                  fontWeight: FontWeight.w600,
+                ),
+            onPressed: onDeleteAccount,
+          ),
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+      ],
+    );
+  }
+}

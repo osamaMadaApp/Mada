@@ -268,17 +268,22 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'nafath_verified': <String, String>{
       'en': 'Nafath Verified',
       'ar': 'تم التحقق من نفاذ',
+    },
     'my_orders': <String, String>{
       'en': 'My Orders',
       'ar': 'طلباتي',
     },
-    'mada_properties': <String, String>{
-      'en': 'MADA Properties',
-      'ar': 'مدى العقارية',
-    },
     'no_data_found': <String, String>{
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
+    },
+    'change_password': <String, String>{
+      'en': 'Change password',
+      'ar': 'تغيير كلمة المرور',
+    },
+    'edit_profile': <String, String>{
+      'en': 'Edit profile',
+      'ar': 'تعديل الملف الشخصي',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,

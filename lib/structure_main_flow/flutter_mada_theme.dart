@@ -108,6 +108,10 @@ abstract class FlutterMadaTheme {
   /// Gray
   late Color colorF5F5F5;
   late Color colorD2D2D2;
+  late Color colorFAFAFA;
+
+  // Red
+  late Color colorFF0000;
 }
 
 DeviceSize getDeviceSize(BuildContext context) {
@@ -203,6 +207,10 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color color97BE5A = const Color(0xFF97BE5A);
   @override
   late Color colorD2D2D2 = const Color(0xFFD2D2D2);
+  @override
+  late Color colorFAFAFA = const Color(0xFFFAFAFA);
+  @override
+  late Color colorFF0000 = const Color(0x00ff0000);
 }
 
 class DarkModeTheme extends FlutterMadaTheme {
