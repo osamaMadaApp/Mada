@@ -245,6 +245,30 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Arabic',
       'ar': 'العربية',
     },
+    'profile_info': <String, String>{
+      'en': 'Profile Info.',
+      'ar': 'معلومات الحساب',
+    },
+    'first_name': <String, String>{
+      'en': 'First Name',
+      'ar': 'الاسم الأول',
+    },
+    'last_name': <String, String>{
+      'en': 'Last Name',
+      'ar': 'اسم العائلة',
+    },
+    'email': <String, String>{
+      'en': 'Email',
+      'ar': 'البريد الإلكتروني',
+    },
+    'verify_with_nafath': <String, String>{
+      'en': 'Verify with Nafath',
+      'ar': 'التحقق مع نفاذ',
+    },
+    'nafath_verified': <String, String>{
+      'en': 'Nafath Verified',
+      'ar': 'تم التحقق من نفاذ',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

@@ -54,7 +54,7 @@ class Menu extends StatelessWidget {
                   TabItem(
                     label: FFLocalizations.of(context).getText('view_profile'),
                     icon: iconViewProfile,
-                    content: const ViewProfile(),
+                    content: const ViewProfileScreen(),
                   ),
                   TabItem(
                     label: FFLocalizations.of(context).getText('favorites'),
