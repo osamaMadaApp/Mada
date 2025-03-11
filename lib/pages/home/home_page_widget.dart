@@ -1,154 +1,124 @@
-import 'package:flutter/scheduler.dart';
-
-import '/structure_main_flow/flutter_mada_util.dart';
-import '../../components/header_widget/header_widget.dart';
 import '../../general_exports.dart';
-import '../../index.dart';
-import 'home_page_model.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageWidgetState();
-}
-
-class _HomePageWidgetState extends State<HomePage>
-    with TickerProviderStateMixin {
-  late HomePageModel _model;
-
-  @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => HomePageModel());
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) async {
-        ApiRequest(
-          path: apiHomeScreen,
-          formatResponse: true,
-          className: 'HomeController/getHomeScreenResult',
-        ).request(
-          onSuccess: (dynamic data, dynamic response) {
-            _model.homeData = data;
-            for (dynamic image in _model.homeData[keyResults][keyHomeBanner]) {
-              _model.homeBanner.add(image[keyBannerImage]);
-            }
-            _model.mostPopularProjects =
-                _model.homeData[keyResults][keyMostPopularProject];
-            setState(() {});
-          },
-        );
-      },
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider<HomePageModel>(
+          create: (BuildContext context) => HomePageModel(),
+        ),
+      ],
+      child: const Home(),
     );
   }
+}
 
-  @override
-  void dispose() {
-    _model.dispose();
-    super.dispose();
-  }
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomePageModel homePageModel = Provider.of<HomePageModel>(context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: wrapWithModel(
-        model: _model,
-        updateCallback: () => setState(() {}),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 50.h,
-          ),
-          child: _model.homeData == null
-              ? const Center()
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      HeaderWidget(
-                        profilePicture: FFAppState().userModel[keyProfilePic],
-                        title: FFAppState().userModel[keyFirstName],
-                      ),
-                      SizedBox(height: 25.h),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            height: 700.h,
-                            constraints: BoxConstraints(
-                              maxWidth: 330.w,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20.w,
-                              vertical: 20.h,
-                            ),
-                            decoration: BoxDecoration(
-                              color: FlutterMadaTheme.of(context).colorF5F5F5,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Image.asset(imageGrayLogo),
-                                  SizedBox(height: 20.h),
-                                  MadaText(
-                                    FFLocalizations.of(context).getText(
-                                      'your_gateway_to_premium_life',
-                                    ),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          color: FlutterMadaTheme.of(context)
-                                              .color292D32,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30,
-                                        ),
-                                  ),
-                                  SizedBox(height: 40.h),
-                                  MadaText(
-                                    FFLocalizations.of(context).getText(
-                                      'browse_out_main_categories',
-                                    ),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          color: FlutterMadaTheme.of(context)
-                                              .color292D32,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  HomeCategories(
-                                    menu: _model.homeData[keyResults][keyMenu],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 20.w),
-                          Expanded(
-                            child: SliderComponent(
-                              items: _model.homeBanner,
-                              height: 700.h,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 40.h),
-                      MostPopularProjects(
-                        mostPopularProject: _model.mostPopularProjects,
-                      ),
-                    ],
-                  ),
-                ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+          vertical: 50.h,
         ),
+        child: homePageModel.homeData == null
+            ? const Center()
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    HeaderWidget(
+                      profilePicture: FFAppState().userModel[keyProfilePic],
+                      title: FFAppState().userModel[keyFirstName],
+                    ),
+                    SizedBox(height: 25.h),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          height: 700.h,
+                          constraints: BoxConstraints(
+                            maxWidth: 330.w,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 20.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: FlutterMadaTheme.of(context).colorF5F5F5,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Image.asset(imageGrayLogo),
+                                SizedBox(height: 20.h),
+                                MadaText(
+                                  FFLocalizations.of(context).getText(
+                                    'your_gateway_to_premium_life',
+                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: FlutterMadaTheme.of(context)
+                                            .color292D32,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30,
+                                      ),
+                                ),
+                                SizedBox(height: 40.h),
+                                MadaText(
+                                  FFLocalizations.of(context).getText(
+                                    'browse_out_main_categories',
+                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: FlutterMadaTheme.of(context)
+                                            .color292D32,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                SizedBox(height: 20.h),
+                                HomeCategories(
+                                  menu: homePageModel.homeData[keyResults]
+                                      [keyMenu],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 20.w),
+                        Expanded(
+                          child: SliderComponent(
+                            items: homePageModel.homeBanner,
+                            height: 700.h,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40.h),
+                    MostPopularProjects(
+                      mostPopularProject: homePageModel.mostPopularProjects,
+                    ),
+                  ],
+                ),
+              ),
       ),
     );
   }

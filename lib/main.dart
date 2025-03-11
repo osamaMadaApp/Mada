@@ -8,16 +8,18 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
+import 'general_constants.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
-import 'general_constants.dart';
+
 import 'general_exports.dart';
 import 'pages/home/home_page_widget.dart';
 import 'pages/my_order_page/my_order_page.dart';
 import 'pages/notifications_page/notifications_page.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 
@@ -107,52 +109,54 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true, // Ensures text scales properly
       splitScreenMode: true, // Helps with split-screen support
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp.router(
-          title: 'Mada',
-          localizationsDelegates: const <LocalizationsDelegate>[
-            FFLocalizationsDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: _locale,
-          supportedLocales: const <Locale>[
-            Locale('en'),
-            Locale('ar'),
-          ],
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            textTheme: const TextTheme(
-              headlineMedium: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+        return FlutterSmartDialog(
+          child: MaterialApp.router(
+            title: 'Mada',
+            localizationsDelegates: const <LocalizationsDelegate>[
+              FFLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: _locale,
+            supportedLocales: const <Locale>[
+              Locale('en'),
+              Locale('ar'),
+            ],
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              textTheme: const TextTheme(
+                headlineMedium: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                bodySmall: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+                bodyMedium: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+                bodyLarge: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-              bodySmall: TextStyle(
-                fontSize: 14.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-              ),
-              bodyMedium: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-              ),
-              bodyLarge: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-              ),
+              brightness: Brightness.light,
+              useMaterial3: false,
             ),
-            brightness: Brightness.light,
-            useMaterial3: false,
+            darkTheme: ThemeData(
+              brightness: Brightness.light,
+              useMaterial3: false,
+            ),
+            themeMode: _themeMode,
+            routerConfig: _router,
           ),
-          darkTheme: ThemeData(
-            brightness: Brightness.light,
-            useMaterial3: false,
-          ),
-          themeMode: _themeMode,
-          routerConfig: _router,
         );
       },
     );

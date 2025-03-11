@@ -1,5 +1,3 @@
-import 'package:nested/nested.dart';
-
 import '../../components/header_widget/header_widget.dart';
 import '../../general_exports.dart';
 import '../../index.dart';

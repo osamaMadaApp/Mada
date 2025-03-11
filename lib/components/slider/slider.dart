@@ -12,7 +12,7 @@ class SliderComponent extends StatefulWidget {
     this.sliderScreen = false,
     this.height,
     super.key,
-    this.autoPlay,
+    this.autoPlay = false,
     this.currentIndex,
     this.fit = BoxFit.fill,
     this.zoom = false,
