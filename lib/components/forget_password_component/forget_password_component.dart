@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../general_exports.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../structure_main_flow/flutter_mada_theme.dart';
 import '../../structure_main_flow/flutter_mada_widgets.dart';
@@ -33,7 +34,8 @@ class _ForgetPasswordComponentWidgetState extends State<ForgetPasswordComponent>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ForgetPasswordComponentModel());
+    _model = context.read<ForgetPasswordComponentModel>();
+    _model.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
@@ -45,6 +47,7 @@ class _ForgetPasswordComponentWidgetState extends State<ForgetPasswordComponent>
 
   @override
   Widget build(BuildContext context) {
+    _model = context.watch<ForgetPasswordComponentModel>(); // Using watch here instead of read
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

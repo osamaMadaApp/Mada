@@ -29,10 +29,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   @override
   void initState() {
     super.initState();
-    // _model = createModel(context, () => LoginPageModel());
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {});
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    _model = context.read<LoginPageModel>();
+    });
   }
 
   @override
@@ -43,51 +44,51 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LoginPageModel>(
-      create: (BuildContext context) => LoginPageModel(),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: Stack(
-          children: [
-            Stack(
-              children: [
-                Image.asset(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  'assets/images/login_main_image.png',
-                  fit: BoxFit.cover,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  color:
-                  FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
-                ),
-              ],
-            ),
-            Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.transparent,
-              key: scaffoldKey,
-              body: SafeArea(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  // Duration of the transition
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  child: Container(),
-                ),
+    _model = context.watch<LoginPageModel>(); // Using watch here instead of read
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Stack(
+        children: [
+          Stack(
+            children: [
+              Image.asset(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                'assets/images/login_main_image.png',
+                fit: BoxFit.cover,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color:
+                FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
+              ),
+            ],
+          ),
+          Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                child: _model.currentModelName == 'LoginSideComponent'
+                    ? _buildLoginSideComponent()
+                    : (_model.currentModelName == 'OtpComponent'
+                    ? _buildOtpComponent()
+                    : _buildForgetPasswordComponent()),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

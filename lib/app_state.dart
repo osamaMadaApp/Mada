@@ -29,6 +29,18 @@ class FFAppState extends ChangeNotifier {
       }
     });
     _safeInit(() {
+      if (prefs.containsKey('ff_MasterDateJsonModel')) {
+        try {
+          final String? serializedData =
+              prefs.getString('ff_MasterDateJsonModel') ?? '{}';
+         _MasterDateJsonModel = jsonDecode(serializedData ?? '');
+         print('');
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+    _safeInit(() {
       _selectedLangugeAppState = prefs.getInt('ff_selectedLangugeAppState') ??
           _selectedLangugeAppState;
     });
@@ -61,6 +73,16 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_UserModelWithJson', jsonEncode(value) );
   }
 
+
+
+  Map<String, dynamic> _MasterDateJsonModel =  {};
+  Map<String, dynamic> get masterDateJsonModel => _MasterDateJsonModel;
+  set masterDateJsonModel(Map<String, dynamic> value) {
+    _MasterDateJsonModel = value;
+    prefs.setString('ff_MasterDateJsonModel', jsonEncode(value) );
+  }
+
+
   int _selectedLangugeAppState = 1;
   int get selectedLangugeAppState => _selectedLangugeAppState;
 
@@ -79,10 +101,7 @@ class FFAppState extends ChangeNotifier {
     _timerTimeStamp = value;
     prefs.setInt('ff_timerTime', value);
   }
-
 }
-
-
 
 void _safeInit(Function() initializeField) {
   try {

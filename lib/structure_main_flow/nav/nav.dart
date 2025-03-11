@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/api_keys.dart';
+import '../../api/api_request.dart';
+import '../../api/api_routes.dart';
 import '../../main.dart';
 import '../../pages/login_page/login_page_widget.dart';
 import '/auth/base_auth_user_provider.dart';
@@ -60,6 +63,7 @@ class AppStateNotifier extends ChangeNotifier {
         user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
     initialUser ??= newUser;
     user = newUser;
+    getMasterData();
 
     // Refresh the app on auth change unless explicitly marked otherwise.
     // No need to update unless the user has changed.
@@ -75,6 +79,20 @@ class AppStateNotifier extends ChangeNotifier {
     showSplashImage = false;
     notifyListeners();
   }
+
+  Future<void> getMasterData() async {
+    await ApiRequest(
+      path: apiMasterData,
+      className: 'SplashController/getMasterData',
+      defaultHeadersValue: true,
+      formatResponse: true,
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+       FFAppState().masterDateJsonModel = response[keyResults];
+      },
+    );
+  }
+
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(

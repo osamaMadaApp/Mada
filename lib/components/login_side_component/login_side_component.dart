@@ -24,8 +24,10 @@ class _LoginSideComponent extends State<LoginSideComponent> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginSideComponentModel());
-
+    _model = context.read<LoginSideComponentModel>();
+    _model.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    });
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if(kDebugMode){
        setState(() {
@@ -44,6 +46,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
 
   @override
   Widget build(BuildContext context) {
+    _model = context.watch<LoginSideComponentModel>(); // Using watch here instead of read
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
