@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import '../../api/api_keys.dart';
 import '../../api/api_request.dart';
 import '../../api/api_routes.dart';
+import '../../api/routes_keys.dart';
 import '../../backend/schema/util/schema_util.dart';
 import '../../components/forget_password_component/forget_password_component.dart';
 import '../../components/otp_component/otp_component.dart';
@@ -57,7 +58,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               Image.asset(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                'assets/images/login_main_image.png',
+                loginMainImage,
                 fit: BoxFit.cover,
               ),
               Container(
@@ -172,7 +173,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               (dynamic data, dynamic response, dynamic headers) {
             if (response[keySuccess] == true) {
               FFAppState().userModel = response['results'];
-              context.pushNamed('HomePage');
+              context.pushNamed(routeHome);
             } else {
               showToast(message: response[keyMsg]);
             }
