@@ -16,23 +16,20 @@ class SelectableCategory extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 5.w,
-          vertical: 1.h,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: isSelected
               ? FlutterMadaTheme.of(context).primary.withOpacity(0.1)
-              : FlutterMadaTheme.of(context).gray600,
-          borderRadius: BorderRadius.circular(12),
+              : FlutterMadaTheme.of(context).colorD2D2D240.withOpacity(0.25),
+          borderRadius: BorderRadius.circular(32),
           border: Border.all(
             color: isSelected
                 ? FlutterMadaTheme.of(context).primary
-                : FlutterMadaTheme.of(context).gray600,
+                : FlutterMadaTheme.of(context).colorD2D2D240,
           ),
         ),
         child: MadaText(
-          text.tr,
+          text,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Colors.black,

@@ -39,20 +39,23 @@ void main() async {
 
   runApp(
     GetMaterialApp(
-      home: MultiProvider(
-        providers: <SingleChildWidget>[
-          ChangeNotifierProvider(
-              create: (BuildContext context) => LoginPageModel()),
-          ChangeNotifierProvider(
-              create: (BuildContext context) => OtpComponentModel()),
-          ChangeNotifierProvider(
-              create: (BuildContext context) => LoginSideComponentModel()),
-          ChangeNotifierProvider(
-              create: (BuildContext context) => ForgetPasswordComponentModel()),
-          ChangeNotifierProvider(
-              create: (BuildContext context) => ExclusiveProjectsModel()),
-        ],
-        child: const MyApp(),
+      home: FlutterSmartDialog(
+        child: MultiProvider(
+          providers: <SingleChildWidget>[
+            ChangeNotifierProvider(
+                create: (BuildContext context) => LoginPageModel()),
+            ChangeNotifierProvider(
+                create: (BuildContext context) => OtpComponentModel()),
+            ChangeNotifierProvider(
+                create: (BuildContext context) => LoginSideComponentModel()),
+            ChangeNotifierProvider(
+                create: (BuildContext context) =>
+                    ForgetPasswordComponentModel()),
+            ChangeNotifierProvider(
+                create: (BuildContext context) => ExclusiveProjectsModel()),
+          ],
+          child: const MyApp(),
+        ),
       ),
     ),
   );
@@ -190,7 +193,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     setIsRTL(context);
     final Map<String, dynamic> tabs = <String, dynamic>{
-      'HomePage': const FlutterSmartDialog(child: HomePage()),
+      'HomePage': const HomePage(),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
       'MenuPage': const MenuPage(),

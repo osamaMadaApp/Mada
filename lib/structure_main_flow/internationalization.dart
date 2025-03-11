@@ -285,6 +285,34 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Edit profile',
       'ar': 'تعديل الملف الشخصي',
     },
+    'hi': <String, String>{
+      'en': 'Hi',
+      'ar': 'مرحبا',
+    },
+    'hi_guest': <String, String>{
+      'en': 'Hi Guest',
+      'ar': 'مرحبا بالضيف',
+    },
+    'notifications': <String, String>{
+      'en': 'Notifications',
+      'ar': 'الإشعارات',
+    },
+    'new_notifications': <String, String>{
+      'en': 'New Notifications',
+      'ar': 'إشعارات جديدة',
+    },
+    'read_notifications': <String, String>{
+      'en': 'Read Notifications',
+      'ar': 'قراءة الإشعارات',
+    },
+    'notification_details': <String, String>{
+      'en': 'Notification Details',
+      'ar': 'تفاصيل الإشعار',
+    },
+    'details': <String, String>{
+      'en': 'Details',
+      'ar': 'تفاصيل',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
