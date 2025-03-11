@@ -146,18 +146,19 @@ class HomeCategories extends StatelessWidget {
               title: menu[index][keyName],
               mainAxisAlignment: MainAxisAlignment.center,
               onTap: () {
-                // switch (menu[index][keyLink]) {
-                //   case 'projects/exclusive-projects':
-                //     Get.toNamed(routeExclusiveProjects);
-                //   case 'propeties/list':
-                //     Get.toNamed(routeSearchScreen);
-                //   case 'request-property':
-                //     Get.toNamed(routeRequestYourProperty);
-                //   case 'user/properties/list-property':
-                //     Get.toNamed(routeListProperty);
-                //   default:
-                //     null;
-                // }
+                switch (menu[index][keyLink]) {
+                  case 'projects/exclusive-projects':
+                    // Get.toNamed(routeExclusiveProjects);
+                    // routeExclusiveProjects
+                  case 'propeties/list':
+                    // Get.toNamed(routeSearchScreen);
+                  case 'request-property':
+                    // Get.toNamed(routeRequestYourProperty);
+                  case 'user/properties/list-property':
+                    // Get.toNamed(routeListProperty);
+                  default:
+                    null;
+                }
               },
             ),
           );
