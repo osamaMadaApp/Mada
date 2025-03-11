@@ -225,13 +225,37 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'My Orders',
       'ar': 'طلباتي',
     },
-    'mada_properties': <String, String>{
-      'en': 'MADA Properties',
-      'ar': 'مدى العقارية',
-    },
     'no_data_found': <String, String>{
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
+    },
+    'hi': <String, String>{
+      'en': 'Hi',
+      'ar': 'مرحبا',
+    },
+    'hi_guest': <String, String>{
+      'en': 'Hi Guest',
+      'ar': 'مرحبا بالضيف',
+    },
+    'notifications': <String, String>{
+      'en': 'Notifications',
+      'ar': 'الإشعارات',
+    },
+    'new_notifications': <String, String>{
+      'en': 'New Notifications',
+      'ar': 'إشعارات جديدة',
+    },
+    'read_notifications': <String, String>{
+      'en': 'Read Notifications',
+      'ar': 'قراءة الإشعارات',
+    },
+    'notification_details': <String, String>{
+      'en': 'Notification Details',
+      'ar': 'تفاصيل الإشعار',
+    },
+    'details': <String, String>{
+      'en': 'Details',
+      'ar': 'تفاصيل',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,

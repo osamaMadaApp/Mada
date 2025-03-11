@@ -1,6 +1,7 @@
 import 'package:country_flags/country_flags.dart';
 
 import '../../general_exports.dart';
+import '../../structure_main_flow/internationalization.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -58,8 +59,8 @@ class HeaderWidget extends StatelessWidget {
                   children: <Widget>[
                     MadaText(
                       title != null
-                          ? '${'hi'.tr}, ${title!.capitalize ?? ''}'
-                          : 'hi_guest'.tr,
+                          ? '${FFLocalizations.of(context).getText('hi')}, ${title!.capitalize ?? ''}'
+                          : FFLocalizations.of(context).getText('hi_guest'),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: FlutterMadaTheme.of(context).color292D32,
                             fontWeight: FontWeight.bold,
