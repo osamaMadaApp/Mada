@@ -6,20 +6,23 @@ import '../../structure_main_flow/flutter_mada_model.dart';
 import '../../structure_main_flow/flutter_mada_theme.dart';
 import 'otp_component.dart' show OtpComponent;
 
-class OtpComponentModel extends FlutterMadaModel<OtpComponent> {
+class OtpComponentModel   extends ChangeNotifier{
   //
 
-
-  @override
-  void initState(BuildContext context) {
+ bool? isValid;
 
 
-  }
 
   @override
   void dispose() {
+    super.dispose();
+
 
   }
+ void changeTab(int index) {
+
+   notifyListeners();
+ }
 
   PinTheme themePin(BuildContext context){
     return PinTheme(

@@ -1,12 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../structure_main_flow/flutter_mada_model.dart';
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import '../../structure_main_flow/flutter_mada_widgets.dart';
-import '../../structure_main_flow/internationalization.dart';
+
 import '/structure_main_flow/flutter_mada_util.dart';
-import 'package:flutter/material.dart';
+import '../../general_exports.dart';
+import '../../structure_main_flow/flutter_mada_widgets.dart';
 import 'login_side_component_model.dart';
 
 class LoginSideComponent extends StatefulWidget {
@@ -27,9 +24,18 @@ class _LoginSideComponent extends State<LoginSideComponent> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginSideComponentModel());
-
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    _model = context.read<LoginSideComponentModel>();
+    _model.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    });
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if(kDebugMode){
+       setState(() {
+         _model.textController1.text = 'usama@gmail.com';
+         _model.textController2.text = 'usama@gmail.com';
+       });
+      }
+    });
   }
 
   @override
@@ -40,6 +46,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
 
   @override
   Widget build(BuildContext context) {
+    _model = context.watch<LoginSideComponentModel>(); // Using watch here instead of read
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -60,7 +67,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/mada_logo.svg',
+                    madaLogo,
                     fit: BoxFit.cover,
                   ),
                   Column(
