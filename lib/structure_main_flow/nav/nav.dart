@@ -1,3 +1,5 @@
+import '../../api/routes_keys.dart';
+import '../../pages/exclusive_projects/exclusive_projects.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -102,17 +104,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       errorBuilder: (context, state) => const LoginPageWidget(),
       routes: [
         FFRoute(
+          name: routeExclusiveProjects,
+          path: routeExclusiveProjects.toRoutePath(),
+          builder: (context, params) => const ExclusiveProjects(),
+        ),
+        FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => FFAppState().isLoggedIn() == true
-              ? const NavBarPage(initialPage: 'HomePage')
+              ? const NavBarPage(initialPage: routeHome)
               : const LoginPageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
+          name: routeHome,
+          path: routeHome.toRoutePath(),
           builder: (context, params) =>
-              const NavBarPage(initialPage: 'HomePage'),
+              const NavBarPage(initialPage: routeHome),
         ),
         FFRoute(
           name: 'LoginPage',

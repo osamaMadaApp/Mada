@@ -49,7 +49,7 @@ class _${pageName}WidgetState extends State<$pageName>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => $modelName());
+    _model = context.read<$modelName>();
     SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
@@ -61,6 +61,7 @@ class _${pageName}WidgetState extends State<$pageName>
 
   @override
   Widget build(BuildContext context) {
+   _model = context.watch<$modelName>();
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -81,13 +82,11 @@ class _${pageName}WidgetState extends State<$pageName>
   final String modelClass = '''
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_model.dart';
-import '${snakeCaseName}.dart' show $pageName;
 
-class $modelName extends FlutterMadaModel<$pageName> {
-  @override
-  void initState(BuildContext context) {}
+class $modelName extends ChangeNotifier{
+  
+  void initState() {}
 
-  @override
   void dispose() {}
 }
 ''';

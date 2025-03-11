@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:Mada/pages/exclusive_projects/exclusive_projects_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -48,6 +49,8 @@ void main() async {
               create: (BuildContext context) => LoginSideComponentModel()),
           ChangeNotifierProvider(
               create: (BuildContext context) => ForgetPasswordComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ExclusiveProjectsModel()),
         ],
         child: const MyApp(),
       ),
@@ -109,54 +112,52 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true, // Ensures text scales properly
       splitScreenMode: true, // Helps with split-screen support
       builder: (BuildContext context, Widget? child) {
-        return FlutterSmartDialog(
-          child: MaterialApp.router(
-            title: 'Mada',
-            localizationsDelegates: const <LocalizationsDelegate>[
-              FFLocalizationsDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            locale: _locale,
-            supportedLocales: const <Locale>[
-              Locale('en'),
-              Locale('ar'),
-            ],
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              textTheme: const TextTheme(
-                headlineMedium: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                bodySmall: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-                bodyMedium: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-                bodyLarge: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
+        return MaterialApp.router(
+          title: 'Mada',
+          localizationsDelegates: const <LocalizationsDelegate>[
+            FFLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: _locale,
+          supportedLocales: const <Locale>[
+            Locale('en'),
+            Locale('ar'),
+          ],
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              brightness: Brightness.light,
-              useMaterial3: false,
+              bodySmall: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              bodyLarge: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-            darkTheme: ThemeData(
-              brightness: Brightness.light,
-              useMaterial3: false,
-            ),
-            themeMode: _themeMode,
-            routerConfig: _router,
+            brightness: Brightness.light,
+            useMaterial3: false,
           ),
+          darkTheme: ThemeData(
+            brightness: Brightness.light,
+            useMaterial3: false,
+          ),
+          themeMode: _themeMode,
+          routerConfig: _router,
         );
       },
     );
@@ -189,7 +190,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     setIsRTL(context);
     final Map<String, dynamic> tabs = <String, dynamic>{
-      'HomePage': const HomePage(),
+      'HomePage': const FlutterSmartDialog(child: HomePage()),
       'MyOrderPage': const MyOrderPage(),
       'NotificationsPage': const NotificationsPage(),
       'MenuPage': const MenuPage(),

@@ -1,3 +1,4 @@
+import '../../api/routes_keys.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -146,18 +147,18 @@ class HomeCategories extends StatelessWidget {
               title: menu[index][keyName],
               mainAxisAlignment: MainAxisAlignment.center,
               onTap: () {
-                // switch (menu[index][keyLink]) {
-                //   case 'projects/exclusive-projects':
-                //     Get.toNamed(routeExclusiveProjects);
-                //   case 'propeties/list':
-                //     Get.toNamed(routeSearchScreen);
-                //   case 'request-property':
-                //     Get.toNamed(routeRequestYourProperty);
-                //   case 'user/properties/list-property':
-                //     Get.toNamed(routeListProperty);
-                //   default:
-                //     null;
-                // }
+                switch (menu[index][keyLink]) {
+                  case 'projects/exclusive-projects':
+                    context.pushNamed(routeExclusiveProjects);
+                  case 'propeties/list':
+                    // Get.toNamed(routeSearchScreen);
+                  case 'request-property':
+                    // Get.toNamed(routeRequestYourProperty);
+                  case 'user/properties/list-property':
+                    // Get.toNamed(routeListProperty);
+                  default:
+                    null;
+                }
               },
             ),
           );
