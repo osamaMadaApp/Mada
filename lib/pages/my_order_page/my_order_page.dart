@@ -30,7 +30,13 @@ class MyOrders extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: myOrderPageModel.units.isEmpty
-          ? const Center()
+          ? myOrderPageModel.isLoading
+              ? const Center()
+              : Center(
+                  child: Text(
+                    FFLocalizations.of(context).getText('no_data_found'),
+                  ),
+                )
           : Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 20.w,
