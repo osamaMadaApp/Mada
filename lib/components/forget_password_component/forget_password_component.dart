@@ -1,11 +1,13 @@
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import '../../structure_main_flow/flutter_mada_widgets.dart';
-import '/structure_main_flow/flutter_mada_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '/structure_main_flow/flutter_mada_util.dart';
+import '../../structure_main_flow/flutter_mada_theme.dart';
+import '../../structure_main_flow/flutter_mada_widgets.dart';
+import '../../utils/assets.dart';
 import 'forget_password_component_model.dart';
 
 class ForgetPasswordComponent extends StatefulWidget {
@@ -63,7 +65,7 @@ class _ForgetPasswordComponentWidgetState extends State<ForgetPasswordComponent>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/mada_logo.svg',
+                    madaLogo,
                     fit: BoxFit.cover,
                   ),
                   Column(

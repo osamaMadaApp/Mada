@@ -60,7 +60,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                color: FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
+                color:
+                    FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
               ),
             ],
           ),
@@ -102,19 +103,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             _model.currentModelName = 'ForgetPasswordComponent';
           });
         },
-        onConfirmTap: () async{
+        onConfirmTap: () async {
           final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
-         await ApiRequest(
+          await ApiRequest(
             path: apiLogin,
             method: ApiMethods.post,
             className: 'MyAppController/login',
-            header: {
-              keyLanguage: FFAppState().getSelectedLanguge(),
-            },
             defaultHeadersValue: false,
             body: {
               keyCountryCode: 966,
-              keyMobile:595106753 ,
+              keyMobile: 595106753,
               ...deviceInfoDetails,
             },
           ).request(
@@ -133,13 +131,30 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     );
   }
 
+  Future<void> resendCode() async {
+    final String fcId = await getFcmToken() ?? '';
+    ApiRequest(
+      path: apiResendOTP,
+      method: ApiMethods.post,
+      defaultHeadersValue: false,
+      className: 'MyAppController/resendCode',
+      body: {
+        keyCountryCode: 966,
+        keyMobile: 595106753,
+        keyDeviceToken: fcId,
+      },
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {},
+    );
+  }
+
   // Helper method to build LoginSideComponent
   Widget _buildOtpComponent() {
     return wrapWithModel(
       model: _model.otpComponent,
       updateCallback: () => setState(() {}),
       child: OtpComponent(
-        onConfnfirm: () async{
+        onConfnfirm: () async {
           final Map<String, dynamic> deviceInfo = await getDeviceQueryParams();
           final String fcId = await getFcmToken() ?? '';
           ApiRequest(
@@ -152,22 +167,26 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             defaultHeadersValue: false,
             body: {
               keyCountryCode: 966,
-              keyMobile:595106753 ,
+              keyMobile: 595106753,
               keyOtpPhone: 1234,
               keyDeviceId: deviceInfo[keyDeviceId],
               keyDeviceType: deviceInfo[keyDeviceModel],
               keyDeviceToken: fcId,
             },
           ).request(
-            onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
+            onSuccessWithHeader:
+                (dynamic data, dynamic response, dynamic headers) {
               if (response[keySuccess] == true) {
-                  FFAppState().userModel = response['results'];
-                  context.pushNamed('HomePage');
+                FFAppState().userModel = response['results'];
+                context.pushNamed('HomePage');
               } else {
                 showToast(message: response[keyMsg]);
               }
             },
           );
+        },
+        onResendCode: () async {
+          resendCode();
         },
       ),
     );

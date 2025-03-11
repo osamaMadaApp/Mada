@@ -210,12 +210,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 0
                               ? SvgPicture.asset(
-                                  'assets/images/home.svg',
+                                  home,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/home_disabled.svg',
+                                  homeDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -237,12 +237,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 1
                               ? SvgPicture.asset(
-                                  'assets/images/my_orders.svg',
+                                  myOrders,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/my_orders_disabeld.svg',
+                                  myOrdersDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -264,12 +264,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 2
                               ? SvgPicture.asset(
-                                  'assets/images/notification.svg',
+                                  notification,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/notification_disabled.svg',
+                                  notificationDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -291,12 +291,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 3
                               ? SvgPicture.asset(
-                                  'assets/images/menu.svg',
+                                  menu,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/menu_disabeld.svg',
+                                  menuDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -310,7 +310,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                 child: SvgPicture.asset(
-                  'assets/images/logo.svg',
+                  logo,
                   width: 56.0,
                   height: 56.0,
                 ),

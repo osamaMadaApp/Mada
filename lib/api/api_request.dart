@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../app_state.dart';
 import '../general_exports.dart';
 
 class ApiRequest {
@@ -36,16 +37,16 @@ class ApiRequest {
   dynamic response;
   final bool withAuth;
   final bool defaultHeadersValue;
-  // String authorization() => myAppController.userData != null
-  //     ? 'Bearer ${myAppController.userData[keyToken]}'
-  //     : '';
+  String authorization() => FFAppState().userModel.isNotEmpty
+      ? 'Bearer ${FFAppState().userModel[keyToken]}'
+      : '';
 
   Future<Dio> _dio() async {
     final Map<String, dynamic> defaultHeaders = <String, dynamic>{
       'Content-Type': '*/*',
       'Accept': '*/*',
       'platform': Platform.isAndroid ? 'android' : 'ios',
-      // keyLanguage: Get.find<MyAppController>().appLocale,
+      keyLanguage: FFAppState().getSelectedLanguge(),
     };
 
     final Map<String, dynamic> mergedHeaders = <String, dynamic>{

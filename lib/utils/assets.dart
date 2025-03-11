@@ -60,6 +60,15 @@ const String iconPaymentOption = '${iconsPath}payment_option_icon.svg';
 const String iconPrimaryArrow = '${iconsPath}primary_arrow.svg';
 const String iconSelectListArrow = '${iconsPath}select_list_arrow.svg';
 const String iconSort = '${iconsPath}sort.svg';
+const String logo = '${iconsPath}logo.svg';
+const String menu = '${iconsPath}menu.svg';
+const String menuDisabled = '${iconsPath}menu_disabeld.svg';
+const String notification = '${iconsPath}notification.svg';
+const String notificationDisabled = '${iconsPath}notification_disabled.svg';
+const String myOrders = '${iconsPath}my_orders.svg';
+const String myOrdersDisabled = '${iconsPath}my_orders_disabeld.svg';
+const String home = '${iconsPath}home.svg';
+const String homeDisabled = '${iconsPath}home_disabled.svg';
 
 // profile
 const String iconArrowRight = '${iconsPath}arrow-right.svg';
@@ -110,6 +119,7 @@ const String imageNafath2 = '${imagesPath}nafath_image.png';
 const String imageThreeSixty = '${imagesPath}360-view.png';
 const String imagePaymentPlan = '${imagesPath}payment_plan.png';
 const String imageUpdateApp = '${imagesPath}update_app.png';
+const String madaLogo = '${imagesPath}mada_logo.svg';
 
 // splash image
 const String imageSplashScreen = '${imagesPath}splash_screen.png';
