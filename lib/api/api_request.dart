@@ -83,7 +83,7 @@ class ApiRequest {
 
     try {
       if (withLoading) {
-        // startLoading();
+        startLoading();
       }
       switch (method) {
         case ApiMethods.get:
@@ -135,7 +135,7 @@ class ApiRequest {
       }
 
       if (withLoading) {
-        // dismissLoading();
+        dismissLoading();
       }
 
       if (onSuccess != null) {
@@ -147,7 +147,7 @@ class ApiRequest {
     } on Exception catch (error) {
       consoleLog(error);
 
-      // dismissLoading();
+      dismissLoading();
       // request time
       final int time = DateTime.now().difference(startTime).inMilliseconds;
 
@@ -184,6 +184,7 @@ class ApiRequest {
 
         //handle DioError here by error type or by error code
         if (shouldShowMessage) {
+          consoleLogPretty(errorData['message']);
           showMessage(
             description:
                 errorData['errors'] != null && errorData['errors'].length > 0

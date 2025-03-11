@@ -33,7 +33,7 @@ void main() async {
   await appState.initializePersistedState();
 
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       home: ChangeNotifierProvider(
         create: (BuildContext context) => appState,
         child: const MyApp(),
