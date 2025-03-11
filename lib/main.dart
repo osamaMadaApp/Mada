@@ -1,25 +1,20 @@
 import 'dart:io' show Platform;
 
-import 'package:Mada/pages/login_page/login_page_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
-import 'general_constants.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
-
 import 'general_exports.dart';
-import 'pages/home/home_page_widget.dart';
-import 'pages/my_order_page/my_order_page.dart';
-import 'pages/notifications_page/notifications_page.dart';
+import 'pages/login_page/login_page_model.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 
@@ -41,18 +36,23 @@ void main() async {
   final FFAppState appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (BuildContext context) => LoginPageModel()),
-      ChangeNotifierProvider(create: (BuildContext context) => OtpComponentModel()),
-      ChangeNotifierProvider(create: (BuildContext context) => LoginSideComponentModel()),
-      ChangeNotifierProvider(create: (BuildContext context) => ForgetPasswordComponentModel()),
-    ],
-    child: const MyApp(),
-  )
+  runApp(
+    GetMaterialApp(
+      home: MultiProvider(
+        providers: <SingleChildWidget>[
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginPageModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => OtpComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginSideComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ForgetPasswordComponentModel()),
+        ],
+        child: const MyApp(),
+      ),
+    ),
   );
-
 }
 
 class MyApp extends StatefulWidget {

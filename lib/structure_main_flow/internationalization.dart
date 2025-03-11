@@ -221,6 +221,18 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'MADA Properties',
       'ar': 'مدى العقارية',
     },
+    'my_orders': <String, String>{
+      'en': 'My Orders',
+      'ar': 'طلباتي',
+    },
+    'mada_properties': <String, String>{
+      'en': 'MADA Properties',
+      'ar': 'مدى العقارية',
+    },
+    'no_data_found': <String, String>{
+      'en': 'No data found',
+      'ar': 'لم يتم العثور على بيانات',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
