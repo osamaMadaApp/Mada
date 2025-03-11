@@ -8,7 +8,11 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
+import 'components/forget_password_component/forget_password_component_model.dart';
+import 'components/login_side_component/login_side_component_model.dart';
+import 'components/otp_component/otp_component_model.dart';
 import 'general_exports.dart';
+import 'pages/login_page/login_page_model.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 import 'structure_main_flow/internationalization.dart';
 
@@ -34,8 +38,17 @@ void main() async {
 
   runApp(
     GetMaterialApp(
-      home: ChangeNotifierProvider(
-        create: (BuildContext context) => appState,
+      home: MultiProvider(
+        providers: <SingleChildWidget>[
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginPageModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => OtpComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => LoginSideComponentModel()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => ForgetPasswordComponentModel()),
+        ],
         child: const MyApp(),
       ),
     ),
@@ -66,7 +79,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier); // navigation
     setLocale(FFAppState().getSelectedLanguge());
@@ -213,12 +225,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 0
                               ? SvgPicture.asset(
-                                  'assets/images/home.svg',
+                                  home,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/home_disabled.svg',
+                                  homeDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -240,12 +252,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 1
                               ? SvgPicture.asset(
-                                  'assets/images/my_orders.svg',
+                                  myOrders,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/my_orders_disabeld.svg',
+                                  myOrdersDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -267,12 +279,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 2
                               ? SvgPicture.asset(
-                                  'assets/images/notification.svg',
+                                  notification,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/notification_disabled.svg',
+                                  notificationDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -294,12 +306,12 @@ class _NavBarPageState extends State<NavBarPage> {
                           padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           child: currentIndex == 3
                               ? SvgPicture.asset(
-                                  'assets/images/menu.svg',
+                                  menu,
                                   width: 24.0,
                                   height: 24.0,
                                 )
                               : SvgPicture.asset(
-                                  'assets/images/menu_disabeld.svg',
+                                  menuDisabled,
                                   width: 24.0,
                                   height: 24.0,
                                 ),
@@ -313,7 +325,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                 child: SvgPicture.asset(
-                  'assets/images/logo.svg',
+                  logo,
                   width: 56.0,
                   height: 56.0,
                 ),

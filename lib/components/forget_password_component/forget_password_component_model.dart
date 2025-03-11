@@ -2,7 +2,7 @@ import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_model.dart';
 import 'forget_password_component.dart' show ForgetPasswordComponent;
 
-class ForgetPasswordComponentModel extends FlutterMadaModel<ForgetPasswordComponent> {
+class ForgetPasswordComponentModel extends ChangeNotifier{
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textControllerValidator1;
@@ -11,19 +11,11 @@ class ForgetPasswordComponentModel extends FlutterMadaModel<ForgetPasswordCompon
 
   bool? isValidEmail ;
 
-  @override
-  void initState(BuildContext context) {
+  void initState() {
     textController1 ??= TextEditingController();
     textFieldFocusNode1 ??= FocusNode();
-    //
-
   }
 
-  @override
-  void dispose() {
-
-    //
-  }
 
   bool buttonEnabled() {
     return (textController1?.text.isNotEmpty == true);

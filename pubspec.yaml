@@ -118,6 +118,7 @@ dependencies:
   package_info_plus: ^8.0.2
   smooth_page_indicator: ^1.2.0+3
   flutter_email_sender: ^6.0.3
+  jwt_decoder: ^2.0.1
 
 
 
