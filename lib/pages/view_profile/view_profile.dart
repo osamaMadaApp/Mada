@@ -638,7 +638,7 @@ class DeleteAccountSheet extends StatelessWidget {
                   height: 10.h,
                 ),
                 Text(
-                  'delete_account_desc'.tr,
+                  FFLocalizations.of(context).getText('delete_account_desc'),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: FlutterMadaTheme.of(context).color000000,
                         fontWeight: FontWeight.w400,
@@ -654,7 +654,7 @@ class DeleteAccountSheet extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: CustomButton(
-            text: 'confirm_delete'.tr,
+            text: FFLocalizations.of(context).getText('confirm_delete'),
             style: ElevatedButton.styleFrom(
               backgroundColor:
                   FlutterMadaTheme.of(context).colorFF0000.withValues(

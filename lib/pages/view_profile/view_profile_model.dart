@@ -154,7 +154,7 @@ class ViewProfileModel extends ChangeNotifier {
 
       FFAppState().userModel = userData;
     } else {
-      showMessage(description: response.reasonPhrase);
+      showToast(response.reasonPhrase.toString());
       consoleLog(response.reasonPhrase);
     }
     dismissLoading();

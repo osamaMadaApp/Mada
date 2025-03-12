@@ -1,6 +1,5 @@
-import 'package:flutter_svg/svg.dart';
-
 import '../../general_exports.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
 class ProjectCard extends StatelessWidget {
   const ProjectCard({
@@ -110,7 +109,7 @@ class ProjectCard extends StatelessWidget {
                               (totalUnits != null && totalUnits != 0))
                             LabelCard(
                               text:
-                                  '${'available'.tr} $availableUnits ${'of'.tr} $totalUnits',
+                                  '${FFLocalizations.of(context).getText('available')} $availableUnits ${FFLocalizations.of(context).getText('of')} $totalUnits',
                             )
                           else
                             const Center(),

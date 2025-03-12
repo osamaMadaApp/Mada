@@ -186,7 +186,8 @@ class Notifications extends StatelessWidget {
                                           height: 5.h,
                                           child: Center(
                                             child: Text(
-                                              'no_data'.tr,
+                                              FFLocalizations.of(context)
+                                                  .getText('no_data'),
                                             ),
                                           ),
                                         )

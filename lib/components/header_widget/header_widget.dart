@@ -59,7 +59,7 @@ class HeaderWidget extends StatelessWidget {
                   children: <Widget>[
                     MadaText(
                       title != null
-                          ? '${FFLocalizations.of(context).getText('hi')}, ${title!.capitalize ?? ''}'
+                          ? '${FFLocalizations.of(context).getText('hi')}, ${title!.toUpperCase() ?? ''}'
                           : FFLocalizations.of(context).getText('hi_guest'),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: FlutterMadaTheme.of(context).color292D32,

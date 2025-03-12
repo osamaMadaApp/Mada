@@ -38,31 +38,26 @@ void main() async {
   await appState.initializePersistedState();
 
   runApp(
-    GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FlutterSmartDialog(
-        child: MultiProvider(
-          providers: <SingleChildWidget>[
-            ChangeNotifierProvider(create: (_) => AppStateNotifier.instance),
-            ChangeNotifierProvider(
-              create: (BuildContext context) => LoginPageModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (BuildContext context) => OtpComponentModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (BuildContext context) => LoginSideComponentModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (BuildContext context) => ForgetPasswordComponentModel(),
-            ),
-            ChangeNotifierProvider(
-              create: (BuildContext context) => ExclusiveProjectsModel(),
-            ),
-          ],
-          child: const MyApp(),
+    MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider(create: (_) => AppStateNotifier.instance),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => LoginPageModel(),
         ),
-      ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => OtpComponentModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => LoginSideComponentModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ForgetPasswordComponentModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ExclusiveProjectsModel(),
+        ),
+      ],
+      child: const MyApp(),
     ),
   );
 }
@@ -123,6 +118,7 @@ class _MyAppState extends State<MyApp> {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp.router(
           title: 'Mada',
+          builder: FlutterSmartDialog.init(),
           localizationsDelegates: const <LocalizationsDelegate>[
             FFLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
