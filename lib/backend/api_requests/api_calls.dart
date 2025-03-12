@@ -19,8 +19,7 @@ class MadaApiGroupGroup {
   static String getBaseUrl() => 'https://mycar.completechaintech.com';
   static Map<String, String> headers = {};
   static LoginCall loginCall = LoginCall();
-  static LoginAnonymouslyUserCall loginAnonymouslyUser =
-      LoginAnonymouslyUserCall();
+  static LoginAnonymouslyUserCall loginAnonymouslyUser = LoginAnonymouslyUserCall();
   static GetUserByIdCall getUserByIdCall = GetUserByIdCall();
   static GetSliderCall getSliderCall = GetSliderCall();
   static GetCarsCall getCarsCall = GetCarsCall();

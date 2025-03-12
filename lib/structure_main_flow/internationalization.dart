@@ -273,6 +273,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'My Orders',
       'ar': 'طلباتي',
     },
+    'mada_properties': <String, String>{
+      'en': 'MADA Properties',
+      'ar': 'مدى العقارية',
+    },
     'no_data_found': <String, String>{
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
@@ -284,6 +288,34 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'edit_profile': <String, String>{
       'en': 'Edit profile',
       'ar': 'تعديل الملف الشخصي',
+    },
+    'exclusive_projects': <String, String>{
+      'en': 'Exclusive projects',
+      'ar': 'مشاريع حصرية',
+    },
+    'projects_categories': <String, String>{
+      'en': 'Projects Categories',
+      'ar': 'فئات المشاريع',
+    },
+    'latest_projects': <String, String>{
+      'en': 'Latest Projects',
+      'ar': 'أحدث المشاريع',
+    },
+    'available': <String, String>{
+      'en': 'Available',
+      'ar': 'متاح',
+    },
+    'of': <String, String>{
+      'en': 'of',
+      'ar': 'ل',
+    },
+    'result': <String, String>{
+      'en': 'Result: ',
+      'ar': 'الناتج: ',
+    },
+    'project': <String, String>{
+      'en': 'Project',
+      'ar': 'مشروع',
     },
     'hi': <String, String>{
       'en': 'Hi',
@@ -312,6 +344,34 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'details': <String, String>{
       'en': 'Details',
       'ar': 'تفاصيل',
+    },
+    'exclusive_units': <String, String>{
+      'en': 'Exclusive Units',
+      'ar': 'وحدات حصرية',
+    },
+    'other_units': <String, String>{
+      'en': 'Other Units',
+      'ar': 'وحدات أخرى',
+    },
+    'order_id': <String, String>{
+      'en': 'Order ID',
+      'ar': 'رقم الطلب',
+    },
+    'date': <String, String>{
+      'en': 'Date',
+      'ar': 'تاريخ',
+    },
+    'phone': <String, String>{
+      'en': 'Phone',
+      'ar': 'الهاتف',
+    },
+    'email': <String, String>{
+      'en': 'Email',
+      'ar': 'البريد الإلكتروني',
+    },
+    'whatsapp': <String, String>{
+      'en': 'Whatsapp',
+      'ar': 'واتساب',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,

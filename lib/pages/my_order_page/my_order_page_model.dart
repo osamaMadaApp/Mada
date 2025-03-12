@@ -8,7 +8,7 @@ class MyOrderPageModel extends ChangeNotifier {
 
   GeneralTaps selectedCategory = GeneralTaps.exclusiveUnits;
   bool isLoading = true;
-  List<dynamic> units = <dynamic>[];
+  List<dynamic>? units;
   int page = 0;
   bool hasNextPage = true;
   ScrollController scrollController = ScrollController();
@@ -44,7 +44,8 @@ class MyOrderPageModel extends ChangeNotifier {
     ).request(
       onSuccess: (dynamic data, dynamic response) {
         dismissLoading();
-        units.addAll(data[keyResults][keyDocs]);
+        units ??= <dynamic>[];
+        units!.addAll(data[keyResults][keyDocs]);
         hasNextPage = data[keyResults][keyHasNextPage];
         isLoading = false;
         notifyListeners();
@@ -55,7 +56,7 @@ class MyOrderPageModel extends ChangeNotifier {
   void onChangeCategoryPress(GeneralTaps category, {bool refresh = false}) {
     if (category != selectedCategory || refresh) {
       selectedCategory = category;
-      units.clear();
+      units!.clear();
       page = 0;
       getMyOrdersUnits(
         type: selectedCategory == GeneralTaps.exclusiveUnits

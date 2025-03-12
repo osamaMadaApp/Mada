@@ -97,36 +97,39 @@ class Notifications extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                               horizontal: 20.w,
                             ),
-                            child: Row(
-                              children: <Widget>[
-                                SelectableCategory(
-                                  text: FFLocalizations.of(context)
-                                      .getText('new_notifications'),
-                                  isSelected:
-                                      notificationsPageModel.selectedScreen ==
-                                          NotificationType.newNotifications,
-                                  onTap: () {
-                                    notificationsPageModel
-                                        .onChangeCategoryPress(
-                                      NotificationType.newNotifications,
-                                    );
-                                  },
-                                ),
-                                SizedBox(width: 8.w),
-                                SelectableCategory(
-                                  text: FFLocalizations.of(context)
-                                      .getText('read_notifications'),
-                                  isSelected:
-                                      notificationsPageModel.selectedScreen ==
-                                          NotificationType.readNotifications,
-                                  onTap: () {
-                                    notificationsPageModel
-                                        .onChangeCategoryPress(
-                                      NotificationType.readNotifications,
-                                    );
-                                  },
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: <Widget>[
+                                  SelectableCategory(
+                                    text: FFLocalizations.of(context)
+                                        .getText('new_notifications'),
+                                    isSelected:
+                                        notificationsPageModel.selectedScreen ==
+                                            NotificationType.newNotifications,
+                                    onTap: () {
+                                      notificationsPageModel
+                                          .onChangeCategoryPress(
+                                        NotificationType.newNotifications,
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  SelectableCategory(
+                                    text: FFLocalizations.of(context)
+                                        .getText('read_notifications'),
+                                    isSelected:
+                                        notificationsPageModel.selectedScreen ==
+                                            NotificationType.readNotifications,
+                                    onTap: () {
+                                      notificationsPageModel
+                                          .onChangeCategoryPress(
+                                        NotificationType.readNotifications,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           if (notificationsPageModel.isLoading == true)

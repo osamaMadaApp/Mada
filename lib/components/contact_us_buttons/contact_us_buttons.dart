@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../structure_main_flow/internationalization.dart';
 
 class ContactUsButtons extends StatelessWidget {
   const ContactUsButtons({
@@ -30,7 +31,7 @@ class ContactUsButtons extends StatelessWidget {
         if (showWhatsApp)
           Expanded(
             child: ContactUsCard(
-              text: 'whatsApp'.tr,
+              text: FFLocalizations.of(context).getText('whatsapp'),
               icon: iconWhatsapp,
               containerHeight: containerHeight,
               onTap: () {
@@ -51,7 +52,7 @@ class ContactUsButtons extends StatelessWidget {
           ),
         Expanded(
           child: ContactUsCard(
-            text: 'phone'.tr,
+            text: FFLocalizations.of(context).getText('phone'),
             icon: iconPhoneLogo,
             containerHeight: containerHeight,
             onTap: () {
@@ -68,7 +69,7 @@ class ContactUsButtons extends StatelessWidget {
           ),
         if (showEmail)
           ContactUsCard(
-            text: 'email'.tr,
+            text: FFLocalizations.of(context).getText('email'),
             icon: iconEmailContact,
             containerHeight: containerHeight,
             onTap: () {
@@ -105,31 +106,22 @@ class ContactUsCard extends StatelessWidget {
         child: Container(
           height: containerHeight ?? 7.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(1.h),
-            color: FlutterMadaTheme.of(context).gray600,
+            borderRadius: BorderRadius.circular(10),
+            color: FlutterMadaTheme.of(context).colorD2D2D240,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: 1.w,
-              ),
               SvgPicture.asset(
                 icon,
-                height: 2.h,
               ),
-              SizedBox(
-                width: 02.w,
-              ),
-              SizedBox(
-                width: 2.w,
-                child: MadaText(
-                  text,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Colors.black),
-                ),
+              SizedBox(width: 8.w),
+              MadaText(
+                text,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(color: Colors.black),
               ),
             ],
           ),

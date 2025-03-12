@@ -22,35 +22,34 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       title: Text(
         title ?? '',
-        style:  TextStyle(
+        style: TextStyle(
           color: FlutterMadaTheme.of(context).color000000,
-          fontSize: 16.0,
-          fontWeight: FontWeight.w500,
+          fontSize: 28.0,
+          fontFamily: AppFonts.outfit,
+          fontWeight: AppFonts.w600,
         ),
       ),
       centerTitle: false,
       backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
       elevation: 0.0,
-      leading: RotatedBox(
-        quarterTurns: isRTL ? 2 : 0,
-        child: IconButton(
-          icon: SvgPicture.asset(iconBack),
-          onPressed: () {
-            Get.back();
-          },
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          iconBack,
         ),
+        onPressed: () {
+          context.pop();
+        },
       ),
-      actions: actions ??
-          [
+      actions: actions ?? [
             if (withCloseButton)
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: kToolbarHeight.h * 0.04,
+                  horizontal: 72.h,
                 ),
                 child: GestureDetector(
                   onTap: () async {
                     consoleLog(Get.currentRoute);
-                     context.pop();
+                    context.pop();
                   },
                   child: SvgPicture.asset(iconCloseButton),
                 ),
@@ -60,6 +59,5 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(kToolbarHeight.h);
+  Size get preferredSize => Size.fromHeight(72.h);
 }

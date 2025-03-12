@@ -1,5 +1,7 @@
 // ignore_for_file: overridden_fields
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -113,6 +115,9 @@ abstract class FlutterMadaTheme {
   // Red
   late Color colorFF0000;
 
+  late Color color4CAF50FF;
+  late Color colorfafafa;
+
   /// Gray
   late Color colorD2D2D240;
 
@@ -218,6 +223,10 @@ class LightModeTheme extends FlutterMadaTheme {
   @override
   late Color colorFF0000 = const Color(0x00ff0000);
   @override
+  late Color color4CAF50FF = const Color(0xff4caf50ff);
+  @override
+  late Color colorfafafa = const Color(0xFFfafafa);
+  @override
   late Color colorD2D2D240 = const Color(0x40D2D2D2);
   @override
   late Color color97BE5A1A = const Color(0x97BE5A1A);
@@ -249,3 +258,16 @@ class AppFonts {
   static const FontWeight w600 = FontWeight.w600;
   static const FontWeight w700 = FontWeight.w700;
 }
+
+Size physicalScreenSize = window.physicalSize;
+double physicalWidth = physicalScreenSize.width;
+double physicalHeight = physicalScreenSize.height;
+double pixelRatio = window.devicePixelRatio;
+
+/// Size in logical pixels
+Size logicalScreenSize = window.physicalSize / pixelRatio;
+
+///  ignore: duplicate_ignore, non_constant_identifier_names
+double DEVICE_WIDTH = logicalScreenSize.width;
+// ignore: non_constant_identifier_names
+double DEVICE_HEIGHT = logicalScreenSize.height;
