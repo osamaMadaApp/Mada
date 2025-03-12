@@ -35,6 +35,9 @@ class ProjectUnitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String orderId = item[keyOrderID].length > 10
+        ? item[keyOrderID].substring(0, 10)
+        : item[keyOrderID];
     return Column(
       children: <Widget>[
         GestureDetector(
@@ -338,7 +341,7 @@ class ProjectUnitCard extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            '${FFLocalizations.of(context).getText('order_id')}: #${item[keyOrderID] ?? ''}',
+                            '${FFLocalizations.of(context).getText('order_id')}: #$orderId',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
@@ -351,7 +354,7 @@ class ProjectUnitCard extends StatelessWidget {
                           ),
                           SizedBox(width: 16.w),
                           Text(
-                            '${FFLocalizations.of(context).getText('date')}: #${item[keyCreatedAt]}',
+                            '${FFLocalizations.of(context).getText('date')}: ${isoToReadableDate(item[keyCreatedAt])}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
