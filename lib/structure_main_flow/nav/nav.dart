@@ -10,9 +10,9 @@ import '../../api/api_keys.dart';
 import '../../api/api_request.dart';
 import '../../api/api_routes.dart';
 import '../../api/routes_keys.dart';
-import '../../main.dart';
 import '../../pages/exclusive_projects/exclusive_projects.dart';
 import '../../pages/login_page/login_page_widget.dart';
+import '../../pages/nav_bar/nav_bar.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -111,14 +111,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => FFAppState().isLoggedIn() == true
-              ? const NavBarPage(initialPage: routeHome)
+              ? const NavBarPage()
               : const LoginPageWidget(),
         ),
         FFRoute(
           name: routeHome,
           path: routeHome.toRoutePath(),
-          builder: (context, params) =>
-              const NavBarPage(initialPage: routeHome),
+          builder: (context, params) => const NavBarPage(),
         ),
         FFRoute(
           name: routeLogin,
