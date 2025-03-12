@@ -1,18 +1,19 @@
-import '../../api/routes_keys.dart';
-import '../../pages/exclusive_projects/exclusive_projects.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../api/api_keys.dart';
-import '../../api/api_request.dart';
-import '../../api/api_routes.dart';
-import '../../main.dart';
-import '../../pages/login_page/login_page_widget.dart';
 import '/auth/base_auth_user_provider.dart';
 import '/backend/schema/structs/index.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
+import '../../api/api_keys.dart';
+import '../../api/api_request.dart';
+import '../../api/api_routes.dart';
+import '../../api/routes_keys.dart';
+import '../../main.dart';
+import '../../pages/exclusive_projects/exclusive_projects.dart';
+import '../../pages/login_page/login_page_widget.dart';
+
 export 'package:go_router/go_router.dart';
 
 export 'serialization_util.dart';
@@ -86,15 +87,13 @@ class AppStateNotifier extends ChangeNotifier {
     await ApiRequest(
       path: apiMasterData,
       className: 'SplashController/getMasterData',
-      defaultHeadersValue: true,
       formatResponse: true,
     ).request(
       onSuccess: (dynamic data, dynamic response) {
-       FFAppState().masterDateJsonModel = response[keyResults];
+        FFAppState().masterDateJsonModel = response[keyResults];
       },
     );
   }
-
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
@@ -122,7 +121,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               const NavBarPage(initialPage: routeHome),
         ),
         FFRoute(
-          name: 'LoginPage',
+          name: routeLogin,
           path: '/loginPage',
           builder: (context, params) => const LoginPageWidget(),
         ),

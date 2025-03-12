@@ -1,3 +1,4 @@
+import '../../app_state.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/internationalization.dart';
 
@@ -74,8 +75,9 @@ class Menu extends StatelessWidget {
                     label: FFLocalizations.of(context)
                         .getText('terms_and_conditions'),
                     icon: iconJudge,
-                    content: const Center(
-                      child: Text('Profile Page'),
+                    content: AqarekWebviewWidget(
+                      url: FFAppState()
+                          .masterDateJsonModel[keyTermsAndConditions],
                     ),
                   ),
                   TabItem(

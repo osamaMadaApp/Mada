@@ -1,10 +1,15 @@
 export 'package:flutter/material.dart';
 export 'package:flutter/src/scheduler/ticker.dart';
+export 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:get/get.dart';
+export 'package:image_cropper/image_cropper.dart';
+export 'package:image_picker/image_picker.dart';
 export 'package:nested/nested.dart';
 export 'package:provider/provider.dart';
+export 'package:share_plus/share_plus.dart';
+export 'package:webview_flutter/webview_flutter.dart';
 
 export 'api/index.dart';
 export 'components/index.dart';

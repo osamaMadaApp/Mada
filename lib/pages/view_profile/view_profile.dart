@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../main.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
 class ViewProfileScreen extends StatelessWidget {
@@ -225,6 +224,8 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ViewProfileModel viewProfileModel =
+        Provider.of<ViewProfileModel>(context);
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 20.w,
@@ -283,16 +284,7 @@ class Settings extends StatelessWidget {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
-                            if (FFAppState().getSelectedLanguge() != 'en') {
-                              FFAppState().update(
-                                () {
-                                  FFAppState().selectedLangugeAppState = 1;
-                                },
-                              );
-
-                              MyApp.of(context).setLocale('en');
-                              // should call master data again
-                            }
+                            viewProfileModel.changeLanguage(context, 'en');
                           },
                           child: MadaText(
                             FFLocalizations.of(context).getText('english'),
@@ -310,17 +302,7 @@ class Settings extends StatelessWidget {
                           SvgPicture.asset(iconToggleOffCircle),
                         TextButton(
                           onPressed: () {
-                            if (FFAppState().getSelectedLanguge() != 'ar') {
-                              FFAppState().update(
-                                () {
-                                  FFAppState().selectedLangugeAppState = 0;
-                                },
-                              );
-
-                              MyApp.of(context).setLocale('ar');
-
-                              // should call master data again
-                            }
+                            viewProfileModel.changeLanguage(context, 'ar');
                           },
                           child: MadaText(
                             FFLocalizations.of(context).getText('arabic'),
@@ -365,7 +347,9 @@ class Settings extends StatelessWidget {
               text: FFLocalizations.of(context).getText('logout'),
               withArrow: false,
               fontSize: 16,
-              // onPressed: myAppController.logout,
+              onPressed: () {
+                viewProfileModel.logout(context);
+              },
             ),
           ),
           SizedBox(
