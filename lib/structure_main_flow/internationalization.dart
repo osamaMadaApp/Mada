@@ -233,6 +233,34 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
     },
+    'exclusive_projects': <String, String>{
+      'en': 'Exclusive projects',
+      'ar': 'مشاريع حصرية',
+    },
+    'projects_categories': <String, String>{
+      'en': 'Projects Categories',
+      'ar': 'فئات المشاريع',
+    },
+    'latest_projects': <String, String>{
+      'en': 'Latest Projects',
+      'ar': 'أحدث المشاريع',
+    },
+    'available': <String, String>{
+      'en': 'Available',
+      'ar': 'متاح',
+    },
+    'of': <String, String>{
+      'en': 'of',
+      'ar': 'ل',
+    },
+    'result': <String, String>{
+      'en': 'Result: ',
+      'ar': 'الناتج: ',
+    },
+    'project': <String, String>{
+      'en': 'Project',
+      'ar': 'مشروع',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
