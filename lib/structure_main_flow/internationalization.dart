@@ -261,6 +261,62 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Project',
       'ar': 'مشروع',
     },
+    'hi': <String, String>{
+      'en': 'Hi',
+      'ar': 'مرحبا',
+    },
+    'hi_guest': <String, String>{
+      'en': 'Hi Guest',
+      'ar': 'مرحبا بالضيف',
+    },
+    'notifications': <String, String>{
+      'en': 'Notifications',
+      'ar': 'الإشعارات',
+    },
+    'new_notifications': <String, String>{
+      'en': 'New Notifications',
+      'ar': 'إشعارات جديدة',
+    },
+    'read_notifications': <String, String>{
+      'en': 'Read Notifications',
+      'ar': 'قراءة الإشعارات',
+    },
+    'notification_details': <String, String>{
+      'en': 'Notification Details',
+      'ar': 'تفاصيل الإشعار',
+    },
+    'details': <String, String>{
+      'en': 'Details',
+      'ar': 'تفاصيل',
+    },
+    'exclusive_units': <String, String>{
+      'en': 'Exclusive Units',
+      'ar': 'وحدات حصرية',
+    },
+    'other_units': <String, String>{
+      'en': 'Other Units',
+      'ar': 'وحدات أخرى',
+    },
+    'order_id': <String, String>{
+      'en': 'Order ID',
+      'ar': 'رقم الطلب',
+    },
+    'date': <String, String>{
+      'en': 'Date',
+      'ar': 'تاريخ',
+    },
+    'phone': <String, String>{
+      'en': 'Phone',
+      'ar': 'الهاتف',
+    },
+    'email': <String, String>{
+      'en': 'Email',
+      'ar': 'البريد الإلكتروني',
+    },
+    'whatsapp': <String, String>{
+      'en': 'Whatsapp',
+      'ar': 'واتساب',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

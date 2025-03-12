@@ -1,16 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../../api/api_keys.dart';
-import '../../api/api_request.dart';
-import '../../api/api_routes.dart';
+
+import '/structure_main_flow/flutter_mada_util.dart';
 import '../../api/routes_keys.dart';
 import '../../backend/schema/util/schema_util.dart';
 import '../../components/forget_password_component/forget_password_component.dart';
+import '../../components/login_side_component/login_side_component.dart';
 import '../../components/otp_component/otp_component.dart';
 import '../../general_exports.dart';
-import '/structure_main_flow/flutter_mada_theme.dart';
-import '/structure_main_flow/flutter_mada_util.dart';
-import '../../components/login_side_component/login_side_component.dart';
 import 'login_page_model.dart';
 
 export 'login_page_model.dart';
@@ -33,7 +29,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {});
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    _model = context.read<LoginPageModel>();
+      _model = context.read<LoginPageModel>();
     });
   }
 
@@ -45,7 +41,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _model = context.watch<LoginPageModel>(); // Using watch here instead of read
+    _model =
+        context.watch<LoginPageModel>(); // Using watch here instead of read
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -65,7 +62,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 color:
-                FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
+                    FlutterMadaTheme.of(context).color000000.withOpacity(0.40),
               ),
             ],
           ),
@@ -84,8 +81,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 child: _model.currentModelName == 'LoginSideComponent'
                     ? _buildLoginSideComponent()
                     : (_model.currentModelName == 'OtpComponent'
-                    ? _buildOtpComponent()
-                    : _buildForgetPasswordComponent()),
+                        ? _buildOtpComponent()
+                        : _buildForgetPasswordComponent()),
               ),
             ),
           ),
@@ -111,7 +108,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           defaultHeadersValue: false,
           body: {
             keyCountryCode: 966,
-            keyMobile: 595106753,
+            keyMobile: 550575293,
             ...deviceInfoDetails,
           },
         ).request(
@@ -138,7 +135,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       className: 'MyAppController/resendCode',
       body: {
         keyCountryCode: 966,
-        keyMobile: 595106753,
+        keyMobile: 550575293,
         keyDeviceToken: fcId,
       },
     ).request(
@@ -162,7 +159,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           defaultHeadersValue: false,
           body: {
             keyCountryCode: 966,
-            keyMobile: 595106753,
+            keyMobile: 550575293,
             keyOtpPhone: 1234,
             keyDeviceId: deviceInfo[keyDeviceId],
             keyDeviceType: deviceInfo[keyDeviceModel],
