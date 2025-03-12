@@ -39,6 +39,7 @@ void main() async {
 
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: FlutterSmartDialog(
         child: MultiProvider(
           providers: <SingleChildWidget>[
