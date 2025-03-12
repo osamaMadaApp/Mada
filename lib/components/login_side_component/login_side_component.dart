@@ -26,8 +26,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
     super.initState();
     _model = context.read<LoginSideComponentModel>();
     _model.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if(kDebugMode){
        setState(() {
