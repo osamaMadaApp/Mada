@@ -161,11 +161,6 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/icons/
-    - assets/videos/
-    - assets/audios/
-    - assets/rive_animations/
-    - assets/pdfs/
-    - assets/jsons/
 
   fonts:
     - family: Outfit
