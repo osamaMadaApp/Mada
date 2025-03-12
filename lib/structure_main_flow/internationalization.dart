@@ -221,6 +221,54 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'MADA Properties',
       'ar': 'مدى العقارية',
     },
+    'settings': <String, String>{
+      'en': 'Settings',
+      'ar': 'الاعدادات',
+    },
+    'logout': <String, String>{
+      'en': 'Logout',
+      'ar': 'تسجيل الخروج',
+    },
+    'delete_account': <String, String>{
+      'en': 'Delete Account',
+      'ar': 'حذف الحساب',
+    },
+    'language': <String, String>{
+      'en': 'Language',
+      'ar': 'اللغة',
+    },
+    'english': <String, String>{
+      'en': 'English',
+      'ar': 'الإنجليزية',
+    },
+    'arabic': <String, String>{
+      'en': 'Arabic',
+      'ar': 'العربية',
+    },
+    'profile_info': <String, String>{
+      'en': 'Profile Info.',
+      'ar': 'معلومات الحساب',
+    },
+    'first_name': <String, String>{
+      'en': 'First Name',
+      'ar': 'الاسم الأول',
+    },
+    'last_name': <String, String>{
+      'en': 'Last Name',
+      'ar': 'اسم العائلة',
+    },
+    'email': <String, String>{
+      'en': 'Email',
+      'ar': 'البريد الإلكتروني',
+    },
+    'verify_with_nafath': <String, String>{
+      'en': 'Verify with Nafath',
+      'ar': 'التحقق مع نفاذ',
+    },
+    'nafath_verified': <String, String>{
+      'en': 'Nafath Verified',
+      'ar': 'تم التحقق من نفاذ',
+    },
     'my_orders': <String, String>{
       'en': 'My Orders',
       'ar': 'طلباتي',
@@ -232,6 +280,14 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'no_data_found': <String, String>{
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
+    },
+    'change_password': <String, String>{
+      'en': 'Change password',
+      'ar': 'تغيير كلمة المرور',
+    },
+    'edit_profile': <String, String>{
+      'en': 'Edit profile',
+      'ar': 'تعديل الملف الشخصي',
     },
     'exclusive_projects': <String, String>{
       'en': 'Exclusive projects',

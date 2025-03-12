@@ -1,6 +1,5 @@
-import '../../components/header_widget/header_widget.dart';
+import '../../app_state.dart';
 import '../../general_exports.dart';
-import '../../index.dart';
 import '../../structure_main_flow/internationalization.dart';
 
 class MenuPage extends StatelessWidget {
@@ -29,9 +28,11 @@ class Menu extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        backgroundColor: FlutterMadaTheme.of(context).info,
-        body: Column(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 15.w,
+        ),
+        child: Column(
           children: <Widget>[
             SizedBox(height: 60.h),
             Padding(
@@ -47,15 +48,14 @@ class Menu extends StatelessWidget {
               ),
             ),
             SizedBox(height: 55.h),
-            Expanded(
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 250.h,
               child: CustomTabs(
                 tabs: <TabItem>[
                   TabItem(
                     label: FFLocalizations.of(context).getText('view_profile'),
                     icon: iconViewProfile,
-                    content: const Center(
-                      child: Text('Home Page'),
-                    ),
+                    content: const ViewProfileScreen(),
                   ),
                   TabItem(
                     label: FFLocalizations.of(context).getText('favorites'),
@@ -75,8 +75,9 @@ class Menu extends StatelessWidget {
                     label: FFLocalizations.of(context)
                         .getText('terms_and_conditions'),
                     icon: iconJudge,
-                    content: const Center(
-                      child: Text('Profile Page'),
+                    content: AqarekWebviewWidget(
+                      url: FFAppState()
+                          .masterDateJsonModel[keyTermsAndConditions],
                     ),
                   ),
                   TabItem(

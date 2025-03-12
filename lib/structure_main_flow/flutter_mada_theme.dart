@@ -110,8 +110,14 @@ abstract class FlutterMadaTheme {
   /// Gray
   late Color colorF5F5F5;
   late Color colorD2D2D2;
+  late Color colorFAFAFA;
+
+  // Red
+  late Color colorFF0000;
+
   late Color color4CAF50FF;
   late Color colorfafafa;
+
   /// Gray
   late Color colorD2D2D240;
 
@@ -213,7 +219,11 @@ class LightModeTheme extends FlutterMadaTheme {
   @override
   late Color colorD2D2D2 = const Color(0xFFD2D2D2);
   @override
-  late Color color4CAF50FF = const Color(0xFF4CAF50FF);
+  late Color colorFAFAFA = const Color(0xFFFAFAFA);
+  @override
+  late Color colorFF0000 = const Color(0x00ff0000);
+  @override
+  late Color color4CAF50FF = const Color(0xff4caf50ff);
   @override
   late Color colorfafafa = const Color(0xFFfafafa);
   @override

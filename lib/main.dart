@@ -42,17 +42,22 @@ void main() async {
       home: FlutterSmartDialog(
         child: MultiProvider(
           providers: <SingleChildWidget>[
+            ChangeNotifierProvider(create: (_) => AppStateNotifier.instance),
             ChangeNotifierProvider(
-                create: (BuildContext context) => LoginPageModel()),
+              create: (BuildContext context) => LoginPageModel(),
+            ),
             ChangeNotifierProvider(
-                create: (BuildContext context) => OtpComponentModel()),
+              create: (BuildContext context) => OtpComponentModel(),
+            ),
             ChangeNotifierProvider(
-                create: (BuildContext context) => LoginSideComponentModel()),
+              create: (BuildContext context) => LoginSideComponentModel(),
+            ),
             ChangeNotifierProvider(
-                create: (BuildContext context) =>
-                    ForgetPasswordComponentModel()),
+              create: (BuildContext context) => ForgetPasswordComponentModel(),
+            ),
             ChangeNotifierProvider(
-                create: (BuildContext context) => ExclusiveProjectsModel()),
+              create: (BuildContext context) => ExclusiveProjectsModel(),
+            ),
           ],
           child: const MyApp(),
         ),

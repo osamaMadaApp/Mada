@@ -2,12 +2,13 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../general_exports.dart';
 
-void startLoading() {
+void startLoading({BuildContext? cContext}) {
   SmartDialog.showLoading(
     builder: (BuildContext context) => CircularProgressIndicator(
-      backgroundColor: FlutterMadaTheme.of(context).primary.withOpacity(0.1),
+      backgroundColor:
+          FlutterMadaTheme.of(cContext ?? context).primary.withOpacity(0.1),
       valueColor: AlwaysStoppedAnimation<Color>(
-        FlutterMadaTheme.of(context).primary,
+        FlutterMadaTheme.of(cContext ?? context).primary,
       ),
     ),
     clickMaskDismiss: true,
