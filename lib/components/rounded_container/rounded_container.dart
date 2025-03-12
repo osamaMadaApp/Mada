@@ -7,7 +7,7 @@ class RoundedContainer extends StatelessWidget {
     this.onTap,
     this.boxShadow,
     this.minHeight = 0.1,
-    this.borderRadius = 0.02,
+    this.borderRadius = 10,
     this.borderWidth = 0.0,
     this.borderColor = Colors.transparent,
     this.withPadding = true,

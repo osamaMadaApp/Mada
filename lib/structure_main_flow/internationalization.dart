@@ -257,6 +257,34 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Details',
       'ar': 'تفاصيل',
     },
+    'exclusive_units': <String, String>{
+      'en': 'Exclusive Units',
+      'ar': 'وحدات حصرية',
+    },
+    'other_units': <String, String>{
+      'en': 'Other Units',
+      'ar': 'وحدات أخرى',
+    },
+    'order_id': <String, String>{
+      'en': 'Order ID',
+      'ar': 'رقم الطلب',
+    },
+    'date': <String, String>{
+      'en': 'Date',
+      'ar': 'تاريخ',
+    },
+    'phone': <String, String>{
+      'en': 'Phone',
+      'ar': 'الهاتف',
+    },
+    'email': <String, String>{
+      'en': 'Email',
+      'ar': 'البريد الإلكتروني',
+    },
+    'whatsapp': <String, String>{
+      'en': 'Whatsapp',
+      'ar': 'واتساب',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

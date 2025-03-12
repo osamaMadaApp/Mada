@@ -27,7 +27,7 @@ class LabelCard extends StatelessWidget {
     return showLabel
         ? Container(
             padding: EdgeInsets.symmetric(
-              horizontal: paddingHorizontal ?? (5.w),
+              horizontal: paddingHorizontal ?? (8.w),
               vertical: paddingVertical ?? (8.h),
             ),
             decoration: BoxDecoration(
