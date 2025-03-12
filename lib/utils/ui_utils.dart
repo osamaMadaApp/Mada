@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 // import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../general_exports.dart';
 import '../structure_main_flow/flutter_mada_util.dart';
@@ -185,15 +186,13 @@ String getFontFamily(String languageCode) {
 //       ),
 //     );
 
-// void showToast({
-//   String message = '',
-// }) {
-//   Fluttertoast.showToast(
-//     msg: message,
-//     toastLength: Toast.LENGTH_LONG,
-//     gravity: ToastGravity.CENTER,
-//   );
-// }
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.CENTER,
+  );
+}
 
 // String propertyCodeSuffix(dynamic item) => item.containsKey(keyBuildingNo)
 //     ? (item?[keyBuildingNo] ?? '')
@@ -246,11 +245,6 @@ String getStringJoinedByDash(List<dynamic> items, String key) =>
 List<dynamic> getListFromKey(List<dynamic> list, String key) =>
     list.map((dynamic item) => item[key]).toList();
 
-TextStyle textPrimaryStyle(BuildContext context) =>
-    Theme.of(Get.context!).textTheme.bodySmall!.copyWith(
-          color: FlutterMadaTheme.of(context).color000000,
-        );
-
 String getFormattedPrice(double price) {
   return NumberFormat('#,##0').format(price);
 }
@@ -261,12 +255,12 @@ String getCurrency() {
   // return myAppController.masterData[keyCurrency];
 }
 
-String getUnitOfMeasure() {
+String getUnitOfMeasure(BuildContext context) {
   // final MyAppController myAppController = Get.find<MyAppController>();
   // if (myAppController.appCountry == 'SA') {
   //   return 'sqm'.tr;
   // } else {
-  return 'sqft'.tr;
+  return FFLocalizations.of(context).getText('sqft');
   // }
 }
 

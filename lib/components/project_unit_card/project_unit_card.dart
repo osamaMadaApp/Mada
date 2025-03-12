@@ -266,7 +266,7 @@ class ProjectUnitCard extends StatelessWidget {
                                 ),
                                 SizedBox(width: 5.w),
                                 Text(
-                                  getUnitOfMeasure(),
+                                  getUnitOfMeasure(context),
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall!

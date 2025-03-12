@@ -1,6 +1,3 @@
-import 'package:flutter_svg/svg.dart';
-
-import '../../api/api_request.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -40,7 +37,8 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
           context.pop();
         },
       ),
-      actions: actions ?? [
+      actions: actions ??
+          [
             if (withCloseButton)
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -48,7 +46,7 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: GestureDetector(
                   onTap: () async {
-                    consoleLog(Get.currentRoute);
+                    // consoleLog(Get.currentRoute);
                     context.pop();
                   },
                   child: SvgPicture.asset(iconCloseButton),

@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../general_exports.dart';
+import '../structure_main_flow/flutter_mada_util.dart';
 
 Future<void> makePhoneCall(String phoneNumber) async {
   final String url = 'tel:$phoneNumber';
@@ -29,7 +29,8 @@ Future<void> sendEmail(String sendTo) async {
 }
 
 Future<void> whatsapp(
-  String phone, {
+  String phone,
+  BuildContext context, {
   String msg = '',
   bool showWhatsMsg = false,
   bool isPaymentMsg = false,
@@ -62,13 +63,11 @@ Future<void> whatsapp(
       );
     }
   } on Exception {
-    Fluttertoast.showToast(
-      msg: 'whatsapp_not_installed'.tr,
-    );
+    showToast(FFLocalizations.of(context).getText('whatsapp_not_installed'));
   }
 }
 
-Future<void> launchMaps(double? lat, double? long) async {
+Future<void> launchMaps(BuildContext context, double? lat, double? long) async {
   if (lat != null && long != null) {
     final String url = Platform.isAndroid
         ? 'https://www.google.com/maps/search/?api=1&query=$lat,$long'
@@ -81,9 +80,9 @@ Future<void> launchMaps(double? lat, double? long) async {
         throw 'Could not launch $url';
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Error launching map');
+      showToast('Error launching map');
     }
   } else {
-    Fluttertoast.showToast(msg: 'error_maps'.tr);
+    showToast(FFLocalizations.of(context).getText('error_maps'));
   }
 }

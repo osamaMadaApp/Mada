@@ -3,7 +3,6 @@ export 'package:flutter/src/scheduler/ticker.dart';
 export 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
-export 'package:get/get.dart';
 export 'package:image_cropper/image_cropper.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:nested/nested.dart';

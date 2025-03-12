@@ -373,6 +373,22 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Whatsapp',
       'ar': 'واتساب',
     },
+    '360_view': <String, String>{
+      'en': '360 View',
+      'ar': 'عرض 360',
+    },
+    'delete_account_desc': <String, String>{
+      'en': 'Are you sure you want to delete your account?',
+      'ar': 'هل أنت متأكد أنك تريد حذف حسابك؟',
+    },
+    'confirm_delete': <String, String>{
+      'en': 'Confirm Delete',
+      'ar': 'تأكيد الحذف',
+    },
+    'sqft': <String, String>{
+      'en': 'Sqft',
+      'ar': 'قدم مربع',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

@@ -4,27 +4,17 @@ import 'dart:io';
 // import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:client_information/client_information.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:from_css_color/from_css_color.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
-import '../../../api/api_keys.dart';
-import '../../../utils/log.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
-import '../../../auth/firebase_auth/auth_util.dart';
+import '../../../api/api_keys.dart';
 import '../../../structure_main_flow/flutter_mada_theme.dart';
-import '../../../structure_main_flow/flutter_mada_widgets.dart';
-import '../../api_requests/api_calls.dart';
-import '../structs/user_model_struct.dart';
+import '../../../utils/log.dart';
 
 export 'package:collection/collection.dart' show ListEquality;
 export 'package:flutter/material.dart' show Color, Colors;
@@ -43,17 +33,6 @@ const REGISTER_ARCHERY = 'REGISTER_ARCHERY';
 const DONATION_FOR_PROJECT = 'DONATION_FOR_PROJECT';
 const DETECT_LOCATION = 'DETECT_LOCATION';
 const QraanEjaza = 'QraanEjaza';
-
-
-void showToast({
-  String message = '',
-}) {
-  Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.CENTER,
-  );
-}
 
 Future<Map<String, dynamic>> getDeviceInfo() async {
   String? fcId;
@@ -360,7 +339,8 @@ extension FilePathExtension on String {
   }
 }
 
-void error(BuildContext context, FocusNode unfocusNode, String? error) async {
+Future<void> error(
+    BuildContext context, FocusNode unfocusNode, String? error) async {
   await showDialog<bool>(
     context: context,
     builder: (alertDialogContext) {
@@ -387,12 +367,12 @@ void error(BuildContext context, FocusNode unfocusNode, String? error) async {
                 FFLocalizations.of(context).getVariableText(
                     enText: 'Something went wrong !', arText: 'حصل خطأ ما'),
                 style: TextStyle(
-                      fontFamily: 'Roboto',
-                      color: FlutterMadaTheme.of(context).color000000,
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontFamily: 'Roboto',
+                  color: FlutterMadaTheme.of(context).color000000,
+                  fontSize: 18.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],
@@ -403,12 +383,12 @@ void error(BuildContext context, FocusNode unfocusNode, String? error) async {
             child: Text(
               '$error' ?? '',
               style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: FlutterMadaTheme.of(context).color000000,
-                    fontSize: 14.0,
-                    letterSpacing: 0.14,
-                    fontWeight: FontWeight.w500,
-                  ),
+                fontFamily: 'Roboto',
+                color: FlutterMadaTheme.of(context).color000000,
+                fontSize: 14.0,
+                letterSpacing: 0.14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
@@ -454,12 +434,12 @@ Future<bool>? success(
                 FFLocalizations.of(context).getVariableText(
                     enText: 'Successful Action', arText: 'عملية ناجحة'),
                 style: TextStyle(
-                      fontFamily: 'Roboto',
-                      color: FlutterMadaTheme.of(context).color000000,
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontFamily: 'Roboto',
+                  color: FlutterMadaTheme.of(context).color000000,
+                  fontSize: 18.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],
@@ -470,13 +450,12 @@ Future<bool>? success(
             child: Text(
               '$body' ?? '',
               style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: FlutterMadaTheme.of(context).color000000,
-                    fontSize: 14.0,
-                    letterSpacing: 0.14,
-                    fontWeight: FontWeight.w500,
-
-                  ),
+                fontFamily: 'Roboto',
+                color: FlutterMadaTheme.of(context).color000000,
+                fontSize: 14.0,
+                letterSpacing: 0.14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
@@ -503,7 +482,7 @@ Future<bool>? success(
 extension TimestampToFormattedDate on int {
   String toFormattedDate({bool isMilliseconds = true}) {
     // Convert timestamp to DateTime (convert to milliseconds if in seconds)
-    DateTime dateTime = isMilliseconds
+    final DateTime dateTime = isMilliseconds
         ? DateTime.fromMillisecondsSinceEpoch(this)
         : DateTime.fromMillisecondsSinceEpoch(this * 1000);
 
@@ -514,12 +493,12 @@ extension TimestampToFormattedDate on int {
 
 extension StringToDateTime on String {
   /// Converts a string to DateTime using the provided format.
-  DateTime toDateTime({String format = "dd-MM-yyyy"}) {
+  DateTime toDateTime({String format = 'dd-MM-yyyy'}) {
     try {
       final dateFormat = DateFormat(format);
       return dateFormat.parse(this);
     } catch (e) {
-      throw FormatException("Invalid date format. Expected: $format");
+      throw FormatException('Invalid date format. Expected: $format');
     }
   }
 }
@@ -527,12 +506,12 @@ extension StringToDateTime on String {
 bool isExpirationDatePassed(int expirationTimestamp,
     {bool isMilliseconds = true}) {
   // Convert expiration timestamp to DateTime
-  DateTime expirationDate = isMilliseconds
+  final DateTime expirationDate = isMilliseconds
       ? DateTime.fromMillisecondsSinceEpoch(expirationTimestamp)
       : DateTime.fromMillisecondsSinceEpoch(expirationTimestamp * 1000);
 
   // Get current date
-  DateTime currentDate = DateTime.now();
+  final DateTime currentDate = DateTime.now();
 
   // Check if the expiration date has passed
   return currentDate.isAfter(expirationDate);
@@ -595,10 +574,10 @@ enum TicketType { airline, hotel }
 extension DateChecker on int {
   bool isFutureDate() {
     // Convert the timestamp (in milliseconds) to a DateTime object
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(this);
+    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(this);
 
     // Get the current date and time
-    DateTime now = DateTime.now();
+    final DateTime now = DateTime.now();
 
     // Return true if the date is in the future, otherwise false
     return dateTime.isAfter(now);
@@ -609,7 +588,7 @@ extension DateCheckerExpired on String {
   bool isNotExpired() {
     try {
       // Parse the string into a DateTime object using the given format
-      final dateParts = this.split('-');
+      final dateParts = split('-');
       if (dateParts.length != 3) return false;
 
       final day = int.parse(dateParts[0]);
@@ -634,8 +613,6 @@ extension DateCheckerExpired on String {
   }
 }
 
-
-
 String getTextByKey(String key, BuildContext context) {
   if (key == HOME) {
     return FFLocalizations.of(context)
@@ -654,11 +631,11 @@ const String PROGRAM = 'program';
 const String contactUs = 'contactUs';
 
 int calculateNights(int startDateInt, int endDateInt) {
-  DateTime startDate = DateTime.fromMillisecondsSinceEpoch(startDateInt);
-  DateTime endDate = DateTime.fromMillisecondsSinceEpoch(endDateInt);
+  final DateTime startDate = DateTime.fromMillisecondsSinceEpoch(startDateInt);
+  final DateTime endDate = DateTime.fromMillisecondsSinceEpoch(endDateInt);
 
-  Duration difference = endDate.difference(startDate);
-  int nights = difference.inDays;
+  final Duration difference = endDate.difference(startDate);
+  final int nights = difference.inDays;
   return nights;
 }
 
@@ -671,13 +648,11 @@ Widget totalView(
   return InkWell(
     onTap: onTap,
     child: Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff1E1E1E),
+      decoration: const BoxDecoration(
+        color: Color(0xff1E1E1E),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(25),
           bottomRight: Radius.circular(25),
-          topLeft: const Radius.circular(0.0),
-          topRight: const Radius.circular(0.0),
         ),
       ),
       child: Column(
@@ -689,12 +664,10 @@ Widget totalView(
               Align(
                 child: Container(
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(212),
-                      topLeft: const Radius.circular(0.0),
-                      topRight: const Radius.circular(0.0),
                     ),
                   ),
                   child: SizedBox(
@@ -712,7 +685,7 @@ Widget totalView(
                 ),
               ),
               Container(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0, 15, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0, 15, 0),
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: Image.asset(
@@ -727,9 +700,8 @@ Widget totalView(
           ),
           Flexible(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(30, 5, 30, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(30, 5, 30, 0.0),
               child: Column(
-                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -743,37 +715,35 @@ Widget totalView(
                             title ?? '',
                             overflow: TextOverflow.ellipsis,
                             softWrap: true,
-                            style: TextStyle(
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                  fontFamily: 'k2d',
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 35,
-
-                                ),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 0.0,
+                              fontFamily: 'k2d',
+                              fontWeight: FontWeight.w800,
+                              fontSize: 35,
+                            ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5, 0.0, 5),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 5, 0.0, 5),
                         child: Wrap(
                           children: [
                             Text(
                               subTitle ?? '',
                               style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'k2d',
-                                    fontSize: 25,
-
-                                  ),
+                                color: Colors.white,
+                                fontFamily: 'k2d',
+                                fontSize: 25,
+                              ),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 5.0, 0.0, 5),
                         child: Wrap(
                           children: [
                             Text(
@@ -782,12 +752,12 @@ Widget totalView(
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               softWrap: true,
-                              style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 0.0,
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF1A965C),
-                                  ),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 0.0,
+                                fontFamily: 'Inter',
+                                color: Color(0xFF1A965C),
+                              ),
                             ),
                           ],
                         ),
@@ -795,7 +765,7 @@ Widget totalView(
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 1, 0, 1),
+                    margin: const EdgeInsets.fromLTRB(0, 1, 0, 1),
                     height: 2,
                     color: const Color(0xFF1A965C),
                   )

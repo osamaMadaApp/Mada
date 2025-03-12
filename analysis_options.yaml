@@ -42,7 +42,6 @@ linter:
     - unrelated_type_equality_checks
     - use_key_in_widget_constructors
     - valid_regexps
-    - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
     - always_require_non_null_named_parameters

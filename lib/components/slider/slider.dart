@@ -4,7 +4,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../general_exports.dart';
-import '../../index.dart';
+import '../../structure_main_flow/internationalization.dart';
 
 class SliderComponent extends StatefulWidget {
   SliderComponent({
@@ -274,7 +274,7 @@ class _SliderComponentState extends State<SliderComponent> {
                           width: 0.02.h,
                         ),
                         Text(
-                          '360_view'.tr,
+                          FFLocalizations.of(context).getText('360_view'),
                           style:
                               Theme.of(context).textTheme.bodySmall!.copyWith(
                                     fontWeight: FontWeight.w500,

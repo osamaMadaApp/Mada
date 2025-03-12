@@ -6,7 +6,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import '../app_state.dart';
 import '../auth/firebase_auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../backend/api_requests/api_manager.dart';
 import '../general_exports.dart';
 import '../structure_main_flow/flutter_mada_util.dart';
 
@@ -75,43 +74,44 @@ class ApiRequest {
     );
 
     // Adding interceptor
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        if (options.headers['Authorization'] != null) {
-          if (options.headers['Authorization']
-              .toString()
-              .replaceAll('Bearer ', '')
-              .replaceAll('null', '')
-              .isNotEmpty) {
-            var header = options.headers['Authorization'];
-            bool isExpired = JwtDecoder.isExpired(
-                header.toString().replaceAll('Bearer ', ''));
-            if (isExpired) {
-              ApiCallResponse refreshApiCall =
-                  await MadaApiGroupGroup.refreshApiCall.call(
-                      path : baseUrl + apiRefreshToken,
-                      token: FFAppState().userModel[keyToken],
-                      refreshToken: FFAppState().userModel[keyRefreshToken]);
-              if (refreshApiCall.succeeded == true) {
-                FFAppState().userModel[keyToken] = refreshApiCall.jsonBody[keyResults][keyToken];
-                FFAppState().userModel[keyRefreshToken] = refreshApiCall.jsonBody[keyResults][keyToken];
-                options.headers['Authorization'] =
-                    'Bearer ${FFAppState().userModel[keyToken]}';
-              }
-              return handler.next(options);
-            } else {
-              return handler.next(options);
+    dio.interceptors.add(InterceptorsWrapper(onRequest:
+        (RequestOptions options, RequestInterceptorHandler handler) async {
+      if (options.headers['Authorization'] != null) {
+        if (options.headers['Authorization']
+            .toString()
+            .replaceAll('Bearer ', '')
+            .replaceAll('null', '')
+            .isNotEmpty) {
+          final header = options.headers['Authorization'];
+          final bool isExpired =
+              JwtDecoder.isExpired(header.toString().replaceAll('Bearer ', ''));
+          if (isExpired) {
+            final ApiCallResponse refreshApiCall =
+                await MadaApiGroupGroup.refreshApiCall.call(
+                    path: baseUrl + apiRefreshToken,
+                    token: FFAppState().userModel[keyToken],
+                    refreshToken: FFAppState().userModel[keyRefreshToken]);
+            if (refreshApiCall.succeeded == true) {
+              FFAppState().userModel[keyToken] =
+                  refreshApiCall.jsonBody[keyResults][keyToken];
+              FFAppState().userModel[keyRefreshToken] =
+                  refreshApiCall.jsonBody[keyResults][keyToken];
+              options.headers['Authorization'] =
+                  'Bearer ${FFAppState().userModel[keyToken]}';
             }
+            return handler.next(options);
           } else {
-            FFAppState().prefs.clear();
-            await authManager.signOut();
             return handler.next(options);
           }
         } else {
+          FFAppState().prefs.clear();
+          await authManager.signOut();
           return handler.next(options);
         }
+      } else {
+        return handler.next(options);
       }
-    ));
+    }));
 
     return dio;
   }
@@ -232,11 +232,10 @@ class ApiRequest {
         //handle DioError here by error type or by error code
         if (shouldShowMessage) {
           consoleLogPretty(errorData['message']);
-          showMessage(
-            description:
-                errorData['errors'] != null && errorData['errors'].length > 0
-                    ? errorData['errors'][0]['message']
-                    : errorData['message'],
+          showToast(
+            errorData['errors'] != null && errorData['errors'].length > 0
+                ? errorData['errors'][0]['message']
+                : errorData['message'],
           );
         }
       } else {

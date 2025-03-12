@@ -118,7 +118,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 _model.currentModelName = 'OtpComponent';
               });
             } else {
-              showToast(message: response[keyMsg]);
+              showToast(response[keyMsg]);
             }
           },
         );
@@ -172,7 +172,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               FFAppState().userModel = response['results'];
               context.pushNamed(routeHome);
             } else {
-              showToast(message: response[keyMsg]);
+              showToast(response[keyMsg]);
             }
           },
         );
