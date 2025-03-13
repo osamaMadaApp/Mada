@@ -1,5 +1,4 @@
 import '../../app_state.dart';
-import '../../auth/base_auth_user_provider.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/internationalization.dart';
 
@@ -36,8 +35,6 @@ class AppProvider extends ChangeNotifier {
 
   static AppProvider get instance => _instance ??= AppProvider._();
 
-  BaseAuthUser? initialUser;
-  BaseAuthUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -48,15 +45,7 @@ class AppProvider extends ChangeNotifier {
   /// Otherwise, this will trigger a refresh and interrupt the action(s).
   bool notifyOnAuthChange = true;
 
-  bool get loading => user == null || showSplashImage;
-
-  bool get loggedIn => user?.loggedIn ?? false;
-
-  bool get isAdmin => user?.isAdmin ?? false;
-
-  bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
-
-  bool get shouldRedirect => loggedIn && _redirectLocation != null;
+  bool get loading => showSplashImage;
 
   String getRedirectLocation() => _redirectLocation!;
 
@@ -69,23 +58,6 @@ class AppProvider extends ChangeNotifier {
   /// Mark as not needing to notify on a sign in / out when we intend
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
-
-  void update(BaseAuthUser newUser) {
-    final shouldUpdate =
-        user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
-    initialUser ??= newUser;
-    user = newUser;
-    getMasterData();
-
-    // Refresh the app on auth change unless explicitly marked otherwise.
-    // No need to update unless the user has changed.
-    if (notifyOnAuthChange && shouldUpdate) {
-      notifyListeners();
-    }
-    // Once again mark the notifier as needing to update on auth change
-    // (in order to catch sign in / out events).
-    updateNotifyOnAuthChange(true);
-  }
 
   void stopShowingSplashImage() {
     showSplashImage = false;
