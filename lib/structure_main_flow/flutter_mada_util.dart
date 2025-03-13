@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:Mada/structure_main_flow/uploaded_file.dart';
+import 'uploaded_file.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,8 +12,8 @@ import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 // import 'package:url_launcher/url_launcher.dart';
 
+import '../general_exports.dart';
 import '../main.dart';
-
 
 export 'keep_alive_wrapper.dart';
 export 'lat_lng.dart';
@@ -54,15 +54,15 @@ String dateTimeFormat(String format, DateTime? dateTime, {String? locale}) {
 Future<FFUploadedFile> resizeImageIfNeeded(FFUploadedFile imageFile) async {
   const int maxSizeInBytes = 1024 * 1024; // 2MB
 
-  Uint8List? imageBytes = imageFile.bytes;
+  final Uint8List? imageBytes = imageFile.bytes;
   if ((imageBytes?.lengthInBytes ?? 0) <= maxSizeInBytes) {
     // Image is already within the size limit
     return imageFile;
   }
 
-  img.Image? image = img.decodeImage(imageBytes ?? Uint8List(0));
+  final img.Image? image = img.decodeImage(imageBytes ?? Uint8List(0));
   if (image == null) {
-    throw Exception("Could not decode image");
+    throw Exception('Could not decode image');
   }
 
   int quality = 100;
@@ -76,9 +76,10 @@ Future<FFUploadedFile> resizeImageIfNeeded(FFUploadedFile imageFile) async {
   } while (compressedBytes.lengthInBytes > maxSizeInBytes && quality > 0);
 
   if (compressedBytes.lengthInBytes > maxSizeInBytes) {
-    throw Exception("Could not compress image to required size");
+    throw Exception('Could not compress image to required size');
   }
-  String newPath = imageFile.name?.replaceAll('.jpg', '_resized.jpg') ?? '';
+  final String newPath =
+      imageFile.name?.replaceAll('.jpg', '_resized.jpg') ?? '';
 
   return FFUploadedFile(
       bytes: compressedBytes, name: newPath, blurHash: imageFile.blurHash);
@@ -230,7 +231,7 @@ Theme wrapInMaterialTimePickerTheme(
 }
 
 Future launchURL(String url) async {
-  var uri = Uri.parse(url);
+  final uri = Uri.parse(url);
   try {
     // await launchUrl(uri);
   } catch (e) {
@@ -337,7 +338,6 @@ DateTime dateTimeFromSecondsSinceEpoch(int seconds) {
 
 TimeOfDay get getCurrentTimeOfDayStamp => TimeOfDay.now();
 
-
 extension DateTimeConversionExtension on DateTime {
   int get secondsSinceEpoch => (millisecondsSinceEpoch / 1000).round();
 }
@@ -431,7 +431,7 @@ bool responsiveVisibility({
 const kTextValidatorUsernameRegex = r'^[a-zA-Z][a-zA-Z0-9_-]{2,16}$';
 // https://stackoverflow.com/a/201378
 const kTextValidatorEmailRegex =
-    "^(?:[a-zA-Z0-9!#\$%&\'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#\$%&\'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\$";
+    "^(?:[a-zA-Z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\$";
 const kTextValidatorWebsiteRegex =
     r'(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)';
 
@@ -458,11 +458,13 @@ extension IterableExt<T> on Iterable<T> {
       .toList();
 }
 
-void setAppLanguage(BuildContext context, String language) =>
-    MyApp.of(context).setLocale(language);
+void setAppLanguage(BuildContext context, String language) {
+  Provider.of<AppProvider>(context, listen: false).setLocale(language);
+}
 
-void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
-    MyApp.of(context).setThemeMode(themeMode);
+void setDarkModeSetting(BuildContext context, ThemeMode themeMode) {
+  Provider.of<AppProvider>(context, listen: false).setThemeMode(themeMode);
+}
 
 void showSnackbar(
   BuildContext context,
@@ -574,8 +576,8 @@ void fixStatusBarOniOS16AndBelow(BuildContext context) {
 
 extension ListUniqueExt<T> on Iterable<T> {
   List<T> unique(dynamic Function(T) getKey) {
-    var distinctSet = <dynamic>{};
-    var distinctList = <T>[];
+    final distinctSet = <dynamic>{};
+    final distinctList = <T>[];
     for (var item in this) {
       if (distinctSet.add(getKey(item))) {
         distinctList.add(item);
