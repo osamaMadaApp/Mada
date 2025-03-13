@@ -1,4 +1,5 @@
 import '../../app_state.dart';
+import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/internationalization.dart';
 
@@ -17,6 +18,8 @@ class AppProvider extends ChangeNotifier {
     await appState.initializePersistedState();
 
     await getMasterData();
+
+    await refreshToken();
   }
 
   void setLocale(String language) {
@@ -72,6 +75,35 @@ class AppProvider extends ChangeNotifier {
     ).request(
       onSuccess: (dynamic data, dynamic response) {
         FFAppState().masterDateJsonModel = response[keyResults];
+      },
+    );
+  }
+
+  Future<void> refreshToken() async {
+    if (FFAppState().userModel.isEmpty) {
+      return;
+    }
+    final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
+
+    ApiRequest(
+      path: apiRefreshToken,
+      method: ApiMethods.post,
+      withAuth: false,
+      className: 'SplashScreenController/refreshToken',
+      defaultHeadersValue: false,
+      body: <String, dynamic>{
+        keyRefreshToken: FFAppState().userModel[keyRefreshToken],
+        ...deviceInfoDetails,
+      },
+    ).request(
+      onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
+        notifyListeners();
+        if (response[keySuccess] == true) {
+          FFAppState().userModel[keyToken] = data[keyResults][keyToken];
+          FFAppState().userModel[keyRefreshToken] =
+              data[keyResults][keyRefreshToken];
+          consoleLog(FFAppState().userModel[keyToken], key: 'new_token');
+        }
       },
     );
   }
