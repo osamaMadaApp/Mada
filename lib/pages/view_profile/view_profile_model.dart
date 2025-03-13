@@ -1,10 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
 import '../../api/routes_keys.dart';
 import '../../general_exports.dart';
-import '../../main.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
 class ViewProfileModel extends ChangeNotifier {
@@ -39,13 +39,13 @@ class ViewProfileModel extends ChangeNotifier {
         FFAppState().selectedLangugeAppState = (language == 'en') ? 1 : 0;
       });
 
-      MyApp.of(context).setLocale(language);
+      Provider.of<AppProvider>(context, listen: false).setLocale(language);
 
       data = null;
       notifyListeners();
       startLoading();
 
-      final appState = context.read<AppStateNotifier>();
+      final appState = context.read<AppProvider>();
       await appState.getMasterData();
 
       getUserProfile();
@@ -154,7 +154,6 @@ class ViewProfileModel extends ChangeNotifier {
 
       FFAppState().userModel = userData;
     } else {
-      showToast(response.reasonPhrase.toString());
       consoleLog(response.reasonPhrase);
     }
     dismissLoading();

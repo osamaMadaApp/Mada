@@ -24,6 +24,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MenuPageModel menuPageModel = Provider.of<MenuPageModel>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();

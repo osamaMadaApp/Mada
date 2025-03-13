@@ -1,18 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '/auth/base_auth_user_provider.dart';
 import '/backend/schema/structs/index.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
-import '../../api/api_keys.dart';
-import '../../api/api_request.dart';
-import '../../api/api_routes.dart';
 import '../../api/routes_keys.dart';
+import '../../general_exports.dart';
 import '../../pages/exclusive_projects/exclusive_projects.dart';
 import '../../pages/login_page/login_page_widget.dart';
-import '../../pages/nav_bar/nav_bar.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -20,83 +13,7 @@ export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
-class AppStateNotifier extends ChangeNotifier {
-  AppStateNotifier._();
-
-  static AppStateNotifier? _instance;
-
-  static AppStateNotifier get instance => _instance ??= AppStateNotifier._();
-
-  BaseAuthUser? initialUser;
-  BaseAuthUser? user;
-  bool showSplashImage = true;
-  String? _redirectLocation;
-
-  /// Determines whether the app will refresh and build again when a sign
-  /// in or sign out happens. This is useful when the app is launched or
-  /// on an unexpected logout. However, this must be turned off when we
-  /// intend to sign in/out and then navigate or perform any actions after.
-  /// Otherwise, this will trigger a refresh and interrupt the action(s).
-  bool notifyOnAuthChange = true;
-
-  bool get loading => user == null || showSplashImage;
-
-  bool get loggedIn => user?.loggedIn ?? false;
-
-  bool get isAdmin => user?.isAdmin ?? false;
-
-  bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
-
-  bool get shouldRedirect => loggedIn && _redirectLocation != null;
-
-  String getRedirectLocation() => _redirectLocation!;
-
-  bool hasRedirect() => _redirectLocation != null;
-
-  void setRedirectLocationIfUnset(String loc) => _redirectLocation ??= loc;
-
-  void clearRedirectLocation() => _redirectLocation = null;
-
-  /// Mark as not needing to notify on a sign in / out when we intend
-  /// to perform subsequent actions (such as navigation) afterwards.
-  void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
-
-  void update(BaseAuthUser newUser) {
-    final shouldUpdate =
-        user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
-    initialUser ??= newUser;
-    user = newUser;
-    getMasterData();
-
-    // Refresh the app on auth change unless explicitly marked otherwise.
-    // No need to update unless the user has changed.
-    if (notifyOnAuthChange && shouldUpdate) {
-      notifyListeners();
-    }
-    // Once again mark the notifier as needing to update on auth change
-    // (in order to catch sign in / out events).
-    updateNotifyOnAuthChange(true);
-  }
-
-  void stopShowingSplashImage() {
-    showSplashImage = false;
-    notifyListeners();
-  }
-
-  Future<void> getMasterData() async {
-    await ApiRequest(
-      path: apiMasterData,
-      className: 'SplashController/getMasterData',
-      formatResponse: true,
-    ).request(
-      onSuccess: (dynamic data, dynamic response) {
-        FFAppState().masterDateJsonModel = response[keyResults];
-      },
-    );
-  }
-}
-
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppProvider appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
@@ -182,7 +99,7 @@ extension NavigationExtensions on BuildContext {
 }
 
 extension GoRouterExtensions on GoRouter {
-  AppStateNotifier get appState => AppStateNotifier.instance;
+  AppProvider get appState => AppProvider.instance;
 
   void prepareAuthEvent([bool ignoreRedirect = false]) =>
       appState.hasRedirect() && !ignoreRedirect
@@ -292,7 +209,7 @@ class FFRoute {
 
   // late final String? isNavigatingToPath;
 
-  GoRoute toRoute(AppStateNotifier appStateNotifier) => GoRoute(
+  GoRoute toRoute(AppProvider appStateNotifier) => GoRoute(
         name: name,
         path: path,
         redirect: (context, state) {

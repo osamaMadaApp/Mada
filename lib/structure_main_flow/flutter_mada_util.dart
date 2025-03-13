@@ -3,7 +3,6 @@ import 'dart:math' show pow, pi, sin;
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'package:image/image.dart' as img;
@@ -13,10 +12,9 @@ import 'package:timeago/timeago.dart' as timeago;
 
 // import 'package:url_launcher/url_launcher.dart';
 
-import '../main.dart';
+import '../general_exports.dart';
 import 'uploaded_file.dart';
 
-export 'dart:convert' show jsonEncode, jsonDecode;
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
 
@@ -459,11 +457,13 @@ extension IterableExt<T> on Iterable<T> {
       .toList();
 }
 
-void setAppLanguage(BuildContext context, String language) =>
-    MyApp.of(context).setLocale(language);
+void setAppLanguage(BuildContext context, String language) {
+  Provider.of<AppProvider>(context, listen: false).setLocale(language);
+}
 
-void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
-    MyApp.of(context).setThemeMode(themeMode);
+void setDarkModeSetting(BuildContext context, ThemeMode themeMode) {
+  Provider.of<AppProvider>(context, listen: false).setThemeMode(themeMode);
+}
 
 void showSnackbar(
   BuildContext context,

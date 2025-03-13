@@ -5,41 +5,38 @@ class NavBarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => NavBarModel(),
-      child: Consumer<NavBarModel>(
-        builder: (context, provider, child) {
-          return Scaffold(
-            body: Row(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: NavigationRail(
-                        selectedIndex: provider.currentIndex,
-                        onDestinationSelected: provider.changePage,
-                        labelType: NavigationRailLabelType.none,
-                        destinations: _buildNavDestinations(context, provider),
-                      ),
+    return Consumer<NavBarModel>(
+      builder: (context, provider, child) {
+        return Scaffold(
+          body: Row(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Expanded(
+                    child: NavigationRail(
+                      selectedIndex: provider.currentIndex,
+                      onDestinationSelected: provider.changePage,
+                      labelType: NavigationRailLabelType.none,
+                      destinations: _buildNavDestinations(context, provider),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                      child: SvgPicture.asset(
-                        logo,
-                        width: 56.0,
-                        height: 56.0,
-                      ),
-                    )
-                  ],
-                ),
-                Expanded(
-                  child: provider.currentPage,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                    child: SvgPicture.asset(
+                      logo,
+                      width: 56.0,
+                      height: 56.0,
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                child: provider.currentPage,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

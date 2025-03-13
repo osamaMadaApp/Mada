@@ -1,6 +1,9 @@
 import '../../general_exports.dart';
 
 class NavBarModel extends ChangeNotifier {
+  NavBarModel() {
+    consoleLog(currentIndex, key: 'current_index');
+  }
   String _currentPageName = 'HomePage';
   int _currentIndex = 0;
 
