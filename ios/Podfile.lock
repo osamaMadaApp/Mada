@@ -174,15 +174,12 @@ PODS:
     - Flutter
   - flutter_email_sender (0.0.1):
     - Flutter
+  - flutter_localization (0.0.1):
+    - Flutter
   - flutter_pdfview (1.0.2):
     - Flutter
   - fluttertoast (0.0.2):
     - Flutter
-  - FMDB (2.7.12):
-    - FMDB/standard (= 2.7.12)
-  - FMDB/Core (2.7.12)
-  - FMDB/standard (2.7.12):
-    - FMDB/Core
   - geolocator_apple (1.2.0):
     - Flutter
   - google_sign_in_ios (0.0.1):
@@ -270,9 +267,9 @@ PODS:
     - FlutterMacOS
   - sign_in_with_apple (0.0.1):
     - Flutter
-  - sqflite (0.0.2):
+  - sqflite_darwin (0.0.4):
     - Flutter
-    - FMDB (>= 2.7.5)
+    - FlutterMacOS
   - SwiftyGif (5.4.5)
   - TOCropViewController (2.7.4)
   - url_launcher_ios (0.0.1):
@@ -299,6 +296,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_credit_card (from `.symlinks/plugins/flutter_credit_card/ios`)
   - flutter_email_sender (from `.symlinks/plugins/flutter_email_sender/ios`)
+  - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
@@ -313,7 +311,7 @@ DEPENDENCIES:
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
-  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
@@ -346,7 +344,6 @@ SPEC REPOS:
     - FirebaseSessions
     - FirebaseSharedSwift
     - FirebaseStorage
-    - FMDB
     - GoogleDataTransport
     - GoogleSignIn
     - GoogleUtilities
@@ -388,6 +385,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_credit_card/ios"
   flutter_email_sender:
     :path: ".symlinks/plugins/flutter_email_sender/ios"
+  flutter_localization:
+    :path: ".symlinks/plugins/flutter_localization/ios"
   flutter_pdfview:
     :path: ".symlinks/plugins/flutter_pdfview/ios"
   fluttertoast:
@@ -416,8 +415,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
-  sqflite:
-    :path: ".symlinks/plugins/sqflite/ios"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   video_player_avfoundation:
@@ -438,7 +437,7 @@ SPEC CHECKSUMS:
   client_information: cd2088b683015ea782082d6562d17e0320ae7097
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
-  file_picker: 09aa5ec1ab24135ccd7a1621c46c84134bfd6655
+  file_picker: b159e0c068aef54932bb15dc9fd1571818edaf49
   Firebase: a64bf6a8546e6eab54f1c715cd6151f39d2329f4
   firebase_auth: 6997563f7652d7c4ce0d817c8a24282595e31a6d
   firebase_core: aa979ae726f00b3ef4ccf59dfb96170af84efbd4
@@ -469,19 +468,19 @@ SPEC CHECKSUMS:
   FirebaseStorage: d35da127dd49edcbd07b8c07cf651a70161558b2
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_credit_card: 48fb35065294868bc6a3e7f18a42f28929b84f48
-  flutter_email_sender: 10a22605f92809a11ef52b2f412db806c6082d40
+  flutter_email_sender: e03bdda7637bcd3539bfe718fddd980e9508efaa
+  flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   flutter_pdfview: 2e4d13ffb774858562ffbdfdb61b40744b191adc
   fluttertoast: 21eecd6935e7064cc1fcb733a4c5a428f3f24f0f
-  FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   geolocator_apple: 9bcea1918ff7f0062d98345d238ae12718acfbc1
-  google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
+  google_sign_in_ios: 4111e87aa5e24a4404f00ea13479f35e571969cc
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   image_cropper: e0bb0042e4404ff2ef134e5cf0492cbd892156cd
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   motion_sensors: 03f55b7c637a7e365a0b5f9697a449f9059d5d91
@@ -495,9 +494,9 @@ SPEC CHECKSUMS:
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f
-  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
-  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
