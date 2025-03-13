@@ -5,9 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
-import 'auth/firebase_auth/auth_util.dart';
-import 'auth/firebase_auth/firebase_user_provider.dart';
-import 'backend/firebase/firebase_config.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
@@ -29,8 +26,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
-
-  await initFirebase();
 
   await FlutterMadaTheme.initialize();
 
@@ -81,19 +76,12 @@ class _MyAppState extends State<MyApp> {
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
-  late Stream<BaseAuthUser> userStream;
-
   @override
   void initState() {
     super.initState();
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier); // navigation
     setLocale(FFAppState().getSelectedLanguge());
-    userStream = madaFirebaseUserStream()
-      ..listen((BaseAuthUser user) {
-        _appStateNotifier.update(user);
-      });
-    jwtTokenStream.listen((_) {});
     Future.delayed(
       const Duration(),
       () => _appStateNotifier.stopShowingSplashImage(),
@@ -168,4 +156,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

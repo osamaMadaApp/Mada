@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '/backend/schema/structs/index.dart';
-
 import '../../structure_main_flow/lat_lng.dart';
 import '../../structure_main_flow/place.dart';
 import '../../structure_main_flow/uploaded_file.dart';
@@ -40,7 +39,7 @@ String? serializeParam(
     }
     if (isList) {
       final serializedValues = (param as Iterable)
-          .map((p) => serializeParam(p, paramType, isList: false))
+          .map((p) => serializeParam(p, paramType))
           .where((p) => p != null)
           .map((p) => p!)
           .toList();
