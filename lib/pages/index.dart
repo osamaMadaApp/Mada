@@ -1,7 +1,12 @@
+export 'fal_license_awards/index.dart';
+export 'fav/index.dart';
 export 'home/index.dart';
 export 'menu_page/index.dart';
 export 'my_app/index.dart';
 export 'my_order_page/index.dart';
 export 'nav_bar/index.dart';
 export 'notifications_page/index.dart';
+export 'pdf_view_page/index.dart';
+export 'splash_page/index.dart';
+export 'terms_and_conditions/index.dart';
 export 'view_profile/index.dart';

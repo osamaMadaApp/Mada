@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
 class MenuPageModel extends ChangeNotifier implements TickerProvider {
   MenuPageModel() {
@@ -9,7 +10,15 @@ class MenuPageModel extends ChangeNotifier implements TickerProvider {
     tabController.addListener(() {
       notifyListeners();
     });
+
+    sliderSettings = FFAppState().masterDateJsonModel[keySliderSettings] ?? [];
+    awards = FFAppState().masterDateJsonModel[keyAwardSettings] ?? [];
+    bannerImages = awards.map((item) => item['bannerImage'] as String).toList();
   }
+
+  List<dynamic> sliderSettings = [];
+  List<dynamic> awards = [];
+  List<String> bannerImages = [];
 
   late TabController tabController;
 
@@ -26,6 +35,7 @@ class MenuPageModel extends ChangeNotifier implements TickerProvider {
   @override
   void dispose() {
     tabController.dispose();
+
     super.dispose();
   }
 }

@@ -34,7 +34,7 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
           iconBack,
         ),
         onPressed: () {
-          context.pop();
+          Navigator.pop(context);
         },
       ),
       actions: actions ??

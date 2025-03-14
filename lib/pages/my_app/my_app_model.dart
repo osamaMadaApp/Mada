@@ -89,7 +89,7 @@ class AppProvider extends ChangeNotifier {
       path: apiRefreshToken,
       method: ApiMethods.post,
       withAuth: false,
-      className: 'SplashScreenController/refreshToken',
+      className: 'AppProvider/refreshToken',
       defaultHeadersValue: false,
       body: <String, dynamic>{
         keyRefreshToken: FFAppState().userModel[keyRefreshToken],

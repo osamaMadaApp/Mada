@@ -31,7 +31,8 @@ void main() async {
     MultiProvider(
       providers: <SingleChildWidget>[
         ChangeNotifierProvider(create: (_) => appProvider),
-        ChangeNotifierProvider(create: (_) => NavBarModel()),
+   
+
         // The bottom models should be deleted we don't want them globally
         ChangeNotifierProvider(
           create: (BuildContext context) => LoginPageModel(),

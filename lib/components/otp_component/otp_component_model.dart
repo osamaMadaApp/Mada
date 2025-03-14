@@ -1,35 +1,26 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_model.dart';
-import '../../structure_main_flow/flutter_mada_theme.dart';
-import 'otp_component.dart' show OtpComponent;
 
-class OtpComponentModel   extends ChangeNotifier{
+class OtpComponentModel extends ChangeNotifier {
   //
 
- bool? isValid;
+  bool? isValid;
 
+  int currentIndex = 0;
 
-
-  @override
-  void dispose() {
-    super.dispose();
-
-
+  void changeTab(int index) {
+    currentIndex = index;
+    consoleLog(currentIndex);
+    notifyListeners();
   }
- void changeTab(int index) {
 
-   notifyListeners();
- }
-
-  PinTheme themePin(BuildContext context){
+  PinTheme themePin(BuildContext context) {
     return PinTheme(
       height: 76.h,
       width: 352.w,
       decoration: BoxDecoration(
-        color:   Colors.transparent,
+        color: Colors.transparent,
         shape: BoxShape.circle,
         border: Border.all(
           color: FlutterMadaTheme.of(context).color989898,
@@ -37,6 +28,4 @@ class OtpComponentModel   extends ChangeNotifier{
       ),
     );
   }
-
-
 }

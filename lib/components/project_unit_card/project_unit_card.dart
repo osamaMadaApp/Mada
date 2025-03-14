@@ -17,6 +17,7 @@ class ProjectUnitCard extends StatelessWidget {
     this.showUnitNumber = false,
     this.maxLines = 2,
     this.whatsAppMsg,
+    this.borderColor,
   });
 
   final dynamic item;
@@ -32,12 +33,17 @@ class ProjectUnitCard extends StatelessWidget {
   final bool showBathroom;
   final int maxLines;
   final String? whatsAppMsg;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
-    final String orderId = item[keyOrderID].length > 10
-        ? item[keyOrderID].substring(0, 10)
-        : item[keyOrderID];
+    String orderId = '';
+    if (item[keyOrderID] != null) {
+      orderId = item[keyOrderID].length > 10
+          ? item[keyOrderID].substring(0, 10)
+          : item[keyOrderID];
+    }
+
     return Column(
       children: <Widget>[
         GestureDetector(
@@ -45,6 +51,7 @@ class ProjectUnitCard extends StatelessWidget {
           child: RoundedContainer(
             withPadding: false,
             color: Colors.white,
+            borderColor: borderColor ?? Colors.transparent,
             child: Container(
               padding: EdgeInsets.symmetric(
                 vertical: 8.h,
@@ -79,17 +86,42 @@ class ProjectUnitCard extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    '${item[keyTitle]}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width: 120.w,
+                                        child: Text(
+                                          '${item[keyTitle]}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                          maxLines: maxLines,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                    maxLines: maxLines,
-                                    overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          if (withFavorite)
+                                            GestureDetector(
+                                              onTap: onFavoritesPressed,
+                                              child: SvgPicture.asset(
+                                                item[keyIsWishListed] == true
+                                                    ? iconFav
+                                                    : iconUnFav,
+                                              ),
+                                            ),
+                                          SizedBox(height: 1.h),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                   if (item[keyUnitNumber] != null &&
                                       showUnitNumber)
@@ -191,42 +223,6 @@ class ProjectUnitCard extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 3.w,
-                                vertical: 1.h,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      if (withFavorite)
-                                        GestureDetector(
-                                          onTap: onFavoritesPressed,
-                                          child: SvgPicture.asset(
-                                            item[keyIsWishListed] == true
-                                                ? iconFav
-                                                : iconUnFav,
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 1.h),
                                 ],
                               ),
                             ),

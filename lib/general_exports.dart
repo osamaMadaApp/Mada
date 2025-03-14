@@ -18,5 +18,6 @@ export 'general_constants.dart';
 // export 'extensions/index.dart';
 // export 'language/index.dart';
 export 'pages/index.dart';
+export 'router/index.dart';
 export 'structure_main_flow/index.dart';
 export 'utils/index.dart';

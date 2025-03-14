@@ -1,18 +1,13 @@
-import '../../app_state.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <SingleChildWidget>[
-        ChangeNotifierProvider<MenuPageModel>(
-          create: (BuildContext context) => MenuPageModel(),
-        ),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => MenuPageModel(),
       child: const Menu(),
     );
   }
@@ -62,7 +57,7 @@ class Menu extends StatelessWidget {
                     label: FFLocalizations.of(context).getText('favorites'),
                     icon: iconLovely,
                     content: const Center(
-                      child: Text('Search Page'),
+                      child: FavoritesScreen(),
                     ),
                   ),
                   TabItem(
@@ -76,17 +71,15 @@ class Menu extends StatelessWidget {
                     label: FFLocalizations.of(context)
                         .getText('terms_and_conditions'),
                     icon: iconJudge,
-                    content: AqarekWebviewWidget(
-                      url: FFAppState()
-                          .masterDateJsonModel[keyTermsAndConditions],
-                    ),
+                    content: const TermsAndCOnditions(),
                   ),
                   TabItem(
                     label: FFLocalizations.of(context)
                         .getText('fal_license_awards'),
                     icon: iconFAL,
-                    content: const Center(
-                      child: Text('Profile Page'),
+                    content: FALLicenseAndAwards(
+                      sliderSettings: menuPageModel.sliderSettings,
+                      banners: menuPageModel.bannerImages,
                     ),
                   ),
                 ],
