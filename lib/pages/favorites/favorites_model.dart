@@ -1,12 +1,6 @@
-import '../../app_state.dart';
 import '../../general_exports.dart';
 
 class FavoritesModel extends ChangeNotifier {
-  FavoritesModel() {
-    getFavoriteList();
-    scrollController.addListener(scrollListener);
-  }
-
   GeneralTaps selectedCategory = GeneralTaps.exclusiveUnits;
 
   bool isLoading = true;
@@ -14,6 +8,10 @@ class FavoritesModel extends ChangeNotifier {
   int page = 0;
   bool hasNextPage = true;
   ScrollController scrollController = ScrollController();
+
+  void addScrollListener() {
+    scrollController.addListener(scrollListener);
+  }
 
   void scrollListener() {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
@@ -78,11 +76,6 @@ class FavoritesModel extends ChangeNotifier {
     String bodyKey = 'unitId',
     Function()? onSuccessLogin,
   }) {
-    if (FFAppState().userModel.isNotEmpty) {
-      // should redirect to login
-      return;
-    }
-
     startLoading();
     ApiRequest(
       path: type == PropertyType.unit
@@ -98,6 +91,7 @@ class FavoritesModel extends ChangeNotifier {
       onSuccess: (dynamic data, dynamic response) {
         if (response[keySuccess] == true) {
           onRequestSuccess!();
+          notifyListeners();
         }
 
         showToast(response[keyMessage]);
