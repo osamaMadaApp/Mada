@@ -17,7 +17,12 @@ class NotificationsPageModel extends ChangeNotifier {
   void scrollListener() {
     if (scrollController.position.maxScrollExtent == scrollController.offset) {
       if (hasNextPage) {
-        getNotificationsList(pagination: true);
+        getNotificationsList(
+          pagination: true,
+          isRead: selectedScreen == NotificationType.newNotifications
+              ? false
+              : true,
+        );
       }
     }
   }

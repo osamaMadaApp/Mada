@@ -3,7 +3,6 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
-import 'backend/firebase/firebase_config.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
@@ -24,8 +23,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
-
-  await initFirebase();
 
   final appProvider = AppProvider.instance;
   await appProvider.init();

@@ -1,5 +1,5 @@
 import '../../app_state.dart';
-import '../../auth/base_auth_user_provider.dart';
+import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/internationalization.dart';
 
@@ -18,6 +18,8 @@ class AppProvider extends ChangeNotifier {
     await appState.initializePersistedState();
 
     await getMasterData();
+
+    await refreshToken();
   }
 
   void setLocale(String language) {
@@ -36,8 +38,6 @@ class AppProvider extends ChangeNotifier {
 
   static AppProvider get instance => _instance ??= AppProvider._();
 
-  BaseAuthUser? initialUser;
-  BaseAuthUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -48,15 +48,7 @@ class AppProvider extends ChangeNotifier {
   /// Otherwise, this will trigger a refresh and interrupt the action(s).
   bool notifyOnAuthChange = true;
 
-  bool get loading => user == null || showSplashImage;
-
-  bool get loggedIn => user?.loggedIn ?? false;
-
-  bool get isAdmin => user?.isAdmin ?? false;
-
-  bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
-
-  bool get shouldRedirect => loggedIn && _redirectLocation != null;
+  bool get loading => showSplashImage;
 
   String getRedirectLocation() => _redirectLocation!;
 
@@ -69,23 +61,6 @@ class AppProvider extends ChangeNotifier {
   /// Mark as not needing to notify on a sign in / out when we intend
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
-
-  void update(BaseAuthUser newUser) {
-    final shouldUpdate =
-        user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
-    initialUser ??= newUser;
-    user = newUser;
-    getMasterData();
-
-    // Refresh the app on auth change unless explicitly marked otherwise.
-    // No need to update unless the user has changed.
-    if (notifyOnAuthChange && shouldUpdate) {
-      notifyListeners();
-    }
-    // Once again mark the notifier as needing to update on auth change
-    // (in order to catch sign in / out events).
-    updateNotifyOnAuthChange(true);
-  }
 
   void stopShowingSplashImage() {
     showSplashImage = false;
@@ -100,6 +75,35 @@ class AppProvider extends ChangeNotifier {
     ).request(
       onSuccess: (dynamic data, dynamic response) {
         FFAppState().masterDateJsonModel = response[keyResults];
+      },
+    );
+  }
+
+  Future<void> refreshToken() async {
+    if (FFAppState().userModel.isEmpty) {
+      return;
+    }
+    final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
+
+    ApiRequest(
+      path: apiRefreshToken,
+      method: ApiMethods.post,
+      withAuth: false,
+      className: 'SplashScreenController/refreshToken',
+      defaultHeadersValue: false,
+      body: <String, dynamic>{
+        keyRefreshToken: FFAppState().userModel[keyRefreshToken],
+        ...deviceInfoDetails,
+      },
+    ).request(
+      onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
+        notifyListeners();
+        if (response[keySuccess] == true) {
+          FFAppState().userModel[keyToken] = data[keyResults][keyToken];
+          FFAppState().userModel[keyRefreshToken] =
+              data[keyResults][keyRefreshToken];
+          consoleLog(FFAppState().userModel[keyToken], key: 'new_token');
+        }
       },
     );
   }

@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '/backend/schema/structs/index.dart';
-
-import '../../structure_main_flow/lat_lng.dart';
-import '../../structure_main_flow/place.dart';
 import '../../structure_main_flow/uploaded_file.dart';
 
 /// SERIALIZATION HELPERS
@@ -15,16 +12,6 @@ String dateTimeRangeToString(DateTimeRange dateTimeRange) {
   final endStr = dateTimeRange.end.millisecondsSinceEpoch.toString();
   return '$startStr|$endStr';
 }
-
-String placeToString(FFPlace place) => jsonEncode({
-      'latLng': place.latLng.serialize(),
-      'name': place.name,
-      'address': place.address,
-      'city': place.city,
-      'state': place.state,
-      'country': place.country,
-      'zipCode': place.zipCode,
-    });
 
 String uploadedFileToString(FFUploadedFile uploadedFile) =>
     uploadedFile.serialize();
@@ -40,7 +27,7 @@ String? serializeParam(
     }
     if (isList) {
       final serializedValues = (param as Iterable)
-          .map((p) => serializeParam(p, paramType, isList: false))
+          .map((p) => serializeParam(p, paramType))
           .where((p) => p != null)
           .map((p) => p!)
           .toList();
@@ -60,12 +47,10 @@ String? serializeParam(
         data = (param as DateTime).millisecondsSinceEpoch.toString();
       case ParamType.DateTimeRange:
         data = dateTimeRangeToString(param as DateTimeRange);
-      case ParamType.LatLng:
-        data = (param as LatLng).serialize();
+
       case ParamType.Color:
         data = (param as Color).toCssString();
-      case ParamType.FFPlace:
-        data = placeToString(param as FFPlace);
+
       case ParamType.FFUploadedFile:
         data = uploadedFileToString(param as FFUploadedFile);
       case ParamType.JSON:
@@ -96,41 +81,6 @@ DateTimeRange? dateTimeRangeFromString(String dateTimeRangeStr) {
   return DateTimeRange(
     start: DateTime.fromMillisecondsSinceEpoch(int.parse(pieces.first)),
     end: DateTime.fromMillisecondsSinceEpoch(int.parse(pieces.last)),
-  );
-}
-
-LatLng? latLngFromString(String? latLngStr) {
-  final pieces = latLngStr?.split(',');
-  if (pieces == null || pieces.length != 2) {
-    return null;
-  }
-  return LatLng(
-    double.parse(pieces.first.trim()),
-    double.parse(pieces.last.trim()),
-  );
-}
-
-FFPlace placeFromString(String placeStr) {
-  final serializedData = jsonDecode(placeStr) as Map<String, dynamic>;
-  final data = {
-    'latLng': serializedData.containsKey('latLng')
-        ? latLngFromString(serializedData['latLng'] as String)
-        : const LatLng(0.0, 0.0),
-    'name': serializedData['name'] ?? '',
-    'address': serializedData['address'] ?? '',
-    'city': serializedData['city'] ?? '',
-    'state': serializedData['state'] ?? '',
-    'country': serializedData['country'] ?? '',
-    'zipCode': serializedData['zipCode'] ?? '',
-  };
-  return FFPlace(
-    latLng: data['latLng'] as LatLng,
-    name: data['name'] as String,
-    address: data['address'] as String,
-    city: data['city'] as String,
-    state: data['state'] as String,
-    country: data['country'] as String,
-    zipCode: data['zipCode'] as String,
   );
 }
 
@@ -197,12 +147,10 @@ dynamic deserializeParam<T>(
             : null;
       case ParamType.DateTimeRange:
         return dateTimeRangeFromString(param);
-      case ParamType.LatLng:
-        return latLngFromString(param);
+
       case ParamType.Color:
         return fromCssColor(param);
-      case ParamType.FFPlace:
-        return placeFromString(param);
+
       case ParamType.FFUploadedFile:
         return uploadedFileFromString(param);
       case ParamType.JSON:

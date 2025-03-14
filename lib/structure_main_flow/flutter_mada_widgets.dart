@@ -1,5 +1,5 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FFButtonOptions {
   const FFButtonOptions({
@@ -49,12 +49,12 @@ class FFButtonOptions {
 
 class FFButtonWidget extends StatefulWidget {
   const FFButtonWidget({
-    super.key,
     required this.text,
     required this.onPressed,
+    required this.options,
+    super.key,
     this.icon,
     this.iconData,
-    required this.options,
     this.showLoadingIndicator = true,
   });
 
@@ -78,7 +78,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Widget textWidget = loading
+    final Widget textWidget = loading
         ? SizedBox(
             width: widget.options.width == null
                 ? _getTextWidth(text, widget.options.textStyle, maxLines)
@@ -95,7 +95,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               ),
             ),
           )
-        :  Text(
+        : Text(
             text ?? '',
             style:
                 text == null ? null : widget.options.textStyle?.withoutColor(),
@@ -122,7 +122,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
             : () => widget.onPressed!())
         : null;
 
-    ButtonStyle style = ButtonStyle(
+    final ButtonStyle style = ButtonStyle(
       shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
         (states) {
           if (states.contains(WidgetState.hovered) &&
@@ -186,7 +186,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
     );
 
     if ((widget.icon != null || widget.iconData != null) && !loading) {
-      Widget icon = widget.icon ??
+      final Widget icon = widget.icon ??
           FaIcon(
             widget.iconData!,
             size: widget.options.iconSize,
@@ -245,7 +245,6 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 extension _WithoutColorExtension on TextStyle {
   TextStyle withoutColor() => TextStyle(
         inherit: inherit,
-        color: null,
         backgroundColor: backgroundColor,
         fontSize: fontSize,
         fontWeight: fontWeight,
