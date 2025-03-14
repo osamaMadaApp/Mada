@@ -22,6 +22,15 @@ String getFontFamily(String languageCode) {
   return fontFamily;
 }
 
+bool areMapsEqual(Map? map1, Map? map2) {
+  if (map1 == null || map2 == null) return false;
+  if (map1.length != map2.length) return false;
+  for (var key in map1.keys) {
+    if (map1[key] != map2[key]) return false;
+  }
+  return true;
+}
+
 // Future<void> openUrl(String url) async {
 //   if (await canLaunchUrl(Uri.parse(url))) {
 //     await launchUrl(

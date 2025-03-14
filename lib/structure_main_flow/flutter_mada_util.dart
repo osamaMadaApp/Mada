@@ -329,6 +329,7 @@ String formatNumber(
 }
 
 DateTime get getCurrentTimestamp => DateTime.now();
+
 DateTime dateTimeFromSecondsSinceEpoch(int seconds) {
   return DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
 }
@@ -341,8 +342,11 @@ extension DateTimeConversionExtension on DateTime {
 
 extension DateTimeComparisonOperators on DateTime {
   bool operator <(DateTime other) => isBefore(other);
+
   bool operator >(DateTime other) => isAfter(other);
+
   bool operator <=(DateTime other) => this < other || isAtSameMomentAs(other);
+
   bool operator >=(DateTime other) => this > other || isAtSameMomentAs(other);
 }
 
@@ -398,14 +402,18 @@ Rect? getWidgetBoundingBox(BuildContext context) {
 }
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
+
 bool get isiOS => !kIsWeb && Platform.isIOS;
+
 bool get isWeb => kIsWeb;
 
 const kBreakpointSmall = 479.0;
 const kBreakpointMedium = 767.0;
 const kBreakpointLarge = 991.0;
+
 bool isMobileWidth(BuildContext context) =>
     MediaQuery.sizeOf(context).width < kBreakpointSmall;
+
 bool responsiveVisibility({
   required BuildContext context,
   bool phone = true,
@@ -425,6 +433,32 @@ bool responsiveVisibility({
   }
 }
 
+Future<void> bottomSheet(BuildContext context, FocusNode unFocusNode,
+    {Widget? child}) async {
+  await showModalBottomSheet(
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+    ),
+    backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
+    isDismissible: true,
+    enableDrag: false,
+    useSafeArea: true,
+    context: context,
+    builder: (context) {
+      return GestureDetector(
+        onTap: () => unFocusNode.canRequestFocus
+            ? FocusScope.of(context).requestFocus(unFocusNode)
+            : FocusScope.of(context).unfocus(),
+        child: Padding(
+          padding: MediaQuery.viewInsetsOf(context),
+          child: child,
+        ),
+      );
+    },
+  );
+}
+
 const kTextValidatorUsernameRegex = r'^[a-zA-Z][a-zA-Z0-9_-]{2,16}$';
 // https://stackoverflow.com/a/201378
 const kTextValidatorEmailRegex =
@@ -434,6 +468,7 @@ const kTextValidatorWebsiteRegex =
 
 extension FFTextEditingControllerExt on TextEditingController? {
   String get text => this == null ? '' : this!.text;
+
   set text(String newText) => this?.text = newText;
 }
 
@@ -555,6 +590,7 @@ extension StatefulWidgetExtensions on State<StatefulWidget> {
 // For iOS 16 and below, set the status bar color to match the app's theme.
 // https://github.com/flutter/flutter/issues/41067
 Brightness? _lastBrightness;
+
 void fixStatusBarOniOS16AndBelow(BuildContext context) {
   if (!isiOS) {
     return;

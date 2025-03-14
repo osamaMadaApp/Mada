@@ -9,6 +9,7 @@ import 'components/otp_component/otp_component_model.dart';
 import 'general_exports.dart';
 import 'pages/exclusive_projects/exclusive_projects_model.dart';
 import 'pages/login_page/login_page_model.dart';
+import 'pages/projects_listview/projects_listview_model.dart';
 import 'structure_main_flow/flutter_mada_util.dart';
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
@@ -47,6 +48,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => ExclusiveProjectsModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ProjectsListviewModel(),
         ),
       ],
       child: const MyApp(),

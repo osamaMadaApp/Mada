@@ -389,6 +389,26 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Sqft',
       'ar': 'قدم مربع',
     },
+    'quick_filter': <String, String>{
+      'en': 'Quick filter',
+      'ar': 'البحث المتقدم',
+    },
+    'edit_filter': <String, String>{
+      'en': 'Edit Filter',
+      'ar': 'تعديل الفلتر',
+    },
+    'add_custom_filter': <String, String>{
+      'en': 'Add Custom Filter',
+      'ar': 'إضافة فلتر مخصص',
+    },
+    'reset_filter': <String, String>{
+      'en': 'Reset filter',
+      'ar': 'إعادة تعيين الفلتر',
+    },
+    'project_result': <String, String>{
+      'en': 'Project Result',
+      'ar': 'نتيجة البحث',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
