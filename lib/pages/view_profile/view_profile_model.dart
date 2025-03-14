@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../../api/routes_keys.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -77,7 +76,12 @@ class ViewProfileModel extends ChangeNotifier {
 
   void onSignOut(BuildContext context) {
     // should clear Local storage before
-    context.pushNamed(routeLogin);
+    FFAppState().clearUserData();
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      Routes.routeLogin,
+      (Route<dynamic> route) => false,
+    );
   }
 
   Future<void> pickImageAndUpload() async {

@@ -3,7 +3,6 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../general_exports.dart';
 import '../../structure_main_flow/internationalization.dart';
-import '../../structure_main_flow/nav/nav.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return Consumer<AppProvider>(
           builder: (context, appProvider, child) {
-            return MaterialApp.router(
+            return MaterialApp(
               title: 'Mada',
               builder: FlutterSmartDialog.init(),
               localizationsDelegates: const <LocalizationsDelegate>[
@@ -63,7 +62,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: false,
               ),
               themeMode: appProvider.themeMode,
-              routerConfig: createRouter(AppProvider.instance),
+              onGenerateRoute: AppRouter.generateRoute,
             );
           },
         );

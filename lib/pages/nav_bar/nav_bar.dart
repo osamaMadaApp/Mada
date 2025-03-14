@@ -5,6 +5,18 @@ class NavBarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => NavBarModel(),
+      child: const NavBar(),
+    );
+  }
+}
+
+class NavBar extends StatelessWidget {
+  const NavBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Consumer<NavBarModel>(
       builder: (context, provider, child) {
         return Scaffold(
@@ -31,7 +43,7 @@ class NavBarPage extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child: provider.currentPage,
+                child: provider.getCurrentPage(provider.currentIndex),
               ),
             ],
           ),

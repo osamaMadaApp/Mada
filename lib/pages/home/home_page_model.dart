@@ -4,7 +4,6 @@ class HomePageModel extends ChangeNotifier {
   HomePageModel() {
     getHomeScreenResult();
   }
-
   dynamic homeData;
   List<String> homeBanner = <String>[];
   List<dynamic> mostPopularProjects = <dynamic>[];

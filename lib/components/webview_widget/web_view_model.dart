@@ -4,13 +4,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../utils/index.dart';
 
 class WebViewModel extends ChangeNotifier {
-  WebViewModel(String url) {
-    _initializeWebViewController(url);
-  }
   late WebViewController webViewController;
   bool isLoading = true;
 
-  void _initializeWebViewController(String url) {
+  void initializeWebViewController(String url) {
     startLoading();
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)

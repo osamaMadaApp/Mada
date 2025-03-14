@@ -1,7 +1,6 @@
 import 'package:flutter/scheduler.dart';
 
 import '/structure_main_flow/flutter_mada_util.dart';
-import '../../api/routes_keys.dart';
 import '../../backend/schema/util/schema_util.dart';
 import '../../components/forget_password_component/forget_password_component.dart';
 import '../../components/login_side_component/login_side_component.dart';
@@ -170,7 +169,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               (dynamic data, dynamic response, dynamic headers) {
             if (response[keySuccess] == true) {
               FFAppState().userModel = response['results'];
-              context.pushNamed(routeHome);
+              Navigator.pushNamed(context, Routes.routeNavBar);
             } else {
               showToast(response[keyMsg]);
             }

@@ -409,6 +409,18 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Project Result',
       'ar': 'نتيجة البحث',
     },
+    'awards_achievements': <String, String>{
+      'en': 'Awards and Achivements',
+      'ar': 'الجوائز والإنجازات',
+    },
+    'fal_license': <String, String>{
+      'en': 'FAL Licence',
+      'ar': 'رخصة فال',
+    },
+    'success_download': <String, String>{
+      'en': 'Success Download',
+      'ar': 'تم التنزيل بنجاح',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

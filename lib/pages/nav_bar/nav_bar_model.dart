@@ -23,4 +23,19 @@ class NavBarModel extends ChangeNotifier {
     _currentPageName = tabs.keys.toList()[index];
     notifyListeners();
   }
+
+  Widget getCurrentPage(int index) {
+    switch (index) {
+      case 0:
+        return const HomePage();
+      case 1:
+        return const MyOrderPage();
+      case 2:
+        return const NotificationsPage();
+      case 3:
+        return const MenuPage();
+      default:
+        return const Center();
+    }
+  }
 }
