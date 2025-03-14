@@ -13,6 +13,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _initializeApp();
+
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      Provider.of<AppProvider>(context, listen: false)
+          .setLocale(FFAppState().getSelectedLanguge());
+    });
   }
 
   Future<void> _initializeApp() async {
