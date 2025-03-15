@@ -642,14 +642,14 @@ class DeleteAccountSheet extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 20.w,
-                      vertical: 10.h,
+                      vertical: 30.h,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SvgPicture.asset(iconDeleteAccountWarning),
                         SizedBox(
-                          height: 10.h,
+                          height: 20.h,
                         ),
                         Text(
                           FFLocalizations.of(context)
@@ -661,10 +661,28 @@ class DeleteAccountSheet extends StatelessWidget {
                                 color: FlutterMadaTheme.of(context).color000000,
                                 fontWeight: FontWeight.w400,
                               ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          FFLocalizations.of(context).getText('delete_desc'),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: FlutterMadaTheme.of(context)
+                                        .colorFF0000
+                                        .withValues(
+                                          alpha: 0.7,
+                                        ),
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         )
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
               ],
             ),
