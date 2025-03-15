@@ -3,15 +3,18 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
 class ViewProfileModel extends ChangeNotifier {
   ViewProfileModel() {
     getUserProfile();
+    lifeCycleListener = AppLifecycleListener(onStateChange: onLifeCycleChanged);
   }
 
   dynamic data;
+  late final AppLifecycleListener lifeCycleListener;
 
   void getUserProfile() {
     startLoading();
@@ -123,6 +126,77 @@ class ViewProfileModel extends ChangeNotifier {
     }
   }
 
+  void onEditProfileInfo(BuildContext context) {
+    SideSheet.show(
+      context,
+      child: ChangeProfileInfo(
+        firstName: data[keyFirstName],
+        lastName: data[keyLastName],
+        email: data[keyEmail],
+        isNafathVerified: data[keyIsNafathVerified] == 1,
+        nationalId: data[keyNationalID],
+        shouldShowNationalId:
+            data[keyCountryCODE] == '966' && data[keyIsNafathVerified] == 0,
+        onChangeInfo: (firstName, lastName, email, nationId) {
+          updateProfile(firstName, lastName, email, nationId, context);
+        },
+      ),
+      title: FFLocalizations.of(context).getText('change_profile_info'),
+    );
+  }
+
+  Future<void> updateProfile(String firstName, String lastName, String email,
+      String? nationId, BuildContext context) async {
+    if (firstName.isEmpty || lastName.isEmpty) {
+      showToast(
+          FFLocalizations.of(context).getText('please_fill_profile_info'));
+      return;
+    }
+    if (firstName == data[keyFirstName] &&
+        lastName == data[keyLastName] &&
+        email == data[keyEmail] &&
+        (nationId == data[keyNationalID] || nationId!.isEmpty)) {
+      Navigator.pop(context);
+      return;
+    }
+
+    final String fcId = await getFcmToken() ?? '';
+
+    startLoading();
+    ApiRequest(
+      path: apiUpdateProfile,
+      method: ApiMethods.put,
+      defaultHeadersValue: false,
+      className: 'ViewProfileController/updateProfile',
+      body: {
+        keyFirstName: firstName,
+        keyLastName: lastName,
+        keyEmail: email,
+        keyDeviceToken: fcId,
+        keyNationalID: nationId,
+      },
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        dismissLoading();
+        if (response[keySuccess] == true) {
+          this.data = null;
+          notifyListeners();
+          final dynamic userData = FFAppState().userModel;
+          userData[keyFirstName] = data[keyResults][keyFirstName] ?? '';
+          userData[keyLastName] = data[keyResults][keyLastName] ?? '';
+          userData[keyEmail] = data[keyResults][keyEmail] ?? '';
+
+          consoleLog(FFAppState().userModel);
+
+          getUserProfile();
+          Navigator.pop(context);
+        } else {
+          showToast(response[keyMsg]);
+        }
+      },
+    );
+  }
+
   Future<void> updateUserImage(File image) async {
     startLoading();
     final headers = {
@@ -163,9 +237,25 @@ class ViewProfileModel extends ChangeNotifier {
     dismissLoading();
   }
 
+  void onDeleteAccount(BuildContext context) {
+    SideSheet.show(
+      context,
+      child: const DeleteAccountSheet(),
+      title: FFLocalizations.of(context).getText('delete_account_!'),
+    );
+  }
+
+  void onLifeCycleChanged(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      data = null;
+      notifyListeners();
+      getUserProfile();
+    }
+  }
+
   @override
   void dispose() {
-    consoleLog('Disposed');
     super.dispose();
+    lifeCycleListener.dispose();
   }
 }

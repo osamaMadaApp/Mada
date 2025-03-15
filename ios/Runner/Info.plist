@@ -22,6 +22,9 @@
 		<string>ar</string>
 	</array>
 
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

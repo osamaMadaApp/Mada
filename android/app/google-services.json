@@ -1,43 +1,46 @@
 {
   "project_info": {
-    "project_number": "159616523246",
-    "project_id": "mycar-5128d",
-    "storage_bucket": "mycar-5128d.firebasestorage.app"
+    "project_number": "233226426635",
+    "firebase_url": "https://mada-app-bee5b-default-rtdb.firebaseio.com",
+    "project_id": "mada-app-bee5b",
+    "storage_bucket": "mada-app-bee5b.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:159616523246:android:632852316c24259810ccff",
+        "mobilesdk_app_id": "1:233226426635:android:6780ebb11cc85f50646a0e",
         "android_client_info": {
-          "package_name": "com.usama.mycar.com"
+          "package_name": "com.madaagent.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "159616523246-1g0le1pl5ssvmejcbrfd0ciaqkfuioud.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA9uyRdCaLnsX1APYv_K0_2dQr49ewV7Vk"
+          "current_key": "AIzaSyBz4WzqaXNR0qGfzhyHPO_FEJKa1vIprRo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "159616523246-1g0le1pl5ssvmejcbrfd0ciaqkfuioud.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "159616523246-92qhqr5tnig7t789mds33udmb1219c6b.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.usama.mycar.com"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233226426635:android:b234e5f502471782646a0e",
+        "android_client_info": {
+          "package_name": "com.madaproperties.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz4WzqaXNR0qGfzhyHPO_FEJKa1vIprRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

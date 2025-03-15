@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_util.dart';
 
 class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
   const MadaHeader({
@@ -46,8 +45,7 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: GestureDetector(
                   onTap: () async {
-                    // consoleLog(Get.currentRoute);
-                    context.pop();
+                    Navigator.pop(context);
                   },
                   child: SvgPicture.asset(iconCloseButton),
                 ),

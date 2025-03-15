@@ -7,12 +7,14 @@ class CustomButton extends StatelessWidget {
     this.style,
     this.textStyle,
     super.key,
+    this.borderRadius,
   });
 
   final Function? onPressed;
   final String? text;
   final ButtonStyle? style;
   final TextStyle? textStyle;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class CustomButton extends StatelessWidget {
             ),
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.h),
+              borderRadius: BorderRadius.circular(borderRadius ?? 8.h),
             ),
           ),
       child: Text(

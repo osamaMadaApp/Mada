@@ -28,66 +28,67 @@ class Menu extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal: 15.w,
         ),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 60.h),
-            Padding(
-              padding: EdgeInsets.only(
-                left: isRTL ? 30.w : 0.w,
-                right: !isRTL ? 30.w : 0.w,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 60.h),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: isRTL ? 30.w : 0.w,
+                  right: !isRTL ? 30.w : 0.w,
+                ),
+                child: HeaderWidget(
+                  title: FFLocalizations.of(context).getText('menu'),
+                  subTitle:
+                      FFLocalizations.of(context).getText('mada_properties'),
+                  showProfilePic: false,
+                ),
               ),
-              child: HeaderWidget(
-                title: FFLocalizations.of(context).getText('menu'),
-                subTitle:
-                    FFLocalizations.of(context).getText('mada_properties'),
-                showProfilePic: false,
+              SizedBox(height: 55.h),
+              SizedBox(
+                height: MediaQuery.of(context).size.height - 250.h,
+                child: CustomTabs(
+                  tabs: <TabItem>[
+                    TabItem(
+                      label:
+                          FFLocalizations.of(context).getText('view_profile'),
+                      icon: iconViewProfile,
+                      content: const ViewProfileScreen(),
+                    ),
+                    TabItem(
+                      label: FFLocalizations.of(context).getText('favorites'),
+                      icon: iconLovely,
+                      content: const Center(
+                        child: FavoritesScreen(),
+                      ),
+                    ),
+                    TabItem(
+                      label: FFLocalizations.of(context).getText('contact_us'),
+                      icon: iconCallCalling,
+                      content: const ContactUsScreen(),
+                    ),
+                    TabItem(
+                      label: FFLocalizations.of(context)
+                          .getText('terms_and_conditions'),
+                      icon: iconJudge,
+                      content: const TermsAndCOnditions(),
+                    ),
+                    TabItem(
+                      label: FFLocalizations.of(context)
+                          .getText('fal_license_awards'),
+                      icon: iconFAL,
+                      content: FALLicenseAndAwards(
+                        sliderSettings: menuPageModel.sliderSettings,
+                        banners: menuPageModel.bannerImages,
+                      ),
+                    ),
+                  ],
+                  tabController: menuPageModel.tabController,
+                  onTabChanged: menuPageModel.changeTab,
+                ),
               ),
-            ),
-            SizedBox(height: 55.h),
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 250.h,
-              child: CustomTabs(
-                tabs: <TabItem>[
-                  TabItem(
-                    label: FFLocalizations.of(context).getText('view_profile'),
-                    icon: iconViewProfile,
-                    content: const ViewProfileScreen(),
-                  ),
-                  TabItem(
-                    label: FFLocalizations.of(context).getText('favorites'),
-                    icon: iconLovely,
-                    content: const Center(
-                      child: FavoritesScreen(),
-                    ),
-                  ),
-                  TabItem(
-                    label: FFLocalizations.of(context).getText('contact_us'),
-                    icon: iconCallCalling,
-                    content: const Center(
-                      child: Text('Profile Page'),
-                    ),
-                  ),
-                  TabItem(
-                    label: FFLocalizations.of(context)
-                        .getText('terms_and_conditions'),
-                    icon: iconJudge,
-                    content: const TermsAndCOnditions(),
-                  ),
-                  TabItem(
-                    label: FFLocalizations.of(context)
-                        .getText('fal_license_awards'),
-                    icon: iconFAL,
-                    content: FALLicenseAndAwards(
-                      sliderSettings: menuPageModel.sliderSettings,
-                      banners: menuPageModel.bannerImages,
-                    ),
-                  ),
-                ],
-                tabController: menuPageModel.tabController,
-                onTabChanged: menuPageModel.changeTab,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,1 @@
+enum ContactUsTypes { companies, individuals }

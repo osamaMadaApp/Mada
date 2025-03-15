@@ -2,22 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>159616523246-92qhqr5tnig7t789mds33udmb1219c6b.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.159616523246-92qhqr5tnig7t789mds33udmb1219c6b</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAR8na_eQSe31LYv2NRBX5ToFJ_r_w0YS8</string>
+	<string>AIzaSyBbfRAfTTO06nSkY8y3G4m-HXDd4sIss-4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>159616523246</string>
+	<string>233226426635</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.usama.mada.com</string>
+	<string>com.madaagent.app</string>
 	<key>PROJECT_ID</key>
-	<string>mada-5128d</string>
+	<string>mada-app-bee5b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mada-5128d.firebasestorage.app</string>
+	<string>mada-app-bee5b.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:159616523246:ios:c30b62b29d98b2dd10ccff</string>
+	<string>1:233226426635:ios:a356c7e6b8a9553d646a0e</string>
+	<key>DATABASE_URL</key>
+	<string>https://mada-app-bee5b-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

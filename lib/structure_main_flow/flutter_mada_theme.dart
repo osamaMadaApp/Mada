@@ -120,6 +120,7 @@ abstract class FlutterMadaTheme {
 
   /// Gray
   late Color colorD2D2D240;
+  late Color colorF4F4F4;
 
   /// Green
   late Color color97BE5A1A;
@@ -234,6 +235,9 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color color97BE5A1A = const Color(0x97BE5A1A);
   @override
   late Color colorFFF4F4F4A = const Color(0xFFF4F4F4);  // gray
+  @override
+  late Color colorF4F4F4 = const Color(0xFFF4F4F4);
+
 }
 
 class DarkModeTheme extends FlutterMadaTheme {
@@ -271,7 +275,7 @@ double pixelRatio = window.devicePixelRatio;
 /// Size in logical pixels
 Size logicalScreenSize = window.physicalSize / pixelRatio;
 
-///  ignore: duplicate_ignore, non_constant_identifier_names
+// ignore: duplicate_ignore, non_constant_identifier_names
 double DEVICE_WIDTH = logicalScreenSize.width;
 // ignore: non_constant_identifier_names
 double DEVICE_HEIGHT = logicalScreenSize.height;
