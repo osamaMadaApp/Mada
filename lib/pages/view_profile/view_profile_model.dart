@@ -240,7 +240,11 @@ class ViewProfileModel extends ChangeNotifier {
   void onDeleteAccount(BuildContext context) {
     SideSheet.show(
       context,
-      child: const DeleteAccountSheet(),
+      child: DeleteAccountSheet(
+        onDeleteAccount: () {
+          logout(context);
+        },
+      ),
       title: FFLocalizations.of(context).getText('delete_account_!'),
     );
   }

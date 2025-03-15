@@ -481,6 +481,12 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Contact Info',
       'ar': 'معلومات الاتصال',
     },
+    'delete_desc': <String, String>{
+      'en':
+          'By performing Delete We regret to inform you that your account will be scheduled for permanent deletion within the next two weeks. During this period, you will be logged out from Mada App. Please note that if you log in again, the deletion process will be halted.',
+      'ar':
+          'بإجراء عملية حذف، يؤسفنا إبلاغك بأنه سيتم حذف حسابك نهائيًا خلال الأسبوعين القادمين. خلال هذه الفترة، سيتم تسجيل خروجك من تطبيق مدى. يُرجى العلم أنه في حال تسجيل الدخول مرة أخرى، سيتم إيقاف عملية الحذف.',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
