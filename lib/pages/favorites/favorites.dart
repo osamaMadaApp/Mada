@@ -82,7 +82,7 @@ class _FavoritesState extends State<Favorites> {
                       },
                     ),
                     SizedBox(
-                      width: DEVICE_WIDTH * 0.01,
+                      width: 10.w,
                     ),
                     SelectableCategory(
                       text: FFLocalizations.of(context).getText('other_units'),
