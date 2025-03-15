@@ -434,14 +434,14 @@ bool responsiveVisibility({
 }
 
 Future<void> bottomSheet(BuildContext context, FocusNode unFocusNode,
-    {Widget? child}) async {
+    {Widget? child, required bool isScrollControlled, required bool isDismissible}) async {
   await showModalBottomSheet(
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
     ),
     backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
-    isDismissible: true,
+    isDismissible: isDismissible,
     enableDrag: false,
     useSafeArea: true,
     context: context,
@@ -458,6 +458,54 @@ Future<void> bottomSheet(BuildContext context, FocusNode unFocusNode,
     },
   );
 }
+
+Future<Future<Object?>> showLeftSideDrawer({
+  required BuildContext context,
+  required Widget child,
+  bool isDismissible = true,
+}) async {
+  return showGeneralDialog(
+    context: context,
+    barrierDismissible: isDismissible,
+    barrierLabel: "Dismiss",
+    transitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (context, animation, secondaryAnimation) => Align(
+      alignment: Alignment.centerLeft,
+      child: Material(
+        color: Colors.transparent,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.75,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: FlutterMadaTheme.of(context).colorFFFFFF,
+              borderRadius: const BorderRadius.horizontal(
+                right: Radius.circular(10.0),
+              ),
+            ),
+            child: Padding(
+              padding: MediaQuery.viewInsetsOf(context),
+              child: child,
+            ),
+          ),
+        ),
+      ),
+    ),
+    transitionBuilder: (context, animation, secondaryAnimation, child) {
+      final slide = Tween<Offset>(
+        begin: const Offset(-1, 0),
+        end: Offset.zero,
+      ).animate(animation);
+
+      return SlideTransition(
+        position: slide,
+        child: child,
+      );
+    },
+  );
+}
+
 
 const kTextValidatorUsernameRegex = r'^[a-zA-Z][a-zA-Z0-9_-]{2,16}$';
 // https://stackoverflow.com/a/201378

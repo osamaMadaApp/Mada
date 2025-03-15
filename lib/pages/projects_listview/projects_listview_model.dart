@@ -1,22 +1,30 @@
 import '../../app_state.dart';
-import '../../components/bottom_sheet_container/bottom_sheet_container.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_model.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
-class ProjectsListviewModel extends ChangeNotifier{
-  
+class ProjectsListviewModel extends ChangeNotifier {
 
+  ProjectsListviewModel({this.keyTitle, this.keyProjectStatus, this.keyType}) {
+    onInit(keyTitle ?? '', keyProjectStatus ?? '');
+    onReady();
+  }
+
+  final String? keyType;
+  final String? keyProjectStatus;
+  final String? keyTitle;
 
   List<dynamic> filteredPropertyPurpose =
-  FFAppState().masterDateJsonModel[keyFilteredPropertyPurpose];
+      FFAppState().masterDateJsonModel[keyFilteredPropertyPurpose];
+
   // Only for ready projects
   List<dynamic> projectCategories =
-  FFAppState().masterDateJsonModel[keyProjectCategories];
+      FFAppState().masterDateJsonModel[keyProjectCategories];
 
   dynamic roomsNumber = FFAppState().masterDateJsonModel[keyRooms];
-  dynamic screenTitle ;
-  dynamic projectStatus ;
+  dynamic screenTitle;
+
+  dynamic projectStatus;
+
   bool isCurrentLocationSelected = true;
   bool showAvailableUnits = true;
   List<dynamic> selectedTypeFilter = [];
@@ -53,6 +61,7 @@ class ProjectsListviewModel extends ChangeNotifier{
   dynamic selectedTemSortKey = {};
   dynamic selectedTemSortType = {};
   ScrollController scrollController = ScrollController();
+
   // MyAppController myAppController = Get.find<MyAppController>();
   List<dynamic> subCommunities = [];
   List<dynamic> selectedSubCommunity = [];
@@ -70,22 +79,17 @@ class ProjectsListviewModel extends ChangeNotifier{
   bool hasNextPage = true;
   int totalDocs = 0;
 
-
-  void onInit(String keyTitle,String keyProjectStatus) {
+  void onInit(String keyTitle, String keyProjectStatus) {
     screenTitle = keyTitle;
     projectStatus = keyProjectStatus;
-    minPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [0] ??
-        0;
-    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [1] ??
+    minPrice =
+        FFAppState().masterDateJsonModel['priceRangeFilterProject'][0] ?? 0;
+    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject'][1] ??
         100000;
-    minSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [0] ??
-        0;
-    maxSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [1] ??
-        500;
+    minSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][0] ?? 0;
+    maxSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][1] ?? 500;
     minPriceController.text = formatter.format(minPrice);
     maxPriceController.text = formatter.format(maxPrice);
     minAreaController.text = minSpace.toString();
@@ -114,7 +118,6 @@ class ProjectsListviewModel extends ChangeNotifier{
       maxAreaController.text = formatter.format(spaceTemRange!.end.toInt());
     });
   }
-
 
   void onReady() {
     getExclusiveProjects();
@@ -164,7 +167,7 @@ class ProjectsListviewModel extends ChangeNotifier{
     });
   }
 
-  void update(){
+  void update() {
     notifyListeners();
   }
 
@@ -196,7 +199,7 @@ class ProjectsListviewModel extends ChangeNotifier{
         keyNeighborhoodId: selectedNeighborhood.map((e) => e[keyID]).toList(),
         keyBedrooms: selectedRoomsNumber.map((e) => e['key']).toList(),
         keyDeveloper:
-        selectedRealEstateDeveloper.map((e) => e[keyName]).toList(),
+            selectedRealEstateDeveloper.map((e) => e[keyName]).toList(),
         'subCommunityId': selectedSubCommunity.map((e) => e[keyID]).toList(),
       },
       className: 'ProjectsListviewController/getProjectsWithFiltering',
@@ -307,11 +310,10 @@ class ProjectsListviewModel extends ChangeNotifier{
     update();
   }
 
-
   Future<List> getNeighborHoodAppController(
-      List<dynamic> selectedCities, {
-        bool withLoading = false,
-      }) async {
+    List<dynamic> selectedCities, {
+    bool withLoading = false,
+  }) async {
     if (withLoading) {
       startLoading();
     }
@@ -455,28 +457,7 @@ class ProjectsListviewModel extends ChangeNotifier{
     }
 
     update();
-    // bottomSheet(
-    //
-    //   BottomSheetContainer(
-    //     title: FFLocalizations.of(context).getText('custom_filter'),
-    //     totalPadding: EdgeInsets.all(0),
-    //     titlePadding: DEVICE_HEIGHT * 0.0,
-    //     titleVerticalPadding: DEVICE_HEIGHT * 0.04,
-    //     titleHorizontalPadding: DEVICE_HEIGHT * 0.02,
-    //     child: const ProjectListviewFilterSheet(),
-    //     onClosingTheSheet: () {
-    //       // When the user close the bottom sheet
-    //
-    //       resetToDefaultValues();
-    //
-    //       update();
-    //
-    //       Get.back();
-    //     },
-    //   ),
-    //   isScrollControlled: true,
-    //   isDismissible: false,
-    // );
+
   }
 
   void onApplyFilterPress() {
@@ -578,18 +559,14 @@ class ProjectsListviewModel extends ChangeNotifier{
     selectedTemProjectsCategories = {};
     selectedTemRoomsNumber.clear();
     selectedTemSubCommunity.clear();
-    minPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [0] ??
-        0;
-    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [1] ??
+    minPrice =
+        FFAppState().masterDateJsonModel['priceRangeFilterProject'][0] ?? 0;
+    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject'][1] ??
         100000;
-    minSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [0] ??
-        0;
-    maxSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [1] ??
-        500;
+    minSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][0] ?? 0;
+    maxSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][1] ?? 500;
     minPriceController.text = formatter.format(minPrice);
     maxPriceController.text = formatter.format(maxPrice);
     minAreaController.text = minSpace.toString();
@@ -637,7 +614,7 @@ class ProjectsListviewModel extends ChangeNotifier{
       className: 'RequestYourPropertyController/getCommunities',
       body: {
         keyNeighborhoodId:
-        selectedTempNeighborhood.map((e) => e[keyID]).toList(),
+            selectedTempNeighborhood.map((e) => e[keyID]).toList(),
       },
     ).request(
       onSuccess: (dynamic data, dynamic response) async {
@@ -691,17 +668,14 @@ class ProjectsListviewModel extends ChangeNotifier{
 
   bool checkFilterOnSlider() {
     dynamic minPrice =
-        FFAppState().masterDateJsonModel['priceRangeFilterProject'][0] ??
-            0;
+        FFAppState().masterDateJsonModel['priceRangeFilterProject'][0] ?? 0;
     dynamic maxPrice =
         FFAppState().masterDateJsonModel['priceRangeFilterProject'][1] ??
             100000;
     dynamic minSpace =
-        FFAppState().masterDateJsonModel['areaRangeFilterProject'][0] ??
-            0;
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][0] ?? 0;
     dynamic maxSpace =
-        FFAppState().masterDateJsonModel['areaRangeFilterProject'][1] ??
-            500;
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][1] ?? 500;
 
     if (priceRange!.start !=
         (minPrice is double ? minPrice : minPrice.toDouble())) {
@@ -732,18 +706,14 @@ class ProjectsListviewModel extends ChangeNotifier{
     selectedTypeFilter.clear();
     selectedCity.clear();
     selectedSubCommunity.clear();
-    minPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [0] ??
-        0;
-    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject']
-    [1] ??
+    minPrice =
+        FFAppState().masterDateJsonModel['priceRangeFilterProject'][0] ?? 0;
+    maxPrice = FFAppState().masterDateJsonModel['priceRangeFilterProject'][1] ??
         100000;
-    minSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [0] ??
-        0;
-    maxSpace = FFAppState().masterDateJsonModel['areaRangeFilterProject']
-    [1] ??
-        500;
+    minSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][0] ?? 0;
+    maxSpace =
+        FFAppState().masterDateJsonModel['areaRangeFilterProject'][1] ?? 500;
     minPriceController.text = formatter.format(minPrice);
     maxPriceController.text = formatter.format(maxPrice);
     minAreaController.text = minSpace.toString();

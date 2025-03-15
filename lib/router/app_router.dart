@@ -1,6 +1,7 @@
 import '../general_exports.dart';
 import '../pages/exclusive_projects/exclusive_projects.dart';
 import '../pages/login_page/login_page_widget.dart';
+import '../pages/projects_listview/projects_listview.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -39,6 +40,16 @@ class AppRouter {
       case Routes.routePdfScreen:
         return MaterialPageRoute(
           builder: (_) => const PDFScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
+      case Routes.routeProjectsListview:
+        return MaterialPageRoute(
+          builder: (_) => ProjectsListview(
+            keyTitle: args?[keyTitle],
+            keyProjectStatus: args?[keyProjectStatus],
+            keyType: args?[keyType],
+          ),
           settings: RouteSettings(arguments: args),
         );
 

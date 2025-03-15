@@ -11,6 +11,7 @@ import 'package:from_css_color/from_css_color.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../../utils/ui_utils.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../../api/api_keys.dart';
 import '../../../structure_main_flow/flutter_mada_theme.dart';
@@ -623,6 +624,24 @@ String getTextByKey(String key, BuildContext context) {
   } else {
     return FFLocalizations.of(context)
         .getVariableText(enText: 'Programs', arText: 'البرامج');
+  }
+}
+
+RangeLabels formattedRangeLabels(
+    RangeValues values, {
+      String suffix = 'm²',
+      bool price = false,
+    }) {
+  if (!price) {
+    return RangeLabels(
+      '${values.start.round().toString()} $suffix',
+      '${values.end.round().toString()} $suffix',
+    );
+  } else {
+    return RangeLabels(
+      '${getFormattedPrice(values.start.round().toDouble())} $suffix',
+      '${getFormattedPrice(values.end.round().toDouble())} $suffix',
+    );
   }
 }
 

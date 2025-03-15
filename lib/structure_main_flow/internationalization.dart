@@ -421,6 +421,54 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Success Download',
       'ar': 'تم التنزيل بنجاح',
     },
+    'purpose_of_use': <String, String>{
+      'en': 'Purpose of use',
+      'ar': 'غرض الاستخدام',
+    },
+    'project_categories': <String, String>{
+      'en': 'Project categories',
+      'ar': 'نوع المشروع',
+    },
+    'please_select_city': <String, String>{
+      'en': 'Please select the city',
+      'ar': 'يرجى اختيار المدينة',
+    },
+    'the_neighborhood': <String, String>{
+      'en': 'The neighborhood',
+      'ar': 'الحي',
+    },
+    'choose_sub_community': <String, String>{
+      'en': 'Choose Sub Community',
+      'ar': 'اختر الحي',
+    },
+    'bedrooms': <String, String>{
+      'en': 'Bedrooms',
+      'ar': 'غرف النوم',
+    },
+    'price': <String, String>{
+      'en': 'Price',
+      'ar': 'السعر',
+    },
+    'min': <String, String>{
+      'en': 'Min',
+      'ar': 'الحد الأدنى',
+    },
+    'max': <String, String>{
+      'en': 'Max',
+      'ar': 'الحد الأقصى',
+    },
+    'area': <String, String>{
+      'en': 'Area',
+      'ar': 'منطقة',
+    },
+    'real_estate_developer': <String, String>{
+      'en': 'Real estate developer',
+      'ar': 'المطور العقاري',
+    },
+    'apply_filter': <String, String>{
+      'en': 'Apply filter',
+      'ar': 'تطبيق الفلتر',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

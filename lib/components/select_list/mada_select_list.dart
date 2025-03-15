@@ -11,7 +11,7 @@ class SelectList extends StatelessWidget {
     this.borderWidth = 0.0,
     this.borderColor = Colors.transparent,
     this.defaultBorderColor = Colors.transparent,
-    this.unselectedBackgroundColor = Colors.grey,
+    this.unselectedBackgroundColor,
     this.unselectedFontColor = Colors.black,
     super.key,
     this.spaceBetween = false,
@@ -42,7 +42,7 @@ class SelectList extends StatelessWidget {
 
   /// The default border color of the item.
   final Color defaultBorderColor;
-  final Color unselectedBackgroundColor;
+  final Color? unselectedBackgroundColor;
   final Color unselectedFontColor;
   final double? minHeight;
   final double? minWidth;
@@ -124,7 +124,7 @@ class SelectList extends StatelessWidget {
                       ? FlutterMadaTheme.of(context)
                           .color97BE5A
                           .withOpacity(0.15)
-                      : unselectedBackgroundColor,
+                      : (unselectedBackgroundColor?? FlutterMadaTheme.of(context).colorD2D2D2),
                   onTap: () {
                     onTap?.call(item);
                   },
@@ -143,8 +143,11 @@ class SelectList extends StatelessWidget {
                           fit: BoxFit.contain,
                         ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: spaceBetween ? DEVICE_WIDTH * 0.075 : 0,
+                        padding: EdgeInsets.fromLTRB(
+                          spaceBetween ? DEVICE_WIDTH * 0.075 : 12.w,
+                          16.h,
+                          spaceBetween ? DEVICE_WIDTH * 0.075 : 12.w,
+                          16.h,
                         ),
                         child: Align(
                           child: Row(
@@ -184,8 +187,7 @@ class SelectList extends StatelessWidget {
     ).toList();
   }
 
-  List<Widget> _buildItemWithLimitation(dynamic item, BuildContext context,
-      bool isWrap, bool showImage, int maxTextLength) {
+  List<Widget> _buildItemWithLimitation(dynamic item, BuildContext context, bool isWrap, bool showImage, int maxTextLength) {
     List<Widget> rows = [];
     int itemsPerRow;
 
@@ -229,7 +231,7 @@ class SelectList extends StatelessWidget {
                           ? FlutterMadaTheme.of(context)
                               .color97BE5A
                               .withOpacity(0.15)
-                          : unselectedBackgroundColor,
+                          : (unselectedBackgroundColor?? FlutterMadaTheme.of(context).colorD2D2D2),
                       onTap: () {
                         onTap?.call(item);
                       },

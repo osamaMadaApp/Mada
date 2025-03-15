@@ -123,6 +123,8 @@ abstract class FlutterMadaTheme {
 
   /// Green
   late Color color97BE5A1A;
+
+  late Color colorFFF4F4F4A;
 }
 
 DeviceSize getDeviceSize(BuildContext context) {
@@ -150,7 +152,7 @@ class LightModeTheme extends FlutterMadaTheme {
   Color get tertiaryColor => tertiary;
 
   @override
-  late Color primary = const Color(0xFF8EC24D);
+  late Color primary = const Color(0xFF8EC24D); // green3
   @override
   late Color color91605DEC = const Color(0xA039AFA9);
   @override
@@ -203,7 +205,7 @@ class LightModeTheme extends FlutterMadaTheme {
   @override
   late Color coloreff5e6 = const Color(0xFFeff5e6);
   @override
-  late Color color8EC24D = const Color(0xFF8EC24D);
+  late Color color8EC24D = const Color(0xFF8EC24D); // green3
   @override
   late Color color292D32 = const Color(0xFF292D32);
   @override
@@ -211,11 +213,11 @@ class LightModeTheme extends FlutterMadaTheme {
   @override
   late Color colorF5F5F5 = const Color(0xFFF5F5F5);
   @override
-  late Color color989898 = const Color(0xFF989898);
+  late Color color989898 = const Color(0xFF989898); // gray2
   @override
   late Color colorE1E1E1 = const Color(0xFFE1E1E1);
   @override
-  late Color color97BE5A = const Color(0xFF97BE5A);
+  late Color color97BE5A = const Color(0xFF97BE5A); // green2
   @override
   late Color colorD2D2D2 = const Color(0xFFD2D2D2);
   @override
@@ -230,6 +232,8 @@ class LightModeTheme extends FlutterMadaTheme {
   late Color colorD2D2D240 = const Color(0x40D2D2D2);
   @override
   late Color color97BE5A1A = const Color(0x97BE5A1A);
+  @override
+  late Color colorFFF4F4F4A = const Color(0xFFF4F4F4);  // gray
 }
 
 class DarkModeTheme extends FlutterMadaTheme {

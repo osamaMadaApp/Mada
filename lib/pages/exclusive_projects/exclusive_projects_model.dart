@@ -1,7 +1,10 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_model.dart';
 
 class ExclusiveProjectsModel extends ChangeNotifier{
+
+  ExclusiveProjectsModel() {
+    initState();
+  }
 
   final List<dynamic> lastProjects = [];
   Map<String, dynamic> data = {};
@@ -10,8 +13,6 @@ class ExclusiveProjectsModel extends ChangeNotifier{
   int page = 0;
   ScrollController scrollController = ScrollController();
   bool hasNextPage = true;
-
-
   void initState() {
     getExclusiveProjects(hideScreen: true);
     scrollController.addListener(scrollListener);
