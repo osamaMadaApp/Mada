@@ -1,5 +1,5 @@
 export 'fal_license_awards/index.dart';
-export 'fav/index.dart';
+export 'favorites/index.dart';
 export 'home/index.dart';
 export 'menu_page/index.dart';
 export 'my_app/index.dart';

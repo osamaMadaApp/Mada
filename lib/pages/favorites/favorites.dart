@@ -13,8 +13,24 @@ class FavoritesScreen extends StatelessWidget {
   }
 }
 
-class Favorites extends StatelessWidget {
+class Favorites extends StatefulWidget {
   const Favorites({super.key});
+
+  @override
+  State<Favorites> createState() => _FavoritesState();
+}
+
+class _FavoritesState extends State<Favorites> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (callBack) {
+        Provider.of<FavoritesModel>(context, listen: false).getFavoriteList();
+        Provider.of<FavoritesModel>(context, listen: false).addScrollListener();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,18 +122,19 @@ class Favorites extends StatelessWidget {
                                       (BuildContext context, int index) {
                                     return ProjectUnitCard(
                                       item: controller.units[index],
+                                      showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
-                                            controller.units[index][keyID],
-                                            PropertyType.unit,
-                                            onRequestSuccess: () {
-                                          controller.units.remove(
-                                            controller.units[index],
-                                          );
-                                          // controller.update();
-                                        });
+                                          controller.units[index][keyID],
+                                          PropertyType.unit,
+                                          onRequestSuccess: () {
+                                            controller.units.remove(
+                                              controller.units[index],
+                                            );
+                                          },
+                                        );
                                       },
                                       onTap: () {
                                         // Get.toNamed(
@@ -131,9 +148,10 @@ class Favorites extends StatelessWidget {
                                     );
                                   },
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
                                     mainAxisExtent: 250,
+                                    crossAxisSpacing: 10.w,
                                   ),
                                 ),
                               if (controller.selectedCategory ==
@@ -149,13 +167,6 @@ class Favorites extends StatelessWidget {
                                       showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
-                                      onTap: () {
-                                        // Get.toNamed(
-                                        //   routePropertyDetails,
-                                        //   arguments: controller.units[index]
-                                        //       [keyID],
-                                        // );
-                                      },
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
                                           controller.units[index][keyID],
@@ -164,17 +175,24 @@ class Favorites extends StatelessWidget {
                                             controller.units.remove(
                                               controller.units[index],
                                             );
-                                            // controller.update();
                                           },
                                           bodyKey: 'propertyId',
                                         );
                                       },
+                                      onTap: () {
+                                        // Get.toNamed(
+                                        //   routePropertyDetails,
+                                        //   arguments: controller.units[index]
+                                        //       [keyID],
+                                        // );
+                                      },
                                     );
                                   },
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
-                                    mainAxisExtent: 350,
+                                    mainAxisExtent: 250,
+                                    crossAxisSpacing: 10.w,
                                   ),
                                 ),
                             ],
