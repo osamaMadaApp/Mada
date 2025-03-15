@@ -235,7 +235,7 @@ class ProjectUnitCard extends StatelessWidget {
                     margin: EdgeInsets.only(top: 8.h),
                     padding: EdgeInsets.symmetric(
                       horizontal: 8.w,
-                      vertical: 10.h,
+                      vertical: 14.h,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(
@@ -320,7 +320,6 @@ class ProjectUnitCard extends StatelessWidget {
                       children: <Widget>[
                         SizedBox(height: 8.h),
                         ContactUsButtons(
-                          containerHeight: 50.h,
                           whatsappNumber: item[keyWhatsappNumber],
                           phoneNumber: item[keyPhoneNumber],
                           showWhatsApp: item[keyWhatsappNumber] != null,
