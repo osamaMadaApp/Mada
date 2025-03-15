@@ -79,6 +79,36 @@ class AppProvider extends ChangeNotifier {
     );
   }
 
+  void onNafathVerificationPress(BuildContext context) {
+    if (FFAppState().userModel[keyIsNafathVerified] == 1) {
+      showToast(FFLocalizations.of(context).getText('nafath_already_verified'));
+      return;
+    }
+    startLoading();
+    ApiRequest(
+      path: apiNafathRequest,
+      method: ApiMethods.post,
+      className: 'ViewProfileController/onNafathVerificationPress',
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        dismissLoading();
+        if (response[keySuccess] == true) {
+          showToast(
+              FFLocalizations.of(context).getText('please_confirm_nafath'));
+          SideSheet.show(
+            context,
+            child: NafathNumberSheet(
+              nafathNumber: data[keyResults][keyNafathCode],
+            ),
+            title: FFLocalizations.of(context).getText('nafath_number'),
+          );
+        } else {
+          showToast(response[keyMsg]);
+        }
+      },
+    );
+  }
+
   Future<void> refreshToken() async {
     if (FFAppState().userModel.isEmpty) {
       return;

@@ -21,7 +21,10 @@ class PDFScreen extends StatelessWidget {
               title: controller.title,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.download_rounded),
+                  icon: const Icon(
+                    Icons.download_rounded,
+                    color: Colors.black,
+                  ),
                   onPressed: () {
                     controller.downloadPdf(
                       FFLocalizations.of(context).getText('success_download'),

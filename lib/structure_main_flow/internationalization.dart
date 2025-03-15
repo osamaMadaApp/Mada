@@ -273,10 +273,6 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'My Orders',
       'ar': 'طلباتي',
     },
-    'mada_properties': <String, String>{
-      'en': 'MADA Properties',
-      'ar': 'مدى العقارية',
-    },
     'no_data_found': <String, String>{
       'en': 'No data found',
       'ar': 'لم يتم العثور على بيانات',
@@ -365,10 +361,6 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Phone',
       'ar': 'الهاتف',
     },
-    'email': <String, String>{
-      'en': 'Email',
-      'ar': 'البريد الإلكتروني',
-    },
     'whatsapp': <String, String>{
       'en': 'Whatsapp',
       'ar': 'واتساب',
@@ -400,6 +392,54 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'success_download': <String, String>{
       'en': 'Success Download',
       'ar': 'تم التنزيل بنجاح',
+    },
+    'nafath_already_verified': <String, String>{
+      'en': 'NAFATH already verified',
+      'ar': 'تم التحقق من نفاذ بالفعل',
+    },
+    'please_confirm_nafath': <String, String>{
+      'en': 'Please confirm NAFATH',
+      'ar': 'يرجى تأكيد نفاذ',
+    },
+    'nafath_number': <String, String>{
+      'en': 'Nafath number',
+      'ar': 'رقم نفاذ',
+    },
+    'copy': <String, String>{
+      'en': 'Copy',
+      'ar': 'نسخ',
+    },
+    'your_nafath_number': <String, String>{
+      'en': 'ٌYour Nafath Number',
+      'ar': 'رقم نفاذ الخاص بك',
+    },
+    'copied_to_clipboard': <String, String>{
+      'en': 'ٌCopied to clipboard',
+      'ar': 'تم النسخ إلى الحافظة',
+    },
+    'close': <String, String>{
+      'en': 'ٌClose',
+      'ar': 'اغلاق',
+    },
+    'change_profile_info': <String, String>{
+      'en': 'Change profile info.',
+      'ar': 'تغيير معلومات الملف الشخصي',
+    },
+    'email_address': <String, String>{
+      'en': 'Email addreess',
+      'ar': 'عنوان البريد الإلكتروني',
+    },
+    'national_id': <String, String>{
+      'en': 'National id',
+      'ar': 'رقم الهوية الوطنية',
+    },
+    'please_fill_profile_info': <String, String>{
+      'en': 'Please fill profile info',
+      'ar': 'يرجى ملء معلومات الملف الشخصي',
+    },
+    'delete_account_!': <String, String>{
+      'en': 'Delete Account !!',
+      'ar': 'حذف الحساب !!',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,

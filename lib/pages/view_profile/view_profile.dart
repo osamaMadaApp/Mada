@@ -167,16 +167,21 @@ class Profile extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          CustomContainerButton(
-            onPressed: () {},
-            text: FFLocalizations.of(context).getText('edit_profile'),
-            textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: FlutterMadaTheme.of(context).color8EC24D,
-                ),
-            backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
-            borderColor: FlutterMadaTheme.of(context).color8EC24D,
-            borderRadius: 10.r,
-            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
+          SizedBox(
+            width: 150.w,
+            child: CustomContainerButton(
+              onPressed: () {
+                viewProfileModel.onEditProfileInfo(context);
+              },
+              text: FFLocalizations.of(context).getText('edit_profile'),
+              textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: FlutterMadaTheme.of(context).color8EC24D,
+                  ),
+              backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
+              borderColor: FlutterMadaTheme.of(context).color8EC24D,
+              borderRadius: 10.r,
+              padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
+            ),
           ),
           SizedBox(
             height: 10.h,
@@ -207,8 +212,10 @@ class Profile extends StatelessWidget {
                     withLine: false,
                     fontSize: 16,
                     image: imageNafath2,
-                    // onPressed:
-                    //     viewProfileModel.myAppController.onNafathVerificationPress,
+                    onPressed: () {
+                      Provider.of<AppProvider>(context, listen: false)
+                          .onNafathVerificationPress(context);
+                    },
                   ),
                 ),
               ),
@@ -369,13 +376,14 @@ class Settings extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.h),
             ),
             child: ProfileCategory(
-              icon: iconProfileDelete,
-              text: FFLocalizations.of(context).getText('delete_account'),
-              withLine: false,
-              withArrow: false,
-              fontSize: 16,
-              // onPressed: controller.onDeleteAccount,
-            ),
+                icon: iconProfileDelete,
+                text: FFLocalizations.of(context).getText('delete_account'),
+                withLine: false,
+                withArrow: false,
+                fontSize: 16,
+                onPressed: () {
+                  viewProfileModel.onDeleteAccount(context);
+                }),
           ),
         ],
       ),
@@ -615,71 +623,81 @@ class DeleteAccountSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.r),
-            color: FlutterMadaTheme.of(context).colorFF0000.withValues(
-                  alpha: 0.3,
-                ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 5.h,
-            ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.85,
+      child: Column(
+        children: [
+          Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                SvgPicture.asset(iconDeleteAccountWarning),
-                SizedBox(
-                  height: 10.h,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                          alpha: 0.03,
+                        ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 10.h,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SvgPicture.asset(iconDeleteAccountWarning),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          FFLocalizations.of(context)
+                              .getText('delete_account_desc'),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                color: FlutterMadaTheme.of(context).color000000,
+                                fontWeight: FontWeight.w400,
+                              ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                Text(
-                  FFLocalizations.of(context).getText('delete_account_desc'),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: FlutterMadaTheme.of(context).color000000,
-                        fontWeight: FontWeight.w400,
-                      ),
-                )
               ],
             ),
           ),
-        ),
-        SizedBox(
-          height: 16.h,
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: CustomButton(
-            text: FFLocalizations.of(context).getText('confirm_delete'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  FlutterMadaTheme.of(context).colorFF0000.withValues(
-                        alpha: 0.25,
-                      ),
-              padding: EdgeInsets.symmetric(
-                vertical: 5.h,
-                horizontal: 10.w,
-              ),
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.r),
-              ),
-            ),
-            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: FlutterMadaTheme.of(context).colorFF0000,
-                  fontWeight: FontWeight.w600,
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: CustomButton(
+              text: FFLocalizations.of(context).getText('confirm_delete'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    FlutterMadaTheme.of(context).colorFF0000.withValues(
+                          alpha: 0.15,
+                        ),
+                padding: EdgeInsets.symmetric(
+                  vertical: 5.h,
+                  horizontal: 10.w,
                 ),
-            onPressed: onDeleteAccount,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+              ),
+              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                          alpha: 1,
+                        ),
+                    fontWeight: FontWeight.w600,
+                  ),
+              onPressed: onDeleteAccount,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
