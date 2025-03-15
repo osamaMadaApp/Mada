@@ -364,53 +364,55 @@ class NotificationCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 8.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                item[keyTitle] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: item[keyIsRead] == false
-                                          ? Colors.black
-                                          : FlutterMadaTheme.of(context)
-                                              .color989898,
-                                    ),
-                              ),
-                              if (showDescription)
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
                                 Text(
-                                  item[keyDescription] ?? '',
+                                  item[keyTitle] ?? '',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
                                       .copyWith(
-                                        fontWeight: FontWeight.normal,
+                                        fontWeight: FontWeight.w400,
                                         color: item[keyIsRead] == false
                                             ? Colors.black
                                             : FlutterMadaTheme.of(context)
                                                 .color989898,
                                       ),
                                 ),
-                              SizedBox(height: 22.h),
-                              MadaText(
-                                item[keyCreatedAt] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.normal,
-                                      color: item[keyIsRead] == false
-                                          ? FlutterMadaTheme.of(context)
-                                              .color8EC24D
-                                          : FlutterMadaTheme.of(context)
-                                              .color989898
-                                              .withOpacity(0.5),
-                                    ),
-                              ),
-                            ],
+                                if (showDescription)
+                                  Text(
+                                    item[keyDescription] ?? '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          fontWeight: FontWeight.normal,
+                                          color: item[keyIsRead] == false
+                                              ? Colors.black
+                                              : FlutterMadaTheme.of(context)
+                                                  .color989898,
+                                        ),
+                                  ),
+                                SizedBox(height: 22.h),
+                                MadaText(
+                                  item[keyCreatedAt] ?? '',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        fontWeight: FontWeight.normal,
+                                        color: item[keyIsRead] == false
+                                            ? FlutterMadaTheme.of(context)
+                                                .color8EC24D
+                                            : FlutterMadaTheme.of(context)
+                                                .color989898
+                                                .withOpacity(0.5),
+                                      ),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
