@@ -10,9 +10,11 @@ import '../../structure_main_flow/flutter_mada_util.dart';
 class ViewProfileModel extends ChangeNotifier {
   ViewProfileModel() {
     getUserProfile();
+    lifeCycleListener = AppLifecycleListener(onStateChange: onLifeCycleChanged);
   }
 
   dynamic data;
+  late final AppLifecycleListener lifeCycleListener;
 
   void getUserProfile() {
     startLoading();
@@ -243,9 +245,17 @@ class ViewProfileModel extends ChangeNotifier {
     );
   }
 
+  void onLifeCycleChanged(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      data = null;
+      notifyListeners();
+      getUserProfile();
+    }
+  }
+
   @override
   void dispose() {
-    consoleLog('Disposed');
     super.dispose();
+    lifeCycleListener.dispose();
   }
 }
