@@ -441,6 +441,46 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Delete Account !!',
       'ar': 'حذف الحساب !!',
     },
+    'individuals': <String, String>{
+      'en': 'Individuals',
+      'ar': 'الأفراد',
+    },
+    'companies': <String, String>{
+      'en': 'Companies',
+      'ar': 'الشركات',
+    },
+    'please_enter_valid_number': <String, String>{
+      'en': 'Please enter a valid number',
+      'ar': 'الرجاء إدخال رقم صحيح',
+    },
+    'msg_title': <String, String>{
+      'en': 'Msg title',
+      'ar': 'عنوان الرسالة',
+    },
+    'type_msg': <String, String>{
+      'en': 'Type msg ...',
+      'ar': 'عنوان الرسالة',
+    },
+    'send': <String, String>{
+      'en': 'Send',
+      'ar': 'إرسال',
+    },
+    'company_name': <String, String>{
+      'en': 'Company name',
+      'ar': 'اسم الشركة',
+    },
+    'employee_name': <String, String>{
+      'en': 'Employee name',
+      'ar': 'اسم الموظف',
+    },
+    'employee_position': <String, String>{
+      'en': 'Employee position',
+      'ar': 'منصب الموظف',
+    },
+    'contact_info': <String, String>{
+      'en': 'Contact Info',
+      'ar': 'معلومات الاتصال',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

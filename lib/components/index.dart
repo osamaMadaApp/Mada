@@ -7,6 +7,7 @@ export 'custom_tabs/index.dart';
 export 'header_widget/index.dart';
 export 'label_card/index.dart';
 export 'labeled_icon_card/index.dart';
+export 'mada_header/index.dart';
 export 'mada_text/index.dart';
 export 'nafath_number_sheet/index.dart';
 export 'project_card/index.dart';

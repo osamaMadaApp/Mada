@@ -65,9 +65,7 @@ class Menu extends StatelessWidget {
                     TabItem(
                       label: FFLocalizations.of(context).getText('contact_us'),
                       icon: iconCallCalling,
-                      content: const Center(
-                        child: Text('Profile Page'),
-                      ),
+                      content: const ContactUsScreen(),
                     ),
                     TabItem(
                       label: FFLocalizations.of(context)
