@@ -8,7 +8,6 @@ class ContactUsButtons extends StatelessWidget {
     this.email,
     this.phoneNumber,
     this.whatsappNumber,
-    this.containerHeight,
     this.showWhatsApp = true,
     this.whatsappMsg,
     this.isPaymentMsg = false,
@@ -18,7 +17,6 @@ class ContactUsButtons extends StatelessWidget {
   final String? phoneNumber;
   final String? whatsappNumber;
   final bool showEmail;
-  final double? containerHeight;
   final bool showWhatsApp;
   final String? whatsappMsg;
   final bool isPaymentMsg;
@@ -33,7 +31,6 @@ class ContactUsButtons extends StatelessWidget {
             child: ContactUsCard(
               text: FFLocalizations.of(context).getText('whatsapp'),
               icon: iconWhatsapp,
-              containerHeight: containerHeight,
               onTap: () {
                 whatsapp(
                   '',
@@ -55,7 +52,6 @@ class ContactUsButtons extends StatelessWidget {
           child: ContactUsCard(
             text: FFLocalizations.of(context).getText('phone'),
             icon: iconPhoneLogo,
-            containerHeight: containerHeight,
             onTap: () {
               // makePhoneCall(
               //   phoneNumber ??
@@ -72,7 +68,6 @@ class ContactUsButtons extends StatelessWidget {
           ContactUsCard(
             text: FFLocalizations.of(context).getText('email'),
             icon: iconEmailContact,
-            containerHeight: containerHeight,
             onTap: () {
               sendEmail(
                 email ?? '',
@@ -91,13 +86,11 @@ class ContactUsCard extends StatelessWidget {
     required this.icon,
     super.key,
     this.onTap,
-    this.containerHeight,
   });
 
   final Function()? onTap;
   final String text;
   final String icon;
-  final double? containerHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +98,10 @@ class ContactUsCard extends StatelessWidget {
       onTap: onTap,
       child: Center(
         child: Container(
-          height: containerHeight ?? 7.h,
+          padding: EdgeInsets.symmetric(
+            horizontal: 8.w,
+            vertical: 8.h,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: FlutterMadaTheme.of(context).colorD2D2D240,
