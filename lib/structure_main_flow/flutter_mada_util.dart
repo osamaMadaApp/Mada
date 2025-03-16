@@ -462,11 +462,11 @@ Future<void> bottomSheet(BuildContext context, FocusNode unFocusNode,
 Future<Future<Object?>> showLeftSideDrawer({
   required BuildContext context,
   required Widget child,
-  bool isDismissible = true,
+  bool? isDismissible,
 }) async {
   return showGeneralDialog(
     context: context,
-    barrierDismissible: isDismissible,
+    barrierDismissible: isDismissible ?? true,
     barrierLabel: "Dismiss",
     transitionDuration: const Duration(milliseconds: 300),
     pageBuilder: (context, animation, secondaryAnimation) => Align(

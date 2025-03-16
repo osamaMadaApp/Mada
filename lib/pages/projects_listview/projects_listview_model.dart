@@ -1,4 +1,5 @@
 import '../../app_state.dart';
+import '../../components/projects_listview_filter/projects_listview_filter.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -12,6 +13,7 @@ class ProjectsListviewModel extends ChangeNotifier {
   final String? keyType;
   final String? keyProjectStatus;
   final String? keyTitle;
+    String? test;
 
   List<dynamic> filteredPropertyPurpose =
       FFAppState().masterDateJsonModel[keyFilteredPropertyPurpose];
@@ -168,6 +170,11 @@ class ProjectsListviewModel extends ChangeNotifier {
   }
 
   void update() {
+
+    notifyListeners();
+  }
+  void updateTest(int count) {
+    test = count.toString();
     notifyListeners();
   }
 
@@ -449,15 +456,21 @@ class ProjectsListviewModel extends ChangeNotifier {
     update();
   }
 
-  void openCustomBottomSheet() {
-    resetToOriginalValues();
+  void openCustomBottomSheet(BuildContext context) {
+    // resetToOriginalValues();
+    //
+    // if (selectedTempCity.isEmpty) {
+    //   getNeighborhood(selectedTempCity, withLoading: false);
+    // }
+    //
+    // update();
 
-    if (selectedTempCity.isEmpty) {
-      getNeighborhood(selectedTempCity, withLoading: false);
-    }
 
-    update();
-
+    // showLeftSideDrawer(
+    //   context: context,
+    //   child:   ProjectListviewFilterSheet(), // No need to pass controller manually now
+    //   isDismissible: true,
+    // );
   }
 
   void onApplyFilterPress() {

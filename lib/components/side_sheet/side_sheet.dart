@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../pages/projects_listview/projects_listview_model.dart';
 
 class SideSheet {
   static void show(
@@ -12,7 +13,7 @@ class SideSheet {
   }) {
     // Determine direction based on locale (LTR or RTL)
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-
+    context.read<ProjectsListviewModel>();
     showGeneralDialog(
       context: context,
       barrierDismissible: barrierDismissible,

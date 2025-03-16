@@ -1,10 +1,9 @@
-import '../../components/bottom_sheet_container/bottom_sheet_container.dart';
-import '../../components/mada_header/mada_header.dart';
+ import '../../components/mada_header/mada_header.dart';
 import '../../components/projects_listview_filter/projects_listview_filter.dart';
 import '../../components/reset_filter/reset_filter.dart';
 import '../../components/select_list/mada_select_list.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_util.dart';
+import '../../structure_main_flow/internationalization.dart';
 import 'projects_listview_model.dart';
 
 class ProjectsListview extends StatelessWidget {
@@ -23,10 +22,15 @@ class ProjectsListview extends StatelessWidget {
           keyProjectStatus: keyProjectStatus,
           keyType: keyType),
       child: _ProjectsListviewWidgetState(
-        keyTitle: keyTitle,
-        keyProjectStatus: keyProjectStatus,
-        keyType: keyType,
-      ),
+          keyTitle: keyTitle,
+          keyProjectStatus: keyProjectStatus,
+          keyType: keyType,
+          onTap: () {
+            showLeftSideDrawer(
+              context: context,
+              isDismissible: true,
+            );
+          }),
     );
   }
 }
@@ -36,12 +40,13 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
     this.keyTitle,
     this.keyProjectStatus,
     this.keyType,
+    required this.onTap,
   });
 
   final String? keyType;
   final String? keyProjectStatus;
   final String? keyTitle;
-
+  final void Function() onTap;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -159,39 +164,51 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
                                           children: [
+                                            // Container(
+                                            //   width: 400,
+                                            //   height: 400,
+                                            //   child: BottomSheetContainer(
+                                            //     title: FFLocalizations.of(context).getText('custom_filter'),
+                                            //     totalPadding:
+                                            //     EdgeInsets.zero,
+                                            //     titlePadding: DEVICE_HEIGHT * 0.0,
+                                            //     titleVerticalPadding: DEVICE_HEIGHT * 0.04,
+                                            //     titleHorizontalPadding: DEVICE_HEIGHT * 0.02,
+                                            //     child: ProjectListviewFilterSheet(
+                                            //       controller: model,
+                                            //     ),
+                                            //     onClosingTheSheet: () {
+                                            //       // When the user close the bottom sheet
+                                            //
+                                            //       // resetToDefaultValues();
+                                            //       //
+                                            //       // update(); TODO
+                                            //       //
+                                            //       // Get.back();
+                                            //       Navigator.pop(context);
+                                            //     },
+                                            //   ),
+                                            // ),
                                             GestureDetector(
                                               onTap: () {
-                                                model.openCustomBottomSheet();
-                                                showLeftSideDrawer(
-                                                  context: context,
-                                                  child: BottomSheetContainer(
-                                                    title: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                            'custom_filter'),
-                                                    totalPadding:
-                                                        EdgeInsets.zero,
-                                                    titlePadding:
-                                                        DEVICE_HEIGHT * 0.0,
-                                                    titleVerticalPadding:
-                                                        DEVICE_HEIGHT * 0.04,
-                                                    titleHorizontalPadding:
-                                                        DEVICE_HEIGHT * 0.02,
-                                                    child: ProjectListviewFilterSheet(
-                                                      controller: model,
-                                                    ),
-                                                    onClosingTheSheet: () {
-                                                      // When the user close the bottom sheet
+                                                // model.openCustomBottomSheet();
+                                                // context.read<ProjectsListviewModel>().openCustomBottomSheet(context);
 
-                                                      // resetToDefaultValues();
-                                                      //
-                                                      // update(); TODO
-                                                      //
-                                                      // Get.back();
-                                                    },
-                                                  ),
-                                                  isDismissible: false,
+                                                // SideSheet.show(
+                                                //   context,
+                                                //   child: ProjectListviewFilterSheet(controller: context.read<ProjectsListviewModel>(),),
+                                                //   title: FFLocalizations.of(context).getText('change_profile_info'),
+                                                // );
+
+
+
+                                                showLeftSideDrawer(
+                                                context: context,
+                                                isDismissible: true,
+                                                controller: model
                                                 );
+
+                                                // onTap.call();
                                               },
                                               child: Container(
                                                 padding: EdgeInsets.symmetric(
@@ -350,12 +367,21 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                             SizedBox(
                                               height: DEVICE_HEIGHT * 0.01,
                                             ),
-                                            ListView.builder(
-                                              itemCount: model.projects.length,
+                                            GridView.builder(
+                                              padding: EdgeInsets.zero,
                                               shrinkWrap: true,
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
-                                              padding: EdgeInsets.zero,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                                maxCrossAxisExtent: 434,
+                                                mainAxisSpacing:
+                                                    DEVICE_HEIGHT * 0.0090,
+                                                crossAxisSpacing:
+                                                    DEVICE_WIDTH * 0.0009,
+                                                childAspectRatio: 434 / 231,
+                                              ),
+                                              itemCount: model.projects.length,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -396,7 +422,7 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                                   },
                                                 );
                                               },
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -434,4 +460,48 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
       },
     );
   }
+
+
 }
+
+ Future<Future<Object?>> showLeftSideDrawer({
+   required BuildContext context,
+   bool? isDismissible,
+   ProjectsListviewModel? controller,
+ }) async {
+   // final ProjectsListviewModel controller = Provider.of<ProjectsListviewModel>(context);
+   return showGeneralDialog(
+     context: context,
+     barrierDismissible: isDismissible ?? true,
+     barrierLabel: "Dismiss",
+     transitionDuration: const Duration(milliseconds: 300),
+     pageBuilder: (context, animation, secondaryAnimation) => Align(
+       alignment: Alignment.centerLeft,
+       child: Container(
+         width: MediaQuery.of(context).size.width * 0.75,
+         height: MediaQuery.of(context).size.height,
+         decoration: BoxDecoration(
+           color: FlutterMadaTheme.of(context).colorFFFFFF,
+           borderRadius: const BorderRadius.horizontal(
+             right: Radius.circular(10.0),
+           ),
+         ),
+         child: Padding(
+           padding: MediaQuery.viewInsetsOf(context),
+           child: ProjectListviewFilterSheet(controller: controller),
+         ),
+       ),
+     ),
+     transitionBuilder: (context, animation, secondaryAnimation, child) {
+       final slide = Tween<Offset>(
+         begin: const Offset(-1, 0),
+         end: Offset.zero,
+       ).animate(animation);
+
+       return SlideTransition(
+         position: slide,
+         child: child,
+       );
+     },
+   );
+ }

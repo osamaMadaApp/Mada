@@ -557,6 +557,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Contact Info',
       'ar': 'معلومات الاتصال',
     },
+    'custom_filter': <String, String>{
+      'en': 'Custom Filter',
+      'ar': 'فلتر مخصص',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

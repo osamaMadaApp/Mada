@@ -20,6 +20,7 @@ class ExclusiveProjects extends StatelessWidget {
     );
   }
 }
+
 class _ExclusiveProjectsWidgetState extends StatelessWidget{
    final scaffoldKey = GlobalKey<ScaffoldState>();
 
