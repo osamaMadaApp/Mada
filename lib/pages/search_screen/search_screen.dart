@@ -141,7 +141,7 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                   borderRadius:
                                                       DEVICE_WIDTH * 0.1,
                                                   borderWidth: 1,
-                                                  borderColor: AppColors.green2,
+                                                  borderColor: FlutterMadaTheme.of(context).color97BE5A,
                                                   selectedItem:
                                                       _model.selectedItems,
                                                   suffixWidget: _model

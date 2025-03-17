@@ -456,21 +456,14 @@ class ProjectsListviewModel extends ChangeNotifier {
     update();
   }
 
-  void openCustomBottomSheet(BuildContext context) {
-    // resetToOriginalValues();
-    //
-    // if (selectedTempCity.isEmpty) {
-    //   getNeighborhood(selectedTempCity, withLoading: false);
-    // }
-    //
-    // update();
+  void openCustomBottomSheet() {
+    resetToOriginalValues();
 
+    if (selectedTempCity.isEmpty) {
+      getNeighborhood(selectedTempCity, withLoading: false);
+    }
 
-    // showLeftSideDrawer(
-    //   context: context,
-    //   child:   ProjectListviewFilterSheet(), // No need to pass controller manually now
-    //   isDismissible: true,
-    // );
+    update();
   }
 
   void onApplyFilterPress() {

@@ -5,6 +5,7 @@ import '../../components/projects_listview_filter/projects_listview_filter.dart'
 import '../../components/reset_filter/reset_filter.dart';
 import '../../components/select_list/mada_select_list.dart';
 import '../../general_exports.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 import '../../structure_main_flow/internationalization.dart';
 import 'projects_listview_model.dart';
 
@@ -141,48 +142,16 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
-                                    // Container(
-                                    //   width: 400,
-                                    //   height: 400,
-                                    //   child: BottomSheetContainer(
-                                    //     title: FFLocalizations.of(context).getText('custom_filter'),
-                                    //     totalPadding:
-                                    //     EdgeInsets.zero,
-                                    //     titlePadding: DEVICE_HEIGHT * 0.0,
-                                    //     titleVerticalPadding: DEVICE_HEIGHT * 0.04,
-                                    //     titleHorizontalPadding: DEVICE_HEIGHT * 0.02,
-                                    //     child: ProjectListviewFilterSheet(
-                                    //       controller: model,
-                                    //     ),
-                                    //     onClosingTheSheet: () {
-                                    //       // When the user close the bottom sheet
-                                    //
-                                    //       // resetToDefaultValues();
-                                    //       //
-                                    //       // update(); TODO
-                                    //       //
-                                    //       // Get.back();
-                                    //       Navigator.pop(context);
-                                    //     },
-                                    //   ),
-                                    // ),
                                     GestureDetector(
                                       onTap: () {
-                                        // model.openCustomBottomSheet();
-                                        // context.read<ProjectsListviewModel>().openCustomBottomSheet(context);
-
-                                        // SideSheet.show(
-                                        //   context,
-                                        //   child: ProjectListviewFilterSheet(controller: context.read<ProjectsListviewModel>(),),
-                                        //   title: FFLocalizations.of(context).getText('change_profile_info'),
-                                        // );
-
+                                        model.openCustomBottomSheet();
                                         showLeftSideDrawer(
                                             context: context,
                                             isDismissible: true,
-                                            controller: model);
-
-                                        // onTap.call();
+                                            child: ChangeNotifierProvider.value(
+                                              value: model,
+                                              child: const ProjectListviewFilterSheet(),
+                                            ));
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
@@ -410,47 +379,47 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
   }
 }
 
-Future<Future<Object?>> showLeftSideDrawer({
-  required BuildContext context,
-  bool? isDismissible,
-  ProjectsListviewModel? controller,
-}) async {
-  return showGeneralDialog(
-    context: context,
-    barrierDismissible: isDismissible ?? true,
-    transitionDuration: const Duration(milliseconds: 300),
-    pageBuilder: (context, animation, secondaryAnimation) => Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          color: FlutterMadaTheme.of(context).colorFFFFFF,
-          borderRadius: const BorderRadius.horizontal(
-            right: Radius.circular(10.0),
-          ),
-        ),
-        child: Padding(
-            padding: MediaQuery.viewInsetsOf(context),
-            child: ChangeNotifierProvider.value(
-              value: controller,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ProjectListviewFilterSheet(),
-              ),
-            )),
-      ),
-    ),
-    transitionBuilder: (context, animation, secondaryAnimation, child) {
-      final slide = Tween<Offset>(
-        begin: const Offset(-1, 0),
-        end: Offset.zero,
-      ).animate(animation);
-
-      return SlideTransition(
-        position: slide,
-        child: child,
-      );
-    },
-  );
-}
+// Future<Future<Object?>> showLeftSideDrawer({
+//   required BuildContext context,
+//   bool? isDismissible,
+//   ProjectsListviewModel? controller,
+// }) async {
+//   return showGeneralDialog(
+//     context: context,
+//     barrierLabel: "Dismiss",
+//     barrierDismissible: isDismissible ?? true,
+//     transitionDuration: const Duration(milliseconds: 300),
+//     pageBuilder: (context, animation, secondaryAnimation) => Align(
+//       alignment: Alignment.centerLeft,
+//       child: Container(
+//         width: MediaQuery.of(context).size.width * 0.75,
+//         height: MediaQuery.of(context).size.height,
+//         decoration: BoxDecoration(
+//           color: FlutterMadaTheme.of(context).colorFFFFFF,
+//           borderRadius: const BorderRadius.horizontal(
+//             right: Radius.circular(10.0),
+//           ),
+//         ),
+//         child: Padding(
+//             padding: MediaQuery.viewInsetsOf(context),
+//             child: ChangeNotifierProvider.value(
+//               value: controller,
+//               child: const Padding(
+//                 padding: EdgeInsets.all(16.0),
+//                 child: ProjectListviewFilterSheet(),
+//               ),
+//             )),
+//       ),
+//     ),
+//     transitionBuilder: (context, animation, secondaryAnimation, child) {
+//       final slide = Tween<Offset>(
+//         begin: const Offset(-1, 0),
+//         end: Offset.zero,
+//       ).animate(animation);
+//       return SlideTransition(
+//         position: slide,
+//         child: child,
+//       );
+//     },
+//   );
+// }

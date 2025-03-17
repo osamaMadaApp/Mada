@@ -462,6 +462,7 @@ Future<void> bottomSheet(BuildContext context, FocusNode unFocusNode,
 Future<Future<Object?>> showLeftSideDrawer({
   required BuildContext context,
   required Widget child,
+  String? title,
   bool? isDismissible,
 }) async {
   return showGeneralDialog(
@@ -476,13 +477,10 @@ Future<Future<Object?>> showLeftSideDrawer({
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.75,
+            width: MediaQuery.of(context).size.width * 0.35,
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               color: FlutterMadaTheme.of(context).colorFFFFFF,
-              borderRadius: const BorderRadius.horizontal(
-                right: Radius.circular(10.0),
-              ),
             ),
             child: Padding(
               padding: MediaQuery.viewInsetsOf(context),
