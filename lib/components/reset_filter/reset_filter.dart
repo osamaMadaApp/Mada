@@ -1,5 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 

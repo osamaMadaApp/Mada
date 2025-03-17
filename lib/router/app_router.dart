@@ -53,6 +53,12 @@ class AppRouter {
           settings: RouteSettings(arguments: args),
         );
 
+      case Routes.routeSearchScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SearchScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

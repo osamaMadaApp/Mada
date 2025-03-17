@@ -576,6 +576,7 @@ class CustomContainerButton extends StatelessWidget {
     this.borderColor,
     this.borderRadius = 10.0,
     this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+    this.icon,
   });
   final VoidCallback onPressed;
   final String text;
@@ -584,6 +585,7 @@ class CustomContainerButton extends StatelessWidget {
   final Color? borderColor;
   final double borderRadius;
   final EdgeInsets padding;
+  final String? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -598,15 +600,21 @@ class CustomContainerButton extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        child: Center(
-          child: Text(
-            text,
-            style: textStyle ??
-                Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Colors.black),
-          ),
+        child: Row(
+          children: [
+            if (icon != null) ...[
+              SvgPicture.asset(icon!),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              text,
+              style: textStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: Colors.black),
+            ),
+          ],
         ),
       ),
     );

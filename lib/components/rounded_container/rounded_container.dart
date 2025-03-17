@@ -50,7 +50,8 @@ class RoundedContainer extends StatelessWidget {
         ),
         padding: withPadding
             ? EdgeInsets.symmetric(
-                horizontal: 34.w,
+                horizontal: 12.w,
+                vertical: 16.h,
               )
             : null,
         child: child,

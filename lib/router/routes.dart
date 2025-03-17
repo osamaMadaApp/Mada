@@ -6,5 +6,6 @@ class Routes {
   static const String routeExclusiveProjects = '/exclusive-projects';
   static const String routePdfScreen = '/pdf-screen';
   static const String routeProjectsListview = '/projects_listview';
+  static const String routeSearchScreen = '/search-screen';
 
 }
