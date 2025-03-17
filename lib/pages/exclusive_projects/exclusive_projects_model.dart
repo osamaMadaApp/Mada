@@ -1,6 +1,10 @@
 import '../../general_exports.dart';
 
-class ExclusiveProjectsModel extends ChangeNotifier {
+class ExclusiveProjectsModel extends ChangeNotifier{
+
+  ExclusiveProjectsModel() {
+    initState();
+  }
   final List<dynamic> lastProjects = [];
   Map<String, dynamic> data = {};
   List<dynamic> menu = [];

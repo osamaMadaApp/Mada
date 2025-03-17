@@ -25,23 +25,23 @@ class ResetFilter extends StatelessWidget {
               vertical: DEVICE_HEIGHT * 0.009,
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(AppColors.gray),
               borderRadius: BorderRadius.circular(DEVICE_HEIGHT * 0.04),
-              border: Border.all(color: const Color(AppColors.green2)),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: iconHeight,
-                  child: SvgPicture.asset(iconReset),
-                ),
-                SizedBox(width: horizontalPadding ?? DEVICE_WIDTH * 0.02),
                 Text(
                   FFLocalizations.of(context).getText('reset_filter'),
                   style: textStyle ??
                       Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
+                ),
+                SizedBox(width: horizontalPadding ?? DEVICE_WIDTH * 0.02),
+                SizedBox(
+                  height: iconHeight,
+                  child: SvgPicture.asset(iconRedRoundedClose),
                 ),
               ],
             ),

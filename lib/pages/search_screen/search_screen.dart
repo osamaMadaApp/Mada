@@ -39,7 +39,7 @@ class _SearchScreenWidgetState extends State<SearchScreen>
         body: RefreshIndicator(
           onRefresh: _model.onRefresh,
           color: FlutterMadaTheme.of(context).primary,
-          child: _model.isLoading || _model.data.isEmpty
+          child: _model.data == null
               ? const Center()
               : Column(
                   children: [
@@ -145,7 +145,10 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                   borderRadius:
                                                       DEVICE_WIDTH * 0.1,
                                                   borderWidth: 1,
-                                                  borderColor: AppColors.green2,
+                                                  borderColor:
+                                                      FlutterMadaTheme.of(
+                                                              context)
+                                                          .color97BE5A,
                                                   selectedItem:
                                                       _model.selectedItems,
                                                   suffixWidget: _model
@@ -159,7 +162,7 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                                   0.02,
                                                           horizontalPadding:
                                                               DEVICE_WIDTH *
-                                                                  0.01,
+                                                                  0.005,
                                                           textStyle:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -225,10 +228,18 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                         SizedBox(height: DEVICE_HEIGHT * 0.02),
                                         Column(
                                           children: [
-                                            if (_model.projectResult.isEmpty)
+                                            if (_model.projectResult.isEmpty &&
+                                                !_model.isLoading)
                                               SizedBox(
-                                                height: DEVICE_HEIGHT * 0.1,
-                                                child: const Center(),
+                                                height: DEVICE_HEIGHT * 0.6,
+                                                child: Center(
+                                                  child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'no_data_found',
+                                                    ),
+                                                  ),
+                                                ),
                                               )
                                             else
                                               GridView.builder(
@@ -236,13 +247,9 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 3,
-                                                  childAspectRatio: 0.8,
-                                                  crossAxisSpacing:
-                                                      DEVICE_WIDTH * 0.02,
-                                                  mainAxisSpacing:
-                                                      DEVICE_HEIGHT * 0.02,
+                                                  mainAxisExtent: 290,
                                                 ),
                                                 itemCount:
                                                     _model.projectResult.length,
@@ -256,8 +263,10 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                     whatsAppMsg:
                                                         '${property[keyTitle] ?? ''}\n${property[keyPropertyCategory] ?? ''}\n${property[keyPrice] ?? 0} ${getCurrency()}\n${property[keyCommunity]} - ${property[keySubCommunity]}',
                                                     onFavoritesPressed: () {
-                                                      _model
-                                                          .favorites(property);
+                                                      _model.favorites(
+                                                        property,
+                                                        context,
+                                                      );
                                                     },
                                                     onTap: () {
                                                       _model.onPropertyPressed(

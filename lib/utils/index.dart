@@ -6,4 +6,3 @@ export 'loading.dart';
 export 'location_util.dart';
 export 'log.dart';
 export 'ui_utils.dart';
-export 'utils.dart';

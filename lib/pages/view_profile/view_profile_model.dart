@@ -135,8 +135,7 @@ class ViewProfileModel extends ChangeNotifier {
         email: data[keyEmail],
         isNafathVerified: data[keyIsNafathVerified] == 1,
         nationalId: data[keyNationalID],
-        shouldShowNationalId:
-            data[keyCountryCODE] == '966' && data[keyIsNafathVerified] == 0,
+        shouldShowNationalId: data[keyCountryCODE] == '966' && data[keyIsNafathVerified] == 0,
         onChangeInfo: (firstName, lastName, email, nationId) {
           updateProfile(firstName, lastName, email, nationId, context);
         },

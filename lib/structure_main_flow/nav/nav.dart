@@ -1,3 +1,4 @@
+import '../../pages/projects_listview/projects_listview.dart';
 import 'dart:async';
 
 import '/backend/schema/structs/index.dart';
@@ -19,6 +20,16 @@ GoRouter createRouter(AppProvider appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => const LoginPageWidget(),
       routes: [
+        FFRoute(
+          name: routeProjectsListview,
+          path: routeProjectsListview.toRoutePath(),
+          builder: (context, params) => ProjectsListview(
+            keyTitle: params.getParam('keyTitle', ParamType.String),
+            keyProjectStatus:
+                params.getParam('keyProjectStatus', ParamType.String),
+            keyType: params.getParam('keyType', ParamType.String),
+          ),
+        ),
         FFRoute(
           name: routeExclusiveProjects,
           path: routeExclusiveProjects.toRoutePath(),

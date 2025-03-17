@@ -381,6 +381,26 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Sqft',
       'ar': 'قدم مربع',
     },
+    'quick_filter': <String, String>{
+      'en': 'Quick filter',
+      'ar': 'البحث المتقدم',
+    },
+    'edit_filter': <String, String>{
+      'en': 'Edit Filter',
+      'ar': 'تعديل الفلتر',
+    },
+    'add_custom_filter': <String, String>{
+      'en': 'Add Custom Filter',
+      'ar': 'إضافة فلتر مخصص',
+    },
+    'reset_filter': <String, String>{
+      'en': 'Reset filter',
+      'ar': 'إعادة تعيين الفلتر',
+    },
+    'project_result': <String, String>{
+      'en': 'Project Result',
+      'ar': 'نتيجة البحث',
+    },
     'awards_achievements': <String, String>{
       'en': 'Awards and Achivements',
       'ar': 'الجوائز والإنجازات',
@@ -392,6 +412,50 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'success_download': <String, String>{
       'en': 'Success Download',
       'ar': 'تم التنزيل بنجاح',
+    },
+    'purpose_of_use': <String, String>{
+      'en': 'Purpose of use',
+      'ar': 'غرض الاستخدام',
+    },
+    'project_categories': <String, String>{
+      'en': 'Project categories',
+      'ar': 'نوع المشروع',
+    },
+    'please_select_city': <String, String>{
+      'en': 'Please select the city',
+      'ar': 'يرجى اختيار المدينة',
+    },
+    'the_neighborhood': <String, String>{
+      'en': 'The neighborhood',
+      'ar': 'الحي',
+    },
+    'bedrooms': <String, String>{
+      'en': 'Bedrooms',
+      'ar': 'غرف النوم',
+    },
+    'price': <String, String>{
+      'en': 'Price',
+      'ar': 'السعر',
+    },
+    'min': <String, String>{
+      'en': 'Min',
+      'ar': 'الحد الأدنى',
+    },
+    'max': <String, String>{
+      'en': 'Max',
+      'ar': 'الحد الأقصى',
+    },
+    'area': <String, String>{
+      'en': 'Area',
+      'ar': 'منطقة',
+    },
+    'real_estate_developer': <String, String>{
+      'en': 'Real estate developer',
+      'ar': 'المطور العقاري',
+    },
+    'apply_filter': <String, String>{
+      'en': 'Apply filter',
+      'ar': 'تطبيق الفلتر',
     },
     'nafath_already_verified': <String, String>{
       'en': 'NAFATH already verified',
@@ -481,15 +545,15 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Contact Info',
       'ar': 'معلومات الاتصال',
     },
+    'custom_filter': <String, String>{
+      'en': 'Custom Filter',
+      'ar': 'فلتر مخصص',
+    },
     'delete_desc': <String, String>{
       'en':
           'By performing Delete We regret to inform you that your account will be scheduled for permanent deletion within the next two weeks. During this period, you will be logged out from Mada App. Please note that if you log in again, the deletion process will be halted.',
       'ar':
           'بإجراء عملية حذف، يؤسفنا إبلاغك بأنه سيتم حذف حسابك نهائيًا خلال الأسبوعين القادمين. خلال هذه الفترة، سيتم تسجيل خروجك من تطبيق مدى. يُرجى العلم أنه في حال تسجيل الدخول مرة أخرى، سيتم إيقاف عملية الحذف.',
-    },
-    'quick_filter': <String, String>{
-      'en': 'Quick Filter',
-      'ar': 'تصفية سريعة',
     },
     'city_neighborhood': <String, String>{
       'en': 'City & Neighborhood',
@@ -498,14 +562,6 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'property_type_use': <String, String>{
       'en': 'Property Type & Use',
       'ar': 'نوع العقار والاستخدام',
-    },
-    'price': <String, String>{
-      'en': 'Price',
-      'ar': 'السعر',
-    },
-    'area': <String, String>{
-      'en': 'Area',
-      'ar': 'المساحة',
     },
     'beds_baths': <String, String>{
       'en': 'Beds & Baths',
@@ -531,13 +587,49 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Choose Sub Community',
       'ar': 'اختر الحي',
     },
-    'apply_filter': <String, String>{
-      'en': 'Apply Filter',
-      'ar': 'تطبيق التصفية',
-    },
     'filter': <String, String>{
       'en': 'Filter',
       'ar': 'تصفية',
+    },
+    'type_of_property_looking_for': <String, String>{
+      'en': 'Type of property looking for',
+      'ar': 'نوع العقار الذي تبحث عنه',
+    },
+    'categories': <String, String>{
+      'en': 'Categories',
+      'ar': 'الفئات',
+    },
+    'price_range': <String, String>{
+      'en': 'Price Range',
+      'ar': 'نطاق السعر',
+    },
+    'area_range': <String, String>{
+      'en': 'Area Range',
+      'ar': 'نطاق المساحة',
+    },
+    'min_price': <String, String>{
+      'en': 'Min Price',
+      'ar': 'الحد الأدنى للسعر',
+    },
+    'max_price': <String, String>{
+      'en': 'Max Price',
+      'ar': 'الحد الأقصى للسعر',
+    },
+    'min_area': <String, String>{
+      'en': 'Min Area',
+      'ar': 'الحد الأدنى للمساحة',
+    },
+    'max_area': <String, String>{
+      'en': 'Max Area',
+      'ar': 'الحد الأقصى للمساحة',
+    },
+    'range': <String, String>{
+      'en': 'Range',
+      'ar': 'النطاق',
+    },
+    'bathrooms': <String, String>{
+      'en': 'Bathrooms',
+      'ar': 'الحمامات',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,
