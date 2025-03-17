@@ -39,7 +39,7 @@ class _SearchScreenWidgetState extends State<SearchScreen>
         body: RefreshIndicator(
           onRefresh: _model.onRefresh,
           color: FlutterMadaTheme.of(context).primary,
-          child: _model.isLoading
+          child: _model.isLoading || _model.data.isEmpty
               ? const Center()
               : Column(
                   children: [
@@ -135,8 +135,12 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                               child: SingleChildScrollView(
                                                 child: SelectList(
                                                   items: _model.filterProcess,
-                                                  onTap: _model
-                                                      .onFilterProcessPress,
+                                                  onTap: (dynamic item) {
+                                                    _model.onFilterProcessPress(
+                                                      item,
+                                                      context,
+                                                    );
+                                                  },
                                                   textKey: keyName,
                                                   borderRadius:
                                                       DEVICE_WIDTH * 0.1,

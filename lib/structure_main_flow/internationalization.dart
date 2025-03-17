@@ -519,6 +519,26 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Search for units',
       'ar': 'البحث عن وحدات',
     },
+    'choose_city': <String, String>{
+      'en': 'Choose City',
+      'ar': 'اختر المدينة',
+    },
+    'choose_community': <String, String>{
+      'en': 'Choose Community',
+      'ar': 'اختر المنطقة',
+    },
+    'choose_sub_community': <String, String>{
+      'en': 'Choose Sub Community',
+      'ar': 'اختر الحي',
+    },
+    'apply_filter': <String, String>{
+      'en': 'Apply Filter',
+      'ar': 'تطبيق التصفية',
+    },
+    'filter': <String, String>{
+      'en': 'Filter',
+      'ar': 'تصفية',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

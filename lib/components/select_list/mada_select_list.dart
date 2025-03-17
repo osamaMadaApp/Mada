@@ -16,7 +16,7 @@ class SelectList extends StatelessWidget {
     super.key,
     this.spaceBetween = false,
     this.textWidth,
-    this.borderRadius = 0.1,
+    this.borderRadius = 32,
     this.suffix,
     this.isWrap = false,
     this.showImage = true,
@@ -48,7 +48,7 @@ class SelectList extends StatelessWidget {
   final double? minWidth;
   final bool spaceBetween;
   final double? textWidth;
-  final double? borderRadius;
+  final double borderRadius;
   final Widget? suffix;
   final bool isWrap;
   final ScrollController? scrollController;
@@ -105,7 +105,7 @@ class SelectList extends StatelessWidget {
     return items.map(
       (dynamic item) {
         final bool isSelected = selectedItem is List
-            ? selectedItem.contains(item)
+            ? selectedItem.any((element) => areMapsEqual(element, item))
             : (selectedItem == item || areMapsEqual(selectedItem, item));
         return Column(
           key: keys != null ? keys![items.indexOf(item)] : null,
@@ -115,7 +115,7 @@ class SelectList extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 RoundedContainer(
-                  borderRadius: borderRadius ?? 0.1,
+                  borderRadius: borderRadius ?? 0.2,
                   borderWidth: borderWidth,
                   minHeight: minHeight ?? DEVICE_HEIGHT * 0.0001,
                   minWidth: minWidth,
@@ -219,7 +219,7 @@ class SelectList extends StatelessWidget {
                       left: DEVICE_WIDTH * 0.009,
                     ),
                     child: RoundedContainer(
-                      borderRadius: borderRadius ?? 0.1,
+                      borderRadius: borderRadius,
                       borderWidth: borderWidth,
                       minHeight: minHeight ?? DEVICE_HEIGHT * 0.0001,
                       minWidth: minWidth,

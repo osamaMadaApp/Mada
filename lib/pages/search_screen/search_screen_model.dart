@@ -477,16 +477,17 @@ class SearchScreenModel extends ChangeNotifier {
   }
 
   void onFilterProcessPress(dynamic item, BuildContext context) {
-    // if (item[keyId] == 1) {
-    //   tempCities = List.from(selectedCities);
-    //   tempNeighborhoods = List.from(selectedNeighborhoods);
-    //   SideSheet.show(
-    //     context,
-    //     child: CityFilterSheet(),
-    //     title:
-    //         '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('city_neighborhood')}',
-    //   );
-    // } else if (item[keyId] == 2) {
+    if (item[keyId] == 1) {
+      tempCities = List.from(selectedCities);
+      tempNeighborhoods = List.from(selectedNeighborhoods);
+      SideSheet.show(
+        context,
+        child: const CityFilterSheet(),
+        title:
+            '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('city_neighborhood')}',
+      );
+    }
+    // else if (item[keyId] == 2) {
     //   tempPurposeOfUse = selectedPurposeOfUse;
     //   tempCategories = selectedCategories;
     //   tempTypeOfProperty = List.from(selectedTypeOfProperty);
