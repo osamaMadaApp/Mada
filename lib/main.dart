@@ -63,6 +63,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (BuildContext context) => ExclusiveProjectsModel(),
         ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => SearchScreenModel(),
+        ),
       ],
       child: const MyApp(),
     ),

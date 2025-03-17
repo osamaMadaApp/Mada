@@ -1,0 +1,30 @@
+class AppColors {
+  static const int transparent = 0x00FFFFFF;
+  static const int white = 0xffffffff;
+  static const int black = 0xff000000;
+  static const int primary = 0xFF8EC24D;
+  static const int gray = 0xFFF4F4F4;
+  static const int gray2 = 0xFF989898;
+  static const int gray3 = 0xFFFAFAFA;
+  static const int gray4 = 0xFFD2D2D2;
+  static const int gray5 = 0xFFF5F5F5;
+  static const int gray6 = 0xFFE1E1E1;
+  static const int gray7 = 0xFFD2D2D240;
+  static const int gray8 = 0xFF505050;
+  static const int gray9 = 0xFF82bcf2;
+  static const int blue = 0xFF144CED;
+  static const int gold = 0xFF926327;
+  static const int green = 0xFF8EC24D;
+  static const int green2 = 0xFF97BE5A;
+  static const int green3 = 0xFF8EC24D;
+  static const int green4 = 0xFF97BE5A66;
+  static const int green5 = 0xFF97BE5A0D;
+  static const int green6 = 0xFF97BE5A;
+  static const int green7 = 0xffF1F5E6;
+  static const int green8 = 0xFFE3ECD1;
+  static const int blue2 = 0xFF5AB2FF;
+  static const int blue3 = 0xFFE6EEF3;
+  static const int orange = 0xFFFD9B63;
+  static const int red = 0xFFFF0000;
+  static const int red2 = 0xFFAC0505;
+}

@@ -487,6 +487,38 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'ar':
           'بإجراء عملية حذف، يؤسفنا إبلاغك بأنه سيتم حذف حسابك نهائيًا خلال الأسبوعين القادمين. خلال هذه الفترة، سيتم تسجيل خروجك من تطبيق مدى. يُرجى العلم أنه في حال تسجيل الدخول مرة أخرى، سيتم إيقاف عملية الحذف.',
     },
+    'quick_filter': <String, String>{
+      'en': 'Quick Filter',
+      'ar': 'تصفية سريعة',
+    },
+    'city_neighborhood': <String, String>{
+      'en': 'City & Neighborhood',
+      'ar': 'المدينة والحي',
+    },
+    'property_type_use': <String, String>{
+      'en': 'Property Type & Use',
+      'ar': 'نوع العقار والاستخدام',
+    },
+    'price': <String, String>{
+      'en': 'Price',
+      'ar': 'السعر',
+    },
+    'area': <String, String>{
+      'en': 'Area',
+      'ar': 'المساحة',
+    },
+    'beds_baths': <String, String>{
+      'en': 'Beds & Baths',
+      'ar': 'الغرف والحمامات',
+    },
+    'any': <String, String>{
+      'en': 'Any',
+      'ar': 'أي',
+    },
+    'search_for_units': <String, String>{
+      'en': 'Search for units',
+      'ar': 'البحث عن وحدات',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>
