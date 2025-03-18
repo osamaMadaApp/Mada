@@ -7,7 +7,6 @@ import 'package:client_information/client_information.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:from_css_color/from_css_color.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -19,7 +18,6 @@ import '../../../utils/log.dart';
 
 export 'package:collection/collection.dart' show ListEquality;
 export 'package:flutter/material.dart' show Color, Colors;
-export 'package:from_css_color/from_css_color.dart';
 
 typedef StructBuilder<T> = T Function(Map<String, dynamic> data);
 
@@ -312,14 +310,14 @@ List<T>? getStructList<T>(
             .map((e) => structBuilder(e))
             .toList();
 
-Color? getSchemaColor(dynamic value) => value is String
-    ? fromCssColor(value)
-    : value is Color
-        ? value
-        : null;
-
-List<Color>? getColorsList(dynamic value) =>
-    value is! List ? null : value.map(getSchemaColor).withoutNulls;
+// Color? getSchemaColor(dynamic value) => value is String
+//     ? fromCssColor(value)
+//     : value is Color
+//         ? value
+//         : null;
+//
+// List<Color>? getColorsList(dynamic value) =>
+//     value is! List ? null : value.map(getSchemaColor).withoutNulls;
 
 List<T>? getDataList<T>(dynamic value) =>
     value is! List ? null : value.map((e) => castToType<T>(e)!).toList();

@@ -4,7 +4,6 @@ import 'dart:math' show pow, pi, sin;
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
-import 'package:from_css_color/from_css_color.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
@@ -236,12 +235,6 @@ Future launchURL(String url) async {
   }
 }
 
-Color colorFromCssString(String color, {Color? defaultColor}) {
-  try {
-    return fromCssColor(color);
-  } catch (_) {}
-  return defaultColor ?? Colors.black;
-}
 
 enum FormatType {
   decimal,
