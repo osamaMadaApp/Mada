@@ -144,17 +144,10 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             selectedItem: controller.selectedTempNeighborhood,
                             textKey: keyName,
                             onTap: controller.onTempNeighborhoodPress,
-                            borderColor:
-                                FlutterMadaTheme.of(context).color97BE5A,
-
-                            unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                .colorD2D2D2
-                                .withOpacity(
-                              0.25,
-                            ),
+                            borderColor: FlutterMadaTheme.of(context).color97BE5A,
+                            unselectedBackgroundColor: FlutterMadaTheme.of(context).colorD2D2D2.withOpacity(0.25,),
                             borderWidth: 1,
                             borderRadius: 22,
-
                           ),
                         ],
                       ),
