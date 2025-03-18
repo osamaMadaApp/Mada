@@ -477,57 +477,58 @@ class SearchScreenModel extends ChangeNotifier {
   }
 
   void onFilterProcessPress(dynamic item, BuildContext context) {
-    // if (item[keyId] == 1) {
-    //   tempCities = List.from(selectedCities);
-    //   tempNeighborhoods = List.from(selectedNeighborhoods);
-    //   SideSheet.show(
-    //     context,
-    //     child: CityFilterSheet(),
-    //     title:
-    //         '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('city_neighborhood')}',
-    //   );
-    // } else if (item[keyId] == 2) {
-    //   tempPurposeOfUse = selectedPurposeOfUse;
-    //   tempCategories = selectedCategories;
-    //   tempTypeOfProperty = List.from(selectedTypeOfProperty);
-    //   SideSheet.show(
-    //     context,
-    //     child: PropertyTypeFilterSheet(),
-    //     title:
-    //         '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('property_type_use')}',
-    //   );
-    // } else if (item[keyId] == 3) {
-    //   tempMinPrice = priceRange!.start.toDouble();
-    //   tempMaxPrice = priceRange!.end.toDouble();
-    //   SideSheet.show(
-    //     context,
-    //     child: PriceFilterSheet(),
-    //     title:
-    //         '${FFLocalizations.of(context).getText('price_range')} (${getCurrency()})',
-    //   );
-    // } else if (item[keyId] == 4) {
-    //   tempMinArea = areaRange!.start.toInt();
-    //   tempMaxArea = areaRange!.end.toInt();
-    //   SideSheet.show(
-    //     context,
-    //     child: AreaFilterSheet(),
-    //     title: FFLocalizations.of(context).getText('area_range'),
-    //   );
-    // } else if (item[keyId] == 5) {
-    //   tempRoomsNumber = List.from(selectedRoomNumber);
-    //   tempBathroomsNumber = List.from(selectedBathroomNumber);
-    //   SideSheet.show(
-    //     context,
-    //     child: BedBathFilterSheet(),
-    //     title:
-    //         '${FFLocalizations.of(context).getText('filter')}: ${FFLocalizations.of(context).getText('bedrooms')}, ${FFLocalizations.of(context).getText('bathrooms')}',
-    //   );
-    // }
+    if (item[keyId] == 1) {
+      tempCities = List.from(selectedCities);
+      tempNeighborhoods = List.from(selectedNeighborhoods);
+      SideSheet.show(
+        context,
+        child: const CityFilterSheet(),
+        title:
+            '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('city_neighborhood')}',
+      );
+    } else if (item[keyId] == 2) {
+      tempPurposeOfUse = selectedPurposeOfUse;
+      tempCategories = selectedCategories;
+      tempTypeOfProperty = List.from(selectedTypeOfProperty);
+      SideSheet.show(
+        context,
+        child: const PropertyTypeFilterSheet(),
+        title:
+            '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('property_type_use')}',
+      );
+    } else if (item[keyId] == 3) {
+      tempMinPrice = priceRange!.start.toDouble();
+      tempMaxPrice = priceRange!.end.toDouble();
+      SideSheet.show(
+        context,
+        child: const PriceFilterSheet(),
+        title:
+            '${FFLocalizations.of(context).getText('price_range')} (${getCurrency()})',
+      );
+    } else if (item[keyId] == 4) {
+      tempMinArea = areaRange!.start.toInt();
+      tempMaxArea = areaRange!.end.toInt();
+      SideSheet.show(
+        context,
+        child: const AreaFilterSheet(),
+        title: FFLocalizations.of(context).getText('area_range'),
+      );
+    } else if (item[keyId] == 5) {
+      tempRoomsNumber = List.from(selectedRoomNumber);
+      tempBathroomsNumber = List.from(selectedBathroomNumber);
+      SideSheet.show(
+        context,
+        child: const BedBathFilterSheet(),
+        title:
+            '${FFLocalizations.of(context).getText('filter')}: ${FFLocalizations.of(context).getText('bedrooms')}, ${FFLocalizations.of(context).getText('bathrooms')}',
+      );
+    }
   }
 
   void onApplyFilterPress(BuildContext context) {
     reset();
     Navigator.pop(context);
+    isLoading = true;
     getPropertiesList(
       filter: true,
     );
@@ -539,24 +540,21 @@ class SearchScreenModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void favorites(dynamic property) {
-    // final FavoritesScreenController favoritesScreenController = Get.put(
-    //   FavoritesScreenController(),
-    // );
-
-    // favoritesScreenController.addOrRemoveFromFavorite(
-    //   property[keyID],
-    //   PropertyType.property,
-    //   onSuccessLogin: () {
-    //     reset();
-    //     getPropertiesList();
-    //   },
-    //   onRequestSuccess: () {
-    //     property[keyIsWishListed] = !property[keyIsWishListed];
-    //     notifyListeners();
-    //   },
-    //   bodyKey: 'propertyId',
-    // );
+  void favorites(dynamic property, BuildContext context) {
+    final favoritesModel = context.read<FavoritesModel>();
+    favoritesModel.addOrRemoveFromFavorite(
+      property[keyID],
+      PropertyType.property,
+      onSuccessLogin: () {
+        reset();
+        getPropertiesList();
+      },
+      onRequestSuccess: () {
+        property[keyIsWishListed] = !property[keyIsWishListed];
+        notifyListeners();
+      },
+      bodyKey: 'propertyId',
+    );
   }
 
   void getFilteringFromMasterData() {

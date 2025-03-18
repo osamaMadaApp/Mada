@@ -68,6 +68,19 @@ class MyApp extends StatelessWidget {
                 ),
                 brightness: Brightness.light,
                 useMaterial3: false,
+                sliderTheme: const SliderThemeData(
+                  activeTrackColor: Color(AppColors.green),
+                  inactiveTrackColor: Color(AppColors.gray2),
+                  thumbColor: Color(AppColors.black),
+                  overlayColor: Color(AppColors.transparent),
+                  trackHeight: 2.0,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 25.0),
+                  valueIndicatorColor: Color(AppColors.green3),
+                  rangeValueIndicatorShape:
+                      PaddleRangeSliderValueIndicatorShape(),
+                  overlappingShapeStrokeColor: Color(AppColors.black),
+                ),
               ),
               darkTheme: ThemeData(
                 brightness: Brightness.light,

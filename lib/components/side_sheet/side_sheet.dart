@@ -20,7 +20,7 @@ class SideSheet {
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (context, animation, secondaryAnimation) {
         return Align(
-          alignment: isRTL ? Alignment.centerLeft : Alignment.centerRight,
+          alignment: isRTL ? Alignment.centerRight : Alignment.centerLeft,
           child: Material(
             color: Colors.white,
             elevation: 5,
@@ -79,7 +79,7 @@ class SideSheet {
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
           position: Tween<Offset>(
-            begin: isRTL ? const Offset(-1, 0) : const Offset(1, 0),
+            begin: isRTL ? const Offset(1, 0) : const Offset(-1, 0),
             end: Offset.zero,
           ).animate(animation),
           child: child,
