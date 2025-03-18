@@ -59,6 +59,12 @@ class AppRouter {
           settings: RouteSettings(arguments: args),
         );
 
+      case Routes.routePropertyDetails:
+        return MaterialPageRoute(
+          builder: (_) => const PropertyDetailsScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

@@ -24,18 +24,20 @@ class SideSheet {
           child: Material(
             color: Colors.white,
             elevation: 5,
-            child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 50.h,
+              ),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * widthFactor,
                 height: MediaQuery.of(context).size.height,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    top: 100.h,
+                    top: 20.h,
                     left: 20.w,
                     right: 20.w,
                   ),
                   child: Column(
-                    spacing: 30.h,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
@@ -50,22 +52,22 @@ class SideSheet {
                                     ),
                           ),
                           if (withCloseButton)
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 20.h),
-                              child: Align(
-                                alignment: AlignmentDirectional.topEnd,
-                                child: GestureDetector(
-                                  onTap: onClosingSheet ??
-                                      () {
-                                        Navigator.pop(context);
-                                      },
-                                  child: SvgPicture.asset(iconAix),
-                                ),
-                              ),
+                            GestureDetector(
+                              onTap: onClosingSheet ??
+                                  () => Navigator.pop(context),
+                              child: SvgPicture.asset(iconAix),
                             ),
                         ],
                       ),
-                      child,
+                      SizedBox(height: 30.h),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.89,
+                            child: child,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

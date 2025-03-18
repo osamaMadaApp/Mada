@@ -7,6 +7,7 @@ export 'package:image_cropper/image_cropper.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:nested/nested.dart';
 export 'package:provider/provider.dart';
+export 'package:qr_flutter/qr_flutter.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:webview_flutter/webview_flutter.dart';
 

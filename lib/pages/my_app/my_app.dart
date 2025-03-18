@@ -2,7 +2,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -32,6 +31,19 @@ class MyApp extends StatelessWidget {
               ],
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
+                sliderTheme: const SliderThemeData(
+                  activeTrackColor: Color(AppColors.green),
+                  inactiveTrackColor: Color(AppColors.gray2),
+                  thumbColor: Color(AppColors.black),
+                  overlayColor: Color(AppColors.transparent),
+                  trackHeight: 2.0,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 25.0),
+                  valueIndicatorColor: Color(AppColors.green3),
+                  rangeValueIndicatorShape:
+                      PaddleRangeSliderValueIndicatorShape(),
+                  overlappingShapeStrokeColor: Color(AppColors.black),
+                ),
                 textTheme: const TextTheme(
                   headlineMedium: TextStyle(
                     fontSize: 18.0,

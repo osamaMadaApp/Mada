@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class ProjectUnitCard extends StatelessWidget {
   const ProjectUnitCard({
