@@ -723,6 +723,103 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Bathrooms',
       'ar': 'الحمامات',
     },
+    'location': {'en': 'Location', 'ar': 'الموقع'},
+    'property_specification': {
+      'en': 'Property Specification',
+      'ar': 'مواصفات العقار'
+    },
+    'contact_us_for_more_details': {
+      'en': 'Contact us for more details',
+      'ar': 'اتصل بنا للحصول على مزيد من التفاصيل',
+    },
+    'book_now': {
+      'en': 'Book Now',
+      'ar': 'احجز الآن',
+    },
+    'report_this_unit': {
+      'en': 'Report this unit',
+      'ar': 'الإبلاغ عن هذه الوحدة',
+    },
+    'report_this_property': {
+      'en': 'Report this property',
+      'ar': 'الإبلاغ عن هذه الوحدة',
+    },
+    'report_reason': {
+      'en': 'Report Reason',
+      'ar': 'سبب الإبلاغ',
+    },
+    'select_the_reason': {
+      'en': 'Select the Reason',
+      'ar': 'اختر السبب',
+    },
+    'user_type': {
+      'en': 'User Type',
+      'ar': 'نوع المستخدم',
+    },
+    'select_the_type': {
+      'en': 'Select the Type',
+      'ar': 'اختر النوع',
+    },
+    'other_comments': {
+      'en': 'Other Comments',
+      'ar': 'تعليقات أخرى',
+    },
+    'add_your_additional_comments': {
+      'en': 'Add your additional comments',
+      'ar': 'أضف تعليقاتك الإضافية'
+    },
+    'send_report': {
+      'en': 'Send Report',
+      'ar': 'إرسال التقرير',
+    },
+    'property_info': {
+      'en': 'Property Info',
+      'ar': 'معلومات العقار',
+    },
+    'project_info': {
+      'en': 'Project Info',
+      'ar': 'معلومات المشروع',
+    },
+    'services': {
+      'en': 'Services',
+      'ar': 'الخدمات',
+    },
+    'show_all_services': {
+      'en': 'Show All Services',
+      ',ar': 'عرض جميع الخدمات',
+    },
+    'video_and_brochure': {
+      'en': 'Video and Brochure',
+      'ar': 'الفيديو والكتيب',
+    },
+    'video': {
+      'en': 'Video',
+      'ar': 'فيديو',
+    },
+    'brochure': {
+      'en': 'Brochure',
+      'ar': 'كتيب',
+    },
+    'view_brochure': {
+      'en': 'View Brochure',
+      'ar': 'عرض الكتيب',
+    },
+    'view_property_on_map': {
+      'en': 'View Property on Map',
+      'ar': 'عرض العقار على الخريطة',
+    },
+    'location_nearby_places': {
+      'en': 'Location & Nearby Places',
+      'ar': 'الموقع والأماكن القريبة',
+    },
+    'view_project_on_map': {
+      'en': 'View Project on Map',
+      'ar': 'عرض المشروع على الخريطة',
+    },
+    'nearby_places': {
+      'en': 'Nearby Places',
+      'ar': 'الأماكن القريبة',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

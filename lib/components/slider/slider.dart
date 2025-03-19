@@ -3,6 +3,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../app_state.dart';
 import '../../general_exports.dart';
 
 class SliderComponent extends StatefulWidget {
@@ -245,13 +246,14 @@ class _SliderComponentState extends State<SliderComponent> {
               ),
             if (widget.show360)
               Positioned(
-                bottom: 0.07.h,
-                right: 0.35.h,
-                left: 0.35.h,
+                top: 20.h,
+                left: FFAppState().getSelectedLanguge() == 'en' ? 10.w : null,
+                right: FFAppState().getSelectedLanguge() == 'ar' ? 10.w : null,
                 child: GestureDetector(
                   onTap: widget.onThreeSixtyPressed,
                   child: Container(
                     height: 45.h,
+                    padding: EdgeInsets.all(10.h),
                     decoration: BoxDecoration(
                       color: FlutterMadaTheme.of(context).colorFFFFFF,
                       borderRadius: BorderRadius.circular(25),
@@ -264,13 +266,12 @@ class _SliderComponentState extends State<SliderComponent> {
                             bottom: 4.h,
                           ),
                           child: SizedBox(
-                            height: 0.03.h,
-                            width: 0.07.h,
+                            height: 30.h,
                             child: Image.asset(imageThreeSixty),
                           ),
                         ),
                         SizedBox(
-                          width: 0.02.h,
+                          width: 5.w,
                         ),
                         Text(
                           FFLocalizations.of(context).getText('360_view'),

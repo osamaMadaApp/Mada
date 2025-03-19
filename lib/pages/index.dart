@@ -13,4 +13,5 @@ export 'property_details/index.dart';
 export 'search_screen/index.dart';
 export 'splash_page/index.dart';
 export 'terms_and_conditions/index.dart';
+export 'video_screen/index.dart';
 export 'view_profile/index.dart';

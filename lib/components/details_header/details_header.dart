@@ -43,12 +43,17 @@ class DetailsHeader extends StatelessWidget {
                 },
               ),
             ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+            SizedBox(
+              width: DEVICE_WIDTH * 0.6,
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),

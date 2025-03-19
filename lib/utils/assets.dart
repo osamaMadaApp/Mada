@@ -58,6 +58,7 @@ const String iconRightRoundedArrow = '${iconsPath}right_rounded_arrow.svg';
 const String iconFollowing = '${iconsPath}following.svg';
 const String iconPaymentOption = '${iconsPath}payment_option_icon.svg';
 const String iconPrimaryArrow = '${iconsPath}primary_arrow.svg';
+const String iconBrouchure = '${iconsPath}brouchure_icon.svg';
 const String madaLogo = '${iconsPath}mada_logo.svg';
 const String iconSelectListArrow = '${iconsPath}select_list_arrow.svg';
 const String iconSort = '${iconsPath}sort.svg';

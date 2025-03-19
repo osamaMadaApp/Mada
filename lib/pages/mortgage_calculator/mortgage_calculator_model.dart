@@ -108,6 +108,9 @@ class MortgageCalculatorModel extends ChangeNotifier {
       method: ApiMethods.post,
       defaultHeadersValue: false,
       className: 'MortgageCalculatorController/viewUpfrontCosts',
+      header: {
+        keyLanguage: FFAppState().getSelectedLanguge(),
+      },
       body: {
         'propertyPrice': totalPrice,
         'loanTerm': loanValue,

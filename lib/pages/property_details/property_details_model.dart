@@ -27,6 +27,16 @@ class PropertyDetailsModel extends ChangeNotifier {
         if (data[keySuccess] == true) {
           this.data = data[keyResults];
           adBanner = data[keyResults][keyAdBanner];
+          // this.data[keyVideo].add(
+          //       'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+          //     );
+          this.data[keyUrl360] =
+              'https://kuula.co/share/7vQzR?fs=1&vr=1&thumbs=1&inst=0';
+          // this.data[keyAppBrochure] =
+          //     'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+          this.data[keyVideoImage] =
+              'https://img.freepik.com/free-photo/hand-presenting-model-house-home-loan-campaign_53876-104970.jpg?semt=ais_hybrid';
+
           isLoading = false;
           action?.call();
           dismissLoading();
@@ -35,20 +45,6 @@ class PropertyDetailsModel extends ChangeNotifier {
         notifyListeners();
       },
     );
-  }
-
-  void onShowAllServicesTap() {
-    // Get.bottomSheet(
-    //   BottomSheetContainer(
-    //     title: 'all_services'.tr,
-    //     child: AllServices(
-    //       services: data[keyAmenities] ?? [],
-    //       projectName: data[keyTitle] ?? '',
-    //     ),
-    //   ),
-    //   enableDrag: true,
-    //   isScrollControlled: true,
-    // );
   }
 
   void onVideoTapped() {
@@ -137,36 +133,17 @@ class PropertyDetailsModel extends ChangeNotifier {
     // );
   }
 
-  void reportProperty() {
-    // if (myAppController.userData == null) {
-    //   myAppController.openSignInSheet();
-    //   return;
-    // }
-
-    // Get.bottomSheet(
-    //   BottomSheetContainer(
-    //     title: 'report_this_property'.tr,
-    //     child: ReportPropertySheet(
-    //       onSendReport: (reasonId, userType, otherDetails) {
-    //         onSendReport(reasonId, userType, otherDetails);
-    //       },
-    //     ),
-    //   ),
-    //   isScrollControlled: true,
-    // );
-  }
-
   void onSendReport(
     String reasonId,
     String userType,
     String otherDetails,
-    BuildContext context,
+    Function()? onSuccess,
   ) {
     startLoading();
     ApiRequest(
       path: apiReportProperty,
       method: ApiMethods.post,
-      className: 'PropertyDetailsController/onSendReport',
+      className: 'PropertyDetailsModel/onSendReport',
       defaultHeadersValue: false,
       body: {
         keyPropertyId: data[keyID],
@@ -178,7 +155,7 @@ class PropertyDetailsModel extends ChangeNotifier {
       onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
         dismissLoading();
         if (response[keySuccess] == true) {
-          Navigator.pop(context);
+          onSuccess!();
         }
         showToast(response[keyMsg]);
       },
