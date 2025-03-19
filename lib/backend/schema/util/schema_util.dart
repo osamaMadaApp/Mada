@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-// import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client_information/client_information.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -796,3 +797,25 @@ Widget totalView(
     ),
   );
 }
+
+extension SvgPictureRtl on SvgPicture {
+  static Widget asset(
+      String assetName, {
+        double? width,
+        double? height,
+        BoxFit fit = BoxFit.contain,
+      }) {
+    return RotatedBox(
+      quarterTurns: FFAppState().selectedLangugeAppState == 1 ? 0 : 2, // Rotate 180 degrees for RTL
+      child: SvgPicture.asset(
+        assetName,
+        width: width,
+        height: height,
+        fit: fit,
+      ),
+    );
+  }
+}
+
+
+
