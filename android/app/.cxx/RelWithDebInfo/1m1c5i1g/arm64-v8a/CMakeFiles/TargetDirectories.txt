@@ -1,0 +1,2 @@
+/Users/madaproperties/Documents/MadaTablet/android/app/.cxx/RelWithDebInfo/1m1c5i1g/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/madaproperties/Documents/MadaTablet/android/app/.cxx/RelWithDebInfo/1m1c5i1g/arm64-v8a/CMakeFiles/rebuild_cache.dir

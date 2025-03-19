@@ -23,7 +23,7 @@ bool get isWeb => kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  GoRouter.optionURLReflectsImperativeAPIs = true;
+  // GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
   final appProvider = AppProvider.instance;

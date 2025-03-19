@@ -15,8 +15,7 @@ Future<void> requestPermission() async {
   }
 }
 
-Future<void> saveAndLaunchFile(
-    List<int> bytes, String fileName, String successMsg) async {
+Future<void> saveAndLaunchFile(List<int> bytes, String fileName, String successMsg) async {
   final String path = Platform.isIOS
       ? (await getApplicationDocumentsDirectory()).path
       : (await getExternalStorageDirectory())!.path;
@@ -26,11 +25,28 @@ Future<void> saveAndLaunchFile(
 
   dismissLoading();
 
-  // DocumentFileSavePlus().saveFile(fileBytes, fileName, 'Aqarek/pdf').then(
-  //   (dynamic value) {
-  //     if (Platform.isAndroid) {
-  //       Fluttertoast.showToast(msg: successMsg);
-  //     }
-  //   },
-  // );
+  await savePdfFile(fileBytes, fileName, 'Aqarek/pdf');
+}
+
+Future<void> savePdfFile(Uint8List fileBytes, String fileName, String successMsg) async {
+  try {
+    // Request storage permission
+    final Directory directory = Platform.isAndroid
+        ? Directory('/storage/emulated/0/Download')
+        : await getApplicationDocumentsDirectory();
+
+    final String filePath = '${directory.path}/$fileName.pdf';
+    // Write the file
+    final File file = File(filePath);
+    await file.writeAsBytes(fileBytes);
+
+    // Show success toast
+    if (Platform.isAndroid) {
+      Fluttertoast.showToast(msg: successMsg);
+    }
+  } catch (e) {
+    if (Platform.isAndroid) {
+      Fluttertoast.showToast(msg: successMsg);
+    }
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import '../../general_exports.dart';
 
 class BottomSheetContainer extends StatelessWidget {
@@ -74,7 +73,7 @@ class BottomSheetContainer extends StatelessWidget {
                         alignment: AlignmentDirectional.topEnd,
                         child: GestureDetector(
                           onTap: onClosingTheSheet ?? (){
-                            context.pop();
+                            // context.pop();
                           },
                           child: SvgPicture.asset(iconAix),
                         ),

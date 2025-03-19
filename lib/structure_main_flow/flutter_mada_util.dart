@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
-import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 // import 'package:url_launcher/url_launcher.dart';
@@ -364,26 +363,7 @@ T? castToType<T>(dynamic value) {
   return value as T;
 }
 
-dynamic getJsonField(
-  dynamic response,
-  String jsonPath, [
-  bool isForList = false,
-]) {
-  final field = JsonPath(jsonPath).read(response);
-  if (field.isEmpty) {
-    return null;
-  }
-  if (field.length > 1) {
-    return field.map((f) => f.value).toList();
-  }
-  final value = field.first.value;
-  if (isForList) {
-    return value is! Iterable
-        ? [value]
-        : (value is List ? value : value.toList());
-  }
-  return value;
-}
+
 
 Rect? getWidgetBoundingBox(BuildContext context) {
   try {
