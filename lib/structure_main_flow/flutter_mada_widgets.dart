@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FFButtonOptions {
   const FFButtonOptions({
@@ -186,12 +185,12 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
     );
 
     if ((widget.icon != null || widget.iconData != null) && !loading) {
-      final Widget icon = widget.icon ??
-          FaIcon(
-            widget.iconData!,
-            size: widget.options.iconSize,
-            color: widget.options.iconColor,
-          );
+      // final Widget icon = widget.icon
+          // FaIcon(
+          //   widget.iconData!,
+          //   size: widget.options.iconSize,
+          //   color: widget.options.iconColor,
+          // );
 
       if (text == null) {
         return Container(
@@ -208,7 +207,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
             splashRadius: 1.0,
             icon: Padding(
               padding: widget.options.iconPadding ?? EdgeInsets.zero,
-              child: icon,
+              child: null,
             ),
             onPressed: onPressed,
             style: style,
@@ -221,7 +220,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
         child: ElevatedButton.icon(
           icon: Padding(
             padding: widget.options.iconPadding ?? EdgeInsets.zero,
-            child: icon,
+            child: null,
           ),
           label: textWidget,
           onPressed: onPressed,

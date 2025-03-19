@@ -1,3 +1,4 @@
+import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
 
 class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -29,7 +30,7 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
       elevation: 0.0,
       leading: IconButton(
-        icon: SvgPicture.asset(
+        icon: SvgPictureRtl.asset(
           iconBack,
         ),
         onPressed: () {

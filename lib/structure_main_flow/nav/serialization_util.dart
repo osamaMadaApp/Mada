@@ -48,8 +48,8 @@ String? serializeParam(
       case ParamType.DateTimeRange:
         data = dateTimeRangeToString(param as DateTimeRange);
 
-      case ParamType.Color:
-        data = (param as Color).toCssString();
+      // case ParamType.Color:
+      //   data = (param as Color).toCssString();
 
       case ParamType.FFUploadedFile:
         data = uploadedFileToString(param as FFUploadedFile);
@@ -148,8 +148,8 @@ dynamic deserializeParam<T>(
       case ParamType.DateTimeRange:
         return dateTimeRangeFromString(param);
 
-      case ParamType.Color:
-        return fromCssColor(param);
+      // case ParamType.Color:
+      //   return fromCssColor(param);
 
       case ParamType.FFUploadedFile:
         return uploadedFileFromString(param);
