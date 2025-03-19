@@ -1,85 +1,7 @@
-// // import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-// // import 'package:firebase_analytics/firebase_analytics.dart';
-// // import 'package:package_info_plus/package_info_plus.dart';
-
-// import 'dart:io';
-
-// import 'package:client_information/client_information.dart';
-// import 'package:package_info_plus/package_info_plus.dart';
-
-// import '../general_exports.dart';
-
-// Map<String, dynamic> getDefaultQueryParams() {
-//   final MyAppController myAppController = Get.find<MyAppController>();
-//   Map<String, dynamic> data = <String, dynamic>{};
-//   data = <String, dynamic>{
-//     keyLangId: Get.find<MyAppController>().appLocale,
-//     'sharedKey':
-//         sharedKey, // If you uncomment this line, you will not get any response, don't know why
-//     keyPlatform: Platform.isAndroid ? platformAndroid : platformIOS,
-//     keyAppVersion: myAppController.buildNumber,
-//   };
-//   return data;
-// }
-
-// String getKeyBasedOnLanguage(String key) {
-//   if (isRTL) {
-//     return '${key}Ar';
-//   } else {
-//     return key;
-//   }
-// }
-
-/// Formatted range labels above the range slider, it shows the suffix word above the value
-// RangeLabels formattedRangeLabels(
-//   RangeValues values, {
-//   String suffix = 'm²',
-//   bool price = false,
-// }) {
-//   if (!price) {
-//     return RangeLabels(
-//       '${values.start.round().toString()} ${suffix.tr}',
-//       '${values.end.round().toString()} ${suffix.tr}',
-//     );
-//   } else {
-//     return RangeLabels(
-//       '${getFormattedPrice(values.start.round().toDouble())} ${suffix.tr}',
-//       '${getFormattedPrice(values.end.round().toDouble())} ${suffix.tr}',
-//     );
-//   }
-// }
-
-// Future<Map<String, dynamic>> getDeviceQueryParams() async {
-//   final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-//   final ClientInformation deviceInfo = await ClientInformation.fetch();
-//   Map<String, dynamic> data = <String, dynamic>{};
-//   data = <String, dynamic>{
-//     keyDeviceModel: deviceInfo.osName,
-//     keyDeviceName: deviceInfo.deviceName,
-//     keyDeviceId: deviceInfo.deviceId,
-//     keyOsVersion: deviceInfo.osVersion,
-//     keyReleaseNo: packageInfo.buildNumber,
-//   };
-//   return data;
-// }
-
-// void openWebview(
-//   String key, {
-//   String code = 'not_pdf',
-//   String title = '',
-// }) {
-//   //final MyAppController myAppController = Get.find<MyAppController>();
-
-//   Get.toNamed(
-//     routeWebviewScreen,
-//     arguments: <String, dynamic>{
-//       keyUrl: code == 'pdf' ? key : Uri.parse(key),
-//       keyCode: code,
-//       keyTitle: title,
-//     },
-//   );
-// }
+import '../app_state.dart';
 
 const List<String> allCountries = <String>[
   'AF',
@@ -330,23 +252,6 @@ const List<String> allCountries = <String>[
   'CW',
 ];
 
-// String getCurrency() {
-//   final MyAppController myAppController = Get.find<MyAppController>();
-//   return myAppController.masterData[keyCurrency];
-// }
-
-// String getUnitOfMeasure() {
-//   final MyAppController myAppController = Get.find<MyAppController>();
-//   if (myAppController.appCountry == 'SA') {
-//     return 'sqm'.tr;
-//   } else {
-//     return 'sqft'.tr;
-//   }
-// }
-
-// String getFormattedPrice(double price) {
-//   return NumberFormat('#,##0').format(price);
-// }
 
 bool areMapsEqual(Map? map1, Map? map2) {
   if (map1 == null || map2 == null) return false;
@@ -356,3 +261,4 @@ bool areMapsEqual(Map? map1, Map? map2) {
   }
   return true;
 }
+

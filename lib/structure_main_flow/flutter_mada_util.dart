@@ -4,10 +4,8 @@ import 'dart:math' show pow, pi, sin;
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
-import 'package:from_css_color/from_css_color.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
-import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 // import 'package:url_launcher/url_launcher.dart';
@@ -236,12 +234,6 @@ Future launchURL(String url) async {
   }
 }
 
-Color colorFromCssString(String color, {Color? defaultColor}) {
-  try {
-    return fromCssColor(color);
-  } catch (_) {}
-  return defaultColor ?? Colors.black;
-}
 
 enum FormatType {
   decimal,
@@ -371,26 +363,7 @@ T? castToType<T>(dynamic value) {
   return value as T;
 }
 
-dynamic getJsonField(
-  dynamic response,
-  String jsonPath, [
-  bool isForList = false,
-]) {
-  final field = JsonPath(jsonPath).read(response);
-  if (field.isEmpty) {
-    return null;
-  }
-  if (field.length > 1) {
-    return field.map((f) => f.value).toList();
-  }
-  final value = field.first.value;
-  if (isForList) {
-    return value is! Iterable
-        ? [value]
-        : (value is List ? value : value.toList());
-  }
-  return value;
-}
+
 
 Rect? getWidgetBoundingBox(BuildContext context) {
   try {

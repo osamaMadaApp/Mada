@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_getters_setters
 
 
+import '../../../structure_main_flow/nav/serialization_util.dart';
 import 'index.dart';
 import '/structure_main_flow/flutter_mada_util.dart';
 
