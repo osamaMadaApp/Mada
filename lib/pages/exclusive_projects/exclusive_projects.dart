@@ -158,7 +158,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget{
                                       fontFamily: AppFonts.outfit),
                                 ),
                                 Text(
-                                  '${FFLocalizations.of(context).getText('result')} ${_model.menu.length} ${FFLocalizations.of(context).getText('project')}',
+                                  '${FFLocalizations.of(context).getText('result')} ${_model.lastProjects.length} ${FFLocalizations.of(context).getText('project')}',
                                   style: TextStyle(
                                       color: FlutterMadaTheme.of(context)
                                           .color000000,

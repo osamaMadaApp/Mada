@@ -35,8 +35,6 @@ PODS:
   - DKPhotoGallery/Resource (0.0.19):
     - SDWebImage
     - SwiftyGif
-  - document_file_save_plus (0.0.1):
-    - Flutter
   - file_picker (0.0.1):
     - DKImagePickerController/PhotoGallery
     - Flutter
@@ -190,7 +188,6 @@ PODS:
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - client_information (from `.symlinks/plugins/client_information/ios`)
-  - document_file_save_plus (from `.symlinks/plugins/document_file_save_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
@@ -250,8 +247,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audio_session/ios"
   client_information:
     :path: ".symlinks/plugins/client_information/ios"
-  document_file_save_plus:
-    :path: ".symlinks/plugins/document_file_save_plus/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   firebase_core:
@@ -316,7 +311,6 @@ SPEC CHECKSUMS:
   client_information: dc34b4d464e909eec01badb96a8b6b005e654cb5
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
-  document_file_save_plus: 47b52a647efb29f7d431af45a856ce1a841f32fc
   file_picker: a0560bc09d61de87f12d246fc47d2119e6ef37be
   Firebase: a64bf6a8546e6eab54f1c715cd6151f39d2329f4
   firebase_core: 3d36094af9b47c46bfb965943413a39eebaca4db
