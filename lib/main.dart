@@ -55,9 +55,6 @@ void main() async {
         ChangeNotifierProvider(
           create: (BuildContext context) => ForgetPasswordComponentModel(),
         ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => SearchScreenModel(),
-        ),
       ],
       child: const MyApp(),
     ),
