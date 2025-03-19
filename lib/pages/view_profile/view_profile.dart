@@ -631,99 +631,92 @@ class DeleteAccountSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.85,
-      child: Column(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: FlutterMadaTheme.of(context).colorFF0000.withValues(
-                          alpha: 0.03,
-                        ),
+    return Column(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                        alpha: 0.03,
+                      ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 30.h,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 30.h,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SvgPicture.asset(iconDeleteAccountWarning),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Text(
-                          FFLocalizations.of(context)
-                              .getText('delete_account_desc'),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                                color: FlutterMadaTheme.of(context).color000000,
-                                fontWeight: FontWeight.w400,
-                              ),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Text(
-                          FFLocalizations.of(context).getText('delete_desc'),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: FlutterMadaTheme.of(context)
-                                        .colorFF0000
-                                        .withValues(
-                                          alpha: 0.7,
-                                        ),
-                                    fontWeight: FontWeight.w500,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SvgPicture.asset(iconDeleteAccountWarning),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        FFLocalizations.of(context)
+                            .getText('delete_account_desc'),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: FlutterMadaTheme.of(context).color000000,
+                              fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        FFLocalizations.of(context).getText('delete_desc'),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: FlutterMadaTheme.of(context)
+                                  .colorFF0000
+                                  .withValues(
+                                    alpha: 0.7,
                                   ),
-                        )
-                      ],
-                    ),
+                              fontWeight: FontWeight.w500,
+                            ),
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: CustomButton(
-              text: FFLocalizations.of(context).getText('confirm_delete'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    FlutterMadaTheme.of(context).colorFF0000.withValues(
-                          alpha: 0.15,
-                        ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 5.h,
-                  horizontal: 10.w,
-                ),
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r),
                 ),
               ),
-              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: FlutterMadaTheme.of(context).colorFF0000.withValues(
-                          alpha: 1,
-                        ),
-                    fontWeight: FontWeight.w600,
-                  ),
-              onPressed: onDeleteAccount,
-            ),
+              SizedBox(
+                height: 10.h,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: CustomButton(
+            text: FFLocalizations.of(context).getText('confirm_delete'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  FlutterMadaTheme.of(context).colorFF0000.withValues(
+                        alpha: 0.15,
+                      ),
+              padding: EdgeInsets.symmetric(
+                vertical: 5.h,
+                horizontal: 10.w,
+              ),
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+            ),
+            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                        alpha: 1,
+                      ),
+                  fontWeight: FontWeight.w600,
+                ),
+            onPressed: onDeleteAccount,
+          ),
+        ),
+      ],
     );
   }
 }

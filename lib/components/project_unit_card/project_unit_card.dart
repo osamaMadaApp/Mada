@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class ProjectUnitCard extends StatelessWidget {
   const ProjectUnitCard({
@@ -18,6 +17,7 @@ class ProjectUnitCard extends StatelessWidget {
     this.maxLines = 2,
     this.whatsAppMsg,
     this.borderColor,
+    this.verticalPadding,
   });
 
   final dynamic item;
@@ -34,6 +34,7 @@ class ProjectUnitCard extends StatelessWidget {
   final int maxLines;
   final String? whatsAppMsg;
   final Color? borderColor;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class ProjectUnitCard extends StatelessWidget {
             borderColor: borderColor ?? Colors.transparent,
             child: Container(
               padding: EdgeInsets.symmetric(
-                vertical: 8.h,
+                vertical: verticalPadding ?? 8.h,
                 horizontal: 8.w,
               ),
               decoration: BoxDecoration(

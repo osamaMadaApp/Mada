@@ -259,9 +259,7 @@ String getFormattedPrice(double price) {
 }
 
 String getCurrency() {
-  return 'SAR';
-  // final MyAppController myAppController = Get.find<MyAppController>();
-  // return myAppController.masterData[keyCurrency];
+  return FFAppState().masterDateJsonModel[keyCurrency] ?? 'SAR';
 }
 
 String getUnitOfMeasure(BuildContext context) {

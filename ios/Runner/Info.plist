@@ -104,6 +104,7 @@
 	
 	<key>com.apple.developer.siri</key>
 	<true/>
+	
 </dict>
 </dict>
 </plist>
