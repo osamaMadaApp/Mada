@@ -35,28 +35,26 @@ class Services extends StatelessWidget {
               SizedBox(
                 height: DEVICE_HEIGHT * 0.02,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    height: DEVICE_HEIGHT * 0.1,
-                    width: DEVICE_WIDTH * 0.55,
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: services.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: ServiceCard(
-                            icon: services[index][keyIcon],
-                            name: services[index][keyName] ?? '',
-                          ),
-                        );
-                      },
-                    ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                  height: DEVICE_HEIGHT * 0.1,
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: services.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: ServiceCard(
+                          icon: services[index][keyIcon],
+                          name: services[index][keyName] ?? '',
+                        ),
+                      );
+                    },
                   ),
-                ],
+                ),
               ),
             ],
           ),

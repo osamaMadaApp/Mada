@@ -124,6 +124,7 @@ class _FavoritesState extends State<Favorites> {
                                       showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
+                                      verticalPadding: 0,
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
                                           controller.units[index][keyID],
@@ -167,6 +168,7 @@ class _FavoritesState extends State<Favorites> {
                                       showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
+                                      verticalPadding: 0,
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
                                           controller.units[index][keyID],

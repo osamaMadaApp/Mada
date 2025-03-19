@@ -621,13 +621,6 @@ class SearchScreenModel extends ChangeNotifier {
     return body;
   }
 
-  void onPropertyPressed(dynamic id) {
-    // Get.toNamed(
-    //   routePropertyDetails,
-    //   arguments: id,
-    // );
-  }
-
   Future<void> onRefresh() async {
     reset();
     getPropertiesList();

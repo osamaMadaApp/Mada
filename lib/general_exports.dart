@@ -9,6 +9,7 @@ export 'package:nested/nested.dart';
 export 'package:provider/provider.dart';
 export 'package:qr_flutter/qr_flutter.dart';
 export 'package:share_plus/share_plus.dart';
+export 'package:video_cached_player/video_cached_player.dart';
 export 'package:webview_flutter/webview_flutter.dart';
 
 export 'api/index.dart';

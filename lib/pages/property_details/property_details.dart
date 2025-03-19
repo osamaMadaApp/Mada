@@ -59,9 +59,12 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                     child: Column(
                       children: <Widget>[
                         DetailsHeader(
-                          onDownloadPdfPressed: () {},
-                          onSharePressed: () {},
-                          title: model.data[keyTitle] ?? '',
+                          onDownloadPdfPressed: () {
+                            // will modify this later when change base url
+                          },
+                          onSharePressed: () {
+                            Share.share(model.data[keyDeepLink]);
+                          },
                           showFollow: false,
                         ),
                         SizedBox(
@@ -126,7 +129,16 @@ class PropertyDetailsSection1 extends StatelessWidget {
                     sliderImages: model.data[keyPhotos] ?? [],
                     showFollow: false,
                     threeSixtyUrl: model.data[keyUrl360],
-                    onThreeSixtyPressed: model.threeSixtyUrlPressed,
+                    onThreeSixtyPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.routeWebViewScreen,
+                        arguments: {
+                          keyTitle: model.data[keyTitle] ?? '',
+                          keyUrl: model.data[keyUrl360] ?? '',
+                        },
+                      );
+                    },
                     showThreeSixty: model.data[keyUrl360] != null &&
                         model.data[keyUrl360].isNotEmpty,
                     shareText: model.data[keyDeepLink],
@@ -172,9 +184,30 @@ class PropertyDetailsSection1 extends StatelessWidget {
                     showBrochure: model.data[keyAppBrochure] != null,
                     showVideo: model.data[keyVideo] != null &&
                         model.data[keyVideo].isNotEmpty,
-                    onVideoTapped: model.onVideoTapped,
+                    onVideoTapped: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.routeVideoPlayer,
+                        arguments: {
+                          keyUrl: model.data[keyVideo][0],
+                        },
+                      );
+                    },
                     imageUrl: model.data[keyVideoImage] ?? testImage,
-                    onViewBrochure: model.onViewBrochure,
+                    onViewBrochure: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.routeWebViewScreen,
+                        arguments: {
+                          keyTitle: model.data[keyTitle] ?? '',
+                          keyUrl: model.data[keyAppBrochure] ?? '',
+                          keyProjectBrouchure: true,
+                          keySubtitle: FFLocalizations.of(context).getText(
+                            'property_brochure',
+                          ),
+                        },
+                      );
+                    },
                   ),
                   LocationAndNearbyPlaces(
                     nearbyLocations: model.data['nearestFacilityApp'] ?? [],
@@ -514,228 +547,3 @@ class PropertyDetailsSection2 extends StatelessWidget {
     );
   }
 }
-
-// class PropertyDescription extends StatelessWidget {
-//   const PropertyDescription({
-//     required this.description,
-//     super.key,
-//     this.onDescriptionPressed,
-//     this.title,
-//   });
-//   final String description;
-//   final Function()? onDescriptionPressed;
-//   final String? title;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Padding(
-//           padding: EdgeInsets.all(DEVICE_HEIGHT * 0.02),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               MadaText(
-//                 title ?? 'property_description'.tr,
-//                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-//                       fontWeight: FontWeight.w500,
-//                       color: const Color(
-//                         AppColors.black,
-//                       ),
-//                     ),
-//               ),
-//               GestureDetector(
-//                 onTap: onDescriptionPressed,
-//                 child: Container(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Html(
-//                         data: description,
-//                         style: {
-//                           'body': Style(
-//                             maxLines: 2,
-//                             textOverflow: TextOverflow.ellipsis,
-//                             padding: HtmlPaddings.zero,
-//                             fontSize: FontSize(14),
-//                             margin: Margins.zero,
-//                             fontWeight: FontWeight.w400,
-//                             fontStyle: FontStyle.normal,
-//                             fontFamily: getFontFamily(
-//                               Get.find<MyAppmodel>().appLocale == 'ar'
-//                                   ? 'ar'
-//                                   : 'en',
-//                             ),
-//                             color: const Color(AppColors.gray8),
-//                             height: Height(DEVICE_HEIGHT * 0.08),
-//                           ),
-//                         },
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.end,
-//                         children: [
-//                           Text(
-//                             'read_more'.tr,
-//                             style:
-//                                 Theme.of(context).textTheme.bodySmall!.copyWith(
-//                                       fontWeight: FontWeight.w600,
-//                                       color: const Color(AppColors.primary),
-//                                       decoration: TextDecoration.underline,
-//                                       decorationColor:
-//                                           const Color(AppColors.primary),
-//                                     ),
-//                           ),
-//                         ],
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//         GrayLine(),
-//       ],
-//     );
-//   }
-// }
-
-// class PropertyDescriptionSheet extends StatelessWidget {
-//   const PropertyDescriptionSheet({required this.description, super.key});
-//   final String description;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Html(data: description),
-//       ],
-//     );
-//   }
-// }
-
-// class RegaSheet extends StatelessWidget {
-//   const RegaSheet({
-//     required this.locations,
-//     required this.propertySpec,
-//     super.key,
-//     this.regaInfo,
-//   });
-
-//   final List<dynamic> locations;
-//   final List<dynamic> propertySpec;
-//   final dynamic regaInfo;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.stretch,
-//       children: [
-//         if (locations.isNotEmpty)
-//           MadaText(
-//             'location'.tr,
-//             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-//                   fontWeight: FontWeight.w600,
-//                   color: const Color(
-//                     AppColors.black,
-//                   ),
-//                 ),
-//           ),
-//         SizedBox(
-//           height: DEVICE_HEIGHT * 0.02,
-//         ),
-//         ListView.builder(
-//           itemCount: locations.length,
-//           shrinkWrap: true,
-//           padding: EdgeInsets.zero,
-//           physics: const NeverScrollableScrollPhysics(),
-//           itemBuilder: (BuildContext context, int index) {
-//             return TextWithValue(
-//               text: locations[index][keyLabel] ?? '',
-//               value: locations[index][keyValue].toString(),
-//               color: index % 2 == 1
-//                   ? const Color(AppColors.white)
-//                   : const Color(AppColors.primary).withOpacity(0.1),
-//             );
-//           },
-//         ),
-//         SizedBox(
-//           height: DEVICE_HEIGHT * 0.02,
-//         ),
-//         if (propertySpec.isNotEmpty)
-//           MadaText(
-//             'property_specification'.tr,
-//             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-//                   fontWeight: FontWeight.w600,
-//                   color: const Color(
-//                     AppColors.black,
-//                   ),
-//                 ),
-//           ),
-//         SizedBox(
-//           height: DEVICE_HEIGHT * 0.02,
-//         ),
-//         ListView.builder(
-//           itemCount: propertySpec.length,
-//           shrinkWrap: true,
-//           padding: EdgeInsets.zero,
-//           physics: const NeverScrollableScrollPhysics(),
-//           itemBuilder: (BuildContext context, int index) {
-//             return TextWithValue(
-//               text: propertySpec[index][keyLabel] ?? '',
-//               value: propertySpec[index][keyValue].toString(),
-//               color: index % 2 == 1
-//                   ? const Color(AppColors.white)
-//                   : const Color(AppColors.primary).withOpacity(0.1),
-//             );
-//           },
-//         ),
-//         // REGA QR CODE
-//         if (regaInfo[keyQrUrl] != null && regaInfo[keyQrUrl].isNotEmpty)
-//           Padding(
-//             padding: EdgeInsets.all(DEVICE_HEIGHT * 0.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.stretch,
-//               children: [
-//                 SizedBox(
-//                   height: DEVICE_HEIGHT * 0.015,
-//                 ),
-//                 MadaText(
-//                   'view_details_on_rega'.tr,
-//                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-//                         fontWeight: FontWeight.w600,
-//                         color: const Color(
-//                           AppColors.black,
-//                         ),
-//                       ),
-//                 ),
-//                 SizedBox(
-//                   height: DEVICE_HEIGHT * 0.015,
-//                 ),
-//                 SizedBox(
-//                   width: DEVICE_WIDTH,
-//                   child: Align(
-//                     alignment:
-//                         isRTL ? Alignment.centerRight : Alignment.centerLeft,
-//                     child: Padding(
-//                       padding: EdgeInsets.symmetric(
-//                         horizontal: DEVICE_HEIGHT * 0.005,
-//                       ),
-//                       child: QrImageView(
-//                         data: regaInfo[keyQrUrl] ?? '',
-//                         size: DEVICE_HEIGHT * 0.17,
-//                         gapless: false,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 SizedBox(
-//                   height: DEVICE_HEIGHT * 0.02,
-//                 ),
-//               ],
-//             ),
-//           ),
-//       ],
-//     );
-//   }
-// }

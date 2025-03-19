@@ -3,7 +3,6 @@ import '../../structure_main_flow/flutter_mada_util.dart';
 
 class DetailsHeader extends StatelessWidget {
   const DetailsHeader({
-    required this.title,
     this.onDownloadPdfPressed,
     this.onSharePressed,
     this.onFollowPressed,
@@ -14,7 +13,6 @@ class DetailsHeader extends StatelessWidget {
     super.key,
   });
 
-  final String title;
   final bool showShareIcon;
   final bool showDownloadPdfIcon;
   final bool showFollow;
@@ -33,28 +31,23 @@ class DetailsHeader extends StatelessWidget {
           children: [
             RotatedBox(
               quarterTurns: FFAppState().getSelectedLanguge() == 'ar' ? 2 : 0,
-              child: IconButton(
-                iconSize: 70.h,
-                icon: SvgPicture.asset(
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: SvgPicture.asset(
                   iconBack,
+                  height: 70.h,
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
               ),
             ),
-            SizedBox(
-              width: DEVICE_WIDTH * 0.6,
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+            // Text(
+            //   title,
+            //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       ),
+            //   maxLines: 1,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
           ],
         ),
         Row(

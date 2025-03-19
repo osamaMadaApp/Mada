@@ -27,15 +27,15 @@ class PropertyDetailsModel extends ChangeNotifier {
         if (data[keySuccess] == true) {
           this.data = data[keyResults];
           adBanner = data[keyResults][keyAdBanner];
-          // this.data[keyVideo].add(
-          //       'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
-          //     );
-          this.data[keyUrl360] =
-              'https://kuula.co/share/7vQzR?fs=1&vr=1&thumbs=1&inst=0';
+          // these comments are for testing purposes
+          // this.data[keyVideo][0] =
+          //     'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4';
+          // this.data[keyUrl360] =
+          //     'https://kuula.co/share/7vQzR?fs=1&vr=1&thumbs=1&inst=0';
           // this.data[keyAppBrochure] =
           //     'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-          this.data[keyVideoImage] =
-              'https://img.freepik.com/free-photo/hand-presenting-model-house-home-loan-campaign_53876-104970.jpg?semt=ais_hybrid';
+          // this.data[keyVideoImage] =
+          //     'https://img.freepik.com/free-photo/hand-presenting-model-house-home-loan-campaign_53876-104970.jpg?semt=ais_hybrid';
 
           isLoading = false;
           action?.call();
@@ -47,90 +47,11 @@ class PropertyDetailsModel extends ChangeNotifier {
     );
   }
 
-  void onVideoTapped() {
-    // Get.toNamed(
-    //   routeVideoPlayer,
-    //   arguments: <String, dynamic>{
-    //     keyVideoUrl: data[keyVideo][0],
-    //   },
-    // );
-  }
-
   Future<void> onViewPropertyMap() async {
-    // MapUtils.openMap(
-    //   data[keyLocation][keyCoordinates][0],
-    //   data[keyLocation][keyCoordinates][1],
-    // );
-  }
-
-  void onViewBrochure() {
-    // Get.toNamed(
-    //   routeWebViewScreen,
-    //   arguments: {
-    //     keyTitle: data[keyTitle] ?? '',
-    //     keyUrl: data[keyAppBrochure] ?? '',
-    //     keyProjectBrouchure: true,
-    //     keySubtitle: 'property_brochure'.tr,
-    //   },
-    // );
-  }
-
-  void onOwnProperty() {
-    // if (myAppController.userData == null) {
-    //   myAppController.openSignInSheet(
-    //     action: () {
-    //       getPropertyDetails(hideScreen: true, action: onOwnProperty);
-    //     },
-    //   );
-    //   return;
-    // }
-    // if (data[keyOpenContactPopup]) {
-    //   Get.bottomSheet(
-    //     BottomSheetContainer(
-    //       title: 'confirm_your_data'.tr,
-    //       child: ContactTeamSheet(
-    //         whatsappMsg:
-    //             '${data[keyTitle] ?? ''}\n${data[keyPropertyCategory] ?? ''}\n${data[keyPrice] ?? 0} ${getCurrency()}\n${data[keyCity] ?? ''} - ${data[keyCommunity] ?? ''} - ${data[keySubCommunity] ?? ''}',
-    //       ),
-    //     ),
-    //     isScrollControlled: true,
-    //   );
-    //   return;
-    // }
-    // if (myAppController.appCountry == 'SA' &&
-    //     myAppController.userData[keyIsNafathVerified] == 0) {
-    //   myAppController.openNafathVerificationSheet();
-    //   return;
-    // }
-    // Get.toNamed(
-    //   routePayment,
-    //   arguments: {
-    //     keyPropertyId: propertyId,
-    //   },
-    // );
-  }
-
-  void onDescriptionPressed() {
-    // Get.bottomSheet(
-    //   BottomSheetContainer(
-    //     title: 'property_description'.tr,
-    //     titlePadding: DEVICE_HEIGHT * 0.02,
-    //     child: PropertyDescriptionSheet(
-    //       description: data[keyDescription],
-    //     ),
-    //   ),
-    //   isScrollControlled: true,
-    // );
-  }
-
-  void threeSixtyUrlPressed() {
-    // Get.toNamed(
-    //   routeWebViewScreen,
-    //   arguments: {
-    //     keyTitle: data[keyTitle] ?? '',
-    //     keyUrl: data[keyUrl360] ?? ''
-    //   },
-    // );
+    MapUtils.openMap(
+      data[keyLocation][keyCoordinates][0],
+      data[keyLocation][keyCoordinates][1],
+    );
   }
 
   void onSendReport(
@@ -184,4 +105,52 @@ class PropertyDetailsModel extends ChangeNotifier {
   double calculateDownPaymentPercentage(double percentage) {
     return (percentage / 100) * data[keyPrice];
   }
+
+  void onOwnProperty() {
+    // if (myAppController.userData == null) {
+    //   myAppController.openSignInSheet(
+    //     action: () {
+    //       getPropertyDetails(hideScreen: true, action: onOwnProperty);
+    //     },
+    //   );
+    //   return;
+    // }
+    // if (data[keyOpenContactPopup]) {
+    //   Get.bottomSheet(
+    //     BottomSheetContainer(
+    //       title: 'confirm_your_data'.tr,
+    //       child: ContactTeamSheet(
+    //         whatsappMsg:
+    //             '${data[keyTitle] ?? ''}\n${data[keyPropertyCategory] ?? ''}\n${data[keyPrice] ?? 0} ${getCurrency()}\n${data[keyCity] ?? ''} - ${data[keyCommunity] ?? ''} - ${data[keySubCommunity] ?? ''}',
+    //       ),
+    //     ),
+    //     isScrollControlled: true,
+    //   );
+    //   return;
+    // }
+    // if (myAppController.appCountry == 'SA' &&
+    //     myAppController.userData[keyIsNafathVerified] == 0) {
+    //   myAppController.openNafathVerificationSheet();
+    //   return;
+    // }
+    // Get.toNamed(
+    //   routePayment,
+    //   arguments: {
+    //     keyPropertyId: propertyId,
+    //   },
+    // );
+  }
+
+  // void onDescriptionPressed() {
+  //   // Get.bottomSheet(
+  //   //   BottomSheetContainer(
+  //   //     title: 'property_description'.tr,
+  //   //     titlePadding: DEVICE_HEIGHT * 0.02,
+  //   //     child: PropertyDescriptionSheet(
+  //   //       description: data[keyDescription],
+  //   //     ),
+  //   //   ),
+  //   //   isScrollControlled: true,
+  //   // );
+  // }
 }

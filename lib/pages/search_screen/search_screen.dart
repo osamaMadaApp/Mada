@@ -269,8 +269,14 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                       );
                                                     },
                                                     onTap: () {
-                                                      _model.onPropertyPressed(
-                                                        property[keyID],
+                                                      Navigator.pushNamed(
+                                                        context,
+                                                        Routes
+                                                            .routePropertyDetails,
+                                                        arguments: {
+                                                          keyPropertyId:
+                                                              property[keyID],
+                                                        },
                                                       );
                                                     },
                                                   );

@@ -65,6 +65,18 @@ class AppRouter {
           settings: RouteSettings(arguments: args),
         );
 
+      case Routes.routeVideoPlayer:
+        return MaterialPageRoute(
+          builder: (_) => const VideoScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
+      case Routes.routeWebViewScreen:
+        return MaterialPageRoute(
+          builder: (_) => const WebViewScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

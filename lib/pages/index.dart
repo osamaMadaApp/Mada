@@ -15,3 +15,4 @@ export 'splash_page/index.dart';
 export 'terms_and_conditions/index.dart';
 export 'video_screen/index.dart';
 export 'view_profile/index.dart';
+export 'web_view_screen/index.dart';

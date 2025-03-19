@@ -30,6 +30,7 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: FlutterMadaTheme.of(context).colorFFFFFF,
       elevation: 0.0,
       leading: IconButton(
+        iconSize: 70.h,
         icon: SvgPictureRtl.asset(
           iconBack,
         ),
@@ -56,5 +57,5 @@ class MadaHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(72.h);
+  Size get preferredSize => Size.fromHeight(100.h);
 }

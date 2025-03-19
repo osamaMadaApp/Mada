@@ -119,31 +119,38 @@ class CalculatorProperty extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset(iconCalculator),
-                      SizedBox(
-                        width: DEVICE_WIDTH * 0.02,
-                      ),
-                      SizedBox(
-                        width: DEVICE_WIDTH * 0.22,
-                        child: MadaText(
-                          FFLocalizations.of(context).getText(
-                              'estimates_your_monthly_mortgage_payments'),
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(
-                                      AppColors.black,
-                                    ),
-                                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SvgPicture.asset(iconCalculator),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width: DEVICE_WIDTH * 0.02,
+                        ),
+                        Expanded(
+                          flex: 8,
+                          child: MadaText(
+                            FFLocalizations.of(context).getText(
+                                'estimates_your_monthly_mortgage_payments'),
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(
+                                        AppColors.black,
+                                      ),
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  RotatedBox(
-                    quarterTurns: isRTL ? 2 : 0,
-                    child: SvgPicture.asset(iconArrowGreen),
+                  Expanded(
+                    child: RotatedBox(
+                      quarterTurns: isRTL ? 2 : 0,
+                      child: SvgPicture.asset(iconArrowGreen),
+                    ),
                   ),
                 ],
               ),

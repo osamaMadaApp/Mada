@@ -5,4 +5,5 @@ export 'launch_urls_utils.dart';
 export 'loading.dart';
 export 'location_util.dart';
 export 'log.dart';
+export 'map_utils.dart';
 export 'ui_utils.dart';
