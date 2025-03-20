@@ -145,10 +145,7 @@ class HomeCategories extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 19.h),
             child: LabeledIconCard(
               minWidth: 300.w,
-              icon:
-                  menu[index][keyImage] == null || menu[index][keyImage].isEmpty
-                      ? imageExclusive
-                      : menu[index][keyImage],
+              icon: menu[index][keyImage] == null || menu[index][keyImage].isEmpty ? imageExclusive : menu[index][keyImage],
               title: menu[index][keyName],
               mainAxisAlignment: MainAxisAlignment.center,
               onTap: () {

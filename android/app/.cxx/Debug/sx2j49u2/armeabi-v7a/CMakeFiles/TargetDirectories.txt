@@ -1,2 +1,0 @@
-/Users/madaproperties/Documents/MadaTablet/android/app/.cxx/Debug/sx2j49u2/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/madaproperties/Documents/MadaTablet/android/app/.cxx/Debug/sx2j49u2/armeabi-v7a/CMakeFiles/rebuild_cache.dir
