@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -125,6 +124,7 @@ class _FavoritesState extends State<Favorites> {
                                       showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
+                                      verticalPadding: 0,
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
                                           controller.units[index][keyID],
@@ -152,6 +152,7 @@ class _FavoritesState extends State<Favorites> {
                                     crossAxisCount: 3,
                                     mainAxisExtent: 250,
                                     crossAxisSpacing: 10.w,
+                                    mainAxisSpacing: 10.h,
                                   ),
                                 ),
                               if (controller.selectedCategory ==
@@ -167,6 +168,7 @@ class _FavoritesState extends State<Favorites> {
                                       showContactIcons: true,
                                       borderColor: FlutterMadaTheme.of(context)
                                           .colorE1E1E1,
+                                      verticalPadding: 0,
                                       onFavoritesPressed: () {
                                         controller.addOrRemoveFromFavorite(
                                           controller.units[index][keyID],
@@ -180,11 +182,14 @@ class _FavoritesState extends State<Favorites> {
                                         );
                                       },
                                       onTap: () {
-                                        // Get.toNamed(
-                                        //   routePropertyDetails,
-                                        //   arguments: controller.units[index]
-                                        //       [keyID],
-                                        // );
+                                        Navigator.pushNamed(
+                                          context,
+                                          Routes.routePropertyDetails,
+                                          arguments: {
+                                            keyPropertyId:
+                                                controller.units[index][keyID],
+                                          },
+                                        );
                                       },
                                     );
                                   },
@@ -193,6 +198,7 @@ class _FavoritesState extends State<Favorites> {
                                     crossAxisCount: 3,
                                     mainAxisExtent: 250,
                                     crossAxisSpacing: 10.w,
+                                    mainAxisSpacing: 10.h,
                                   ),
                                 ),
                             ],

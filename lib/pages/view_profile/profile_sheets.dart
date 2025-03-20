@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class ChangeProfileInfo extends StatelessWidget {
   ChangeProfileInfo({
@@ -46,76 +45,70 @@ class ChangeProfileInfo extends StatelessWidget {
       nationalIdController.text = nationalId!;
     }
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.85,
-      child: Column(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 20.h),
-                Row(
+    return Column(
+      children: [
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomInput(
+                      controller: firstNameController,
+                      hint: FFLocalizations.of(context).getText('first_name'),
+                      textInputAction: TextInputAction.next,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: CustomInput(
+                      controller: lastNameController,
+                      hint: FFLocalizations.of(context).getText('last_name'),
+                      textInputAction: TextInputAction.next,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              CustomInput(
+                controller: emailController,
+                hint: FFLocalizations.of(context).getText('email_address'),
+              ),
+              if (shouldShowNationalId)
+                Column(
                   children: [
-                    Expanded(
-                      child: CustomInput(
-                        controller: firstNameController,
-                        hint:
-                            FFLocalizations.of(context).getText('first_name'),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Expanded(
-                      child: CustomInput(
-                        controller: lastNameController,
-                        hint:
-                            FFLocalizations.of(context).getText('last_name'),
-                        textInputAction: TextInputAction.next,
-                      ),
+                    SizedBox(height: 10.h),
+                    CustomInput(
+                      controller: nationalIdController,
+                      hint: FFLocalizations.of(context).getText('national_id'),
+                      enabled: !isNafathVerified,
+                      keyboardType: TextInputType.number,
                     ),
                   ],
                 ),
-                SizedBox(height: 20.h),
-                CustomInput(
-                  controller: emailController,
-                  hint: FFLocalizations.of(context).getText('email_address'),
-                ),
-                if (shouldShowNationalId)
-                  Column(
-                    children: [
-                      SizedBox(height: 10.h),
-                      CustomInput(
-                        controller: nationalIdController,
-                        hint: FFLocalizations.of(context)
-                            .getText('national_id'),
-                        enabled: !isNafathVerified,
-                        keyboardType: TextInputType.number,
-                      ),
-                    ],
-                  ),
-              ],
-            ),
+            ],
           ),
-          SizedBox(
-            width: DEVICE_WIDTH,
-            child: CustomButton(
-              text: FFLocalizations.of(context).getText('confirm'),
-              onPressed: () {
-                onChangeInfo!(
-                  firstNameController.text,
-                  lastNameController.text,
-                  emailController.text,
-                  nationalIdController.text,
-                );
-              },
-            ),
+        ),
+        SizedBox(
+          width: DEVICE_WIDTH,
+          child: CustomButton(
+            text: FFLocalizations.of(context).getText('confirm'),
+            onPressed: () {
+              onChangeInfo!(
+                firstNameController.text,
+                lastNameController.text,
+                emailController.text,
+                nationalIdController.text,
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

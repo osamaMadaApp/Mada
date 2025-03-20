@@ -2,15 +2,26 @@ import 'package:flutter/scheduler.dart';
 
 import '../../general_exports.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenWidgetState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => SearchScreenModel(),
+      child: const Search(),
+    );
+  }
 }
 
-class _SearchScreenWidgetState extends State<SearchScreen>
-    with TickerProviderStateMixin {
+class Search extends StatefulWidget {
+  const Search({super.key});
+
+  @override
+  State<Search> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<Search> with TickerProviderStateMixin {
   late SearchScreenModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -269,8 +280,14 @@ class _SearchScreenWidgetState extends State<SearchScreen>
                                                       );
                                                     },
                                                     onTap: () {
-                                                      _model.onPropertyPressed(
-                                                        property[keyID],
+                                                      Navigator.pushNamed(
+                                                        context,
+                                                        Routes
+                                                            .routePropertyDetails,
+                                                        arguments: {
+                                                          keyPropertyId:
+                                                              property[keyID],
+                                                        },
                                                       );
                                                     },
                                                   );

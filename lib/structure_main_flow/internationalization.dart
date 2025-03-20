@@ -555,6 +555,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'ar':
           'بإجراء عملية حذف، يؤسفنا إبلاغك بأنه سيتم حذف حسابك نهائيًا خلال الأسبوعين القادمين. خلال هذه الفترة، سيتم تسجيل خروجك من تطبيق مدى. يُرجى العلم أنه في حال تسجيل الدخول مرة أخرى، سيتم إيقاف عملية الحذف.',
     },
+    'quick_filter': <String, String>{
+      'en': 'Quick Filter',
+      'ar': 'تصفية سريعة',
+    },
     'city_neighborhood': <String, String>{
       'en': 'City & Neighborhood',
       'ar': 'المدينة والحي',
@@ -574,6 +578,94 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'search_for_units': <String, String>{
       'en': 'Search for units',
       'ar': 'البحث عن وحدات',
+    },
+    'download_property_pdf': <String, String>{
+      'en': 'Download property PDF',
+      'ar': 'تنزيل ملف بي دي أَف الخاص بهذا العقار',
+    },
+    'follow': <String, String>{
+      'en': 'Follow',
+      'ar': 'متابعة',
+    },
+    'price_starts': <String, String>{
+      'en': 'Price Starts',
+      'ar': 'السعر يبدأ من',
+    },
+    'mortgage_calculator': <String, String>{
+      'en': 'Mortagage Calculator',
+      'ar': 'حاسبة الرهن العقاري',
+    },
+    'month': <String, String>{
+      'en': 'Month',
+      'ar': 'شهر',
+    },
+    'estimates_your_monthly_mortgage_payments': <String, String>{
+      'en': 'Estimates your monthly mortgage payments',
+      'ar': 'حساب الأقساط الشهرية الخاصة بك',
+    },
+    'property_price': {
+      'en': 'Property Price',
+      'ar': 'سعر العقار',
+    },
+    'loan_term': {
+      'en': 'Loan Term',
+      'ar': 'مدة القرض',
+    },
+    'years': {
+      'en': 'Years',
+      'ar': 'سنوات',
+    },
+    'loan_term_must_be_2_years': {
+      'en': 'Loan term must be at least 2 years',
+      'ar': 'يجب أن تكون مدة القرض سنتين على الأقل'
+    },
+    'down_payment': {
+      'en': 'Down Payment',
+      'ar': 'الدفعة الأولى',
+    },
+    'down_payment_must_be_at_least': {
+      'en': 'Down payment must be at least',
+      'ar': 'يجب أن تكون الدفعة الأولى على الأقل'
+    },
+    'percentage': {
+      'en': 'Percentage',
+      'ar': 'النسبة المئوية',
+    },
+    'interest_rate': {
+      'en': 'Interest Rate',
+      'ar': 'معدل الفائدة',
+    },
+    'monthly_payment': {
+      'en': 'Monthly Payment',
+      'ar': 'الدفع الشهري',
+    },
+    'view_upfront_costs': {
+      'en': 'View Upfront Costs',
+      'ar': 'عرض التكاليف المسبقة'
+    },
+    '%': {
+      'en': '%',
+      'ar': '%',
+    },
+    'loan_summary': {
+      'en': 'Loan Summary',
+      'ar': 'ملخص القرض',
+    },
+    'upfront_costs': {
+      'en': 'Upfront Costs',
+      'ar': 'التكاليف المبدئية',
+    },
+    'regulatory_information': {
+      'en': 'Regulatory Information',
+      'ar': 'معلومات تنظيمية'
+    },
+    'see_more': {
+      'en': 'See More',
+      'ar': 'عرض المزيد',
+    },
+    'view_details_on_rega': {
+      'en': 'View details on REGA',
+      'ar': 'عرض التفاصيل حول معلومات التنظيمية',
     },
     'choose_city': <String, String>{
       'en': 'Choose City',
@@ -630,6 +722,111 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'bathrooms': <String, String>{
       'en': 'Bathrooms',
       'ar': 'الحمامات',
+    },
+    'location': {'en': 'Location', 'ar': 'الموقع'},
+    'property_specification': {
+      'en': 'Property Specification',
+      'ar': 'مواصفات العقار'
+    },
+    'contact_us_for_more_details': {
+      'en': 'Contact us for more details',
+      'ar': 'اتصل بنا للحصول على مزيد من التفاصيل',
+    },
+    'book_now': {
+      'en': 'Book Now',
+      'ar': 'احجز الآن',
+    },
+    'report_this_unit': {
+      'en': 'Report this unit',
+      'ar': 'الإبلاغ عن هذه الوحدة',
+    },
+    'report_this_property': {
+      'en': 'Report this property',
+      'ar': 'الإبلاغ عن هذه الوحدة',
+    },
+    'report_reason': {
+      'en': 'Report Reason',
+      'ar': 'سبب الإبلاغ',
+    },
+    'select_the_reason': {
+      'en': 'Select the Reason',
+      'ar': 'اختر السبب',
+    },
+    'user_type': {
+      'en': 'User Type',
+      'ar': 'نوع المستخدم',
+    },
+    'select_the_type': {
+      'en': 'Select the Type',
+      'ar': 'اختر النوع',
+    },
+    'other_comments': {
+      'en': 'Other Comments',
+      'ar': 'تعليقات أخرى',
+    },
+    'add_your_additional_comments': {
+      'en': 'Add your additional comments',
+      'ar': 'أضف تعليقاتك الإضافية'
+    },
+    'send_report': {
+      'en': 'Send Report',
+      'ar': 'إرسال التقرير',
+    },
+    'property_info': {
+      'en': 'Property Info',
+      'ar': 'معلومات العقار',
+    },
+    'project_info': {
+      'en': 'Project Info',
+      'ar': 'معلومات المشروع',
+    },
+    'services': {
+      'en': 'Services',
+      'ar': 'الخدمات',
+    },
+    'show_all_services': {
+      'en': 'Show All Services',
+      ',ar': 'عرض جميع الخدمات',
+    },
+    'video_and_brochure': {
+      'en': 'Video and Brochure',
+      'ar': 'الفيديو والكتيب',
+    },
+    'video': {
+      'en': 'Video',
+      'ar': 'فيديو',
+    },
+    'brochure': {
+      'en': 'Brochure',
+      'ar': 'كتيب',
+    },
+    'view_brochure': {
+      'en': 'View Brochure',
+      'ar': 'عرض الكتيب',
+    },
+    'view_property_on_map': {
+      'en': 'View Property on Map',
+      'ar': 'عرض العقار على الخريطة',
+    },
+    'location_nearby_places': {
+      'en': 'Location & Nearby Places',
+      'ar': 'الموقع والأماكن القريبة',
+    },
+    'view_project_on_map': {
+      'en': 'View Project on Map',
+      'ar': 'عرض المشروع على الخريطة',
+    },
+    'nearby_places': {
+      'en': 'Nearby Places',
+      'ar': 'الأماكن القريبة',
+    },
+    'project_brochure': {
+      'en': 'Project Brochure',
+      'ar': 'كتيب المشروع',
+    },
+    'property_brochure': {
+      'en': 'Property Brochure',
+      'ar': 'كتيب العقار',
     },
   },
 ].reduce((Map<String, Map<String, String>> a,

@@ -1,6 +1,4 @@
-import '../../components/mada_header/mada_header.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class PDFScreen extends StatelessWidget {
   const PDFScreen({super.key});
