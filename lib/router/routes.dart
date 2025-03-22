@@ -7,6 +7,7 @@ class Routes {
   static const String routePdfScreen = '/pdf-screen';
   static const String routeProjectsListview = '/projects_listview';
   static const String routeSearchScreen = '/search-screen';
+  static const String routeProjectDetails = '/project-details';
   static const String routePropertyDetails = '/property-details';
   static const String routeVideoPlayer = '/video-player';
   static const String routeWebViewScreen = '/webView-screen';

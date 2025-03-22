@@ -482,7 +482,10 @@ class SearchScreenModel extends ChangeNotifier {
       tempNeighborhoods = List.from(selectedNeighborhoods);
       SideSheet.show(
         context,
-        child: const CityFilterSheet(),
+        child: ChangeNotifierProvider.value(
+          value: Provider.of<SearchScreenModel>(context, listen: false),
+          child: const CityFilterSheet(),
+        ),
         title:
             '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('city_neighborhood')}',
       );
@@ -492,7 +495,10 @@ class SearchScreenModel extends ChangeNotifier {
       tempTypeOfProperty = List.from(selectedTypeOfProperty);
       SideSheet.show(
         context,
-        child: const PropertyTypeFilterSheet(),
+        child: ChangeNotifierProvider.value(
+          value: Provider.of<SearchScreenModel>(context, listen: false),
+          child: const PropertyTypeFilterSheet(),
+        ),
         title:
             '${FFLocalizations.of(context).getText('filter')} : ${FFLocalizations.of(context).getText('property_type_use')}',
       );
@@ -501,7 +507,10 @@ class SearchScreenModel extends ChangeNotifier {
       tempMaxPrice = priceRange!.end.toDouble();
       SideSheet.show(
         context,
-        child: const PriceFilterSheet(),
+        child: ChangeNotifierProvider.value(
+          value: Provider.of<SearchScreenModel>(context, listen: false),
+          child: const PriceFilterSheet(),
+        ),
         title:
             '${FFLocalizations.of(context).getText('price_range')} (${getCurrency()})',
       );
@@ -510,7 +519,10 @@ class SearchScreenModel extends ChangeNotifier {
       tempMaxArea = areaRange!.end.toInt();
       SideSheet.show(
         context,
-        child: const AreaFilterSheet(),
+        child: ChangeNotifierProvider.value(
+          value: Provider.of<SearchScreenModel>(context, listen: false),
+          child: const AreaFilterSheet(),
+        ),
         title: FFLocalizations.of(context).getText('area_range'),
       );
     } else if (item[keyId] == 5) {
@@ -518,7 +530,10 @@ class SearchScreenModel extends ChangeNotifier {
       tempBathroomsNumber = List.from(selectedBathroomNumber);
       SideSheet.show(
         context,
-        child: const BedBathFilterSheet(),
+        child: ChangeNotifierProvider.value(
+          value: Provider.of<SearchScreenModel>(context, listen: false),
+          child: const BedBathFilterSheet(),
+        ),
         title:
             '${FFLocalizations.of(context).getText('filter')}: ${FFLocalizations.of(context).getText('bedrooms')}, ${FFLocalizations.of(context).getText('bathrooms')}',
       );

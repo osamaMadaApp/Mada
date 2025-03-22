@@ -228,10 +228,13 @@ class MostPopularProjects extends StatelessWidget {
                       projectCategory: mostPopularProject[index]
                           [keyProjectType],
                       onTap: () {
-                        // Get.toNamed(
-                        //   routeProjectDetails,
-                        //   arguments: mostPopularProject[index][keySlug],
-                        // );
+                        Navigator.pushNamed(
+                          context,
+                          Routes.routeProjectDetails,
+                          arguments: {
+                            keyProjectId: mostPopularProject[index][keySlug],
+                          },
+                        );
                       },
                     );
                   })

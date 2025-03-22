@@ -828,6 +828,38 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Property Brochure',
       'ar': 'كتيب العقار',
     },
+    'read_more': {
+      'en': 'Read More',
+      'ar': 'قراءة المزيد',
+    },
+    'project_description': {
+      'en': 'Project Description',
+      'ar': 'وصف المشروع',
+    },
+    'installments': {
+      'en': 'Installments',
+      'ar': 'الأقساط',
+    },
+    'amount': {
+      'en': 'Amount',
+      'ar': 'المبلغ',
+    },
+    'payment_plans': {
+      'en': 'Payment Plans',
+      'ar': 'خطط الدفع',
+    },
+    'see_less': {
+      'en': 'See Less',
+      'ar': 'عرض أقل',
+    },
+    'view_units': {
+      'en': 'View Units',
+      'ar': 'عرض الوحدات',
+    },
+    'following': {
+      'en': 'Following',
+      'ar': 'المتابعة',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

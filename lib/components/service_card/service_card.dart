@@ -24,7 +24,7 @@ class ServiceCard extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: DEVICE_WIDTH * 0.02,
+          horizontal: DEVICE_WIDTH * 0.01,
         ),
         child: Column(
           crossAxisAlignment: crossAxisAlignment,
@@ -36,6 +36,7 @@ class ServiceCard extends StatelessWidget {
                 width: DEVICE_WIDTH * 0.04,
                 child: CachedImage(
                   image: icon,
+                  fit: BoxFit.contain,
                 ),
               ),
             SizedBox(
