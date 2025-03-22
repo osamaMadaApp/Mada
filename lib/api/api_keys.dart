@@ -265,6 +265,7 @@ const String keyRecordId = 'recordId';
 const String keyPlatform = 'platform';
 const String keyApp = 'app';
 const String keyWeb = 'web';
+const String keyPassword = 'password';
 
 // *************** Platforms ***************
 

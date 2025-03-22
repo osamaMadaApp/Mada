@@ -77,11 +77,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     child: child,
                   );
                 },
-                child: _model.currentModelName == 'LoginSideComponent'
-                    ? _buildLoginSideComponent()
-                    : (_model.currentModelName == 'OtpComponent'
-                        ? _buildOtpComponent()
-                        : _buildForgetPasswordComponent()),
+                child: _buildLoginSideComponent(),
               ),
             ),
           ),
@@ -98,75 +94,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           _model.currentModelName = 'ForgetPasswordComponent';
         });
       },
-      onConfirmTap: () async {
-        final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
+      onConfirmTap: (String? email , String? password) async {
+        final Map<String, dynamic> deviceInfo = await getDeviceInfo();
+        final String fcId = await getFcmToken() ?? '';
+
         await ApiRequest(
           path: apiLogin,
           method: ApiMethods.post,
           className: 'MyAppController/login',
           defaultHeadersValue: false,
           body: {
-            keyCountryCode: 966,
-            keyMobile: 550575293,
-            ...deviceInfoDetails,
+            keyEmail: email,
+            keyPassword: password,
+            keyDeviceId: deviceInfo[keyDeviceId],
+            keyDeviceType: deviceInfo[keyDeviceModel],
+            keyDeviceToken: fcId
           },
         ).request(
           onSuccess: (dynamic data, dynamic response) {
-            if (response[keySuccess] == true) {
-              setState(() {
-                _model.currentModelName = 'OtpComponent';
-              });
-            } else {
-              showToast(response[keyMsg]);
-            }
-          },
-        );
-      },
-    );
-  }
-
-  Future<void> resendCode() async {
-    final String fcId = await getFcmToken() ?? '';
-    ApiRequest(
-      path: apiResendOTP,
-      method: ApiMethods.post,
-      defaultHeadersValue: false,
-      className: 'MyAppController/resendCode',
-      body: {
-        keyCountryCode: 966,
-        keyMobile: 550575293,
-        keyDeviceToken: fcId,
-      },
-    ).request(
-      onSuccess: (dynamic data, dynamic response) {},
-    );
-  }
-
-  // Helper method to build LoginSideComponent
-  Widget _buildOtpComponent() {
-    return OtpComponent(
-      onConfnfirm: () async {
-        final Map<String, dynamic> deviceInfo = await getDeviceQueryParams();
-        final String fcId = await getFcmToken() ?? '';
-        ApiRequest(
-          path: apiVerifyOtp,
-          method: ApiMethods.post,
-          className: 'MyAppController/verifyOtp',
-          header: {
-            keyLanguage: FFAppState().getSelectedLanguge(),
-          },
-          defaultHeadersValue: false,
-          body: {
-            keyCountryCode: 966,
-            keyMobile: 550575293,
-            keyOtpPhone: 1234,
-            keyDeviceId: deviceInfo[keyDeviceId],
-            keyDeviceType: deviceInfo[keyDeviceModel],
-            keyDeviceToken: fcId,
-          },
-        ).request(
-          onSuccessWithHeader:
-              (dynamic data, dynamic response, dynamic headers) {
             if (response[keySuccess] == true) {
               FFAppState().userModel = response['results'];
               Navigator.pushNamed(context, Routes.routeNavBar);
@@ -176,25 +121,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           },
         );
       },
-      onResendCode: () async {
-        resendCode();
-      },
     );
   }
 
-// Helper method to build ForgetPasswordComponent
-  Widget _buildForgetPasswordComponent() {
-    return ForgetPasswordComponent(
-      onLoginTap: () {
-        setState(() {
-          _model.currentModelName = 'LoginSideComponent';
-        });
-      },
-      onConfirmTap: () {
-        setState(() {
-          _model.currentModelName = 'OtpComponent';
-        });
-      },
-    );
-  }
 }
