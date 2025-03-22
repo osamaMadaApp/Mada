@@ -124,7 +124,6 @@ class ProjectDetailsModel extends ChangeNotifier {
       },
       onRequestSuccess: () {
         data[keyIsFollowed] = !data[keyIsFollowed];
-        consoleLog('ssss');
         notifyListeners();
       },
       bodyKey: keyProjectId,
