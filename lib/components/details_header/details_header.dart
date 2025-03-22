@@ -60,20 +60,24 @@ class DetailsHeader extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
                   decoration: BoxDecoration(
-                    color: FlutterMadaTheme.of(context)
-                        .color97BE5A
-                        .withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(10.r),
+                    color: !isFollowed
+                        ? FlutterMadaTheme.of(context)
+                            .color97BE5A
+                            .withValues(alpha: 0.1)
+                        : const Color(AppColors.primary),
+                    borderRadius: BorderRadius.circular(DEVICE_HEIGHT * 0.008),
                   ),
                   child: Row(
                     spacing: 10.w,
                     children: [
                       SvgPicture.asset(
-                        iconFavorite,
+                        !isFollowed ? iconFavorite : iconFollowing,
                         height: 40.h,
                       ),
                       Text(
-                        FFLocalizations.of(context).getText('follow'),
+                        FFLocalizations.of(context).getText(
+                          !isFollowed ? 'follow' : 'following',
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.w500,
                             ),

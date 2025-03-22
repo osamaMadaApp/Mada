@@ -78,9 +78,11 @@ class FavoritesModel extends ChangeNotifier {
   }) {
     startLoading();
     ApiRequest(
-      path: type == PropertyType.unit
-          ? apiUnitsAddToWishList
-          : apiPropertiesAddToWishList,
+      path: type == PropertyType.project
+          ? apiProjectAddToFollow
+          : type == PropertyType.unit
+              ? apiUnitsAddToWishList
+              : apiPropertiesAddToWishList,
       method: ApiMethods.post,
       defaultHeadersValue: false,
       className: 'FavoritesScreenController/addOrRemoveFromFavorite',
@@ -108,4 +110,5 @@ class FavoritesModel extends ChangeNotifier {
 enum PropertyType {
   property,
   unit,
+  project,
 }

@@ -59,6 +59,12 @@ class AppRouter {
           settings: RouteSettings(arguments: args),
         );
 
+      case Routes.routeProjectDetails:
+        return MaterialPageRoute(
+          builder: (_) => const ProjectDetailsScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
       case Routes.routePropertyDetails:
         return MaterialPageRoute(
           builder: (_) => const PropertyDetailsScreen(),

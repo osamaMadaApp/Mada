@@ -9,7 +9,7 @@ class GrayLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: DEVICE_WIDTH,
-      height: DEVICE_HEIGHT * 0.005,
+      height: DEVICE_HEIGHT * 0.002,
       decoration: const BoxDecoration(
         color: Color(AppColors.gray5),
       ),

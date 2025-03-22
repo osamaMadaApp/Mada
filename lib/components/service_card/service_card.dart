@@ -5,7 +5,7 @@ class ServiceCard extends StatelessWidget {
     required this.name,
     super.key,
     this.icon,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
   });
   final String? icon;
   final String name;
@@ -24,7 +24,7 @@ class ServiceCard extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: DEVICE_WIDTH * 0.02,
+          horizontal: DEVICE_WIDTH * 0.01,
         ),
         child: Column(
           crossAxisAlignment: crossAxisAlignment,

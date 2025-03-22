@@ -56,11 +56,13 @@ class VideoAndBrochure extends StatelessWidget {
                         onTap: onVideoTapped,
                         child: Stack(
                           children: <Widget>[
-                            CachedImage(
-                              image: imageUrl,
-                              borderRadius: DEVICE_WIDTH * 0.005,
-                              height: DEVICE_HEIGHT * 0.1,
-                              width: DEVICE_WIDTH * 0.1,
+                            SizedBox(
+                              height: DEVICE_WIDTH * 0.07,
+                              width: DEVICE_WIDTH * 0.07,
+                              child: CachedImage(
+                                image: imageUrl,
+                                borderRadius: DEVICE_WIDTH * 0.01,
+                              ),
                             ),
                             Positioned(
                               top: 0,
@@ -68,23 +70,9 @@ class VideoAndBrochure extends StatelessWidget {
                               left: 0,
                               right: 0,
                               child: Padding(
-                                padding: EdgeInsets.all(
-                                  DEVICE_WIDTH * 0.01,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(AppColors.primary)
-                                        .withValues(alpha: 0.5),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(
-                                      DEVICE_HEIGHT * 0.02,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      iconVideo,
-                                    ),
-                                  ),
+                                padding: EdgeInsets.all(12.sp),
+                                child: SvgPicture.asset(
+                                  iconPlayVideo,
                                 ),
                               ),
                             ),
