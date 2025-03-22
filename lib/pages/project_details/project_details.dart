@@ -475,7 +475,7 @@ class ProjectDetailsSection2 extends StatelessWidget {
                         backgroundColor: const Color(AppColors.green3),
                         padding: EdgeInsets.symmetric(
                           vertical: DEVICE_HEIGHT * 0.019,
-                          horizontal: DEVICE_WIDTH * 0.1,
+                          horizontal: DEVICE_WIDTH * 0.05,
                         ),
                         shadowColor: Colors.transparent,
                         shape: RoundedRectangleBorder(
