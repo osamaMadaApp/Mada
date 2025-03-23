@@ -31,6 +31,10 @@ bool areMapsEqual(Map? map1, Map? map2) {
   return true;
 }
 
+bool isPortrait(BuildContext context) {
+  return MediaQuery.of(context).orientation == Orientation.portrait;
+}
+
 // Future<void> openUrl(String url) async {
 //   if (await canLaunchUrl(Uri.parse(url))) {
 //     await launchUrl(

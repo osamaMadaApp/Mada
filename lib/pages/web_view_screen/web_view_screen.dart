@@ -17,6 +17,7 @@ class WebViewScreen extends StatelessWidget {
         brochureText: args?[keySubtitle],
         isProjectBrouchure: args?[keyProjectBrouchure],
         isPDF: args?[keyIsPdf] ?? false,
+        isBuy: args?[keyBuy],
       ),
     );
   }
@@ -30,6 +31,7 @@ class WebViewComponent extends StatefulWidget {
     this.isProjectBrouchure,
     this.brochureText,
     this.isPDF = false,
+    this.isBuy = false,
   });
 
   final String? urlPath;
@@ -37,6 +39,7 @@ class WebViewComponent extends StatefulWidget {
   final bool? isProjectBrouchure;
   final String? brochureText;
   final bool isPDF;
+  final bool isBuy;
 
   @override
   State<WebViewComponent> createState() => _WebViewComponentState();
@@ -46,16 +49,19 @@ class _WebViewComponentState extends State<WebViewComponent> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((callback) {
-      Provider.of<WebViewScreenModel>(context, listen: false).initialize(
-        context,
-        widget.urlPath,
-        widget.title,
-        widget.isProjectBrouchure,
-        widget.brochureText,
-        isPDF: widget.isPDF,
-      );
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (callback) {
+        Provider.of<WebViewScreenModel>(context, listen: false).initialize(
+          context,
+          widget.urlPath,
+          widget.title,
+          widget.isProjectBrouchure,
+          widget.brochureText,
+          isPDF: widget.isPDF,
+          isBuy: widget.isBuy,
+        );
+      },
+    );
   }
 
   @override

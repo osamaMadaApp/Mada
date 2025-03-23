@@ -273,9 +273,15 @@ class _SearchWidgetState extends State<Search> with TickerProviderStateMixin {
                                                     physics:
                                                         const NeverScrollableScrollPhysics(),
                                                     gridDelegate:
-                                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 3,
-                                                      mainAxisExtent: 290,
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount:
+                                                          isPortrait(context)
+                                                              ? 2
+                                                              : 3,
+                                                      mainAxisExtent:
+                                                          isPortrait(context)
+                                                              ? 320
+                                                              : 290,
                                                     ),
                                                     itemCount: model
                                                         .projectResult.length,
