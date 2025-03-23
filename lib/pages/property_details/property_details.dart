@@ -455,7 +455,39 @@ class PropertyDetailsSection2 extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomButton(
-                        onPressed: model.onOwnProperty,
+                        onPressed: () {
+                          model.onOwnProperty(
+                            onContactPopUp: () {
+                              SideSheet.show(
+                                context,
+                                child: ContactTeamSheet(
+                                  whatsappMsg:
+                                      '${model.data[keyTitle] ?? ''}\n${model.data[keyPropertyCategory] ?? ''}\n${model.data[keyPrice] ?? 0} ${getCurrency()}\n${model.data[keyCity] ?? ''} - ${model.data[keyCommunity] ?? ''} - ${model.data[keySubCommunity] ?? ''}',
+                                ),
+                                title: FFLocalizations.of(context)
+                                    .getText('confirm_your_data'),
+                              );
+                            },
+                            onNafathVerificationSheet: () {
+                              SideSheet.show(
+                                context,
+                                child: const ConfirmNafathSheet(),
+                                title: FFLocalizations.of(context).getText(
+                                  'confirm_your_data',
+                                ),
+                              );
+                            },
+                            onPayment: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.routePayment,
+                                arguments: {
+                                  keyPropertyId: model.data[keyID],
+                                },
+                              );
+                            },
+                          );
+                        },
                         text: FFLocalizations.of(context).getText('book_now'),
                         textStyle:
                             Theme.of(context).textTheme.bodySmall!.copyWith(

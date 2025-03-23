@@ -135,7 +135,7 @@ final Map<String, Map<String, String>> kTranslationsMap =
     },
     'confirm': <String, String>{
       'en': 'Confirm',
-      'ar': 'موافقة',
+      'ar': 'تأكيد',
     },
     'fillEmptyForm': <String, String>{
       'en': 'Input Field is required',
@@ -860,6 +860,93 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Following',
       'ar': 'المتابعة',
     },
+    'payment': {
+      'en': 'Payment',
+      'ar': 'الدفع',
+    },
+    'choose_your_payment_option': {
+      'en': 'Choose Your Payment Option',
+      'ar': 'اختر خيار الدفع الخاص بك',
+    },
+    'if_you_have_any_questions': {
+      'en': 'If you have any questions',
+      'ar': 'إذا كان لديك أي أسئلة',
+    },
+    'online_booking_available': {
+      'en':
+          'Online booking is for Saudi residents only. Please contact our team to complete the manual booking process',
+      'ar':
+          'الحجز الإلكتروني متاح للمقيمين في السعودية فقط. يرجى التواصل مع فريقنا لإكمال إجراء الحجز',
+    },
+    'confirm_your_data': {
+      'en': 'Confirm Your Data',
+      'ar': 'تأكيد بياناتك',
+    },
+    'transfer_to_nafath': {
+      'en':
+          'You will be transferred to NAFATH\nVerify your information before completing the order',
+      'ar': 'سيتم تحويلك الى منصة نفاذ تأكد من معلومات قبل اتمام الطلب',
+    },
+    'commission_vat': {
+      'en': 'Commission Amount & VAT',
+      'ar': 'السعي والضريبة المضافة',
+    },
+    'choose_payment_method': {
+      'en': 'Choose your payment method',
+      'ar': 'اختر طريقة الدفع',
+    },
+    'share_payment_link': {
+      'en': 'Share Payment Link',
+      'ar': 'مشاركة رابط الدفع',
+    },
+    'upload_receipt': {
+      'en': 'Upload Receipt',
+      'ar': 'مشاركة رابط الدفع',
+    },
+    'customer_details': {
+      'en': 'Customer Details',
+      'ar': 'تفاصيل العميل',
+    },
+    'customer_name': {
+      'en': 'Customer Name',
+      'ar': 'اسم العميل',
+    },
+    'mobile_number': {
+      'en': 'Mobile Number',
+      'ar': 'رقم الهاتف',
+    },
+    'address': {
+      'en': 'Address',
+      'ar': 'العنوان',
+    },
+    'required_field': {
+      'en': 'Required Field',
+      'ar': 'حقل مطلوب',
+    },
+    'please_select_payment_option': {
+      'en': 'Please select payment option',
+      'ar': 'الرجاء تحديد خيار الدفع',
+    },
+    'payment_status': {
+      'en': 'Payment Status',
+      'ar': 'حالة الدفع',
+    },
+    'failed_payment_msg': {
+      'en': 'Something went wrong, please try again later',
+      'ar': 'حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا',
+    },
+    'wrong': {
+      'en': 'Wrong',
+      'ar': 'خطأ',
+    },
+    'success_payment_msg': {
+      'en': 'Your payment was successful',
+      'ar': 'تم الدفع بنجاح',
+    },
+    'success': {
+      'en': 'Success',
+      'ar': 'نجاح',
+    }
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

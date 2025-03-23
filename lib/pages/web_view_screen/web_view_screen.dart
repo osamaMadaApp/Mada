@@ -48,6 +48,7 @@ class _WebViewComponentState extends State<WebViewComponent> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       Provider.of<WebViewScreenModel>(context, listen: false).initialize(
+        context,
         widget.urlPath,
         widget.title,
         widget.isProjectBrouchure,
@@ -86,8 +87,8 @@ class _WebViewComponentState extends State<WebViewComponent> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color:
-                                const Color(AppColors.gray4).withOpacity(0.25),
+                            color: const Color(AppColors.gray4)
+                                .withValues(alpha: 0.25),
                             borderRadius:
                                 BorderRadius.circular(DEVICE_HEIGHT * 0.008),
                           ),
