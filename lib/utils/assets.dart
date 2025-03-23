@@ -100,6 +100,10 @@ const String iconGreenShare = '${iconsPath}green_share.svg';
 const String iconDownloadPdf = '${iconsPath}download_pdf.svg';
 const String iconPlayVideo = '${iconsPath}play_video.svg';
 const String iconTwoArrowsDown = '${iconsPath}two_arrows_down.svg';
+const String iconExportLink = '${iconsPath}export_link.svg';
+const String iconReceiptAdd = '${iconsPath}receipt_add.svg';
+const String iconSuccess = '${iconsPath}success.svg';
+const String iconWrong = '${iconsPath}wrong.svg';
 const String iconDeleteAccountWarning =
     '${iconsPath}delete_account_warning.svg';
 

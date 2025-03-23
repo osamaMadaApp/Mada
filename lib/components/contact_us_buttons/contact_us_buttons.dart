@@ -1,5 +1,5 @@
+import '../../app_state.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class ContactUsButtons extends StatelessWidget {
   const ContactUsButtons({
@@ -11,6 +11,7 @@ class ContactUsButtons extends StatelessWidget {
     this.showWhatsApp = true,
     this.whatsappMsg,
     this.isPaymentMsg = false,
+    this.showText = true,
   });
 
   final String? email;
@@ -20,24 +21,26 @@ class ContactUsButtons extends StatelessWidget {
   final bool showWhatsApp;
   final String? whatsappMsg;
   final bool isPaymentMsg;
+  final bool showText;
 
   @override
   Widget build(BuildContext context) {
-    // final MyAppController myAppController = Get.find<MyAppController>();
     return Row(
       children: <Widget>[
         if (showWhatsApp)
           Expanded(
             child: ContactUsCard(
-              text: FFLocalizations.of(context).getText('whatsapp'),
+              text: showText
+                  ? FFLocalizations.of(context).getText('whatsapp')
+                  : '',
               icon: iconWhatsapp,
               onTap: () {
                 whatsapp(
                   '',
                   context,
-                  // whatsappNumber ??
-                  //     myAppController.masterData[keyAdminInfo][0][keyMobile],
-                  msg: whatsappMsg ?? '',
+                  msg: whatsappMsg ??
+                      FFAppState().masterDateJsonModel[keyAdminInfo][0]
+                          [keyMobile],
                   showWhatsMsg: true,
                   isPaymentMsg: isPaymentMsg,
                 );
@@ -50,13 +53,14 @@ class ContactUsButtons extends StatelessWidget {
           ),
         Expanded(
           child: ContactUsCard(
-            text: FFLocalizations.of(context).getText('phone'),
+            text: showText ? FFLocalizations.of(context).getText('phone') : '',
             icon: iconPhoneLogo,
             onTap: () {
-              // makePhoneCall(
-              //   phoneNumber ??
-              //       myAppController.masterData[keyAdminInfo][0][keyMobile],
-              // );
+              makePhoneCall(
+                phoneNumber ??
+                    FFAppState().masterDateJsonModel[keyAdminInfo][0]
+                        [keyMobile],
+              );
             },
           ),
         ),
@@ -65,15 +69,19 @@ class ContactUsButtons extends StatelessWidget {
             width: 2.w,
           ),
         if (showEmail)
-          ContactUsCard(
-            text: FFLocalizations.of(context).getText('email'),
-            icon: iconEmailContact,
-            onTap: () {
-              sendEmail(
-                email ?? '',
-                // email ?? myAppController.masterData[keyAdminInfo][0][keyEmail],
-              );
-            },
+          Expanded(
+            child: ContactUsCard(
+              text:
+                  showText ? FFLocalizations.of(context).getText('email') : '',
+              icon: iconEmailContact,
+              onTap: () {
+                sendEmail(
+                  email ??
+                      FFAppState().masterDateJsonModel[keyAdminInfo][0]
+                          [keyEmail],
+                );
+              },
+            ),
           ),
       ],
     );

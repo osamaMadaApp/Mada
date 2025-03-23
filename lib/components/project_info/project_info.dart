@@ -9,6 +9,7 @@ class ProjectInformation extends StatelessWidget {
     this.padding,
     this.textKey = 'key',
     this.valueKey = keyValue,
+    this.withLine = true,
   });
   final List<dynamic> projectInfo;
   final String? title;
@@ -16,6 +17,7 @@ class ProjectInformation extends StatelessWidget {
   final double? padding;
   final String textKey;
   final String valueKey;
+  final bool withLine;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,9 @@ class ProjectInformation extends StatelessWidget {
                                   : projectInfo[index][valueKey].toString(),
                           color: index.isOdd
                               ? const Color(AppColors.white)
-                              : const Color(AppColors.primary).withOpacity(0.1),
+                              : const Color(AppColors.primary).withValues(
+                                  alpha: 0.1,
+                                ),
                         );
                       },
                     ),
@@ -65,7 +69,7 @@ class ProjectInformation extends StatelessWidget {
                 SizedBox(
                   height: DEVICE_HEIGHT * 0.02,
                 ),
-                const GrayLine(),
+                if (withLine) const GrayLine(),
               ],
             ),
           )

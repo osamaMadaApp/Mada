@@ -1,8 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../app_state.dart';
-
 const List<String> allCountries = <String>[
   'AF',
   'AL',
@@ -252,7 +247,6 @@ const List<String> allCountries = <String>[
   'CW',
 ];
 
-
 bool areMapsEqual(Map? map1, Map? map2) {
   if (map1 == null || map2 == null) return false;
   if (map1.length != map2.length) return false;
@@ -261,4 +255,3 @@ bool areMapsEqual(Map? map1, Map? map2) {
   }
   return true;
 }
-

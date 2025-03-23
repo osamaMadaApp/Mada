@@ -8,6 +8,7 @@ export 'my_app/index.dart';
 export 'my_order_page/index.dart';
 export 'nav_bar/index.dart';
 export 'notifications_page/index.dart';
+export 'payment/index.dart';
 export 'pdf_view_page/index.dart';
 export 'project_details/index.dart';
 export 'property_details/index.dart';

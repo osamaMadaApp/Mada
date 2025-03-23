@@ -106,39 +106,21 @@ class PropertyDetailsModel extends ChangeNotifier {
     return (percentage / 100) * data[keyPrice];
   }
 
-  void onOwnProperty() {
-    // if (myAppController.userData == null) {
-    //   myAppController.openSignInSheet(
-    //     action: () {
-    //       getPropertyDetails(hideScreen: true, action: onOwnProperty);
-    //     },
-    //   );
-    //   return;
-    // }
-    // if (data[keyOpenContactPopup]) {
-    //   Get.bottomSheet(
-    //     BottomSheetContainer(
-    //       title: 'confirm_your_data'.tr,
-    //       child: ContactTeamSheet(
-    //         whatsappMsg:
-    //             '${data[keyTitle] ?? ''}\n${data[keyPropertyCategory] ?? ''}\n${data[keyPrice] ?? 0} ${getCurrency()}\n${data[keyCity] ?? ''} - ${data[keyCommunity] ?? ''} - ${data[keySubCommunity] ?? ''}',
-    //       ),
-    //     ),
-    //     isScrollControlled: true,
-    //   );
-    //   return;
-    // }
-    // if (myAppController.appCountry == 'SA' &&
-    //     myAppController.userData[keyIsNafathVerified] == 0) {
-    //   myAppController.openNafathVerificationSheet();
-    //   return;
-    // }
-    // Get.toNamed(
-    //   routePayment,
-    //   arguments: {
-    //     keyPropertyId: propertyId,
-    //   },
-    // );
+  void onOwnProperty({
+    Function()? onContactPopUp,
+    Function()? onNafathVerificationSheet,
+    Function()? onPayment,
+  }) {
+    if (data[keyOpenContactPopup]) {
+      onContactPopUp!();
+      return;
+    }
+    if (FFAppState().userModel[keyIsNafathVerified] == 0) {
+      onNafathVerificationSheet!();
+      return;
+    }
+
+    onPayment!();
   }
 
   // void onDescriptionPressed() {

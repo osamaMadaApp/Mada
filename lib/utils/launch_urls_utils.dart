@@ -35,13 +35,12 @@ Future<void> whatsapp(
   bool showWhatsMsg = false,
   bool isPaymentMsg = false,
 }) async {
-  // MyAppController myAppController = Get.find<MyAppController>();
-  const String fullWhatAppMsg = '';
+  String fullWhatAppMsg = '';
   if (showWhatsMsg) {
-    // String whatAppMsg = isPaymentMsg
-    //     ? myAppController.masterData[keyWhatsAppMessageInfo] ?? ''
-    //     : myAppController.masterData[keyWhatsAppShareText] ?? '';
-    // fullWhatAppMsg = '$whatAppMsg\n$msg';
+    final String whatAppMsg = isPaymentMsg
+        ? FFAppState().masterDateJsonModel[keyWhatsAppMessageInfo] ?? ''
+        : FFAppState().masterDateJsonModel[keyWhatsAppShareText] ?? '';
+    fullWhatAppMsg = '$whatAppMsg\n$msg';
   }
 
   consoleLog(fullWhatAppMsg, key: 'full-whatsapp-msg');
