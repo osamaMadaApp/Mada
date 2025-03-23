@@ -65,7 +65,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                             // will modify this later when change base url
                           },
                           onSharePressed: () {
-                            Share.share(model.data[keyDeepLink]);
+                            Share.share(
+                              '${model.data[keyTitle]}\n${model.data[keyDeepLink]}',
+                            );
                           },
                           onFollowPressed: () {
                             model.addToFollow(context);
