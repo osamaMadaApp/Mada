@@ -20,6 +20,7 @@ export 'mada_header/index.dart';
 export 'mada_text/index.dart';
 export 'nafath_number_sheet/index.dart';
 export 'payment_plans/index.dart';
+export 'payment_status/index.dart';
 export 'project_card/index.dart';
 export 'project_info/index.dart';
 export 'project_unit_appBar/index.dart';

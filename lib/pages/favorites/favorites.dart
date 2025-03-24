@@ -158,8 +158,9 @@ class _FavoritesState extends State<Favorites> {
                                   },
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    mainAxisExtent: 250,
+                                    crossAxisCount: isPortrait(context) ? 2 : 3,
+                                    mainAxisExtent:
+                                        isPortrait(context) ? 280 : 250,
                                     crossAxisSpacing: 10.w,
                                     mainAxisSpacing: 10.h,
                                   ),
@@ -204,8 +205,9 @@ class _FavoritesState extends State<Favorites> {
                                   },
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    mainAxisExtent: 250,
+                                    crossAxisCount: isPortrait(context) ? 2 : 3,
+                                    mainAxisExtent:
+                                        isPortrait(context) ? 280 : 250,
                                     crossAxisSpacing: 10.w,
                                     mainAxisSpacing: 10.h,
                                   ),

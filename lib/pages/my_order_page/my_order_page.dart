@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class MyOrderPage extends StatelessWidget {
   const MyOrderPage({super.key});
@@ -146,18 +145,22 @@ class MyOrders extends StatelessWidget {
                                             );
                                           },
                                           gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                            mainAxisExtent: 250,
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount:
+                                                isPortrait(context) ? 2 : 3,
+                                            mainAxisExtent:
+                                                isPortrait(context) ? 280 : 250,
                                           ),
                                         ),
                                       if (myOrderPageModel.selectedCategory ==
                                           GeneralTaps.otherUnits)
                                         GridView.builder(
                                           gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                            childAspectRatio: 0.8,
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount:
+                                                isPortrait(context) ? 2 : 3,
+                                            mainAxisExtent:
+                                                isPortrait(context) ? 320 : 350,
                                             crossAxisSpacing: 10,
                                             mainAxisSpacing: 10,
                                           ),

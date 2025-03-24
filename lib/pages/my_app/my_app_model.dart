@@ -1,7 +1,6 @@
 import '../../app_state.dart';
 import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
-import '../../structure_main_flow/internationalization.dart';
 
 class AppProvider extends ChangeNotifier {
   AppProvider._();

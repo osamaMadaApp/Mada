@@ -88,10 +88,15 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const UnitDetailsScreen(),
           settings: RouteSettings(
-            arguments: args
+              arguments: args
           ),
         );
 
+      case Routes.routePayment:
+        return MaterialPageRoute(
+          builder: (_) => const PaymentScreen(),
+          settings: RouteSettings(arguments: args),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
