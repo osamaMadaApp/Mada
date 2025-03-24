@@ -39,14 +39,17 @@ class DetailsHeader extends StatelessWidget {
                 ),
               ),
             ),
-            // Text(
-            //   title,
-            //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            //         fontSize: 20,
-            //         fontWeight: FontWeight.w600,
-            //       ),
-            //   maxLines: 1,
-            //   overflow: TextOverflow.ellipsis,
+            // Visibility(
+            //   visible: title!=null,
+            //   child: Text(
+            //     title ?? '',
+            //     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //     maxLines: 1,
+            //     overflow: TextOverflow.ellipsis,
+            //   ),
             // ),
           ],
         ),

@@ -58,21 +58,15 @@ class CompanyOrProjectSection extends StatelessWidget {
                     height: DEVICE_HEIGHT * 0.005,
                   ),
                   if ((showRealEstateTxt && companyName != null))
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: DEVICE_WIDTH * 0.6,
-                          child: MadaText(
-                            '${FFLocalizations.of(context).getText('real_estate_developer')}-${companyName!}',
-                            style:
-                                Theme.of(context).textTheme.bodySmall!.copyWith(
-                                      color: const Color(AppColors.gray2),
-                                      fontSize: 12,
-                                      // decoration: TextDecoration.underline,
-                                    ),
-                          ),
-                        ),
-                      ],
+                    MadaText(
+                      '${FFLocalizations.of(context).getText('real_estate_developer')}-${companyName!}',
+                      softWarp: true,
+                      style:
+                          Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: const Color(AppColors.gray2),
+                                fontSize: 12,
+                                // decoration: TextDecoration.underline,
+                              ),
                     ),
                 ],
               ),

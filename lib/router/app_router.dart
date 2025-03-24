@@ -2,6 +2,7 @@ import '../general_exports.dart';
 import '../pages/exclusive_projects/exclusive_projects.dart';
 import '../pages/login_page/login_page_widget.dart';
 import '../pages/projects_listview/projects_listview.dart';
+import '../pages/unit_details/unit_details.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -81,6 +82,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const WebViewScreen(),
           settings: RouteSettings(arguments: args),
+        );
+
+      case Routes.routeUnitDetails:
+        return MaterialPageRoute(
+          builder: (_) => const UnitDetailsScreen(),
+          settings: RouteSettings(
+            arguments: args
+          ),
         );
 
       default:

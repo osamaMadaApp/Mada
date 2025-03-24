@@ -144,6 +144,15 @@ class _FavoritesState extends State<Favorites> {
                                         //         [keyID],
                                         //   },
                                         // );
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          Routes.routeUnitDetails,
+                                          arguments: {
+                                            keyID:
+                                            controller.units[index][keyID],
+                                          },
+                                        );
                                       },
                                     );
                                   },

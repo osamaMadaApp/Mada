@@ -860,6 +860,18 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Following',
       'ar': 'المتابعة',
     },
+    'price_with_tax': {
+      'ar': 'السعر شامل الضريبة',
+      'en': 'Price with TAX',
+    },
+    'financial_details': {
+      'ar': 'التفاصيل المالية',
+      'en': 'Financial details',
+    },
+    'general_details': {
+      'ar': 'التفاصيل العامة',
+      'en': 'General details',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

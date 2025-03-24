@@ -11,4 +11,6 @@ class Routes {
   static const String routePropertyDetails = '/property-details';
   static const String routeVideoPlayer = '/video-player';
   static const String routeWebViewScreen = '/webView-screen';
+  static const String routeUnitDetails = '/unit_details';
+
 }
