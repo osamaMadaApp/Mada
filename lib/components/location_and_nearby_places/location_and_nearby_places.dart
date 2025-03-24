@@ -7,12 +7,14 @@ class LocationAndNearbyPlaces extends StatelessWidget {
     this.viewProjectOnMap = true,
     this.viewProjectText,
     this.viewOnMap,
+    this.title,
     this.showGrayLine = false,
   });
 
   final List<dynamic> nearbyLocations;
   final bool viewProjectOnMap;
   final String? viewProjectText;
+  final String? title;
   final Function()? viewOnMap;
   final bool showGrayLine;
 
@@ -77,7 +79,7 @@ class LocationAndNearbyPlaces extends StatelessWidget {
                             height: DEVICE_HEIGHT * 0.02,
                           ),
                           MadaText(
-                            FFLocalizations.of(context).getText('location'),
+                            title ?? FFLocalizations.of(context).getText('location'),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!

@@ -1,6 +1,5 @@
-// ignore_for_file: must_be_immutable
-
-import 'package:flutter_html/flutter_html.dart';
+import '../../components/unit_layout_screen/unit_layout_icon.dart';
+import '../../components/unit_layout_screen/unit_layout_screen.dart';
 import '../../general_exports.dart';
 import 'unit_details_model.dart';
 
@@ -25,6 +24,7 @@ class UnitDetails extends StatefulWidget {
     super.key,
     this.projectId,
   });
+
   final dynamic projectId;
 
   @override
@@ -38,7 +38,8 @@ class _UnitDetailsState extends State<UnitDetails> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (callBack) {
-        Provider.of<UnitDetailsModel>(context, listen: false).getProjectDetails(unitId: widget.projectId);
+        Provider.of<UnitDetailsModel>(context, listen: false)
+            .getProjectDetails(unitId: widget.projectId);
       },
     );
   }
@@ -52,10 +53,10 @@ class _UnitDetailsState extends State<UnitDetails> {
           return model.isLoading
               ? const Center()
               : Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 100.h),
-                    child: SingleChildScrollView(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 100.h),
+                      child: SingleChildScrollView(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 50.h,
@@ -77,15 +78,22 @@ class _UnitDetailsState extends State<UnitDetails> {
                                   SizedBox(
                                     width: 20.w,
                                   ),
-                                  Expanded(  // TODO I COMMIT THIS
+                                  Expanded(
                                     flex: 3,
                                     child: ProjectDetailsSection2(
-                                      statusInfoIsList: true,
-                                      statusInfo: model.data[keyStatusInfo] ?? [],
-                                      status: model.data[keyStatusInfo][0][keyText] ?? '',/// TODO CHICK WITH TEAM
-                                      availableStatus: model.data[keyStatus] ?? '',
-                                      statusColor: '' //model.data[keyStatusColor],
-                                    ),
+                                        statusInfoIsList: true,
+                                        statusInfo:
+                                            model.data[keyStatusInfo] ?? [],
+                                        status: model.data[keyStatusInfo][0]
+                                                [keyText] ??
+                                            '',
+
+                                        /// TODO CHICK WITH TEAM
+                                        availableStatus:
+                                            model.data[keyStatus] ?? '',
+                                        statusColor:
+                                            '' //model.data[keyStatusColor],
+                                        ),
                                   ),
                                 ],
                               ),
@@ -93,28 +101,29 @@ class _UnitDetailsState extends State<UnitDetails> {
                           ),
                         ),
                       ),
-                  ),
-                  Container(
-                    color: const Color(AppColors.gray3),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 48.h,left: 24.w,right: 24.w,bottom: 24.h),
-                      child: DetailsHeader(
-                        onDownloadPdfPressed: () {
-                          // will modify this later when change base url
-                        },
-                        onSharePressed: () {
-                          Share.share(model.data[keyDeepLink]);
-                        },
-                        onFollowPressed: () {
-                          model.addToFollow(context);
-                        },
-                        showDownloadPdfIcon: false,
-                        isFollowed: model.data[keyIsFollowed] ?? false,
+                    ),
+                    Container(
+                      color: const Color(AppColors.gray3),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 48.h, left: 24.w, right: 24.w, bottom: 24.h),
+                        child: DetailsHeader(
+                          onDownloadPdfPressed: () {
+                            // will modify this later when change base url
+                          },
+                          onSharePressed: () {
+                            Share.share(model.data[keyDeepLink]);
+                          },
+                          onFollowPressed: () {
+                            model.addToFollow(context);
+                          },
+                          showDownloadPdfIcon: false,
+                          isFollowed: model.data[keyIsFollowed] ?? false,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
         },
       ),
     );
@@ -135,7 +144,6 @@ class ProjectDetailsSection1 extends StatelessWidget {
         return Column(
           spacing: 20.h,
           children: [
-            // Project Header
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -168,19 +176,18 @@ class ProjectDetailsSection1 extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  // // Project Info
                   ComponentGeneralInformation(
                     name: '${model.data[keyTitle] ?? ''} - ${model.data[keyUnitNumber] ?? ''}',
                     priceStarts: model.data[keyCost] ?? '',
                     city: model.data[keyCity] ?? '',
                     community: model.data[keySubCommunity] ?? '',
-                    priceText: FFLocalizations.of(context).getText('price_with_tax'),
+                    priceText:
+                        FFLocalizations.of(context).getText('price_with_tax'),
                     showPriceText: true,
                   ),
                 ],
               ),
             ),
-
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -191,72 +198,79 @@ class ProjectDetailsSection1 extends StatelessWidget {
                   if (model.data[keyGeneralDetails] != null &&
                       model.data[keyGeneralDetails].isNotEmpty)
                     ProjectDescription(
-                      title: FFLocalizations.of(context).getText('general_details'),
+                      title: FFLocalizations.of(context)
+                          .getText('general_details'),
                       projectInfo: model.data[keyGeneralDetails],
                       onDescriptionPressed: () {
                         model.onDescriptionPressed(context);
                       },
                     ),
+                  UnitLayoutIcon(
+                    planImage: model.data[keyPlan][0],
+                    onTap: () {
+                      SideSheet.show(
+                        context,
+                        child: UnitLayoutScreen(
+                          unitNumber: model.data[keyUnitNumber],
+                          onClose: () {
+                            Navigator.pop(context);
+                          },
+                          title: model.data[keyProjectTitle],
+                          image: model.data[keyPlan][0],
+                        ),
+                        title: FFLocalizations.of(context).getText(
+                          'mortgage_calculator',
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  const Padding(
+                      padding: EdgeInsets.only(left: 12, right: 12),
+                      child: GrayLine()),
                   Services(
                     services: model.data[keyAmenitiesData] ?? [],
                     bottomPadding: DEVICE_HEIGHT * 0.02,
                   ),
-                  // VideoAndBrochure(
-                  //   showBrochure: false,
-                  //   showVideo: model.data[keyVideo] != null &&
-                  //       model.data[keyVideo].isNotEmpty,
-                  //   onVideoTapped: () {
-                   //     Navigator.pushNamed(
-                  //       context,
-                  //       Routes.routeVideoPlayer,
-                  //       arguments: {
-                  //         keyUrl: model.data[keyVideo][0],
-                  //       },
-                  //     );
-                  //   },
-                  //   imageUrl: model.data[keyVideoImage],
-                  // ),
-
+                  if (model.data[keyNearbyFacilities] != null &&
+                      model.data[keyNearbyFacilities].isNotEmpty)
+                  Padding(
+                    padding: EdgeInsets.all(DEVICE_HEIGHT * 0.02),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ProjectInformation(
+                          projectInfo: model.data[keyNearbyFacilities] ?? [],
+                          title: FFLocalizations.of(context)
+                              .getText('location_nearby_places'),
+                          textKey: keyName,
+                          valueKey: keyDistance,
+                          padding: 0,
+                        ),
+                      ],
+                    ),
+                  ),
                   PaymentPlans(
                     paymentPlans: model.data[keyPaymentPlans],
                     percentageKey: keyPercent,
                     showAmount: false,
+                    showGrayLine: false,
                     childAspectRatio: 1.4,
                     onPaymentPlanExpanded: model.onPaymentPlanExpanded,
                     isPaymentPlanExpanded: model.isPaymentPlanExpanded,
                   ),
-
                   LocationAndNearbyPlaces(
+                    title: FFLocalizations.of(context).getText('live_location_on_map'),
                     nearbyLocations: model.data['nearestFacilityApp'] ?? [],
-                    viewProjectText: FFLocalizations.of(context)
-                        .getText('view_project_on_map'),
+                    viewProjectText: FFLocalizations.of(context).getText('view_project_on_map'),
                     viewOnMap: model.onViewProjectMap,
                   ),
                   SizedBox(height: 20.h),
                 ],
               ),
             ),
-
-            // AdsSection(
-            //   showAdSection: model.adBanner != null,
-            //   image: model.adBanner[keyAdImage],
-            //   onAdPressed: () {
-            //     if (model.adBanner[keyPlatform] == keyApp) {
-            //       openScreenBasedOnScreenName(
-            //         model.adBanner[keyScreenNameCapital],
-            //         model.adBanner[keyRecordId],
-            //       );
-            //     } else {
-            //       Get.toNamed(
-            //         routeWebViewScreen,
-            //         arguments: {
-            //           keyUrl:
-            //               model.adBanner[keyRedirectLink] ?? ''
-            //         },
-            //       );
-            //     }
-            //   },
-            // ),
           ],
         );
       },
@@ -289,7 +303,7 @@ class ProjectDetailsSection2 extends StatelessWidget {
     return Consumer<UnitDetailsModel>(
       builder: (
         BuildContext context,
-          UnitDetailsModel model,
+        UnitDetailsModel model,
         Widget? child,
       ) {
         return Container(
@@ -397,7 +411,9 @@ class ProjectDetailsSection2 extends StatelessWidget {
                 textKey: keyLabel,
                 padding: 0,
               ),
-              SizedBox(height: 136.h,),
+              SizedBox(
+                height: 136.h,
+              ),
               const GrayLine(),
               ContactUsDetails(
                 paddingTop: 0,
@@ -460,6 +476,7 @@ class ProjectDescription extends StatelessWidget {
     this.onDescriptionPressed,
     this.title,
   });
+
   final List<dynamic> projectInfo;
   final Function()? onDescriptionPressed;
   final String? title;

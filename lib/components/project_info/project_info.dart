@@ -53,7 +53,7 @@ class ProjectInformation extends StatelessWidget {
                           text: projectInfo[index][textKey] ?? '',
                           value: projectInfo[index][valueKey] == null
                               ? ''
-                              : valueKey == keyAmount
+                               : valueKey == keyAmount
                                   ? '${getFormattedPrice(projectInfo[index][valueKey].toDouble())} ${getCurrency()}'
                                   : projectInfo[index][valueKey].toString(),
                           color: index.isOdd

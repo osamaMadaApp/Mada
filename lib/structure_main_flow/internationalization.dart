@@ -958,6 +958,26 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'success': {
       'en': 'Success',
       'ar': 'نجاح',
+    },
+    'unit_layout': {
+      'en': 'Unit Layout',
+      'ar': 'مخطط الوحدة',
+    },
+    'view_unit_layout': {
+      'en': 'View unit design layout',
+      'ar': 'عرض مخطط تصميم الوحدة',
+    },
+    'click_to_show_details': {
+      'en': 'Click to show  details',
+      'ar': 'اضغط لإظهار التفاصيل',
+    },
+    'layout_of_unit_no': {
+      'en': 'Layout of unit no.',
+      'ar': 'تخطيط الوحدة رقم',
+    },
+    'live_location_on_map': {
+      'en': 'Live location on map',
+      'ar': 'الموقع المباشر على الخريطة',
     }
   },
 ].reduce((Map<String, Map<String, String>> a,
