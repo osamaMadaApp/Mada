@@ -89,8 +89,6 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget{
                                           16.w, 0.h, 0.w, 0.h),
                                       // Add some spacing between items
                                       child: LabeledIconCardGradientColor(
-                                        columnCrossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                         title: _model.menu[index][keyName],
                                         icon: _model.menu[index][keyImage],
                                         textStyle: Theme.of(context)
@@ -173,11 +171,15 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget{
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
+                              gridDelegate:  isPortrait(context) ? SliverGridDelegateWithMaxCrossAxisExtent(
                                 maxCrossAxisExtent: 434,
-                                mainAxisSpacing: DEVICE_HEIGHT * 0.0090,
-                                crossAxisSpacing: DEVICE_WIDTH * 0.0009,
+                                mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
+                                crossAxisSpacing: DEVICE_WIDTH * 0.001,  // Increased spacing
+                                childAspectRatio: 450 / 350,
+                              ) :  SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 434,
+                                mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
+                                crossAxisSpacing: DEVICE_WIDTH * 0.02,  // Increased spacing
                                 childAspectRatio: 434 / 231,
                               ),
                               itemCount: _model.lastProjects.length,

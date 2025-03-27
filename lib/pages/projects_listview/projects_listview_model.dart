@@ -1,5 +1,4 @@
 import '../../app_state.dart';
-import '../../components/projects_listview_filter/projects_listview_filter.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
@@ -14,6 +13,7 @@ class ProjectsListviewModel extends ChangeNotifier {
   final String? keyProjectStatus;
   final String? keyTitle;
     String? test;
+  bool orderByDistance = false;
 
   List<dynamic> filteredPropertyPurpose =
       FFAppState().masterDateJsonModel[keyFilteredPropertyPurpose];
@@ -184,6 +184,29 @@ class ProjectsListviewModel extends ChangeNotifier {
     }
     ++page;
     startLoading();
+
+    final Map<String?, dynamic> body = {
+      keyPage: page,
+      keyProjectStatus: projectStatus,
+      ...filterMap,
+      keySortKey: selectedSortKey['key'] ?? null,
+      keySortType: selectedSortType['key'] ?? null,
+      keyCategories: selectedTypeFilter.map((e) => e[keyID]).toList(),
+      keyCityId: selectedCity.map((e) => e[keyID]).toList(),
+      keyPurposeType: selectedFilteredPropertyPurpose['key'],
+      keyProjectCategory: selectedProjectCategory[keySlug],
+      keyNeighborhoodId: selectedNeighborhood.map((e) => e[keyID]).toList(),
+      keyBedrooms: selectedRoomsNumber.map((e) => e['key']).toList(),
+      keyDeveloper: selectedRealEstateDeveloper.map((e) => e[keyName]).toList(),
+      'subCommunityId': selectedSubCommunity.map((e) => e[keyID]).toList(),
+    };
+
+    // Conditionally add location data if available
+    if (locationData != null && orderByDistance) {
+      body[keyLongitude] = locationData!.longitude;
+      body[keyLatitude] = locationData!.latitude;
+    }
+
     ApiRequest(
       path: apiExclusiveProjects,
       formatResponse: true,
@@ -193,22 +216,7 @@ class ProjectsListviewModel extends ChangeNotifier {
         keyLanguage: FFAppState().getSelectedLanguge(),
       },
       shouldShowRequestDetails: true,
-      body: {
-        keyPage: page,
-        keyProjectStatus: projectStatus,
-        ...filterMap,
-        keySortKey: selectedSortKey['key'] ?? null,
-        keySortType: selectedSortType['key'] ?? null,
-        keyCategories: selectedTypeFilter.map((e) => e[keyID]).toList(),
-        keyCityId: selectedCity.map((e) => e[keyID]).toList(),
-        keyPurposeType: selectedFilteredPropertyPurpose['key'],
-        keyProjectCategory: selectedProjectCategory[keySlug],
-        keyNeighborhoodId: selectedNeighborhood.map((e) => e[keyID]).toList(),
-        keyBedrooms: selectedRoomsNumber.map((e) => e['key']).toList(),
-        keyDeveloper:
-            selectedRealEstateDeveloper.map((e) => e[keyName]).toList(),
-        'subCommunityId': selectedSubCommunity.map((e) => e[keyID]).toList(),
-      },
+      body: body,
       className: 'ProjectsListviewController/getProjectsWithFiltering',
     ).request(
       onSuccess: (dynamic data, dynamic response) {
@@ -740,5 +748,24 @@ class ProjectsListviewModel extends ChangeNotifier {
     hasNextPage = true;
 
     getProjectsWithFiltering();
+  }
+
+  Future<void> _getLocation() async {
+    if (locationData == null) {
+      await getCurrentLocation();
+    }
+    notifyListeners();
+  }
+
+  Future<void> onOrderByDistancePressed() async {
+    orderByDistance = !orderByDistance;
+    if (orderByDistance) {
+      await _getLocation();
+    }
+    if (locationData != null) {
+      resetFilter();
+      getProjectsWithFiltering();
+    }
+    notifyListeners();
   }
 }

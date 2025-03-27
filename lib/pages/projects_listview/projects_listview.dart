@@ -97,30 +97,25 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                               SizedBox(height: DEVICE_HEIGHT * 0.02),
                               Row(
                                 children: [
-                                  Container(
-                                    padding:
-                                        EdgeInsets.all(DEVICE_WIDTH * 0.01),
-                                    decoration: BoxDecoration(
-                                      color: model.isCurrentLocationSelected
-                                          ? FlutterMadaTheme.of(context)
-                                              .color97BE5A //colorD2D2D2
-                                              .withOpacity(0.15)
-                                          : FlutterMadaTheme.of(context)
-                                              .colorD2D2D2
-                                              .withOpacity(
-                                                0.25,
-                                              ),
-                                      borderRadius: BorderRadius.circular(
-                                          DEVICE_HEIGHT * 0.04),
-                                      border: Border.all(
+                                  InkWell(
+                                    onTap: model.onOrderByDistancePressed,
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.all(DEVICE_WIDTH * 0.01),
+                                      decoration: BoxDecoration(
                                         color: model.isCurrentLocationSelected
-                                            ? FlutterMadaTheme.of(context)
-                                                .color97BE5A
-                                            : Colors.transparent,
+                                            ? FlutterMadaTheme.of(context).color97BE5A.withOpacity(0.15)
+                                            : FlutterMadaTheme.of(context).colorD2D2D2.withOpacity(0.25,),
+                                        borderRadius: BorderRadius.circular(DEVICE_HEIGHT * 0.04),
+                                        border: Border.all(
+                                          color: model.isCurrentLocationSelected
+                                              ? FlutterMadaTheme.of(context)
+                                                  .color97BE5A
+                                              : Colors.transparent,
+                                        ),
                                       ),
+                                      child: SvgPicture.asset(iconCurrentLocation),
                                     ),
-                                    child:
-                                        SvgPicture.asset(iconCurrentLocation),
                                   ),
                                   SizedBox(width: DEVICE_WIDTH * 0.02),
                                   Expanded(
@@ -301,12 +296,16 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                       shrinkWrap: true,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
-                                      gridDelegate:
-                                          SliverGridDelegateWithMaxCrossAxisExtent(
+                                      gridDelegate:  isPortrait(context) ? SliverGridDelegateWithMaxCrossAxisExtent(
                                         maxCrossAxisExtent: 434,
-                                        mainAxisSpacing: DEVICE_HEIGHT * 0.0090,
-                                        crossAxisSpacing: DEVICE_WIDTH * 0.0009,
-                                        childAspectRatio: 434 / 231,
+                                        mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
+                                        crossAxisSpacing: DEVICE_WIDTH * 0.001,  // Increased spacing
+                                        childAspectRatio: 400 / 350,
+                                      ) :  SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent: 434,
+                                        mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
+                                        crossAxisSpacing: DEVICE_WIDTH * 0.02,  // Increased spacing
+                                        childAspectRatio: 424 / 231,
                                       ),
                                       itemCount: model.projects.length,
                                       itemBuilder:
@@ -315,12 +314,9 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                         return ProjectCard(
                                           horizontalPadding: 0,
                                           images: item[keyPhotos] ?? [],
-                                          projectImage:
-                                              item[keyDeveloperImage] ??
-                                                  testImage,
-                                          projectName: item[keyTitle] ?? '',
-                                          projectAddress:
-                                              '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
+                                          projectImage: item[keyDeveloperImage] ?? testImage,
+                                          projectName: item['title'] ?? '',
+                                          projectAddress: '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
                                           statusText: item[keyStatus] ?? '',
                                           totalUnits: item[keyTotalUnits] ?? '',
                                           availableUnits:

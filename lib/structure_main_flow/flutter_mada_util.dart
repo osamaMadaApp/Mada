@@ -468,7 +468,6 @@ Future<Future<Object?>> showLeftSideDrawer({
         begin: const Offset(-1, 0),
         end: Offset.zero,
       ).animate(animation);
-
       return SlideTransition(
         position: slide,
         child: child,

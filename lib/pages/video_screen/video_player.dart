@@ -1,3 +1,5 @@
+import 'package:video_player/video_player.dart';
+
 import '../../general_exports.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -58,7 +60,7 @@ class _VideoWidgetState extends State<VideoWidget> {
               Center(
                 child: AspectRatio(
                   aspectRatio: controller.videoController!.value.aspectRatio,
-                  child: CachedVideoPlayer(controller.videoController!),
+                  child: VideoPlayer(controller.videoController!),
                 ),
               ),
               GestureDetector(
@@ -98,7 +100,7 @@ class VideoPlayerControls extends StatelessWidget {
     super.key,
     this.withOptions = true,
   });
-  final CachedVideoPlayerController videoController;
+  final VideoPlayerController videoController;
   final bool withOptions;
 
   @override
@@ -106,7 +108,7 @@ class VideoPlayerControls extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: videoController,
       builder:
-          (BuildContext context, CachedVideoPlayerValue value, Widget? child) {
+          (BuildContext context,  VideoPlayerValue value, Widget? child) {
         return Directionality(
           textDirection: TextDirection.ltr,
           child: Column(

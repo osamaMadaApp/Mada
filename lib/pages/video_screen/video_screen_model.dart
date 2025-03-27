@@ -1,12 +1,14 @@
+import 'package:video_player/video_player.dart';
+
 import '../../general_exports.dart';
 
 class VideoScreenModel extends ChangeNotifier {
-  CachedVideoPlayerController? videoController;
+  VideoPlayerController? videoController;
   bool isLoading = true;
 
   Future<void> onInit(String videoUrl) async {
     consoleLog(videoUrl, key: 'videoUrl');
-    videoController = CachedVideoPlayerController.network(
+    videoController = VideoPlayerController.network(
       videoUrl.isNotEmpty
           ? videoUrl
           : 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',

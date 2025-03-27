@@ -107,18 +107,22 @@ class PropertyCard extends StatelessWidget {
                               padding: EdgeInsets.fromLTRB(0, 0, 6.w, 0),
                               child: SvgPicture.asset(iconLocation),
                             ),
-                            Text(
-                              '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                    color: FlutterMadaTheme.of(context)
-                                        .color989898,
-                                    fontSize: 14,
-                                    fontFamily: AppFonts.outfit,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                      color: FlutterMadaTheme.of(context)
+                                          .color989898,
+                                      fontSize: 14,
+                                      fontFamily: AppFonts.outfit,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                              ),
                             ),
                           ],
                         ),
@@ -127,11 +131,11 @@ class PropertyCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 5,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 5.h,
                   ),
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  margin: EdgeInsets.symmetric(horizontal: 8.w),
                   decoration: BoxDecoration(
                     color: Color(
                       int.parse(

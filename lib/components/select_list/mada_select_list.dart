@@ -109,7 +109,7 @@ class SelectList extends StatelessWidget {
             : (selectedItem == item || areMapsEqual(selectedItem, item));
         return (item[keyImage] != null && showImage)
             ? RoundedContainer(
-                borderRadius: borderRadius ?? 0.1,
+                borderRadius: borderRadius,
                 borderColor: isSelected ? borderColor : defaultBorderColor,
                 color: isSelected
                     ? FlutterMadaTheme.of(context).color97BE5A.withOpacity(0.15)

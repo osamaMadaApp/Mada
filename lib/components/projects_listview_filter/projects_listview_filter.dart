@@ -53,11 +53,12 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                   .onTempFilteredPropertyPurposePressed,
                               borderColor:
                                   FlutterMadaTheme.of(context).color97BE5A,
-                              unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                  .colorD2D2D2
-                                  .withOpacity(
-                                0.25,
-                              ),
+                              unselectedBackgroundColor:
+                                  FlutterMadaTheme.of(context)
+                                      .colorD2D2D2
+                                      .withOpacity(
+                                        0.25,
+                                      ),
                               borderWidth: 1,
                               borderRadius: 22,
                             ),
@@ -92,11 +93,12 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                               borderColor:
                                   FlutterMadaTheme.of(context).color97BE5A,
                               textKey: keyName,
-                              unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                  .colorD2D2D2
-                                  .withOpacity(
-                                0.25,
-                              ),
+                              unselectedBackgroundColor:
+                                  FlutterMadaTheme.of(context)
+                                      .colorD2D2D2
+                                      .withOpacity(
+                                        0.25,
+                                      ),
                               borderWidth: 1,
                               borderRadius: 22,
                             ),
@@ -118,11 +120,10 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                       borderColor: FlutterMadaTheme.of(context).color97BE5A,
                       borderWidth: 1,
                       borderRadius: 22,
-                      unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                          .colorD2D2D2
-                          .withOpacity(
-                        0.25,
-                      ),
+                      unselectedBackgroundColor:
+                          FlutterMadaTheme.of(context).colorD2D2D2.withOpacity(
+                                0.25,
+                              ),
                     ),
                     Visibility(
                       visible: controller.neighborhoods.isNotEmpty,
@@ -144,8 +145,14 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             selectedItem: controller.selectedTempNeighborhood,
                             textKey: keyName,
                             onTap: controller.onTempNeighborhoodPress,
-                            borderColor: FlutterMadaTheme.of(context).color97BE5A,
-                            unselectedBackgroundColor: FlutterMadaTheme.of(context).colorD2D2D2.withOpacity(0.25,),
+                            borderColor:
+                                FlutterMadaTheme.of(context).color97BE5A,
+                            unselectedBackgroundColor:
+                                FlutterMadaTheme.of(context)
+                                    .colorD2D2D2
+                                    .withOpacity(
+                                      0.25,
+                                    ),
                             borderWidth: 1,
                             borderRadius: 22,
                           ),
@@ -175,11 +182,12 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             onTap: controller.onTempSubCommunityPress,
                             borderColor:
                                 FlutterMadaTheme.of(context).color97BE5A,
-                            unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                .colorD2D2D2
-                                .withOpacity(
-                              0.25,
-                            ),
+                            unselectedBackgroundColor:
+                                FlutterMadaTheme.of(context)
+                                    .colorD2D2D2
+                                    .withOpacity(
+                                      0.25,
+                                    ),
                             textKey: keyName,
                             borderWidth: 1,
                             borderRadius: 22,
@@ -212,11 +220,12 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                               onTap: controller.onTemRoomsNumberPress,
                               borderColor:
                                   FlutterMadaTheme.of(context).color97BE5A,
-                              unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                  .colorD2D2D2
-                                  .withOpacity(
-                                0.25,
-                              ),
+                              unselectedBackgroundColor:
+                                  FlutterMadaTheme.of(context)
+                                      .colorD2D2D2
+                                      .withOpacity(
+                                        0.25,
+                                      ),
                               borderWidth: 1,
                               borderRadius: 22,
                             ),
@@ -460,8 +469,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                     SizedBox(height: DEVICE_HEIGHT * 0.04),
                     if (controller.projectStatus != 'Lands')
                       Padding(
-                        padding:
-                            EdgeInsets.only(bottom: DEVICE_HEIGHT * 0.03),
+                        padding: EdgeInsets.only(bottom: DEVICE_HEIGHT * 0.03),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -480,15 +488,13 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                               items: controller.realEstateDevelopers,
                               selectedItem:
                                   controller.selectedTempRealEstateDeveloper,
-                              onTap:
-                                  controller.onTempRealEstateDeveloperPress,
-                              borderColor: Color(AppColors.green2),
+                              onTap: controller.onTempRealEstateDeveloperPress,
+                              borderColor: const Color(AppColors.green2),
                               textKey: keyName,
-                              unselectedBackgroundColor: FlutterMadaTheme.of(context)
-                                  .colorD2D2D2
-                                  .withOpacity(
-                                0.25,
-                              ),
+                              unselectedBackgroundColor:
+                                  FlutterMadaTheme.of(context)
+                                      .colorD2D2D2
+                                      .withOpacity(0.25),
                               borderWidth: 1,
                               borderRadius: 8,
                               minWidth: DEVICE_WIDTH * 0.3,
@@ -524,14 +530,17 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                     SizedBox(
                       width: DEVICE_WIDTH,
                       child: CustomButton(
-                        text: FFLocalizations.of(context)
-                            .getText('apply_filter'),
+                        text:
+                            FFLocalizations.of(context).getText('apply_filter'),
                         textStyle:
                             Theme.of(context).textTheme.bodySmall!.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: Color(AppColors.white),
                                 ),
-                        onPressed: controller.onApplyFilterPress,
+                        onPressed: () {
+                          controller.onApplyFilterPress();
+                          Navigator.pop(context);
+                        },
                       ),
                     )
                   ],
