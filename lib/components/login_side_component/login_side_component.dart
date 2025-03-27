@@ -11,7 +11,7 @@ class LoginSideComponent extends StatefulWidget {
       {super.key, this.onForgetPasswordTap, this.onConfirmTap});
 
   final void Function()? onForgetPasswordTap;
-  final Future<void> Function()? onConfirmTap;
+  final Future<void> Function(String? email, String? password)? onConfirmTap;
 
   @override
   State<LoginSideComponent> createState() => _LoginSideComponent();
@@ -28,11 +28,9 @@ class _LoginSideComponent extends State<LoginSideComponent> {
     _model.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {});
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if(kDebugMode){
-       setState(() {
-         _model.textController1.text = 'usama@gmail.com';
-         _model.textController2.text = 'usama@gmail.com';
-       });
+      if (kDebugMode) {
+        _model.textController1.text = 'sarmad@madaproperties.com';
+        _model.textController2.text = 'Sar@2021\$\$';
       }
     });
   }
@@ -45,7 +43,8 @@ class _LoginSideComponent extends State<LoginSideComponent> {
 
   @override
   Widget build(BuildContext context) {
-    _model = context.watch<LoginSideComponentModel>(); // Using watch here instead of read
+    _model = context
+        .watch<LoginSideComponentModel>(); // Using watch here instead of read
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -96,7 +95,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                             )),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.5,
+                        width: MediaQuery.of(context).size.width / 3,
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(0.w, 32.h, 0.w, 0.h),
                           child: TextFormField(
@@ -179,7 +178,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.5,
+                        width: MediaQuery.of(context).size.width / 3,
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(0.w, 32.h, 0.w, 0.h),
                           child: TextFormField(
@@ -281,22 +280,6 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: widget.onForgetPasswordTap,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0.w, 16.h, 0.w, 0.h),
-                          child: Text(
-                              FFLocalizations.of(context)
-                                  .getText('forgetPassword?'),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: FlutterMadaTheme.of(context).color8EC24D,
-                                fontFamily: AppFonts.outfit,
-                                decoration: TextDecoration.underline,
-                                fontWeight: AppFonts.w400,
-                              )),
-                        ),
-                      ),
                     ],
                   ),
                 ],
@@ -314,14 +297,16 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                             if (_model.textController1State == false) {
                               return;
                             }
-                            await widget.onConfirmTap?.call();
+                            await widget.onConfirmTap?.call(
+                                _model.textController1.text,
+                                _model.textController2.text);
                           }
                         : null,
                     text: FFLocalizations.of(context).getText('login'),
                     options: FFButtonOptions(
                       height: 48.h,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(181.w, 0, 181.w, 0),
+                          EdgeInsetsDirectional.fromSTEB(155.w, 0, 155.w, 0),
                       color: FlutterMadaTheme.of(context).color8EC24D,
                       textStyle: const TextStyle(
                         fontSize: 14.0,
