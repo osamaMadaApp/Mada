@@ -330,10 +330,13 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                           showProjectCategory:
                                               model.projectStatus == 'ready',
                                           onTap: () {
-                                            // Get.toNamed(
-                                            //   routeProjectDetails,
-                                            //   arguments: item[keySlug],
-                                            // );
+                                            Navigator.pushNamed(
+                                              context,
+                                              Routes.routeProjectDetails,
+                                              arguments: {
+                                                keyProjectId: item[keySlug],
+                                              },
+                                            );
                                           },
                                         );
                                       },

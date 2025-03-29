@@ -44,7 +44,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                   ),
                             ),
                             SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectList(
+                            SelectListBottomList(
                               isWrap: true,
                               items: controller.filteredPropertyPurpose,
                               selectedItem:
@@ -84,7 +84,8 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                   ),
                             ),
                             SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectList(
+                            SelectListBottomList(
+                              isProjectList: true,
                               isWrap: true,
                               items: controller.projectCategories,
                               selectedItem:
@@ -112,7 +113,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                           ),
                     ),
                     SizedBox(height: DEVICE_HEIGHT * 0.02),
-                    SelectList(
+                    SelectListBottomList(
                       items: controller.cities,
                       textKey: keyName,
                       selectedItem: controller.selectedTempCity,
@@ -140,7 +141,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                     ),
                           ),
                           SizedBox(height: DEVICE_HEIGHT * 0.02),
-                          SelectList(
+                          SelectListBottomList(
                             items: controller.neighborhoods,
                             selectedItem: controller.selectedTempNeighborhood,
                             textKey: keyName,
@@ -176,7 +177,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                 ),
                           ),
                           SizedBox(height: DEVICE_HEIGHT * 0.02),
-                          SelectList(
+                          SelectListBottomList(
                             items: controller.subCommunities,
                             selectedItem: controller.selectedTemSubCommunity,
                             onTap: controller.onTempSubCommunityPress,
@@ -214,7 +215,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                   ),
                             ),
                             SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectList(
+                            SelectListBottomList(
                               items: controller.roomsNumber,
                               selectedItem: controller.selectedTemRoomsNumber,
                               onTap: controller.onTemRoomsNumberPress,
@@ -484,10 +485,11 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                                   ),
                             ),
                             SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectList(
+                            SelectListBottomList(
                               items: controller.realEstateDevelopers,
                               selectedItem:
                                   controller.selectedTempRealEstateDeveloper,
+                              isProjectList: true,
                               onTap: controller.onTempRealEstateDeveloperPress,
                               borderColor: const Color(AppColors.green2),
                               textKey: keyName,
@@ -589,5 +591,348 @@ class ProjectListviewFilterSheet extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class SelectListBottomList extends StatelessWidget {
+  const SelectListBottomList({
+    required this.items,
+    this.minHeight,
+    this.minWidth,
+    this.textKey = keyValue,
+    this.selectedItem,
+    this.onTap,
+    this.borderWidth = 0.0,
+    this.borderColor = Colors.transparent,
+    this.defaultBorderColor = Colors.transparent,
+    this.unselectedBackgroundColor,
+    this.unselectedFontColor = Colors.black,
+    super.key,
+    this.spaceBetween = false,
+    this.textWidth,
+    this.borderRadius = 32,
+    this.suffix,
+    this.isWrap = false,
+    this.showImage = true,
+    this.scrollController,
+    this.withLimitation = false,
+    this.keys,
+    this.showCount = false,
+    this.suffixWidget,
+    this.crossAxisAlignment,
+    this.mainAxisAlignment,
+    this.isProjectList,
+  });
+
+  final List<dynamic> items;
+  final String textKey;
+  final Function? onTap;
+  final dynamic selectedItem;
+  final double borderWidth;
+  final bool showImage;
+  final bool withLimitation;
+  final bool? isProjectList;
+
+  /// The border color of the selected item.
+  final Color borderColor;
+
+  /// The default border color of the item.
+  final Color defaultBorderColor;
+  final Color? unselectedBackgroundColor;
+  final Color unselectedFontColor;
+  final double? minHeight;
+  final double? minWidth;
+  final bool spaceBetween;
+  final double? textWidth;
+  final double borderRadius;
+  final Widget? suffix;
+  final bool isWrap;
+  final ScrollController? scrollController;
+  final List<GlobalKey>? keys;
+  final bool showCount;
+  final Widget? suffixWidget;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final MainAxisAlignment? mainAxisAlignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return isWrap
+        ? Wrap(
+            children: [
+              if (withLimitation)
+                ..._buildItemWithLimitation(
+                  items,
+                  context,
+                  isWrap,
+                  showImage,
+                  showCount ? 7 : 14,
+                )
+              else
+                ..._buildItem(items, context, isWrap, showImage),
+            ],
+          )
+        : SingleChildScrollView(
+            controller: scrollController,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                if (withLimitation)
+                  ..._buildItemWithLimitation(
+                    items,
+                    context,
+                    isWrap,
+                    showImage,
+                    showCount ? 7 : 14,
+                  )
+                else
+                  ..._buildItem(items, context, isWrap, showImage),
+                if (suffixWidget != null) suffixWidget!,
+              ],
+            ),
+          );
+  }
+
+  List<Widget> _buildItem(
+    dynamic item,
+    BuildContext context,
+    bool isWrap,
+    bool showImage,
+  ) {
+    return items.map(
+      (dynamic item) {
+        final bool isSelected = selectedItem is List
+            ? selectedItem.any((element) => areMapsEqual(element, item))
+            : (selectedItem == item || areMapsEqual(selectedItem, item));
+        return (item[keyImage] != null && showImage)
+            ? Container(
+                margin: isProjectList == true
+                    ? EdgeInsets.only(right: 20.w)
+                    : EdgeInsets.zero,
+                child: RoundedContainer(
+                  minWidth: isProjectList == true ? 140 : null,
+                  borderRadius: borderRadius ?? 0.1,
+                  borderColor: isSelected ? borderColor : defaultBorderColor,
+                  color: isSelected
+                      ? FlutterMadaTheme.of(context)
+                          .color97BE5A
+                          .withOpacity(0.15)
+                      : (unselectedBackgroundColor ??
+                              FlutterMadaTheme.of(context).colorD2D2D240)
+                          .withOpacity(0.25),
+                  onTap: () {
+                    onTap?.call(item);
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      CachedImage(
+                        image: item[keyImage],
+                        height: DEVICE_HEIGHT * 0.0525,
+                        borderRadius: DEVICE_WIDTH * 0.01,
+                        fit: BoxFit.contain,
+                      ),
+                      Text(
+                        item is String ? item : item[textKey] ?? '',
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: isSelected
+                                ? FlutterMadaTheme.of(context).color000000
+                                : unselectedFontColor,
+                            fontFamily: AppFonts.workSans,
+                            fontSize: 14,
+                            fontWeight: AppFonts.w400),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : Column(
+                key: keys != null ? keys![items.indexOf(item)] : null,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      RoundedContainer(
+                        borderRadius: borderRadius ?? 0.1,
+                        borderWidth: borderWidth,
+                        minHeight: minHeight ?? DEVICE_HEIGHT * 0.0001,
+                        minWidth: minWidth,
+                        borderColor:
+                            isSelected ? borderColor : defaultBorderColor,
+                        color: isSelected
+                            ? FlutterMadaTheme.of(context)
+                                .color97BE5A
+                                .withOpacity(0.15)
+                            : (unselectedBackgroundColor ??
+                                    FlutterMadaTheme.of(context).colorD2D2D2)
+                                .withOpacity(0.25),
+                        onTap: () {
+                          onTap?.call(item);
+                        },
+                        child: Column(
+                          mainAxisAlignment:
+                              mainAxisAlignment ?? MainAxisAlignment.center,
+                          crossAxisAlignment:
+                              crossAxisAlignment ?? CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Align(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: textWidth,
+                                    child: Text(
+                                      item is String
+                                          ? item
+                                          : item[textKey] ?? '',
+                                      maxLines: 2,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                              color: isSelected
+                                                  ? FlutterMadaTheme.of(context)
+                                                      .color000000
+                                                  : unselectedFontColor,
+                                              fontFamily: AppFonts.workSans,
+                                              fontSize: 14,
+                                              fontWeight: AppFonts.w400),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  if (suffix != null) suffix!,
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: DEVICE_WIDTH * 0.01),
+                    ],
+                  ),
+                  if (isWrap) SizedBox(height: DEVICE_WIDTH * 0.03),
+                ],
+              );
+      },
+    ).toList();
+  }
+
+  List<Widget> _buildItemWithLimitation(dynamic item, BuildContext context,
+      bool isWrap, bool showImage, int maxTextLength) {
+    final List<Widget> rows = [];
+    int itemsPerRow;
+
+    for (int i = 0; i < items.length;) {
+      // Determine the number of items per row based on the length of the text
+      itemsPerRow = 3; // Default to 3 items per row
+      for (int j = 0; j < 3 && i + j < items.length; j++) {
+        final dynamic item = items[i + j];
+        if (item[textKey] != null &&
+            item[textKey].toString().length > maxTextLength) {
+          itemsPerRow = 2; // If any item's text is too long, limit to 2 items
+          break;
+        }
+      }
+
+      rows.add(
+        Row(
+          children: List<Widget>.generate(itemsPerRow, (index) {
+            if (i + index < items.length) {
+              final dynamic item = items[i + index];
+              final bool isSelected = selectedItem is List
+                  ? selectedItem.contains(item)
+                  : (selectedItem == item || areMapsEqual(selectedItem, item));
+              return Column(
+                key: keys != null ? keys![items.indexOf(item)] : null,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      RoundedContainer(
+                        borderRadius: borderRadius,
+                        borderWidth: borderWidth,
+                        minHeight: minHeight ?? DEVICE_HEIGHT * 0.0001,
+                        minWidth: minWidth,
+                        borderColor:
+                            isSelected ? borderColor : defaultBorderColor,
+                        color: isSelected
+                            ? FlutterMadaTheme.of(context)
+                                .color97BE5A
+                                .withOpacity(0.15)
+                            : (unselectedBackgroundColor ??
+                                    FlutterMadaTheme.of(context).colorD2D2D2)
+                                .withOpacity(0.25),
+                        onTap: () {
+                          onTap?.call(item);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            if (item[keyImage] != null && showImage)
+                              CachedImage(
+                                image: item[keyImage],
+                                width: DEVICE_WIDTH * 0.09,
+                                height: DEVICE_HEIGHT * 0.0525,
+                                borderRadius: DEVICE_WIDTH * 0.01,
+                                fit: BoxFit.contain,
+                              ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    spaceBetween ? DEVICE_WIDTH * 0.075 : 0,
+                              ),
+                              child: Align(
+                                child: SizedBox(
+                                  width: textWidth,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        item is String
+                                            ? item
+                                            : item[textKey] ?? '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                              color: isSelected
+                                                  ? FlutterMadaTheme.of(context)
+                                                      .color000000
+                                                  : unselectedFontColor,
+                                            ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      if (item['propertyCount'] != null &&
+                                          showCount)
+                                        Text(' ( ${item['propertyCount']} )'),
+                                      if (suffix != null) suffix!,
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: DEVICE_WIDTH * 0.01),
+                    ],
+                  ),
+                  if (isWrap) SizedBox(height: DEVICE_WIDTH * 0.03),
+                ],
+              );
+            } else {
+              return Expanded(child: Container());
+            }
+          }),
+        ),
+      );
+
+      rows.add(SizedBox(height: DEVICE_WIDTH * 0.03));
+      i += itemsPerRow;
+    }
+
+    return rows;
   }
 }

@@ -17,7 +17,7 @@ class WebViewScreen extends StatelessWidget {
         brochureText: args?[keySubtitle],
         isProjectBrouchure: args?[keyProjectBrouchure],
         isPDF: args?[keyIsPdf] ?? false,
-        isBuy: args?[keyBuy],
+        isBuy: args?[keyBuy] ?? false,
       ),
     );
   }

@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'dart:ui' as ui;
 
 import 'package:country_flags/country_flags.dart';
@@ -26,7 +25,8 @@ class ContactUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
+        child: Padding(
       padding: EdgeInsets.symmetric(
         vertical: 30.h,
       ),
@@ -49,7 +49,7 @@ class ContactUs extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }
 
