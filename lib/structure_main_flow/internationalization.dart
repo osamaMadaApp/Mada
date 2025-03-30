@@ -886,9 +886,9 @@ final Map<String, Map<String, String>> kTranslationsMap =
     },
     'online_booking_available': {
       'en':
-      'Online booking is for Saudi residents only. Please contact our team to complete the manual booking process',
+          'Online booking is for Saudi residents only. Please contact our team to complete the manual booking process',
       'ar':
-      'الحجز الإلكتروني متاح للمقيمين في السعودية فقط. يرجى التواصل مع فريقنا لإكمال إجراء الحجز',
+          'الحجز الإلكتروني متاح للمقيمين في السعودية فقط. يرجى التواصل مع فريقنا لإكمال إجراء الحجز',
     },
     'confirm_your_data': {
       'en': 'Confirm Your Data',
@@ -896,7 +896,7 @@ final Map<String, Map<String, String>> kTranslationsMap =
     },
     'transfer_to_nafath': {
       'en':
-      'You will be transferred to NAFATH\nVerify your information before completing the order',
+          'You will be transferred to NAFATH\nVerify your information before completing the order',
       'ar': 'سيتم تحويلك الى منصة نفاذ تأكد من معلومات قبل اتمام الطلب',
     },
     'commission_vat': {
@@ -978,7 +978,31 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'live_location_on_map': {
       'en': 'Live location on map',
       'ar': 'الموقع المباشر على الخريطة',
-    }
+    },
+    'please_continue_selection': {
+      'en': 'Please continue selection',
+      'ar': 'يرجى متابعة الاختيار',
+    },
+    'available_units': {
+      'en': 'Available Units',
+      'ar': 'الوحدات المتاحة',
+    },
+    'please_select_the_sorting': {
+      'en': 'Please select the sorting according to the following',
+      'ar': 'يرجى تحديد الترتيب وفقًا لما يلي',
+    },
+    'newest': {
+      'en': 'Newest',
+      'ar': 'الأحدث',
+    },
+    'apply': {
+      'en': 'Apply',
+      'ar': 'تطبيق',
+    },
+    'project_units': {
+      'en': 'Project Units',
+      'ar': 'وحدات المشروع',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

@@ -54,6 +54,12 @@ class AppRouter {
           settings: RouteSettings(arguments: args),
         );
 
+      case Routes.routeProjectUnitsListview:
+        return MaterialPageRoute(
+          builder: (_) => const ProjectUnitsListviewScreen(),
+          settings: RouteSettings(arguments: args),
+        );
+
       case Routes.routeSearchScreen:
         return MaterialPageRoute(
           builder: (_) => const SearchScreen(),
@@ -87,9 +93,7 @@ class AppRouter {
       case Routes.routeUnitDetails:
         return MaterialPageRoute(
           builder: (_) => const UnitDetailsScreen(),
-          settings: RouteSettings(
-              arguments: args
-          ),
+          settings: RouteSettings(arguments: args),
         );
 
       case Routes.routePayment:

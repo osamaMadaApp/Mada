@@ -13,5 +13,5 @@ class Routes {
   static const String routeWebViewScreen = '/webView-screen';
   static const String routeUnitDetails = '/unit_details';
   static const String routePayment = '/payment';
-
+  static const String routeProjectUnitsListview = '/project_units_listview';
 }

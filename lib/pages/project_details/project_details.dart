@@ -458,12 +458,13 @@ class ProjectDetailsSection2 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                       onPressed: () {
-                        // Get.toNamed(
-                        //   routeProjectUnitsListview,
-                        //   arguments: <String, dynamic>{
-                        //     keyProjectId: controller.projectDetails['_id'],
-                        //   },
-                        // );
+                        Navigator.pushNamed(
+                          context,
+                          Routes.routeProjectUnitsListview,
+                          arguments: {
+                            keyProjectId: model.data[keyID],
+                          },
+                        );
                       },
                       text: FFLocalizations.of(context).getText('view_units'),
                       textStyle:
