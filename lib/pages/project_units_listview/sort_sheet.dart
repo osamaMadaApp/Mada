@@ -6,12 +6,8 @@ class SortSheet extends StatelessWidget {
     this.onSelectSortKey,
     this.onSelectSortType,
     this.onApply,
-    this.selectedTemSortKey,
-    this.selectedTemSortType,
     this.isProjectSort = false,
   });
-  final dynamic selectedTemSortKey;
-  final dynamic selectedTemSortType;
   final dynamic onSelectSortType;
   final Function(dynamic item)? onSelectSortKey;
   final Function()? onApply;
@@ -41,7 +37,7 @@ class SortSheet extends StatelessWidget {
               isWrap: true,
               items:
                   isProjectSort ? projectSortList(context) : sortList(context),
-              selectedItem: selectedTemSortKey,
+              selectedItem: model.selectedTemSortKey,
               onTap: (dynamic item) {
                 onSelectSortKey!(item);
               },
@@ -49,9 +45,9 @@ class SortSheet extends StatelessWidget {
               unselectedBackgroundColor: const Color(AppColors.gray),
               borderWidth: 1,
             ),
-            if (selectedTemSortKey != null &&
-                (selectedTemSortKey['key'] == 'price' ||
-                    selectedTemSortKey['key'] == 'startingPrice'))
+            if (model.selectedTemSortKey != null &&
+                (model.selectedTemSortKey['key'] == 'price' ||
+                    model.selectedTemSortKey['key'] == 'startingPrice'))
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -67,7 +63,7 @@ class SortSheet extends StatelessWidget {
                   SelectList(
                     isWrap: true,
                     items: priceSortList(context),
-                    selectedItem: selectedTemSortType,
+                    selectedItem: model.selectedTemSortType,
                     onTap: (dynamic item) {
                       onSelectSortType!(item);
                     },
@@ -77,8 +73,8 @@ class SortSheet extends StatelessWidget {
                   ),
                 ],
               )
-            else if (selectedTemSortKey != null &&
-                selectedTemSortKey['key'] == 'createdAt')
+            else if (model.selectedTemSortKey != null &&
+                model.selectedTemSortKey['key'] == 'createdAt')
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -94,7 +90,7 @@ class SortSheet extends StatelessWidget {
                   SelectList(
                     isWrap: true,
                     items: createdAtSortList(context),
-                    selectedItem: selectedTemSortType,
+                    selectedItem: model.selectedTemSortType,
                     onTap: (dynamic item) {
                       onSelectSortType!(item);
                     },

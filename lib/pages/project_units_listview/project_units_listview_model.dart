@@ -274,25 +274,25 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openCustomFilterBottomSheet() {
+  void openCustomFilterBottomSheet(BuildContext context) {
     selectedTemBathroomsNumber = List.from(selectedBathroomsNumber);
     selectedTemFloor = List.from(selectedFloor);
     selectedTemRoomsNumber = List.from(selectedRoomsNumber);
     priceTemRange = RangeValues(priceRange!.start, priceRange!.end);
     spaceTemRange = RangeValues(spaceRange!.start, spaceRange!.end);
 
-    // Get.bottomSheet(
-    //   BottomSheetContainer(
-    //     title: 'custom_filter'.tr,
-    //     child: const ProjectUnitsListviewFilterSheet(),
-    //     onClosingTheSheet: () {
-    //       resetToOriginal();
-    //       Get.back();
-    //     },
-    //   ),
-    //   isScrollControlled: true,
-    //   isDismissible: false,
-    // );
+    SideSheet.show(
+      context,
+      child: ChangeNotifierProvider.value(
+        value: Provider.of<ProjectUnitsListviewModel>(context, listen: false),
+        child: const ProjectUnitsListviewFilterSheet(),
+      ),
+      onClosingSheet: () {
+        resetToOriginal();
+        Navigator.pop(context);
+      },
+      title: FFLocalizations.of(context).getText('custom_filter'),
+    );
   }
 
   void resetToOriginal() {
@@ -382,28 +382,14 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
       context,
       child: ChangeNotifierProvider.value(
         value: Provider.of<ProjectUnitsListviewModel>(context, listen: false),
-        child: const PropertyTypeFilterSheet(),
+        child: SortSheet(
+          onSelectSortKey: onSelectSortKey,
+          onSelectSortType: onSelectSortType,
+          onApply: () => onApplySort(context),
+        ),
       ),
       title: FFLocalizations.of(context).getText('sort'),
     );
-    // Get.bottomSheet(
-    //   BottomSheetContainer(
-    //     title: 'sortS'.tr,
-    //     titlePadding: DEVICE_HEIGHT * 0.03,
-    //     child: GetBuilder<ProjectUnitsListviewController>(
-    //       builder: (ProjectUnitsListviewController controller) {
-    //         return SortSheet(
-    //           selectedTemSortKey: selectedTemSortKey,
-    //           selectedTemSortType: selectedTemSortType,
-    //           onSelectSortKey: onSelectSortKey,
-    //           onSelectSortType: onSelectSortType,
-    //           onApply: onApplySort,
-    //         );
-    //       },
-    //     ),
-    //   ),
-    //   isScrollControlled: true,
-    // );
   }
 
   void onSelectSortKey(dynamic item) {

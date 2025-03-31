@@ -1003,6 +1003,30 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Project Units',
       'ar': 'وحدات المشروع',
     },
+    'low_to_high': {
+      'en': 'Low to High',
+      'ar': 'من الأقل إلى الأعلى',
+    },
+    'high_to_low': {
+      'en': 'High to Low',
+      'ar': 'من الأعلى إلى الأقل',
+    },
+    'starting_price': {
+      'en': 'Starting Price',
+      'ar': 'السعر الابتدائي',
+    },
+    'oldest_to_newest': {
+      'en': 'Oldest to Newest',
+      'ar': 'الأقدم إلى الأحدث',
+    },
+    'newest_to_oldest': {
+      'en': 'Newest to Oldest',
+      'ar': 'الأحدث إلى الأقدم',
+    },
+    'floors': {
+      'en': 'Floors',
+      'ar': 'الأرضيات',
+    },
   },
 ].reduce((Map<String, Map<String, String>> a,
             Map<String, Map<String, String>> b) =>

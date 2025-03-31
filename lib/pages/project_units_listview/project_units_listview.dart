@@ -58,28 +58,20 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
             appBar: MadaHeader(
               title: FFLocalizations.of(context).getText('project_units'),
               actions: [
-                // GestureDetector(
-                //   onTap: () {
-                //     model.onSortPressed(context);
-                //   },
-                //   child: Container(
-                //     padding: EdgeInsets.all(DEVICE_WIDTH * 0.01),
-                //     margin: EdgeInsets.symmetric(
-                //       horizontal: DEVICE_WIDTH * 0.02,
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: const Color(AppColors.green3).withOpacity(0.1),
-                //       borderRadius: BorderRadius.circular(8),
-                //     ),
-                //     child: SvgPicture.asset(
-                //       iconSort,
-                //       colorFilter: const ColorFilter.mode(
-                //         Colors.black,
-                //         BlendMode.srcIn,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                HeaderContainer(
+                  onPressed: () {
+                    model.onSortPressed(context);
+                  },
+                  icon: iconSort,
+                ),
+                SizedBox(width: DEVICE_WIDTH * 0.02),
+                HeaderContainer(
+                  onPressed: () {
+                    model.openCustomFilterBottomSheet(context);
+                  },
+                  icon: iconCustomFilter,
+                ),
+                SizedBox(width: DEVICE_WIDTH * 0.02),
               ],
             ),
             key: scaffoldKey,
@@ -217,6 +209,41 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
           ),
         );
       },
+    );
+  }
+}
+
+class HeaderContainer extends StatelessWidget {
+  const HeaderContainer({
+    super.key,
+    this.onPressed,
+    this.icon,
+  });
+
+  final Function()? onPressed;
+  final String? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onPressed?.call();
+      },
+      child: Container(
+        padding: EdgeInsets.all(DEVICE_WIDTH * 0.01),
+        margin: const EdgeInsets.symmetric(),
+        decoration: BoxDecoration(
+          color: const Color(AppColors.green3).withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: SvgPicture.asset(
+          icon ?? '',
+          colorFilter: const ColorFilter.mode(
+            Colors.black,
+            BlendMode.srcIn,
+          ),
+        ),
+      ),
     );
   }
 }
