@@ -10,15 +10,15 @@ class AppProvider extends ChangeNotifier {
   Locale? get locale => _locale;
   ThemeMode get themeMode => _themeMode;
 
-  Future<void> init() async {
+  Future<void> init({void Function()? onLogout}) async {
     await FlutterMadaTheme.initialize();
 
     final FFAppState appState = FFAppState();
     await appState.initializePersistedState();
 
-    await getMasterData();
+    await getMasterData( onLogout : onLogout);
 
-    await refreshToken();
+    // await refreshToken();
   }
 
   void setLocale(String language) {
@@ -66,7 +66,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getMasterData() async {
+  Future<void> getMasterData({void Function()? onLogout}) async {
     await ApiRequest(
       path: apiMasterData,
       className: 'SplashController/getMasterData',
@@ -75,6 +75,18 @@ class AppProvider extends ChangeNotifier {
       onSuccess: (dynamic data, dynamic response) {
         FFAppState().masterDateJsonModel = response[keyResults];
       },
+      onLogout: onLogout
+    );
+  }
+  Future<void> getMasterDataProfile() async {
+    await ApiRequest(
+      path: apiMasterData,
+      className: 'SplashController/getMasterData',
+      formatResponse: true,
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        FFAppState().masterDateJsonModel = response[keyResults];
+      }
     );
   }
 
@@ -108,32 +120,32 @@ class AppProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> refreshToken() async {
-    if (FFAppState().userModel.isEmpty) {
-      return;
-    }
-    final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
-
-    ApiRequest(
-      path: apiRefreshToken,
-      method: ApiMethods.post,
-      withAuth: false,
-      className: 'AppProvider/refreshToken',
-      defaultHeadersValue: false,
-      body: <String, dynamic>{
-        keyRefreshToken: FFAppState().userModel[keyRefreshToken],
-        ...deviceInfoDetails,
-      },
-    ).request(
-      onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
-        notifyListeners();
-        if (response[keySuccess] == true) {
-          FFAppState().userModel[keyToken] = data[keyResults][keyToken];
-          FFAppState().userModel[keyRefreshToken] =
-              data[keyResults][keyRefreshToken];
-          consoleLog(FFAppState().userModel[keyToken], key: 'new_token');
-        }
-      },
-    );
-  }
+  // Future<void> refreshToken() async {
+  //   if (FFAppState().userModel.isEmpty) {
+  //     return;
+  //   }
+  //   final Map<String, dynamic> deviceInfoDetails = await getDeviceInfo();
+  //
+  //   ApiRequest(
+  //     path: apiRefreshToken,
+  //     method: ApiMethods.post,
+  //     withAuth: false,
+  //     className: 'AppProvider/refreshToken',
+  //     defaultHeadersValue: false,
+  //     body: <String, dynamic>{
+  //       keyRefreshToken: FFAppState().userModel[keyRefreshToken],
+  //       ...deviceInfoDetails,
+  //     },
+  //   ).request(
+  //     onSuccessWithHeader: (dynamic data, dynamic response, dynamic headers) {
+  //       notifyListeners();
+  //       if (response[keySuccess] == true) {
+  //         FFAppState().userModel[keyToken] = data[keyResults][keyToken];
+  //         FFAppState().userModel[keyRefreshToken] =
+  //             data[keyResults][keyRefreshToken];
+  //         consoleLog(FFAppState().userModel[keyToken], key: 'new_token');
+  //       }
+  //     }
+  //   );
+  // }
 }

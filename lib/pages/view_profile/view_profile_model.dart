@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
+import '../../router/navigation_service.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 
 class ViewProfileModel extends ChangeNotifier {
@@ -48,7 +49,7 @@ class ViewProfileModel extends ChangeNotifier {
       startLoading();
 
       final appState = context.read<AppProvider>();
-      await appState.getMasterData();
+      await appState.getMasterDataProfile();
 
       getUserProfile();
     }
@@ -193,6 +194,9 @@ class ViewProfileModel extends ChangeNotifier {
           showToast(response[keyMsg]);
         }
       },
+      onLogout: (){
+        showAboutDialog(context: context);
+      }
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../general_exports.dart';
+import '../../router/navigation_service.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
           builder: (context, appProvider, child) {
             return MaterialApp(
               title: 'Mada',
+              navigatorKey: NavigationService.navigatorKey,
               builder: FlutterSmartDialog.init(),
               localizationsDelegates: const <LocalizationsDelegate>[
                 FFLocalizationsDelegate(),

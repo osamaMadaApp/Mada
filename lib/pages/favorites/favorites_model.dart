@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../router/navigation_service.dart';
 
 class FavoritesModel extends ChangeNotifier {
   GeneralTaps selectedCategory = GeneralTaps.exclusiveUnits;

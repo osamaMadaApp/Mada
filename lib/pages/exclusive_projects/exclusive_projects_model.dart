@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../router/navigation_service.dart';
 
 class ExclusiveProjectsModel extends ChangeNotifier{
 

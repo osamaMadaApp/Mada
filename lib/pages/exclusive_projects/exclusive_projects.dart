@@ -198,7 +198,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                             crossAxisSpacing:
                                                 DEVICE_WIDTH * 0.02,
                                             // Increased spacing
-                                            childAspectRatio: 434 / 231,
+                                            childAspectRatio: 434 / 201,
                                           ),
                                     itemCount: _model.lastProjects.length,
                                     itemBuilder:

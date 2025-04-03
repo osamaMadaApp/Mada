@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../router/navigation_service.dart';
 
 class ContactUsModel extends ChangeNotifier {
   ContactUsTypes selected = ContactUsTypes.individuals;

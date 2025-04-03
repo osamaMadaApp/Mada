@@ -1,5 +1,6 @@
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
+import '../app_state.dart';
 import '../general_exports.dart';
 
 void startLoading({BuildContext? cContext}) {
@@ -14,6 +15,7 @@ void startLoading({BuildContext? cContext}) {
     clickMaskDismiss: true,
   );
 }
+
 
 void dismissLoading() {
   SmartDialog.dismiss();

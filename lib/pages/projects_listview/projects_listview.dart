@@ -305,7 +305,7 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                         maxCrossAxisExtent: 434,
                                         mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
                                         crossAxisSpacing: DEVICE_WIDTH * 0.02,  // Increased spacing
-                                        childAspectRatio: 424 / 231,
+                                        childAspectRatio: 424 / 201,
                                       ),
                                       itemCount: model.projects.length,
                                       itemBuilder:

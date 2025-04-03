@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
 import '../app_state.dart';
-import '../backend/schema/util/schema_util.dart';
 import '../general_exports.dart';
 import '../structure_main_flow/flutter_mada_util.dart';
 
@@ -25,7 +23,6 @@ class ApiRequest {
     this.shouldShowRequestDetails = true,
   });
 
-  // final MyAppController myAppController = Get.find<MyAppController>();
   final String? path;
   final String? fullUrl;
   final ApiMethods method;
@@ -45,7 +42,7 @@ class ApiRequest {
       ? 'Bearer ${FFAppState().userModel[keyToken]}'
       : '';
 
-  Future<Dio> _dio() async {
+  Future<Dio> _dio(Function()? onLogout) async {
     final Map<String, dynamic> defaultHeaders = <String, dynamic>{
       'Content-Type': '*/*',
       'Accept': '*/*',
@@ -62,7 +59,6 @@ class ApiRequest {
       mergedHeaders['Authorization'] = authorization();
     }
 
-    // final Map<String, dynamic> defaultQueryParams = getDefaultQueryParams();
     final Dio dio = Dio(
       BaseOptions(
         headers: mergedHeaders,
@@ -73,57 +69,33 @@ class ApiRequest {
     );
 
     // Adding interceptor
-    dio.interceptors.add(InterceptorsWrapper(onRequest: (
-      RequestOptions options,
-      RequestInterceptorHandler handler,
-    ) async {
+    dio.interceptors.add(InterceptorsWrapper(onRequest:
+        (RequestOptions options, RequestInterceptorHandler handler) async {
       if (options.headers['Authorization'] != null) {
-        if (options.headers['Authorization']
+        final String token = options.headers['Authorization']
             .toString()
             .replaceAll('Bearer ', '')
-            .replaceAll('null', '')
-            .isNotEmpty) {
-          final header = options.headers['Authorization'];
-          final bool isExpired =
-              JwtDecoder.isExpired(header.toString().replaceAll('Bearer ', ''));
-          if (isExpired) {
-            final Map<String, dynamic> deviceInfoDetails =
-                await getDeviceInfo();
+            .replaceAll('null', '');
 
-            await ApiRequest(
-              path: apiRefreshToken,
-              method: ApiMethods.post,
-              withAuth: false,
-              className: 'SplashScreenController/refreshToken',
-              defaultHeadersValue: false,
-              body: <String, dynamic>{
-                keyRefreshToken: FFAppState().userModel[keyRefreshToken],
-                ...deviceInfoDetails,
-              },
-            ).request(
-              onSuccessWithHeader:
-                  (dynamic data, dynamic response, dynamic headers) {
-                if (response[keySuccess] == true) {
-                  FFAppState().userModel[keyToken] = data[keyResults][keyToken];
-                  FFAppState().userModel[keyRefreshToken] =
-                      data[keyResults][keyRefreshToken];
-                  consoleLog(FFAppState().userModel[keyToken],
-                      key: 'new_token');
-                }
-              },
-            );
-            return handler.next(options);
-          } else {
-            return handler.next(options);
+        if (token.isNotEmpty) {
+          final bool isExpired = JwtDecoder.isExpired(token);
+          if (isExpired) {
+            onLogout?.call();
+            return handler.reject(DioException(
+              requestOptions: options,
+              response: Response(
+                requestOptions: options,
+                statusCode: 401,
+                statusMessage: 'Unauthorized: Token Expired',
+              ),
+            ));
           }
         } else {
           FFAppState().prefs.clear();
-          // await authManager.signOut();
           return handler.next(options);
         }
-      } else {
-        return handler.next(options);
       }
+      return handler.next(options);
     }));
 
     return dio;
@@ -132,15 +104,14 @@ class ApiRequest {
   Future<void> request({
     Function()? beforeSend,
     Function(dynamic data, dynamic response)? onSuccess,
-    Function(dynamic data, dynamic response, dynamic header)?
-        onSuccessWithHeader,
+    Function(dynamic data, dynamic response, dynamic header)?onSuccessWithHeader,
     Function(dynamic error)? onError,
+    Function()? onLogout,
   }) async {
     // start request time
     final DateTime startTime = DateTime.now();
 
-    final Dio dio = await _dio();
-
+    final Dio dio = await _dio(onLogout);
     try {
       if (withLoading) {
         startLoading();

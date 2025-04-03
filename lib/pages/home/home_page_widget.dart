@@ -7,9 +7,70 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomePageModel(),
+      create: (context) => HomePageModel(() {
+        showLogoutDialog(context);
+      }),
       child: const Home(),
     );
+  }
+
+  showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context, // Ensure context is provided
+      barrierDismissible: false, // Prevent dismissal by tapping outside
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: MadaText(
+            FFLocalizations.of(dialogContext).getVariableText(
+              enText: 'Session Ended',
+              arText: 'انتهت الجلسة',
+            ),
+            style: Theme.of(dialogContext).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: FlutterMadaTheme.of(dialogContext).color000000,
+                ),
+          ),
+          content: MadaText(
+            FFLocalizations.of(dialogContext).getVariableText(
+              enText:
+                  'Your session has ended for a security reason. Please re-login.',
+              arText: 'انتهت جلستك لسبب امني. يرجى تسجيل الدخول مرة أخرى.',
+            ),
+            style: Theme.of(dialogContext).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.normal,
+                  color: FlutterMadaTheme.of(dialogContext).color000000,
+                ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Close dialog properly
+              },
+              child: MadaText(
+                FFLocalizations.of(dialogContext).getVariableText(
+                  enText: 'Log Out',
+                  arText: 'تسجيل خروج',
+                ),
+                style: Theme.of(dialogContext).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                      color: FlutterMadaTheme.of(dialogContext).color000000,
+                    ),
+              ),
+            ),
+          ],
+        );
+      },
+    ).then((onValue) {
+      if (context.mounted) {
+        FFAppState().clearUserData();
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.routeLogin,
+          (Route<dynamic> route) => false,
+        );
+      }
+    });
   }
 }
 
@@ -145,7 +206,10 @@ class HomeCategories extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 19.h),
             child: LabeledIconCard(
               minWidth: 300.w,
-              icon: menu[index][keyImage] == null || menu[index][keyImage].isEmpty ? imageExclusive : menu[index][keyImage],
+              icon:
+                  menu[index][keyImage] == null || menu[index][keyImage].isEmpty
+                      ? imageExclusive
+                      : menu[index][keyImage],
               title: menu[index][keyName],
               mainAxisAlignment: MainAxisAlignment.center,
               onTap: () {

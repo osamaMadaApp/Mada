@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
-
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_widgets.dart';
@@ -304,7 +303,7 @@ class _LoginSideComponent extends State<LoginSideComponent> {
                         : null,
                     text: FFLocalizations.of(context).getText('login'),
                     options: FFButtonOptions(
-                      height: 48.h,
+                      height: 68.h,
                       padding:
                           EdgeInsetsDirectional.fromSTEB(155.w, 0, 155.w, 0),
                       color: FlutterMadaTheme.of(context).color8EC24D,
