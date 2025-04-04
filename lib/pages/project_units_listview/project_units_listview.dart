@@ -93,7 +93,6 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                 child: SingleChildScrollView(
                                   physics:
                                       const AlwaysScrollableScrollPhysics(),
-                                  controller: model.scrollController,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -104,11 +103,13 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                           vertical: DEVICE_HEIGHT * 0.02,
                                         ),
                                         child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
                                                 Text(
-                                                  '${FFLocalizations.of(context).getText('available_units')} ( ${model.data[keyResults][keyFinalData][keyTotalDocs] ?? 0} )',
+                                                  '${FFLocalizations.of(context).getText('available_units')} ( ${model.getTotalNumberOfUnits() ?? 0} )',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .bodyLarge!
@@ -124,7 +125,8 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                                 height: DEVICE_HEIGHT * 0.02),
                                             Column(
                                               children: [
-                                                if (model.unitsResult.isEmpty &&
+                                                if (model.data[keyResults]
+                                                        .isEmpty &&
                                                     !model.isLoading)
                                                   SizedBox(
                                                     height: DEVICE_HEIGHT * 0.6,
@@ -139,58 +141,7 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                                     ),
                                                   )
                                                 else
-                                                  GridView.builder(
-                                                    shrinkWrap: true,
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    gridDelegate:
-                                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount:
-                                                          isPortrait(context)
-                                                              ? 2
-                                                              : 3,
-                                                      mainAxisExtent:
-                                                          isPortrait(context)
-                                                              ? 260
-                                                              : 230,
-                                                    ),
-                                                    itemCount: model
-                                                        .unitsResult.length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      final unit = model
-                                                          .unitsResult[index];
-
-                                                      return ProjectUnitCard(
-                                                        item: unit,
-                                                        showUnitNumber: true,
-                                                        maxLines: 3,
-                                                        showBathroom:
-                                                            unit[keyUnitType] !=
-                                                                'Land',
-                                                        showBedroom:
-                                                            unit[keyUnitType] !=
-                                                                'Land',
-                                                        onFavoritesPressed: () {
-                                                          model.favorites(
-                                                            unit,
-                                                            context,
-                                                          );
-                                                        },
-                                                        onTap: () {
-                                                          Navigator.pushNamed(
-                                                            context,
-                                                            Routes
-                                                                .routeUnitDetails,
-                                                            arguments: {
-                                                              keyID:
-                                                                  unit[keyID],
-                                                            },
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                  ),
+                                                  const UnitsList()
                                               ],
                                             ),
                                           ],
@@ -243,6 +194,423 @@ class HeaderContainer extends StatelessWidget {
             BlendMode.srcIn,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UnitsList extends StatelessWidget {
+  const UnitsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ProjectUnitsListviewModel>(
+      builder: (
+        BuildContext context,
+        ProjectUnitsListviewModel model,
+        Widget? child,
+      ) {
+        return Column(
+          children: [
+            ...model.data[keyResults][keyUnits].map(
+              (dynamic item) {
+                final List<dynamic> units = item[keyUnits];
+                return Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: DEVICE_HEIGHT * 0.02,
+                    horizontal: DEVICE_WIDTH * 0.02,
+                  ),
+                  margin: EdgeInsets.only(
+                    bottom: DEVICE_HEIGHT * 0.01,
+                  ),
+                  width: DEVICE_WIDTH,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item[keyID],
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      SizedBox(height: DEVICE_HEIGHT * 0.01),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...units.map(
+                              (dynamic unit) {
+                                return HorizontalProjectUnitCard(
+                                  item: unit,
+                                  showUnitNumber: true,
+                                  maxLines: 3,
+                                  showBathroom: unit[keyUnitType] != 'Land',
+                                  showBedroom: unit[keyUnitType] != 'Land',
+                                  onFavoritesPressed: () {
+                                    model.favorites(
+                                      unit,
+                                      context,
+                                    );
+                                  },
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.routeUnitDetails,
+                                      arguments: {
+                                        keyID: unit[keyID],
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class HorizontalProjectUnitCard extends StatelessWidget {
+  const HorizontalProjectUnitCard({
+    required this.item,
+    super.key,
+    this.onTap,
+    this.showContactIcons = false,
+    this.withFavorite = true,
+    this.showBedroom = true,
+    this.showBathroom = true,
+    this.imageKey = keyImage,
+    this.onFavoritesPressed,
+    this.showOrderId = false,
+    this.showComAndSub = false,
+    this.showUnitNumber = false,
+    this.maxLines = 2,
+    this.whatsAppMsg,
+    this.borderColor,
+    this.verticalPadding,
+  });
+
+  final dynamic item;
+  final Function()? onTap;
+  final bool showContactIcons;
+  final bool withFavorite;
+  final String imageKey;
+  final Function()? onFavoritesPressed;
+  final bool showOrderId;
+  final bool showComAndSub;
+  final bool showUnitNumber;
+  final bool showBedroom;
+  final bool showBathroom;
+  final int maxLines;
+  final String? whatsAppMsg;
+  final Color? borderColor;
+  final double? verticalPadding;
+
+  @override
+  Widget build(BuildContext context) {
+    String orderId = '';
+    if (item[keyOrderID] != null) {
+      orderId = item[keyOrderID].length > 10
+          ? item[keyOrderID].substring(0, 10)
+          : item[keyOrderID];
+    }
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CachedImage(
+                    image: item[imageKey] != null && item[imageKey].isNotEmpty
+                        ? item[imageKey][0]
+                        : testImage,
+                    borderRadius: 10,
+                    width: 110.w,
+                    height: 110.w,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 16.h,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 120.w,
+                              child: Text(
+                                '${item[keyTitle]}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                maxLines: maxLines,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                if (withFavorite)
+                                  GestureDetector(
+                                    onTap: onFavoritesPressed,
+                                    child: SvgPicture.asset(
+                                      item[keyIsWishListed] == true
+                                          ? iconFav
+                                          : iconUnFav,
+                                    ),
+                                  ),
+                                SizedBox(height: 1.h),
+                              ],
+                            ),
+                          ],
+                        ),
+                        if (item[keyUnitNumber] != null && showUnitNumber)
+                          Text(
+                            '- ${item[keyUnitNumber]}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color:
+                                        FlutterMadaTheme.of(context).primary),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        if (showComAndSub)
+                          Column(
+                            children: [
+                              SizedBox(height: 16.h),
+                              Text(
+                                item[keySubCommunity] != null
+                                    ? '${item[keyCommunity] ?? ''} - ${item[keySubCommunity] ?? ''}'
+                                    : '${item[keyCommunity] ?? ''}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: FlutterMadaTheme.of(context)
+                                          .color989898,
+                                    ),
+                              ),
+                            ],
+                          )
+                        else
+                          const Center(),
+                        SizedBox(height: 16.h),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: <Widget>[
+                              if (item[keyStatusInfo] != null &&
+                                  item[keyStatusInfo].isNotEmpty)
+                                ...item[keyStatusInfo].map(
+                                  (label) {
+                                    if (label[keyText] != null &&
+                                        label[keyText].isNotEmpty) {
+                                      return Row(
+                                        children: <Widget>[
+                                          LabelCard(
+                                            text: label[keyText].toString(),
+                                            backgroundColor: Color(
+                                              int.parse(
+                                                hexToColor(
+                                                  label[keyBackgroundColor] ??
+                                                      '#FFFFFF',
+                                                ),
+                                              ),
+                                            ),
+                                            textSize: 16,
+                                            textColor: Color(
+                                              int.parse(
+                                                hexToColor(
+                                                  label[keyTextColor] ??
+                                                      '#FFFFFF',
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 8.w)
+                                        ],
+                                      );
+                                    } else {
+                                      return const Center();
+                                    }
+                                  },
+                                ).toList(),
+                            ],
+                          ),
+                        ),
+                        if (item[keyPrice] != null)
+                          Column(
+                            children: [
+                              SizedBox(height: 16.h),
+                              Text(
+                                '${getFormattedPrice(item[keyPrice].toDouble())} ${getCurrency()}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color:
+                                          FlutterMadaTheme.of(context).primary,
+                                    ),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8.h),
+            padding: EdgeInsets.symmetric(
+              horizontal: 8.w,
+              vertical: 14.h,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              color: FlutterMadaTheme.of(context).colorD2D2D240,
+            ),
+            child: Row(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    SvgPicture.asset(iconArea),
+                    SizedBox(width: 2.w),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          item[keyArea].toString(),
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                        ),
+                        SizedBox(width: 5.w),
+                        Text(
+                          getUnitOfMeasure(context),
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                if (showBedroom)
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: 12.w),
+                      Row(
+                        children: <Widget>[
+                          SvgPicture.asset(iconBedrooms),
+                          SizedBox(width: 2.w),
+                          Text(
+                            item[keyBedrooms].toString(),
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                if (showBathroom && item[keyBathrooms] != null)
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: 12.w),
+                      SvgPicture.asset(iconBathrooms),
+                      SizedBox(width: 2.w),
+                      Text(
+                        item[keyBathrooms].toString(),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+          if (showContactIcons)
+            Column(
+              children: <Widget>[
+                SizedBox(height: 8.h),
+                ContactUsButtons(
+                  whatsappNumber: item[keyWhatsappNumber],
+                  phoneNumber: item[keyPhoneNumber],
+                  showWhatsApp: item[keyWhatsappNumber] != null,
+                  whatsappMsg: whatsAppMsg,
+                ),
+              ],
+            ),
+          if (item[keyOrderID] != null && showOrderId)
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 4.w,
+                vertical: 8.h,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    '${FFLocalizations.of(context).getText('order_id')}: #$orderId',
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          overflow: TextOverflow.ellipsis,
+                          color: FlutterMadaTheme.of(context).color989898,
+                        ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Text(
+                    '${FFLocalizations.of(context).getText('date')}: ${isoToReadableDate(item[keyCreatedAt])}',
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          overflow: TextOverflow.ellipsis,
+                          color: FlutterMadaTheme.of(context).color989898,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+        ],
       ),
     );
   }

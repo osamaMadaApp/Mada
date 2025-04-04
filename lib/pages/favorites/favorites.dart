@@ -137,20 +137,12 @@ class _FavoritesState extends State<Favorites> {
                                         );
                                       },
                                       onTap: () {
-                                        // Get.toNamed(
-                                        //   routeUnitDetails,
-                                        //   arguments: {
-                                        //     keyID: controller.units[index]
-                                        //         [keyID],
-                                        //   },
-                                        // );
-
                                         Navigator.pushNamed(
                                           context,
                                           Routes.routeUnitDetails,
                                           arguments: {
-                                            keyID:
-                                            controller.units[index][keyID],
+                                            keyID: controller.units[index]
+                                                [keyID],
                                           },
                                         );
                                       },

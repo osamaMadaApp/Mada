@@ -1,6 +1,5 @@
 import '../../app_state.dart';
 import '../../general_exports.dart';
-import '../../router/navigation_service.dart';
 
 class HomePageModel extends ChangeNotifier {
   HomePageModel(this.onLogout) {
@@ -39,6 +38,6 @@ class HomePageModel extends ChangeNotifier {
       }
       mostPopularProjects = homeData[keyResults][keyMostPopularProject];
       notifyListeners();
-    } );
+    });
   }
 }

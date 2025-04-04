@@ -4,14 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import 'backend/schema/util/schema_util.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
 import 'components/otp_component/otp_component_model.dart';
 import 'general_exports.dart';
 import 'pages/login_page/login_page_model.dart';
-import 'router/navigation_service.dart';
-import 'services/push_notification_service.dart';
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 
@@ -39,7 +38,6 @@ void main() async {
     },
   );
 
-  await PushNotificationService().setupInteractedMessage();
   runApp(
     MultiProvider(
       providers: <SingleChildWidget>[

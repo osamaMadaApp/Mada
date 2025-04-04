@@ -1,5 +1,6 @@
 import '../../app_state.dart';
 import '../../general_exports.dart';
+import '../../services/push_notification_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PushNotificationService().setupInteractedMessage(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(

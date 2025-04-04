@@ -196,15 +196,7 @@ class _SliderComponentState extends State<SliderComponent> {
                           Container(
                             child: GestureDetector(
                               onTap: () {
-                                if (widget.isOpenImageEnabled) {
-                                  // Get.toNamed(
-                                  //   routeSliderImageScreen,
-                                  //   arguments: <String, dynamic>{
-                                  //     keyPhotos: widget._items,
-                                  //     keyIndex: index,
-                                  //   },
-                                  // );
-                                }
+                                if (widget.isOpenImageEnabled) {}
                               },
                             ),
                           )

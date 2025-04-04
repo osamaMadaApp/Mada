@@ -134,13 +134,15 @@ class MyOrders extends StatelessWidget {
                                               withFavorite: false,
                                               showOrderId: true,
                                               onTap: () {
-                                                // Get.toNamed(
-                                                //   routeUnitDetails,
-                                                //   arguments: <String, dynamic>{
-                                                //     keyID: myOrderPageModel.units[index]
-                                                //         [keyUnitId],
-                                                //   },
-                                                // );
+                                                Navigator.pushNamed(
+                                                  context,
+                                                  Routes.routeUnitDetails,
+                                                  arguments: {
+                                                    keyID: myOrderPageModel
+                                                            .units?[index]
+                                                        [keyUnitId],
+                                                  },
+                                                );
                                               },
                                             );
                                           },
@@ -181,11 +183,16 @@ class MyOrders extends StatelessWidget {
                                               showContactIcons: true,
                                               showOrderId: true,
                                               onTap: () {
-                                                // Get.toNamed(
-                                                //   routePropertyDetails,
-                                                //   arguments: myOrderPageModel.units[index]
-                                                //       [keyPropertyId],
-                                                // );
+                                                Navigator.pushNamed(
+                                                  context,
+                                                  Routes.routeUnitDetails,
+                                                  arguments: {
+                                                    keyPropertyId:
+                                                        myOrderPageModel
+                                                                .units?[index]
+                                                            [keyPropertyId],
+                                                  },
+                                                );
                                               },
                                             );
                                           },

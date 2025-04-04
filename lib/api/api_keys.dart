@@ -50,6 +50,7 @@ const String keyFinalData = 'finalData';
 const String keyLicense = 'licence';
 const String keyTotalArea = 'totalArea';
 const String keyTotalUnits = 'totalUnits';
+const String keyUnits = 'units';
 const String keyTotalAvailableUnits = 'totalAvailableUnits';
 const String keyAvailableUnits = 'availableUnits';
 const String keyDeliveryDate = 'deliveryDate';

@@ -7,7 +7,6 @@ import '../../general_exports.dart';
 
 class ProjectUnitsListviewModel extends ChangeNotifier {
   dynamic data;
-  List<dynamic> unitsResult = [];
   List<dynamic> floors = [];
   List<dynamic> roomsNumber = [];
   List<dynamic> bathroomsNumber = [];
@@ -29,9 +28,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
   dynamic minTemSpace = -1;
   dynamic maxTemPrice = -1;
   dynamic maxTemSpace = -1;
-  int page = 0;
-  bool hasNextPage = true;
-  ScrollController scrollController = ScrollController();
   bool isLoading = true;
   dynamic selectedSortKey = {};
   dynamic selectedSortType = {};
@@ -87,16 +83,7 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
     maxAreaFocusNode.addListener(() {
       maxAreaController.text = formatter.format(spaceTemRange!.end.toInt());
     });
-    scrollController.addListener(scrollListener);
     getProjectUnits(hideScreen: true);
-  }
-
-  void scrollListener() {
-    if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      if (hasNextPage) {
-        getProjectUnits();
-      }
-    }
   }
 
   void getProjectUnits({bool hideScreen = false, bool withReset = false}) {
@@ -105,9 +92,7 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
       notifyListeners();
     }
     if (withReset) {
-      page = 0;
       data = null;
-      unitsResult = [];
       floors = [];
       bathroomsNumber = [];
       roomsNumber = [];
@@ -115,7 +100,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
     }
 
     startLoading();
-    ++page;
     ApiRequest(
       path: apiUnits,
       method: ApiMethods.post,
@@ -126,7 +110,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
       },
       className: 'ProjectUnitsListview/getProjectUnits',
       body: {
-        keyPage: page,
         keyProjectId: projectId,
         'keyword': searchKeyWord,
         keyFloor: selectedFloor.map((e) => e['key']).toList(),
@@ -143,12 +126,12 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
       onSuccess: (dynamic data, dynamic response) {
         dismissLoading();
         this.data = data;
-        unitsResult.addAll(data[keyResults][keyFinalData][keyDocs]);
-        hasNextPage = data[keyResults][keyFinalData][keyHasNextPage];
-        final dynamic filterData = data[keyResults][keyFilterData];
-        floors.addAll(filterData[keyFloors]);
-        bathroomsNumber.addAll(filterData[keyBathrooms]);
-        roomsNumber.addAll(filterData[keyRooms]);
+        if (data[keyResults].isNotEmpty) {
+          final dynamic filterData = data[keyResults][keyFilterData];
+          floors.addAll(filterData[keyFloors]);
+          bathroomsNumber.addAll(filterData[keyBathrooms]);
+          roomsNumber.addAll(filterData[keyRooms]);
+        }
 
         isLoading = false;
         notifyListeners();
@@ -328,8 +311,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
   }
 
   void onSearchFieldSubmitted(String value) {
-    unitsResult.clear();
-    page = 0;
     searchKeyWord = value;
 
     if (delay?.isActive ?? false) delay!.cancel();
@@ -356,9 +337,17 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
     );
   }
 
+  num getTotalNumberOfUnits() {
+    num totalNumberOfUnits = 0;
+    if (data != null && data[keyResults].isNotEmpty) {
+      for (final result in data[keyResults][keyUnits]) {
+        totalNumberOfUnits += result[keyUnits].length;
+      }
+    }
+    return totalNumberOfUnits;
+  }
+
   void onApplyFilterPress(BuildContext context) {
-    unitsResult.clear();
-    page = 0;
     Navigator.pop(context);
     selectedFloor = selectedTemFloor;
     selectedBathroomsNumber = selectedTemBathroomsNumber;
@@ -370,8 +359,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
   }
 
   Future<void> onRefresh() async {
-    unitsResult.clear();
-    page = 0;
     getProjectUnits(hideScreen: true);
   }
 
@@ -425,14 +412,6 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
 
     selectedSortKey = selectedTemSortKey;
     selectedSortType = selectedTemSortType;
-
-    unitsResult.clear();
-    page = 0;
-    scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 700),
-      curve: Curves.easeIn,
-    );
     Navigator.pop(context);
     getProjectUnits();
   }

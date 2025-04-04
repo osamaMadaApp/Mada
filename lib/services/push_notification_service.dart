@@ -8,7 +8,7 @@ import '../firebase_options.dart';
 import '../general_exports.dart';
 
 class PushNotificationService {
-  Future<void> setupInteractedMessage() async {
+  Future<void> setupInteractedMessage(BuildContext context) async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -16,14 +16,14 @@ class PushNotificationService {
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      notificationRedirect(initialMessage.data);
+      notificationRedirect(initialMessage.data, context);
     }
 
     enableIOSNotifications();
-    await registerNotificationListeners();
+    await registerNotificationListeners(context);
   }
 
-  Future<void> registerNotificationListeners() async {
+  Future<void> registerNotificationListeners(BuildContext context) async {
     final AndroidNotificationChannel channel = androidNotificationChannel();
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
@@ -56,7 +56,7 @@ class PushNotificationService {
           final List<String> s = str[i].split(':');
           result.putIfAbsent(s[0].trim(), () => s[1].trim());
         }
-        notificationRedirect(result);
+        notificationRedirect(result, context);
       },
     );
     // onMessage is called when the app is in foreground and a notification is received
@@ -87,7 +87,7 @@ class PushNotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen(
       (RemoteMessage message) {
         consoleLog('message', key: 'IOS-Notif');
-        notificationRedirect(message.data);
+        notificationRedirect(message.data, context);
       },
     );
   }
@@ -110,10 +110,11 @@ class PushNotificationService {
         importance: Importance.max,
       );
 
-  Future<void> notificationRedirect(dynamic result) async {
+  Future<void> notificationRedirect(
+      dynamic result, BuildContext context) async {
     consoleLog('REDIRECT', key: 'redirect');
     final int id = int.parse(result[keyId]);
     final String page = result[keyPage];
-    openScreenBasedOnScreenName(page, id);
+    openScreenBasedOnScreenName(page, id, context);
   }
 }

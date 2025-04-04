@@ -217,12 +217,9 @@ class HomeCategories extends StatelessWidget {
                   case 'projects/exclusive-projects':
                     Navigator.pushNamed(context, Routes.routeExclusiveProjects);
                   case 'propeties/list':
-                    // Get.toNamed(routeSearchScreen);
                     Navigator.pushNamed(context, Routes.routeSearchScreen);
                   case 'request-property':
-                  // Get.toNamed(routeRequestYourProperty);
                   case 'user/properties/list-property':
-                  // Get.toNamed(routeListProperty);
                   default:
                     null;
                 }

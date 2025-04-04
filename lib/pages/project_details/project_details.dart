@@ -227,27 +227,6 @@ class ProjectDetailsSection1 extends StatelessWidget {
                 ],
               ),
             ),
-
-            // AdsSection(
-            //   showAdSection: model.adBanner != null,
-            //   image: model.adBanner[keyAdImage],
-            //   onAdPressed: () {
-            //     if (model.adBanner[keyPlatform] == keyApp) {
-            //       openScreenBasedOnScreenName(
-            //         model.adBanner[keyScreenNameCapital],
-            //         model.adBanner[keyRecordId],
-            //       );
-            //     } else {
-            //       Get.toNamed(
-            //         routeWebViewScreen,
-            //         arguments: {
-            //           keyUrl:
-            //               model.adBanner[keyRedirectLink] ?? ''
-            //         },
-            //       );
-            //     }
-            //   },
-            // ),
           ],
         );
       },

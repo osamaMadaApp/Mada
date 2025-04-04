@@ -177,7 +177,8 @@ class ProjectDetailsSection1 extends StatelessWidget {
                     height: 10.h,
                   ),
                   ComponentGeneralInformation(
-                    name: '${model.data[keyTitle] ?? ''} - ${model.data[keyUnitNumber] ?? ''}',
+                    name:
+                        '${model.data[keyTitle] ?? ''} - ${model.data[keyUnitNumber] ?? ''}',
                     priceStarts: model.data[keyCost] ?? '',
                     city: model.data[keyCity] ?? '',
                     community: model.data[keySubCommunity] ?? '',
@@ -236,22 +237,22 @@ class ProjectDetailsSection1 extends StatelessWidget {
                   ),
                   if (model.data[keyNearbyFacilities] != null &&
                       model.data[keyNearbyFacilities].isNotEmpty)
-                  Padding(
-                    padding: EdgeInsets.all(DEVICE_HEIGHT * 0.02),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ProjectInformation(
-                          projectInfo: model.data[keyNearbyFacilities] ?? [],
-                          title: FFLocalizations.of(context)
-                              .getText('location_nearby_places'),
-                          textKey: keyName,
-                          valueKey: keyDistance,
-                          padding: 0,
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(DEVICE_HEIGHT * 0.02),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ProjectInformation(
+                            projectInfo: model.data[keyNearbyFacilities] ?? [],
+                            title: FFLocalizations.of(context)
+                                .getText('location_nearby_places'),
+                            textKey: keyName,
+                            valueKey: keyDistance,
+                            padding: 0,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   PaymentPlans(
                     paymentPlans: model.data[keyPaymentPlans],
                     percentageKey: keyPercent,
@@ -262,9 +263,11 @@ class ProjectDetailsSection1 extends StatelessWidget {
                     isPaymentPlanExpanded: model.isPaymentPlanExpanded,
                   ),
                   LocationAndNearbyPlaces(
-                    title: FFLocalizations.of(context).getText('live_location_on_map'),
+                    title: FFLocalizations.of(context)
+                        .getText('live_location_on_map'),
                     nearbyLocations: model.data['nearestFacilityApp'] ?? [],
-                    viewProjectText: FFLocalizations.of(context).getText('view_project_on_map'),
+                    viewProjectText: FFLocalizations.of(context)
+                        .getText('view_project_on_map'),
                     viewOnMap: model.onViewProjectMap,
                   ),
                   SizedBox(height: 20.h),
@@ -424,14 +427,7 @@ class ProjectDetailsSection2 extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onPressed: () {
-                        // Get.toNamed(
-                        //   routeProjectUnitsListview,
-                        //   arguments: <String, dynamic>{
-                        //     keyProjectId: controller.projectDetails['_id'],
-                        //   },
-                        // );
-                      },
+                      onPressed: () {},
                       text: FFLocalizations.of(context).getText('book_now'),
                       textStyle:
                           Theme.of(context).textTheme.bodySmall!.copyWith(

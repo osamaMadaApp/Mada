@@ -78,154 +78,151 @@ class ProjectUnitCard extends StatelessWidget {
                             width: 110.w,
                             height: 110.w,
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 16.h,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: 120.w,
-                                        child: Text(
-                                          '${item[keyTitle]}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                          maxLines: maxLines,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          if (withFavorite)
-                                            GestureDetector(
-                                              onTap: onFavoritesPressed,
-                                              child: SvgPicture.asset(
-                                                item[keyIsWishListed] == true
-                                                    ? iconFav
-                                                    : iconUnFav,
-                                              ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 120.w,
+                                      child: Text(
+                                        '${item[keyTitle]}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
                                             ),
-                                          SizedBox(height: 1.h),
-                                        ],
+                                        maxLines: maxLines,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        if (withFavorite)
+                                          GestureDetector(
+                                            onTap: onFavoritesPressed,
+                                            child: SvgPicture.asset(
+                                              item[keyIsWishListed] == true
+                                                  ? iconFav
+                                                  : iconUnFav,
+                                            ),
+                                          ),
+                                        SizedBox(height: 1.h),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                if (item[keyUnitNumber] != null &&
+                                    showUnitNumber)
+                                  Text(
+                                    '- ${item[keyUnitNumber]}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: FlutterMadaTheme.of(context)
+                                                .primary),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  if (item[keyUnitNumber] != null &&
-                                      showUnitNumber)
-                                    Text(
-                                      '- ${item[keyUnitNumber]}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w600,
+                                if (showComAndSub)
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 16.h),
+                                      Text(
+                                        item[keySubCommunity] != null
+                                            ? '${item[keyCommunity] ?? ''} - ${item[keySubCommunity] ?? ''}'
+                                            : '${item[keyCommunity] ?? ''}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w400,
                                               color:
                                                   FlutterMadaTheme.of(context)
-                                                      .primary),
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  if (showComAndSub)
-                                    Column(
-                                      children: [
-                                        SizedBox(height: 16.h),
-                                        Text(
-                                          item[keySubCommunity] != null
-                                              ? '${item[keyCommunity] ?? ''} - ${item[keySubCommunity] ?? ''}'
-                                              : '${item[keyCommunity] ?? ''}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w400,
-                                                color:
-                                                    FlutterMadaTheme.of(context)
-                                                        .color989898,
-                                              ),
-                                        ),
-                                      ],
-                                    )
-                                  else
-                                    const Center(),
-                                  SizedBox(height: 16.h),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: <Widget>[
-                                        if (item[keyStatusInfo] != null &&
-                                            item[keyStatusInfo].isNotEmpty)
-                                          ...item[keyStatusInfo].map(
-                                            (label) {
-                                              if (label[keyText] != null &&
-                                                  label[keyText].isNotEmpty) {
-                                                return Row(
-                                                  children: <Widget>[
-                                                    LabelCard(
-                                                      text: label[keyText]
-                                                          .toString(),
-                                                      backgroundColor: Color(
-                                                        int.parse(
-                                                          hexToColor(
-                                                            label[keyBackgroundColor] ??
-                                                                '#FFFFFF',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      textSize: 16,
-                                                      textColor: Color(
-                                                        int.parse(
-                                                          hexToColor(
-                                                            label[keyTextColor] ??
-                                                                '#FFFFFF',
-                                                          ),
+                                                      .color989898,
+                                            ),
+                                      ),
+                                    ],
+                                  )
+                                else
+                                  const Center(),
+                                SizedBox(height: 16.h),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: <Widget>[
+                                      if (item[keyStatusInfo] != null &&
+                                          item[keyStatusInfo].isNotEmpty)
+                                        ...item[keyStatusInfo].map(
+                                          (label) {
+                                            if (label[keyText] != null &&
+                                                label[keyText].isNotEmpty) {
+                                              return Row(
+                                                children: <Widget>[
+                                                  LabelCard(
+                                                    text: label[keyText]
+                                                        .toString(),
+                                                    backgroundColor: Color(
+                                                      int.parse(
+                                                        hexToColor(
+                                                          label[keyBackgroundColor] ??
+                                                              '#FFFFFF',
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 8.w)
-                                                  ],
-                                                );
-                                              } else {
-                                                return const Center();
-                                              }
-                                            },
-                                          ).toList(),
-                                      ],
-                                    ),
+                                                    textSize: 16,
+                                                    textColor: Color(
+                                                      int.parse(
+                                                        hexToColor(
+                                                          label[keyTextColor] ??
+                                                              '#FFFFFF',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 8.w)
+                                                ],
+                                              );
+                                            } else {
+                                              return const Center();
+                                            }
+                                          },
+                                        ).toList(),
+                                    ],
                                   ),
-                                  if (item[keyPrice] != null)
-                                    Column(
-                                      children: [
-                                        SizedBox(height: 16.h),
-                                        Text(
-                                          '${getFormattedPrice(item[keyPrice].toDouble())} ${getCurrency()}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    FlutterMadaTheme.of(context)
-                                                        .primary,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
+                                ),
+                                if (item[keyPrice] != null)
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 16.h),
+                                      Text(
+                                        '${getFormattedPrice(item[keyPrice].toDouble())} ${getCurrency()}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  FlutterMadaTheme.of(context)
+                                                      .primary,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                              ],
                             ),
                           ),
                         ],
