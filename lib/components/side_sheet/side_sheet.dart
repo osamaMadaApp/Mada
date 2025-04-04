@@ -62,10 +62,7 @@ class SideSheet {
                       SizedBox(height: 30.h),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.89,
-                            child: child,
-                          ),
+                          child: child,
                         ),
                       ),
                     ],

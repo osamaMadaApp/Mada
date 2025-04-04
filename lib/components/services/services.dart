@@ -1,4 +1,5 @@
 import '../../general_exports.dart';
+import '../../structure_main_flow/flutter_mada_util.dart';
 
 class Services extends StatelessWidget {
   const Services({
@@ -36,7 +37,9 @@ class Services extends StatelessWidget {
                 height: DEVICE_HEIGHT * 0.02,
               ),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: FFAppState().getSelectedLanguge() == 'en'
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
                 child: SizedBox(
                   height: DEVICE_HEIGHT * 0.1,
                   child: ListView.builder(
