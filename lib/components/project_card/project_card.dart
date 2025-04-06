@@ -128,7 +128,7 @@ class ProjectCard extends StatelessWidget {
                       if (projectImage != null)
                         CachedImage(
                           image: projectImage,
-                          borderRadius: 2.w,
+                          borderRadius: 4.w,
                           width: 30.w,
                           height: 30.w,
                         ),
@@ -184,7 +184,7 @@ class ProjectCard extends StatelessWidget {
                       if (getAvailableStatusLable != null)
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
+                            horizontal: 8,
                             vertical: 5,
                           ),
                           margin: const EdgeInsets.symmetric(horizontal: 8),

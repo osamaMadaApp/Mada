@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../general_exports.dart';
 import '../pages/exclusive_projects/exclusive_projects.dart';
 import '../pages/login_page/login_page_widget.dart';
@@ -7,8 +9,14 @@ import '../pages/unit_details/unit_details.dart';
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>?;
-
+    if(kDebugMode){
+      print('Route-------');
+      print('RouteName${settings.name}');
+      print('RouteArgs$args');
+      print('Route-------');
+    }
     switch (settings.name) {
+
       case Routes.routeSplash:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),

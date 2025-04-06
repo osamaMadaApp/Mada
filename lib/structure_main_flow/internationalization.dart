@@ -169,6 +169,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Home',
       'ar': '',
     },
+    'off': <String, String>{
+      'en': 'of',
+      'ar': 'من',
+    },
     'code': <String, String>{
       'en': 'Code Verification',
       'ar': 'التحقق من الرمز',

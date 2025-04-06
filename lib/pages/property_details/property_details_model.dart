@@ -1,5 +1,19 @@
+import 'package:flutter/foundation.dart';
+import 'package:pdf/pdf.dart';
+
 import '../../app_state.dart';
 import '../../general_exports.dart';
+import 'package:flutter/material.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/services.dart' as serv;
+import 'dart:typed_data' as U8;
+
+import '../../utils/pdf_file.dart';
+import '../../utils/pdf_utils.dart';
 
 class PropertyDetailsModel extends ChangeNotifier {
   dynamic data;
@@ -123,16 +137,21 @@ class PropertyDetailsModel extends ChangeNotifier {
     onPayment!();
   }
 
-  // void onDescriptionPressed() {
-  //   // Get.bottomSheet(
-  //   //   BottomSheetContainer(
-  //   //     title: 'property_description'.tr,
-  //   //     titlePadding: DEVICE_HEIGHT * 0.02,
-  //   //     child: PropertyDescriptionSheet(
-  //   //       description: data[keyDescription],
-  //   //     ),
-  //   //   ),
-  //   //   isScrollControlled: true,
-  //   // );
-  // }
+  Future<void> createAndDownloadPdf() async {
+    generateAndDownloadPdfFile();
+  }
+
+
+// void onDescriptionPressed() {
+//   // Get.bottomSheet(
+//   //   BottomSheetContainer(
+//   //     title: 'property_description'.tr,
+//   //     titlePadding: DEVICE_HEIGHT * 0.02,
+//   //     child: PropertyDescriptionSheet(
+//   //       description: data[keyDescription],
+//   //     ),
+//   //   ),
+//   //   isScrollControlled: true,
+//   // );
+// }
 }

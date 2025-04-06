@@ -130,6 +130,7 @@ const String imageThreeSixty = '${imagesPath}360-view.png';
 const String imagePaymentPlan = '${imagesPath}payment_plan.png';
 const String imageUpdateApp = '${imagesPath}update_app.png';
 const String loginMainImage = '${imagesPath}login_main_image.png';
+const String coloredLogoImage = '${imagesPath}colored_logo.png';
 
 // splash image
 const String imageSplashScreen = '${imagesPath}splash_screen.png';

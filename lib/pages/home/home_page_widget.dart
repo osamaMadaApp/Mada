@@ -200,7 +200,7 @@ class HomeCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ...menu.map((dynamic item) {
+        ...menu.take(2).map((dynamic item) {
           final int index = menu.indexOf(item);
           return Padding(
             padding: EdgeInsets.only(bottom: 19.h),

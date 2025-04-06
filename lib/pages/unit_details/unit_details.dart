@@ -109,7 +109,7 @@ class _UnitDetailsState extends State<UnitDetails> {
                             top: 48.h, left: 24.w, right: 24.w, bottom: 24.h),
                         child: DetailsHeader(
                           onDownloadPdfPressed: () {
-                            // will modify this later when change base url
+                            model.createAndDownloadPdf();
                           },
                           onSharePressed: () {
                             Share.share(model.data[keyDeepLink]);
@@ -117,7 +117,6 @@ class _UnitDetailsState extends State<UnitDetails> {
                           onFollowPressed: () {
                             model.addToFollow(context);
                           },
-                          showDownloadPdfIcon: false,
                           isFollowed: model.data[keyIsFollowed] ?? false,
                         ),
                       ),
@@ -219,9 +218,7 @@ class ProjectDetailsSection1 extends StatelessWidget {
                           title: model.data[keyProjectTitle],
                           image: model.data[keyPlan][0],
                         ),
-                        title: FFLocalizations.of(context).getText(
-                          'mortgage_calculator',
-                        ),
+                        title: '${FFLocalizations.of(context).getText('layout_of_unit_no')} ${model.data[keyUnitNumber]}',
                       );
                     },
                   ),
@@ -427,7 +424,15 @@ class ProjectDetailsSection2 extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.routePayment,
+                          arguments: {
+                            keyPropertyId: model.data[keyID],
+                          },
+                        );
+                      },
                       text: FFLocalizations.of(context).getText('book_now'),
                       textStyle:
                           Theme.of(context).textTheme.bodySmall!.copyWith(

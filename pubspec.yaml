@@ -83,7 +83,9 @@ dependencies:
 #  chewie: ^1.11.0
 #  video_player: 2.3.0
   flick_video_player: ^0.9.0
- 
+  pdf: ^3.10.4
+
+
 
 
 
@@ -152,6 +154,10 @@ flutter:
           weight: 600
         - asset: assets/fonts/WorkSans-Bold.ttf
           weight: 700
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

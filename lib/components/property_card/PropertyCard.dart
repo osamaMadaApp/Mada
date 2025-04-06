@@ -64,7 +64,7 @@ class PropertyCard extends StatelessWidget {
                           paddingVertical: 4.w,
                           paddingHorizontal: 8.w,
                           text:
-                              '${FFLocalizations.of(context).getText('available')} ${item[keyTotalAvailableUnits] ?? ''} ${FFLocalizations.of(context).getText('of')} ${item[keyTotalUnits] ?? ''}',
+                              '${FFLocalizations.of(context).getText('available')} ${item[keyTotalAvailableUnits] ?? ''} ${FFLocalizations.of(context).getText('off')} ${item[keyTotalUnits] ?? ''}',
                         ),
                       ),
                     ],
@@ -82,6 +82,9 @@ class PropertyCard extends StatelessWidget {
                     image: item?[keyDeveloperImage] ?? testImage,
                     width: 41.w,
                     height: 41.w,
+                    borderRadius: 4,
+                    placeholder: imageGrayLogo,
+                    showPlaceHolder: true,
                   ),
                   Expanded(
                     child: Padding(
@@ -107,12 +110,12 @@ class PropertyCard extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 6.w, 0),
+                                padding: EdgeInsets.fromLTRB( 6.w, 0, 6.w, 0),
                                 child: SvgPicture.asset(iconLocation),
                               ),
                               Expanded(
                                 child: Text(
-                                  '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
+                                  item[keyCity]== null ? '${item[keySubCommunity] ?? ''}' : '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
@@ -135,7 +138,7 @@ class PropertyCard extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
+                      horizontal: 8.w,
                       vertical: 5.h,
                     ),
                     margin: EdgeInsets.symmetric(horizontal: 8.w),

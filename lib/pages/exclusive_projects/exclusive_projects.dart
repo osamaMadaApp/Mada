@@ -77,7 +77,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                     padding: EdgeInsets.fromLTRB(
                                         8.w, 16.h, 8.w, 16.h),
                                     child: SizedBox(
-                                      height: 96.h,
+                                      height: 130.h,
                                       // Set an appropriate height for horizontal scrolling
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
@@ -90,6 +90,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                                 16.w, 0.h, 0.w, 0.h),
                                             // Add some spacing between items
                                             child: LabeledIconCardGradientColor(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               title: _model.menu[index]
                                                   [keyName],
                                               icon: _model.menu[index]
@@ -109,8 +110,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                               onTap: () {
                                                 Navigator.pushNamed(
                                                     context,
-                                                    Routes
-                                                        .routeProjectsListview,
+                                                    Routes.routeProjectsListview,
                                                     arguments: {
                                                       keyType: serializeParam(
                                                         _model.menu[index]
@@ -198,7 +198,7 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                             crossAxisSpacing:
                                                 DEVICE_WIDTH * 0.02,
                                             // Increased spacing
-                                            childAspectRatio: 434 / 201,
+                                            childAspectRatio: 434 / 200,
                                           ),
                                     itemCount: _model.lastProjects.length,
                                     itemBuilder:

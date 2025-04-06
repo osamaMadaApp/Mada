@@ -25,7 +25,7 @@ Future<void> saveAndLaunchFile(List<int> bytes, String fileName, String successM
 
   dismissLoading();
 
-  await savePdfFile(fileBytes, fileName, 'Aqarek/pdf');
+  await savePdfFile(fileBytes, fileName, successMsg);
 }
 
 Future<void> savePdfFile(Uint8List fileBytes, String fileName, String successMsg) async {
@@ -39,11 +39,7 @@ Future<void> savePdfFile(Uint8List fileBytes, String fileName, String successMsg
     // Write the file
     final File file = File(filePath);
     await file.writeAsBytes(fileBytes);
-
-    // Show success toast
-    if (Platform.isAndroid) {
-      Fluttertoast.showToast(msg: successMsg);
-    }
+    Fluttertoast.showToast(msg: successMsg);
   } catch (e) {
     if (Platform.isAndroid) {
       Fluttertoast.showToast(msg: successMsg);

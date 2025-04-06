@@ -2,6 +2,7 @@ import 'package:flutter_html/flutter_html.dart';
 
 import '../../app_state.dart';
 import '../../general_exports.dart';
+import '../../utils/pdf_file.dart';
 
 class UnitDetailsModel extends ChangeNotifier {
   dynamic data;
@@ -114,11 +115,15 @@ class UnitDetailsModel extends ChangeNotifier {
     return (percentage / 100) * data[keyPrice];
   }
 
+  Future<void> createAndDownloadPdf() async {
+    generateAndDownloadPdfFile();
+  }
+
   void addToFollow(BuildContext context) {
     final favoritesModel = context.read<FavoritesModel>();
     favoritesModel.addOrRemoveFromFavorite(
       data[keyID],
-      PropertyType.project,
+      PropertyType.unit,
       onSuccessLogin: () {
         getProjectDetails(unitId: data[keyID]);
       },
@@ -126,7 +131,6 @@ class UnitDetailsModel extends ChangeNotifier {
         data[keyIsFollowed] = !data[keyIsFollowed];
         notifyListeners();
       },
-      bodyKey: keyProjectId,
     );
   }
 
