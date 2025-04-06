@@ -1,3 +1,4 @@
+import '../../app_state.dart';
 import '../../general_exports.dart';
 import '../../router/navigation_service.dart';
 
@@ -43,6 +44,9 @@ class ExclusiveProjectsModel extends ChangeNotifier{
       className: 'ExclusiveProjectsController/getExclusiveProjects',
       body: {
         keyPage: page,
+      },
+      header: {
+        keyLanguage: FFAppState().getSelectedLanguge(),
       },
     ).request(
       onSuccess: (dynamic data, dynamic response) {

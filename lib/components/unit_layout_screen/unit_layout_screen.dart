@@ -1,5 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../general_exports.dart';
 
 class UnitLayoutScreen extends StatelessWidget {
@@ -17,21 +15,14 @@ class UnitLayoutScreen extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: DEVICE_WIDTH * 0.05,
             vertical: DEVICE_HEIGHT * 0.02,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: DEVICE_HEIGHT * 0.01),
-              MadaText(
-                '$title',
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: const Color(AppColors.gray2),
-                ),
-              ),
-            ],
-          ),
+          child: MadaText(
+            '$title',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: const Color(AppColors.gray2),
+            ),
+          )
         ),
         InteractiveViewer(
           panEnabled: true,
@@ -42,6 +33,7 @@ class UnitLayoutScreen extends StatelessWidget {
             height: DEVICE_HEIGHT,
             fit: BoxFit.contain,
             image: image,
+
           ),
         ),
       ],

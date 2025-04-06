@@ -1,3 +1,4 @@
+import '../../backend/schema/util/schema_util.dart';
 import '../../general_exports.dart';
 
 class Agent extends StatelessWidget {
@@ -36,14 +37,14 @@ class Agent extends StatelessWidget {
                             ),
                             child: CachedImage(
                               image: agentInfo[keyProfilePIC] ?? testImage,
-                              height: DEVICE_HEIGHT * 0.08,
-                              width: DEVICE_WIDTH * 0.08,
+                              height: DEVICE_HEIGHT * 0.06,
+                              width: DEVICE_WIDTH * 0.06,
                               placeholder: imageUser,
                               showPlaceHolder: true,
                             ),
                           ),
                           SizedBox(
-                            width: DEVICE_WIDTH * 0.04,
+                            width: DEVICE_WIDTH * 0.02,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +67,7 @@ class Agent extends StatelessWidget {
                       ),
                       RotatedBox(
                         quarterTurns: isRTL ? 2 : 0,
-                        child: SvgPicture.asset(iconArrowGrey),
+                        child: SvgPictureRtl.asset(iconArrowGrey),
                       ),
                     ],
                   )

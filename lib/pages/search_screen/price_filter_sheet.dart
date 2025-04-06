@@ -54,18 +54,18 @@ class PriceFilterSheet extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            SizedBox(height: DEVICE_HEIGHT * 0.01),
-                            Row(
-                              children: [
-                                Text(
-                                  '${FFLocalizations.of(context).getText('min_price')}: ${getFormattedPrice(model.minPrice)} ${getCurrency()}',
-                                ),
-                                const Spacer(),
-                                Text(
-                                  '${FFLocalizations.of(context).getText('max_price')}: ${getFormattedPrice(model.maxPrice)} ${getCurrency()}',
-                                ),
-                              ],
-                            ),
+                            // SizedBox(height: DEVICE_HEIGHT * 0.01),
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       '${FFLocalizations.of(context).getText('min_price')}: ${getFormattedPrice(model.minPrice)} ${getCurrency()}',
+                            //     ),
+                            //     const Spacer(),
+                            //     Text(
+                            //       '${FFLocalizations.of(context).getText('max_price')}: ${getFormattedPrice(model.maxPrice)} ${getCurrency()}',
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(height: DEVICE_WIDTH * 0.02),
                             Row(
                               children: [
@@ -304,18 +304,18 @@ class AreaFilterSheet extends StatelessWidget {
                         SizedBox(height: DEVICE_HEIGHT * 0.02),
                         Column(
                           children: [
-                            SizedBox(height: DEVICE_HEIGHT * 0.01),
-                            Row(
-                              children: [
-                                Text(
-                                  '${FFLocalizations.of(context).getText('min_area')}: ${getFormattedPrice(model.minArea)} m²',
-                                ),
-                                const Spacer(),
-                                Text(
-                                  '${FFLocalizations.of(context).getText('max_area')}: ${getFormattedPrice(model.maxArea)} m²',
-                                ),
-                              ],
-                            ),
+                            // SizedBox(height: DEVICE_HEIGHT * 0.01),
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       '${FFLocalizations.of(context).getText('min_area')}: ${getFormattedPrice(model.minArea)} m²',
+                            //     ),
+                            //     const Spacer(),
+                            //     Text(
+                            //       '${FFLocalizations.of(context).getText('max_area')}: ${getFormattedPrice(model.maxArea)} m²',
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(height: DEVICE_WIDTH * 0.02),
                             Row(
                               children: [

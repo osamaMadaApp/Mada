@@ -650,7 +650,7 @@ class ContactSheetButtons extends StatelessWidget {
             text: FFLocalizations.of(context).getText('whatsapp'),
             value: FFAppState().masterDateJsonModel[keyAdminInfo][0][keyMobile],
             icon: iconWhatsapp,
-            containerHeight: 70.h,
+            containerHeight: 90.h,
             onTap: () {
               whatsapp(
                 FFAppState().masterDateJsonModel[keyAdminInfo][0][keyMobile],
@@ -666,7 +666,7 @@ class ContactSheetButtons extends StatelessWidget {
           ContactUsMenuCard(
             text: FFLocalizations.of(context).getText('phone'),
             icon: iconPhoneLogo,
-            containerHeight: 70.h,
+            containerHeight: 90.h,
             onTap: () {
               makePhoneCall(
                 FFAppState().masterDateJsonModel[keyAdminInfo][0][keyMobile],
@@ -681,7 +681,7 @@ class ContactSheetButtons extends StatelessWidget {
             text: FFLocalizations.of(context).getText('email'),
             value: FFAppState().masterDateJsonModel[keyAdminInfo][0][keyEmail],
             icon: iconEmailContact,
-            containerHeight: 70.h,
+            containerHeight: 90.h,
             withLine: false,
             onTap: () {
               sendEmail(

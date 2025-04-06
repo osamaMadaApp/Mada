@@ -3,7 +3,6 @@ import '../../general_exports.dart';
 import '../../pages/projects_listview/projects_listview_model.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
 import '../../utils/colors.dart';
-import '../select_list/mada_select_list.dart';
 
 class ProjectListviewFilterSheet extends StatelessWidget {
   const ProjectListviewFilterSheet({super.key});
@@ -47,15 +46,10 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             SelectListBottomList(
                               isWrap: true,
                               items: controller.filteredPropertyPurpose,
-                              selectedItem:
-                                  controller.selectedTemFilteredPropertyPurpose,
-                              onTap: controller
-                                  .onTempFilteredPropertyPurposePressed,
-                              borderColor:
-                                  FlutterMadaTheme.of(context).color97BE5A,
-                              unselectedBackgroundColor:
-                                  FlutterMadaTheme.of(context)
-                                      .colorD2D2D2
+                              selectedItem:  controller.selectedTemFilteredPropertyPurpose,
+                              onTap: controller .onTempFilteredPropertyPurposePressed,
+                              borderColor: FlutterMadaTheme.of(context).color97BE5A,
+                              unselectedBackgroundColor:  FlutterMadaTheme.of(context) .colorD2D2D2
                                       .withOpacity(
                                         0.25,
                                       ),
@@ -273,7 +267,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height: DEVICE_HEIGHT * 0.04),
+                    SizedBox(height: DEVICE_HEIGHT * 0.02),
                     Row(
                       children: [
                         Expanded(
@@ -351,7 +345,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: DEVICE_HEIGHT * 0.03),
+                    SizedBox(height: DEVICE_HEIGHT * 0.02),
                     Text(
                       FFLocalizations.of(context).getText('area'),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -724,14 +718,16 @@ class SelectListBottomList extends StatelessWidget {
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       CachedImage(
                         image: item[keyImage],
                         height: DEVICE_HEIGHT * 0.0525,
                         borderRadius: DEVICE_WIDTH * 0.01,
                         fit: BoxFit.contain,
+                        placeholder: imageGrayLogo,
+                        showPlaceHolder: true,
                       ),
+                      SizedBox(height: 15.h,),
                       Text(
                         item is String ? item : item[textKey] ?? '',
                         maxLines: 2,

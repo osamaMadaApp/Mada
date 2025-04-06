@@ -75,7 +75,7 @@ class ProjectUnitCard extends StatelessWidget {
                                 ? item[imageKey][0]
                                 : testImage,
                             borderRadius: 10,
-                            width: 110.w,
+                            width: 103.w,
                             height: 110.w,
                           ),
                           Padding(
@@ -193,7 +193,7 @@ class ProjectUnitCard extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(width: 8.w)
+                                                  SizedBox(width: 3.w)
                                                 ],
                                               );
                                             } else {

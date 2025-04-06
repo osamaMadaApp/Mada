@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../../components/mada_header/mada_header.dart';
 import '../../components/projects_listview_filter/projects_listview_filter.dart';
 import '../../components/reset_filter/reset_filter.dart';
@@ -305,7 +303,7 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                         maxCrossAxisExtent: 434,
                                         mainAxisSpacing: DEVICE_HEIGHT * 0.02,  // Increased spacing
                                         crossAxisSpacing: DEVICE_WIDTH * 0.02,  // Increased spacing
-                                        childAspectRatio: 424 / 201,
+                                        childAspectRatio: 424 / 227,
                                       ),
                                       itemCount: model.projects.length,
                                       itemBuilder:
@@ -316,7 +314,7 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                                           images: item[keyPhotos] ?? [],
                                           projectImage: item[keyDeveloperImage] ?? testImage,
                                           projectName: item['title'] ?? '',
-                                          projectAddress: '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
+                                          projectAddress: item[keyCity]== null ? '${item[keySubCommunity] ?? ''}' : '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
                                           statusText: item[keyStatus] ?? '',
                                           totalUnits: item[keyTotalUnits] ?? '',
                                           availableUnits:

@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import '../../general_exports.dart';
 
 class PropertyDetailsScreen extends StatelessWidget {
@@ -60,7 +58,7 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                       children: <Widget>[
                         DetailsHeader(
                           onDownloadPdfPressed: () {
-                            // will modify this later when change base url
+                            model.createAndDownloadPdf();
                           },
                           onSharePressed: () {
                             Share.share(

@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../app_state.dart';
 import '../../general_exports.dart';
+
+
+
 
 class ProjectDetailsModel extends ChangeNotifier {
   dynamic data;
@@ -129,6 +133,8 @@ class ProjectDetailsModel extends ChangeNotifier {
       bodyKey: keyProjectId,
     );
   }
+
+
 
   void onDescriptionPressed(BuildContext context) {
     SideSheet.show(

@@ -25,7 +25,8 @@ class LabeledIconCardGradientColor extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.fromLTRB(12.w, 5.h, 135.w, 0.h),
+        width: 140.w,
+        padding: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 0.h),
         decoration: BoxDecoration(
           color: FlutterMadaTheme.of(context).color4CAF50FF,
           borderRadius: BorderRadius.circular(8),
@@ -65,6 +66,8 @@ class LabeledIconCardGradientColor extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 0),
               child: MadaText(
                 title ?? '',
+                softWarp: true,
+                maxLines: 1,
                 style: textStyle ??
                     Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: FlutterMadaTheme.of(context).color000000,

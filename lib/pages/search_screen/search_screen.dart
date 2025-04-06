@@ -291,6 +291,7 @@ class _SearchWidgetState extends State<Search> with TickerProviderStateMixin {
                                                           .projectResult[index];
                                                       return ProjectUnitCard(
                                                         item: property,
+                                                        maxLines: 1,
                                                         showContactIcons: true,
                                                         showComAndSub: true,
                                                         whatsAppMsg:

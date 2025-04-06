@@ -1,7 +1,4 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter_html/flutter_html.dart';
-
 import '../../general_exports.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
@@ -62,7 +59,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       children: <Widget>[
                         DetailsHeader(
                           onDownloadPdfPressed: () {
-                            // will modify this later when change base url
+
                           },
                           onSharePressed: () {
                             Share.share(
