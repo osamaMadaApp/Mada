@@ -218,7 +218,8 @@ class ProjectDetailsSection1 extends StatelessWidget {
                           title: model.data[keyProjectTitle],
                           image: model.data[keyPlan][0],
                         ),
-                        title: '${FFLocalizations.of(context).getText('layout_of_unit_no')} ${model.data[keyUnitNumber]}',
+                        title:
+                            '${FFLocalizations.of(context).getText('layout_of_unit_no')} ${model.data[keyUnitNumber]}',
                       );
                     },
                   ),
@@ -429,7 +430,7 @@ class ProjectDetailsSection2 extends StatelessWidget {
                           context,
                           Routes.routePayment,
                           arguments: {
-                            keyPropertyId: model.data[keyID],
+                            keyUnitId: model.data[keyID],
                           },
                         );
                       },
