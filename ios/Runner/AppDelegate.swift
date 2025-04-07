@@ -2,6 +2,7 @@ import UIKit
 import Flutter
 import Firebase
 import FirebaseCore
+import GoogleMaps
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, MessagingDelegate {
@@ -11,6 +12,7 @@ import FirebaseCore
   ) -> Bool {
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
+    GMSServices.provideAPIKey("AIzaSyA_9ZfcuavEd6tbJGOpQkkXiHAk-muzc2M")
     GeneratedPluginRegistrant.register(with: self)
      if #available(iOS 10.0, *) {
         // For iOS 10 display notification (sent via APNS)

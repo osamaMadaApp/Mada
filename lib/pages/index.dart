@@ -2,6 +2,7 @@ export 'contact_us/index.dart';
 export 'fal_license_awards/index.dart';
 export 'favorites/index.dart';
 export 'home/index.dart';
+export 'map_page/index.dart';
 export 'menu_page/index.dart';
 export 'mortgage_calculator/index.dart';
 export 'my_app/index.dart';
