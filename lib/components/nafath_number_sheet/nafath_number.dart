@@ -14,7 +14,8 @@ class NafathNumberSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
+        SizedBox(
+          height: DEVICE_HEIGHT * 0.85,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

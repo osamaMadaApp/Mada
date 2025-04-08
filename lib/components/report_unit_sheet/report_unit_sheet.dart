@@ -19,79 +19,77 @@ class ReportPropertySheet extends StatelessWidget {
     final dynamic masterData = FFAppState().masterDateJsonModel;
     return Column(
       children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  FFLocalizations.of(context).getText('report_reason'),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.01,
-                ),
-                MadaDropdownList(
-                  label:
-                      FFLocalizations.of(context).getText('select_the_reason'),
-                  items: masterData[keyReportReason],
-                  textKey: keyName,
-                  valueKey: keyID,
-                  onChanged: (value) {
-                    reasonId = value;
-                  },
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.03,
-                ),
-                Text(
-                  FFLocalizations.of(context).getText('user_type'),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.01,
-                ),
-                MadaDropdownList(
-                  label: FFLocalizations.of(context).getText('select_the_type'),
-                  items: masterData[keyUserTypeReason],
-                  onChanged: (value) {
-                    userType = value;
-                  },
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.03,
-                ),
-                Text(
-                  FFLocalizations.of(context).getText('other_comments'),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.01,
-                ),
-                Text(
-                  FFLocalizations.of(context)
-                      .getText('add_your_additional_comments'),
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: const Color(AppColors.gray2),
-                      ),
-                ),
-                SizedBox(
-                  height: DEVICE_HEIGHT * 0.005,
-                ),
-                CustomInput(
-                  controller: typeMessageController,
-                  hint: FFLocalizations.of(context).getText('type_msg'),
-                  maxLines: 5,
-                ),
-              ],
-            ),
+        SizedBox(
+          height: DEVICE_HEIGHT * 0.85,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                FFLocalizations.of(context).getText('report_reason'),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.01,
+              ),
+              MadaDropdownList(
+                label: FFLocalizations.of(context).getText('select_the_reason'),
+                items: masterData[keyReportReason],
+                textKey: keyName,
+                valueKey: keyID,
+                onChanged: (value) {
+                  reasonId = value;
+                },
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.03,
+              ),
+              Text(
+                FFLocalizations.of(context).getText('user_type'),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.01,
+              ),
+              MadaDropdownList(
+                label: FFLocalizations.of(context).getText('select_the_type'),
+                items: masterData[keyUserTypeReason],
+                onChanged: (value) {
+                  userType = value;
+                },
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.03,
+              ),
+              Text(
+                FFLocalizations.of(context).getText('other_comments'),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.01,
+              ),
+              Text(
+                FFLocalizations.of(context)
+                    .getText('add_your_additional_comments'),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: const Color(AppColors.gray2),
+                    ),
+              ),
+              SizedBox(
+                height: DEVICE_HEIGHT * 0.005,
+              ),
+              CustomInput(
+                controller: typeMessageController,
+                hint: FFLocalizations.of(context).getText('type_msg'),
+                maxLines: 5,
+              ),
+            ],
           ),
         ),
         SizedBox(

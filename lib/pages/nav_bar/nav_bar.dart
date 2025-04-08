@@ -67,15 +67,16 @@ class NavBar extends StatelessWidget {
     BuildContext context,
     NavBarModel provider,
   ) {
-    final List<String> icons = [home, myOrders, notification, menu];
+    final List<String> icons = [home, iconMap, myOrders, notification, menu];
     final List<String> disabledIcons = [
       homeDisabled,
+      iconMap,
       myOrdersDisabled,
       notificationDisabled,
       menuDisabled
     ];
 
-    return List.generate(4, (index) {
+    return List.generate(icons.length, (index) {
       final bool isSelected = provider.currentIndex == index;
       return NavigationRailDestination(
         icon: Card(

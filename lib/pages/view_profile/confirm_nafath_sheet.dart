@@ -12,24 +12,22 @@ class ConfirmNafathSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  FFLocalizations.of(context).getText('transfer_to_nafath'),
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-                SizedBox(height: DEVICE_HEIGHT * 0.02),
-                Align(
-                    child:
-                        Image.asset(imageNafath, height: DEVICE_HEIGHT * 0.1)),
-                SizedBox(height: DEVICE_HEIGHT * 0.05),
-              ],
-            ),
+        SizedBox(
+          height: DEVICE_HEIGHT * 0.85,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                FFLocalizations.of(context).getText('transfer_to_nafath'),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+              SizedBox(height: DEVICE_HEIGHT * 0.02),
+              Align(
+                  child: Image.asset(imageNafath, height: DEVICE_HEIGHT * 0.1)),
+              SizedBox(height: DEVICE_HEIGHT * 0.05),
+            ],
           ),
         ),
         SizedBox(

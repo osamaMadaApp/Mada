@@ -417,6 +417,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Reset filter',
       'ar': 'إعادة تعيين الفلتر',
     },
+    'reset': <String, String>{
+      'en': 'Reset',
+      'ar': 'إعادة تعيين',
+    },
     'project_result': <String, String>{
       'en': 'Project Result',
       'ar': 'نتيجة البحث',

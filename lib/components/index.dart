@@ -13,6 +13,7 @@ export 'details_header/index.dart';
 export 'grey_line/index.dart';
 export 'header_widget/index.dart';
 export 'label_card/index.dart';
+export 'label_marker/index.dart';
 export 'labeled_icon_card/index.dart';
 export 'location_and_nearby_places/index.dart';
 export 'mada_dropdown_list/index.dart';

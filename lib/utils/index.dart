@@ -1,6 +1,7 @@
 export 'assets.dart';
 export 'colors.dart';
 export 'date_util.dart';
+export 'google_map_utils.dart';
 export 'launch_urls_utils.dart';
 export 'loading.dart';
 export 'location_util.dart';

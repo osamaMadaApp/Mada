@@ -9,6 +9,7 @@ class NavBarModel extends ChangeNotifier {
 
   final Map<String, Widget> tabs = {
     'HomePage': const HomePage(),
+    'MapPage': const MapPage(),
     'MyOrderPage': const MyOrderPage(),
     'NotificationsPage': const NotificationsPage(),
     'MenuPage': const MenuPage(),
@@ -29,10 +30,12 @@ class NavBarModel extends ChangeNotifier {
       case 0:
         return const HomePage();
       case 1:
-        return const MyOrderPage();
+        return const MapPage();
       case 2:
-        return const NotificationsPage();
+        return const MyOrderPage();
       case 3:
+        return const NotificationsPage();
+      case 4:
         return const MenuPage();
       default:
         return const Center();
