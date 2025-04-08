@@ -42,8 +42,9 @@ class FALLicenseAndAwards extends StatelessWidget {
                     height: 50.h,
                   ),
                   SizedBox(
-                    height: 200.h,
+                    height: 260.h,
                     child: ListView.builder(
+                      shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: sliderSettings.length,
                       itemBuilder: (BuildContext context, int index) {

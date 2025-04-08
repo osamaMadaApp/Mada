@@ -47,7 +47,9 @@ class UnitDetailsModel extends ChangeNotifier {
         }
 
         notifyListeners();
-      },
+      },onError: (error){
+      isLoading = false;
+    }
     );
   }
 

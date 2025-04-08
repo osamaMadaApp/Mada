@@ -205,27 +205,31 @@ class ProjectDetailsSection1 extends StatelessWidget {
                         model.onDescriptionPressed(context);
                       },
                     ),
-                  UnitLayoutIcon(
-                    planImage: model.data[keyPlan][0],
-                    onTap: () {
-                      SideSheet.show(
-                        context,
-                        child: UnitLayoutScreen(
-                          unitNumber: model.data[keyUnitNumber],
-                          onClose: () {
-                            Navigator.pop(context);
-                          },
-                          title: model.data[keyProjectTitle],
-                          image: model.data[keyPlan][0],
-                        ),
-                        title:
-                            '${FFLocalizations.of(context).getText('layout_of_unit_no')} ${model.data[keyUnitNumber]}',
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
+                  if (model.data[keyPlan] != null && (model.data[keyPlan] as List).isNotEmpty == true) Column(
+                        children: [
+                          UnitLayoutIcon(
+                            planImage: model.data[keyPlan][0],
+                            onTap: () {
+                              SideSheet.show(
+                                context,
+                                child: UnitLayoutScreen(
+                                  unitNumber: model.data[keyUnitNumber],
+                                  onClose: () {
+                                    Navigator.pop(context);
+                                  },
+                                  title: model.data[keyProjectTitle],
+                                  image: model.data[keyPlan][0],
+                                ),
+                                title:
+                                    '${FFLocalizations.of(context).getText('layout_of_unit_no')} ${model.data[keyUnitNumber]}',
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                        ],
+                      ) else Container(),
                   const Padding(
                       padding: EdgeInsets.only(left: 12, right: 12),
                       child: GrayLine()),

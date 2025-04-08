@@ -632,63 +632,61 @@ class DeleteAccountSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.85,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: FlutterMadaTheme.of(context).colorFF0000.withValues(
-                        alpha: 0.03,
-                      ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 30.h,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SvgPicture.asset(iconDeleteAccountWarning),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Text(
-                        FFLocalizations.of(context)
-                            .getText('delete_account_desc'),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: FlutterMadaTheme.of(context).color000000,
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Text(
-                        FFLocalizations.of(context).getText('delete_desc'),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: FlutterMadaTheme.of(context)
-                                  .colorFF0000
-                                  .withValues(
-                                    alpha: 0.7,
-                                  ),
-                              fontWeight: FontWeight.w500,
-                            ),
-                      )
-                    ],
-                  ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: FlutterMadaTheme.of(context).colorFF0000.withValues(
+                  alpha: 0.03,
                 ),
               ),
-              SizedBox(
-                height: 10.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                  vertical: 30.h,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SvgPicture.asset(iconDeleteAccountWarning),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      FFLocalizations.of(context)
+                          .getText('delete_account_desc'),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: FlutterMadaTheme.of(context).color000000,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      FFLocalizations.of(context).getText('delete_desc'),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: FlutterMadaTheme.of(context)
+                            .colorFF0000
+                            .withValues(
+                          alpha: 0.7,
+                        ),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+          ],
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,

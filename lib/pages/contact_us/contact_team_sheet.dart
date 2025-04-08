@@ -5,29 +5,28 @@ class ContactTeamSheet extends StatelessWidget {
     super.key,
     this.whatsappMsg,
   });
+
   final String? whatsappMsg;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          height: DEVICE_HEIGHT * 0.85,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                FFLocalizations.of(context).getText('online_booking_available'),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: const Color(AppColors.black),
-                    ),
-              ),
-              SizedBox(height: DEVICE_HEIGHT * 0.02),
-              ContactUsButtons(
-                whatsappMsg: whatsappMsg,
-              ),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              FFLocalizations.of(context).getText('online_booking_available'),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: const Color(AppColors.black),
+                  ),
+            ),
+            SizedBox(height: DEVICE_HEIGHT * 0.02),
+            ContactUsButtons(
+              whatsappMsg: whatsappMsg,
+            ),
+          ],
         ),
         Align(
           alignment: Alignment.bottomCenter,

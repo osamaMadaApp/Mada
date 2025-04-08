@@ -8,6 +8,7 @@ class RegulatoryInformation extends StatelessWidget {
     super.key,
     this.regaInfo,
   });
+
   final List<dynamic> regularlyInfo;
   final List<dynamic> locations;
   final List<dynamic> propertySpec;
@@ -114,111 +115,118 @@ class RegaSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (locations.isNotEmpty)
-          MadaText(
-            FFLocalizations.of(context).getText('location'),
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: const Color(
-                    AppColors.black,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (locations.isNotEmpty)
+            MadaText(
+              FFLocalizations.of(context).getText('location'),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: const Color(
+                      AppColors.black,
+                    ),
+                  ),
+            ),
+          SizedBox(
+            height: DEVICE_HEIGHT * 0.02,
+          ),
+          ListView.builder(
+            itemCount: locations.length,
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              return TextWithValue(
+                text: locations[index][keyLabel] ?? '',
+                value: locations[index][keyValue].toString(),
+                color: index.isOdd
+                    ? const Color(AppColors.white)
+                    : const Color(AppColors.primary).withOpacity(0.1),
+              );
+            },
+          ),
+          SizedBox(
+            height: DEVICE_HEIGHT * 0.02,
+          ),
+          if (propertySpec.isNotEmpty)
+            MadaText(
+              FFLocalizations.of(context).getText('property_specification'),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: const Color(
+                      AppColors.black,
+                    ),
+                  ),
+            ),
+          SizedBox(
+            height: DEVICE_HEIGHT * 0.02,
+          ),
+          ListView.builder(
+            itemCount: propertySpec.length,
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              return TextWithValue(
+                text: propertySpec[index][keyLabel] ?? '',
+                value: propertySpec[index][keyValue].toString(),
+                color: index.isOdd
+                    ? const Color(AppColors.white)
+                    : const Color(AppColors.primary).withOpacity(0.1),
+              );
+            },
+          ),
+          // REGA QR CODE
+          if (regaInfo[keyQrUrl] != null && regaInfo[keyQrUrl].isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: DEVICE_HEIGHT * 0.02,
+                ),
+                MadaText(
+                  FFLocalizations.of(context).getText('view_details_on_rega'),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: const Color(
+                          AppColors.black,
+                        ),
+                      ),
+                ),
+                SizedBox(
+                  height: DEVICE_HEIGHT * 0.02,
+                ),
+                SizedBox(
+                  width: DEVICE_WIDTH,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: DEVICE_HEIGHT * 0.005,
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            launchWeb(context,regaInfo[keyQrUrl] ?? '');
+                          },
+                          child: QrImageView(
+                            data: regaInfo[keyQrUrl] ?? '',
+                            size: DEVICE_HEIGHT * 0.17,
+                            gapless: false,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-          ),
-        SizedBox(
-          height: DEVICE_HEIGHT * 0.02,
-        ),
-        ListView.builder(
-          itemCount: locations.length,
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return TextWithValue(
-              text: locations[index][keyLabel] ?? '',
-              value: locations[index][keyValue].toString(),
-              color: index.isOdd
-                  ? const Color(AppColors.white)
-                  : const Color(AppColors.primary).withOpacity(0.1),
-            );
-          },
-        ),
-        SizedBox(
-          height: DEVICE_HEIGHT * 0.02,
-        ),
-        if (propertySpec.isNotEmpty)
-          MadaText(
-            FFLocalizations.of(context).getText('property_specification'),
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: const Color(
-                    AppColors.black,
-                  ),
+                SizedBox(
+                  height: DEVICE_HEIGHT * 0.02,
                 ),
-          ),
-        SizedBox(
-          height: DEVICE_HEIGHT * 0.02,
-        ),
-        ListView.builder(
-          itemCount: propertySpec.length,
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return TextWithValue(
-              text: propertySpec[index][keyLabel] ?? '',
-              value: propertySpec[index][keyValue].toString(),
-              color: index.isOdd
-                  ? const Color(AppColors.white)
-                  : const Color(AppColors.primary).withOpacity(0.1),
-            );
-          },
-        ),
-        // REGA QR CODE
-        if (regaInfo[keyQrUrl] != null && regaInfo[keyQrUrl].isNotEmpty)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: DEVICE_HEIGHT * 0.02,
-              ),
-              MadaText(
-                FFLocalizations.of(context).getText('view_details_on_rega'),
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: const Color(
-                        AppColors.black,
-                      ),
-                    ),
-              ),
-              SizedBox(
-                height: DEVICE_HEIGHT * 0.02,
-              ),
-              SizedBox(
-                width: DEVICE_WIDTH,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: DEVICE_HEIGHT * 0.005,
-                      ),
-                      child: QrImageView(
-                        data: regaInfo[keyQrUrl] ?? '',
-                        size: DEVICE_HEIGHT * 0.17,
-                        gapless: false,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: DEVICE_HEIGHT * 0.02,
-              ),
-            ],
-          ),
-      ],
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

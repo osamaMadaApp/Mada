@@ -2,9 +2,7 @@ import 'package:flutter/scheduler.dart';
 
 import '/structure_main_flow/flutter_mada_util.dart';
 import '../../backend/schema/util/schema_util.dart';
-import '../../components/forget_password_component/forget_password_component.dart';
 import '../../components/login_side_component/login_side_component.dart';
-import '../../components/otp_component/otp_component.dart';
 import '../../general_exports.dart';
 import 'login_page_model.dart';
 

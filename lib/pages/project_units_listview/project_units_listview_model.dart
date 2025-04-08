@@ -7,6 +7,10 @@ import '../../general_exports.dart';
 
 class ProjectUnitsListviewModel extends ChangeNotifier {
   dynamic data;
+  dynamic savedFilterData;
+  bool? availableSelected;
+  bool? bookedSelected;
+  bool? soldSelected;
   List<dynamic> floors = [];
   List<dynamic> roomsNumber = [];
   List<dynamic> bathroomsNumber = [];
@@ -84,7 +88,123 @@ class ProjectUnitsListviewModel extends ChangeNotifier {
       maxAreaController.text = formatter.format(spaceTemRange!.end.toInt());
     });
     getProjectUnits(hideScreen: true);
+    resetFilter();
   }
+
+  void resetFilter(){
+    availableSelected = false;
+    bookedSelected = false;
+    soldSelected = false;
+    notifyListeners();
+  }
+
+  void makeAvailableSelected(){
+    bookedSelected = false;
+    soldSelected = false;
+    availableSelected = !availableSelected!;
+    notifyListeners();
+  }
+  void makeBookedSelected(){
+    availableSelected = false;
+    soldSelected = false;
+    bookedSelected = !bookedSelected!;
+    notifyListeners();
+  }
+  void makeSoldSelected(){
+    availableSelected = false;
+    bookedSelected = false;
+    soldSelected = !soldSelected!;
+    notifyListeners();
+  }
+
+  void makeAvailableSelectedList(){
+    final List<Map<String, dynamic>> fullData = List<Map<String, dynamic>>.from(data[keyResults][keyUnits]);
+
+    final List<Map<String, dynamic>> filteredData = [];
+
+    for (var floor in fullData) {
+      final rawUnits = floor['units'];
+      if (rawUnits is List) {
+        final units = rawUnits.cast<Map<String, dynamic>>();
+        final List<Map<String, dynamic>> availableUnits = [];
+
+        for (var unit in units) {
+          if ((unit['status'] as String?)?.toLowerCase() == 'available') {
+            availableUnits.add(Map<String, dynamic>.from(unit)); // deep copy unit
+          }
+        }
+
+        // Only include the floor if it has available units
+        if (availableUnits.isNotEmpty) {
+          filteredData.add({
+            '_id': floor['_id'],
+            'units': availableUnits,
+          });
+        }
+      }
+    }
+
+    savedFilterData = filteredData;
+    notifyListeners();
+  }
+
+  void makeBookedSelectedList(){
+    final List<Map<String, dynamic>> fullData = List<Map<String, dynamic>>.from(data[keyResults][keyUnits]);
+    final List<Map<String, dynamic>> filteredData = [];
+    for (var floor in fullData) {
+      final rawUnits = floor['units'];
+      if (rawUnits is List) {
+        final units = rawUnits.cast<Map<String, dynamic>>();
+        final List<Map<String, dynamic>> availableUnits = [];
+
+        for (var unit in units) {
+          if ((unit['status'] as String?)?.toLowerCase() == 'reserved' || (unit['status'] as String?)?.toLowerCase() == 'booked' ) {
+            availableUnits.add(Map<String, dynamic>.from(unit)); // deep copy unit
+          }
+        }
+
+        // Only include the floor if it has available units
+        if (availableUnits.isNotEmpty) {
+          filteredData.add({
+            '_id': floor['_id'],
+            'units': availableUnits,
+          });
+        }
+      }
+    }
+
+    savedFilterData = filteredData;
+    notifyListeners();
+  }
+  void makeSoldSelectedList(){
+    final List<Map<String, dynamic>> fullData = List<Map<String, dynamic>>.from(data[keyResults][keyUnits]);
+    final List<Map<String, dynamic>> filteredData = [];
+    for (var floor in fullData) {
+      final rawUnits = floor['units'];
+      if (rawUnits is List) {
+        final units = rawUnits.cast<Map<String, dynamic>>();
+        final List<Map<String, dynamic>> availableUnits = [];
+
+        for (var unit in units) {
+          if ((unit['status'] as String?)?.toLowerCase() == 'sold out' ) {
+            availableUnits.add(Map<String, dynamic>.from(unit)); // deep copy unit
+          }
+        }
+
+        // Only include the floor if it has available units
+        if (availableUnits.isNotEmpty) {
+          filteredData.add({
+            '_id': floor['_id'],
+            'units': availableUnits,
+          });
+        }
+      }
+    }
+
+    savedFilterData = filteredData;
+    notifyListeners();
+  }
+
 
   void getProjectUnits({bool hideScreen = false, bool withReset = false}) {
     if (hideScreen) {

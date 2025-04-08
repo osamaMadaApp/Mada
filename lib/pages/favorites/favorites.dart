@@ -117,8 +117,7 @@ class _FavoritesState extends State<Favorites> {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount: controller.units.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
+                                  itemBuilder: (BuildContext context, int index) {
                                     return ProjectUnitCard(
                                       item: controller.units[index],
                                       showContactIcons: true,

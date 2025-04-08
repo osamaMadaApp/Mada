@@ -46,7 +46,6 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: MadaHeader(title: keyTitle ?? ''),
-      backgroundColor: FlutterMadaTheme.of(context).info,
       body: SafeArea(
           child: !model.isLoading
               ? Stack(
@@ -59,305 +58,353 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                         child: SingleChildScrollView(
                           controller: model.scrollController,
                           physics: const AlwaysScrollableScrollPhysics(),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: DEVICE_WIDTH * 0.02,
-                            vertical: DEVICE_HEIGHT * 0.02,
-                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                FFLocalizations.of(context)
-                                    .getText('quick_filter'),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                              SizedBox(height: DEVICE_HEIGHT * 0.025),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      model.openCustomBottomSheet();
-                                      showLeftSideDrawer(
-                                          context: context,
-                                          isDismissible: true,
-                                          child: ChangeNotifierProvider.value(
-                                            value: model,
-                                            child:
-                                                const ProjectListviewFilterSheet(),
-                                          ));
-                                    },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.all(DEVICE_WIDTH * 0.005),
-                                      decoration: BoxDecoration(
-                                        color: FlutterMadaTheme.of(context)
-                                            .colorFFFFFF,
-                                        borderRadius: BorderRadius.circular(
-                                            DEVICE_HEIGHT * 0.04),
-                                        border: Border.all(
-                                          color: model.isCurrentLocationSelected
-                                              ? FlutterMadaTheme.of(context)
-                                                  .color97BE5A
-                                              : Colors.transparent,
-                                        ),
-                                      ),
-                                      child: SvgPicture.asset(
-                                        iconCustomFilter,
-                                        width: 25,
-                                        colorFilter: ColorFilter.mode(
-                                          FlutterMadaTheme.of(context)
-                                              .color97BE5A,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: DEVICE_WIDTH * 0.02),
-                                  if (model.projectStatus != 'Lands')
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: DEVICE_HEIGHT * 0.02,
-                                      ),
-                                      child: SelectList(
-                                          minHeight: 40.h,
-                                          items: model.typeFilter,
-                                          textKey: keyName,
-                                          selectedItem:
-                                              model.selectedTypeFilter,
-                                          onTap: model.onTypeFilterPress,
-                                          borderColor:
-                                              FlutterMadaTheme.of(context)
-                                                  .color97BE5A,
-                                          borderWidth: 1,
-                                          suffixWidget: SingleChildScrollView(
-                                            scrollDirection: Axis.horizontal,
-                                            child: Row(
-                                              children: [
-                                                if (model.checkFilterApplied())
-                                                  GestureDetector(
-                                                    onTap: model.resetFilter,
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                        horizontal:
-                                                            DEVICE_WIDTH *
-                                                                0.009,
-                                                        vertical:
-                                                            DEVICE_HEIGHT *
-                                                                0.009,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: const Color(
-                                                            AppColors.white),
-                                                        border: Border.all(
-                                                          color: FlutterMadaTheme
-                                                                  .of(context)
-                                                              .color97BE5A,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                DEVICE_HEIGHT *
-                                                                    0.04),
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 20,
-                                                            child: SvgPicture.asset(
-                                                                iconFilterRemove),
-                                                          ),
-                                                          SizedBox(
-                                                              width:
-                                                                  DEVICE_WIDTH *
-                                                                      0.009),
-                                                          Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                                    'reset_filter'),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyMedium!
-                                                                .copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        AppFonts
-                                                                            .workSans,
-                                                                    fontSize:
-                                                                        16),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  )
-                                              ],
-                                            ),
-                                          ),
-                                          borderRadius: 22),
-                                    ),
-                                  SizedBox(height: DEVICE_HEIGHT * 0.02),
-                                ],
-                              ),
-                              SizedBox(height: DEVICE_HEIGHT * 0.025),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: model.onOrderByDistancePressed,
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.all(DEVICE_WIDTH * 0.0055),
-                                      decoration: BoxDecoration(
-                                        color: model.isCurrentLocationSelected
-                                            ? FlutterMadaTheme.of(context)
-                                                .color97BE5A
-                                                .withOpacity(0.15)
-                                            : FlutterMadaTheme.of(context)
-                                                .colorD2D2D2
-                                                .withOpacity(
-                                                  0.25,
-                                                ),
-                                        borderRadius: BorderRadius.circular(
-                                            DEVICE_HEIGHT * 0.04),
-                                        border: Border.all(
-                                          color: model.isCurrentLocationSelected
-                                              ? FlutterMadaTheme.of(context)
-                                                  .color97BE5A
-                                              : Colors.transparent,
-                                        ),
-                                      ),
-                                      child:
-                                          SvgPicture.asset(iconCurrentLocation),
-                                    ),
-                                  ),
-                                  SizedBox(width: DEVICE_WIDTH * 0.02),
-                                  Expanded(
-                                    child: SelectList(
-                                        items: model.cities,
-                                        textKey: keyName,
-                                        selectedItem: model.selectedCity,
-                                        onTap: model.onCityPress,
-                                        borderColor:
-                                            FlutterMadaTheme.of(context)
-                                                .color97BE5A,
-                                        borderWidth: 1,
-                                        borderRadius: 22),
-                                  )
-                                ],
-                              ),
-                              SizedBox(height: DEVICE_HEIGHT * 0.025),
-                              Padding(
+                              Container(
+                                color: FlutterMadaTheme.of(context).info,
                                 padding: EdgeInsets.symmetric(
-                                  vertical: DEVICE_HEIGHT * 0.03,
+                                  horizontal: DEVICE_WIDTH * 0.02,
+                                  vertical: DEVICE_HEIGHT * 0.02,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      FFLocalizations.of(context)
+                                          .getText('quick_filter'),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                    SizedBox(height: DEVICE_HEIGHT * 0.025),
                                     Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          FFLocalizations.of(context)
-                                              .getText('latest_projects'),
-                                          style: TextStyle(
-                                              color: FlutterMadaTheme.of(context)
-                                                  .color000000,
-                                              fontSize: 20.0,
-                                              fontWeight: AppFonts.w600,
-                                              fontFamily: AppFonts.outfit),
+                                        InkWell(
+                                          onTap: () {
+                                            model.openCustomBottomSheet();
+                                            showLeftSideDrawer(
+                                                context: context,
+                                                isDismissible: true,
+                                                child: ChangeNotifierProvider
+                                                    .value(
+                                                  value: model,
+                                                  child:
+                                                      const ProjectListviewFilterSheet(),
+                                                ));
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(
+                                                DEVICE_WIDTH * 0.005),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterMadaTheme.of(context)
+                                                      .colorFFFFFF,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      DEVICE_HEIGHT * 0.04),
+                                              border: Border.all(
+                                                color: model
+                                                        .isCurrentLocationSelected
+                                                    ? FlutterMadaTheme.of(
+                                                            context)
+                                                        .color97BE5A
+                                                    : Colors.transparent,
+                                              ),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              iconCustomFilter,
+                                              width: 25,
+                                              colorFilter: ColorFilter.mode(
+                                                FlutterMadaTheme.of(context)
+                                                    .color97BE5A,
+                                                BlendMode.srcIn,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                        Text(
-                                          '${FFLocalizations.of(context).getText('result')} ${model.totalDocs} ${FFLocalizations.of(context).getText('project')}',
-                                          style: TextStyle(
-                                              color: FlutterMadaTheme.of(context)
-                                                  .color000000,
-                                              fontSize: 20.0,
-                                              fontWeight: AppFonts.w400,
-                                              fontFamily: AppFonts.outfit),
-                                        ),
+                                        SizedBox(width: DEVICE_WIDTH * 0.02),
+                                        if (model.projectStatus != 'Lands')
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: DEVICE_HEIGHT * 0.02,
+                                            ),
+                                            child: SelectList(
+                                                minHeight: 40.h,
+                                                items: model.typeFilter,
+                                                textKey: keyName,
+                                                selectedItem:
+                                                    model.selectedTypeFilter,
+                                                onTap: model.onTypeFilterPress,
+                                                borderColor:
+                                                    FlutterMadaTheme.of(context)
+                                                        .color97BE5A,
+                                                borderWidth: 1,
+                                                suffixWidget:
+                                                    SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    children: [
+                                                      if (model
+                                                          .checkFilterApplied())
+                                                        GestureDetector(
+                                                          onTap:
+                                                              model.resetFilter,
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                              horizontal:
+                                                                  DEVICE_WIDTH *
+                                                                      0.009,
+                                                              vertical:
+                                                                  DEVICE_HEIGHT *
+                                                                      0.009,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: const Color(
+                                                                  AppColors
+                                                                      .white),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterMadaTheme.of(
+                                                                        context)
+                                                                    .color97BE5A,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      DEVICE_HEIGHT *
+                                                                          0.04),
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                SizedBox(
+                                                                  height: 20,
+                                                                  child: SvgPicture
+                                                                      .asset(
+                                                                          iconFilterRemove),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: DEVICE_WIDTH *
+                                                                        0.009),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                          'reset_filter'),
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .bodyMedium!
+                                                                      .copyWith(
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontFamily: AppFonts
+                                                                              .workSans,
+                                                                          fontSize:
+                                                                              16),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )
+                                                    ],
+                                                  ),
+                                                ),
+                                                borderRadius: 22),
+                                          ),
+                                        SizedBox(height: DEVICE_HEIGHT * 0.02),
                                       ],
                                     ),
-                                    SizedBox(height: DEVICE_HEIGHT * 0.02),
-                                    GridView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      gridDelegate: isPortrait(context)
-                                          ? SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 434,
-                                              mainAxisSpacing:
-                                                  DEVICE_HEIGHT * 0.02,
-                                              // Increased spacing
-                                              crossAxisSpacing:
-                                                  DEVICE_WIDTH * 0.001,
-                                              // Increased spacing
-                                              childAspectRatio: 400 / 350,
-                                            )
-                                          : SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 434,
-                                              mainAxisSpacing:
-                                                  DEVICE_HEIGHT * 0.02,
-                                              // Increased spacing
-                                              crossAxisSpacing:
-                                                  DEVICE_WIDTH * 0.02,
-                                              // Increased spacing
-                                              childAspectRatio: 424 / 227,
+                                    SizedBox(height: DEVICE_HEIGHT * 0.025),
+                                    Row(
+                                      children: [
+                                        InkWell(
+                                          onTap: model.onOrderByDistancePressed,
+                                          child: Container(
+                                            padding: EdgeInsets.all(
+                                                DEVICE_WIDTH * 0.0055),
+                                            decoration: BoxDecoration(
+                                              color: model
+                                                      .isCurrentLocationSelected
+                                                  ? FlutterMadaTheme.of(context)
+                                                      .color97BE5A
+                                                      .withOpacity(0.15)
+                                                  : FlutterMadaTheme.of(context)
+                                                      .colorD2D2D2
+                                                      .withOpacity(
+                                                        0.25,
+                                                      ),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      DEVICE_HEIGHT * 0.04),
+                                              border: Border.all(
+                                                color: model
+                                                        .isCurrentLocationSelected
+                                                    ? FlutterMadaTheme.of(
+                                                            context)
+                                                        .color97BE5A
+                                                    : Colors.transparent,
+                                              ),
                                             ),
-                                      itemCount: model.projects.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        final item = model.projects[index];
-                                        return ProjectCard(
-                                          horizontalPadding: 0,
-                                          images: item[keyPhotos] ?? [],
-                                          projectImage:
-                                              item[keyDeveloperImage] ??
-                                                  testImage,
-                                          projectName: item['title'] ?? '',
-                                          projectAddress: item[keyCity] == null
-                                              ? '${item[keySubCommunity] ?? ''}'
-                                              : '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
-                                          statusText: item[keyStatus] ?? '',
-                                          totalUnits: item[keyTotalUnits] ?? '',
-                                          availableUnits:
-                                              item[keyTotalAvailableUnits] ??
-                                                  '',
-                                          projectStatus:
-                                              item[keyProjectStatus] ?? '',
-                                          getAvailableStatusLable:
-                                              item[keyGetAvailableStatusLable],
-                                          projectCategory: item[keyProjectType],
-                                          showProjectCategory:
-                                              model.projectStatus == 'ready',
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                              context,
-                                              Routes.routeProjectDetails,
-                                              arguments: {
-                                                keyProjectId: item[keySlug],
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
+                                            child: SvgPicture.asset(
+                                                iconCurrentLocation),
+                                          ),
+                                        ),
+                                        SizedBox(width: DEVICE_WIDTH * 0.02),
+                                        Expanded(
+                                          child: SelectList(
+                                              items: model.cities,
+                                              textKey: keyName,
+                                              selectedItem: model.selectedCity,
+                                              onTap: model.onCityPress,
+                                              borderColor:
+                                                  FlutterMadaTheme.of(context)
+                                                      .color97BE5A,
+                                              borderWidth: 1,
+                                              borderRadius: 22),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: DEVICE_HEIGHT * 0.05,
-                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: DEVICE_WIDTH * 0.02,
+                                  vertical: DEVICE_HEIGHT * 0.02,
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: DEVICE_HEIGHT * 0.025),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: DEVICE_HEIGHT * 0.03,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText('latest_projects'),
+                                                style: TextStyle(
+                                                    color: FlutterMadaTheme.of(
+                                                            context)
+                                                        .color000000,
+                                                    fontSize: 20.0,
+                                                    fontWeight: AppFonts.w600,
+                                                    fontFamily:
+                                                        AppFonts.outfit),
+                                              ),
+                                              Text(
+                                                '${FFLocalizations.of(context).getText('result')} ${model.totalDocs} ${FFLocalizations.of(context).getText('project')}',
+                                                style: TextStyle(
+                                                    color: FlutterMadaTheme.of(
+                                                            context)
+                                                        .color000000,
+                                                    fontSize: 20.0,
+                                                    fontWeight: AppFonts.w400,
+                                                    fontFamily:
+                                                        AppFonts.outfit),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                              height: DEVICE_HEIGHT * 0.02),
+                                          GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            gridDelegate: isPortrait(context)
+                                                ? SliverGridDelegateWithMaxCrossAxisExtent(
+                                                    maxCrossAxisExtent: 434,
+                                                    mainAxisSpacing:
+                                                        DEVICE_HEIGHT * 0.02,
+                                                    // Increased spacing
+                                                    crossAxisSpacing:
+                                                        DEVICE_WIDTH * 0.001,
+                                                    // Increased spacing
+                                                    childAspectRatio: 400 / 350,
+                                                  )
+                                                : SliverGridDelegateWithMaxCrossAxisExtent(
+                                                    maxCrossAxisExtent: 434,
+                                                    mainAxisSpacing:
+                                                        DEVICE_HEIGHT * 0.02,
+                                                    // Increased spacing
+                                                    crossAxisSpacing:
+                                                        DEVICE_WIDTH * 0.02,
+                                                    // Increased spacing
+                                                    childAspectRatio: 424 / 235,
+                                                  ),
+                                            itemCount: model.projects.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              final item =
+                                                  model.projects[index];
+                                              return ProjectCard(
+                                                horizontalPadding: 0,
+                                                images: item[keyPhotos] ?? [],
+                                                projectImage:
+                                                    item[keyDeveloperImage] ??
+                                                        testImage,
+                                                projectName:
+                                                    item['title'] ?? '',
+                                                projectAddress: item[keyCity] ==
+                                                        null
+                                                    ? '${item[keySubCommunity] ?? ''}'
+                                                    : '${item[keyCity]} - ${item[keySubCommunity] ?? ''}',
+                                                statusText:
+                                                    item[keyStatus] ?? '',
+                                                totalUnits:
+                                                    item[keyTotalUnits] ?? '',
+                                                availableUnits: item[
+                                                        keyTotalAvailableUnits] ??
+                                                    '',
+                                                projectStatus:
+                                                    item[keyProjectStatus] ??
+                                                        '',
+                                                getAvailableStatusLable: item[
+                                                    keyGetAvailableStatusLable],
+                                                projectCategory:
+                                                    item[keyProjectType],
+                                                showProjectCategory:
+                                                    model.projectStatus ==
+                                                        'ready',
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                    context,
+                                                    Routes.routeProjectDetails,
+                                                    arguments: {
+                                                      keyProjectId:
+                                                          item[keySlug],
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: DEVICE_HEIGHT * 0.05,
+                                    ),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),

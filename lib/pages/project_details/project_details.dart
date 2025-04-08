@@ -1,3 +1,4 @@
+import '../../backend/schema/structs/index.dart';
 import '../../components/two_line_html_preview/two_line_html_preview.dart';
 import '../../general_exports.dart';
 
@@ -418,7 +419,7 @@ class ProjectDetailsSection2 extends StatelessWidget {
                             ),
                       ),
                       const Spacer(),
-                      SvgPicture.asset(iconArrowGreen),
+                      SvgPictureRtl.asset(iconArrowGreen),
                     ],
                   ),
                 ),

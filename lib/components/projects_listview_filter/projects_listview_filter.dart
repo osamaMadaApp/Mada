@@ -491,7 +491,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                         textStyle:
                             Theme.of(context).textTheme.bodySmall!.copyWith(
                                   fontWeight: FontWeight.w600,
-                                  color: Color(AppColors.white),
+                                  color: const Color(AppColors.white),
                                 ),
                         onPressed: () {
                           controller.onApplyFilterPress();
@@ -683,6 +683,7 @@ class SelectListBottomList extends StatelessWidget {
                       CachedImage(
                         image: item[keyImage],
                         height: 41,
+                        width: 50,
                         borderRadius: DEVICE_WIDTH * 0.01,
                         fit: BoxFit.contain,
                         placeholder: imageGrayLogo,

@@ -27,7 +27,7 @@ class PropertyCard extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(8.w, 2.h, 8.w, 0),
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8),
@@ -35,7 +35,7 @@ class PropertyCard extends StatelessWidget {
                     ),
                     child: SliderComponent(
                       items: item[keyPhotos] ?? [] ?? <dynamic>[],
-                      height: 150.h,
+                      height: 220.h,
                       showIndicator: false,
                       fit: BoxFit.cover,
                       topGradient: false,

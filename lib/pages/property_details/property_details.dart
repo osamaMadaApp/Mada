@@ -21,6 +21,7 @@ class PropertyDetails extends StatefulWidget {
     super.key,
     this.propertyId,
   });
+
   final dynamic propertyId;
 
   @override
@@ -400,10 +401,18 @@ class PropertyDetailsSection2 extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                               horizontal: DEVICE_HEIGHT * 0.005,
                             ),
-                            child: QrImageView(
-                              data: model.data[keyRegaInfo][keyQrUrl] ?? '',
-                              size: DEVICE_HEIGHT * 0.17,
-                              gapless: false,
+                            child: GestureDetector(
+                              onTap: () {
+                                launchWeb(
+                                  context,
+                                  model.data[keyRegaInfo][keyQrUrl] ?? '',
+                                );
+                              },
+                              child: QrImageView(
+                                data: model.data[keyRegaInfo][keyQrUrl] ?? '',
+                                size: DEVICE_HEIGHT * 0.17,
+                                gapless: false,
+                              ),
                             ),
                           ),
                         ],

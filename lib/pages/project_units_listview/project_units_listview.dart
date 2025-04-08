@@ -133,6 +133,13 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                                       text: FFLocalizations.of(
                                                               context)
                                                           .getText('available'),
+                                                      isSelected: model
+                                                              .availableSelected ??
+                                                          false,
+                                                      onTap: () {
+                                                        model.makeAvailableSelected();
+                                                        model.makeAvailableSelectedList();
+                                                      },
                                                     ),
                                                     StatusTag(
                                                       color: const Color(
@@ -140,6 +147,13 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                                       text: FFLocalizations.of(
                                                               context)
                                                           .getText('reserved'),
+                                                      isSelected: model
+                                                              .bookedSelected ??
+                                                          false,
+                                                      onTap: () {
+                                                        model.makeBookedSelected();
+                                                        model.makeBookedSelectedList();
+                                                      },
                                                     ),
                                                     StatusTag(
                                                       color: const Color(
@@ -147,6 +161,15 @@ class _ProjectUnitsListviewWidgetState extends State<ProjectUnitsListview> {
                                                       text: FFLocalizations.of(
                                                               context)
                                                           .getText('soldOut'),
+                                                      isSelected:
+                                                          model.soldSelected ??
+                                                              false,
+                                                      onTap: () {
+                                                        model
+                                                            .makeSoldSelected();
+                                                        model
+                                                            .makeSoldSelectedList();
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -243,7 +266,7 @@ class UnitsList extends StatelessWidget {
       ) {
         return Column(
           children: [
-            ...model.data[keyResults][keyUnits].map(
+            ...getValues(model).map(
               (dynamic item) {
                 final List<dynamic> units = item[keyUnits];
                 return Container(
@@ -290,6 +313,7 @@ class UnitsList extends StatelessWidget {
                                       context,
                                     );
                                   },
+                                  withFavorite: unit[keyStatus] != 'Sold Out',
                                   onTap: () {
                                     Navigator.pushNamed(
                                       context,
@@ -314,6 +338,16 @@ class UnitsList extends StatelessWidget {
         );
       },
     );
+  }
+
+  dynamic getValues(ProjectUnitsListviewModel model) {
+    if (model.availableSelected == true ||
+        model.bookedSelected == true ||
+        model.soldSelected == true) {
+      return model.savedFilterData;
+    } else {
+      return model.data[keyResults][keyUnits];
+    }
   }
 }
 
@@ -421,21 +455,6 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  if (withFavorite)
-                                    GestureDetector(
-                                      onTap: onFavoritesPressed,
-                                      child: SvgPicture.asset(
-                                        item[keyIsWishListed] == true
-                                            ? iconFav
-                                            : iconUnFav,
-                                      ),
-                                    ),
-                                  SizedBox(height: 1.h),
-                                ],
-                              ),
                             ],
                           ),
                           if (item[keyUnitNumber] != null && showUnitNumber)
@@ -473,47 +492,50 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                           else
                             const Center(),
                           SizedBox(height: 16.h),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: <Widget>[
-                                if (item[keyStatusInfo] != null &&
-                                    item[keyStatusInfo].isNotEmpty)
-                                  ...item[keyStatusInfo].map(
-                                    (label) {
-                                      if (label[keyText] != null &&
-                                          label[keyText].isNotEmpty) {
-                                        return Row(
-                                          children: <Widget>[
-                                            LabelCard(
-                                              text: label[keyText].toString(),
-                                              backgroundColor: Color(
-                                                int.parse(
-                                                  hexToColor(
-                                                    label[keyBackgroundColor] ??
-                                                        '#FFFFFF',
+                          Container(
+                            width: 160.w,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: <Widget>[
+                                  if (item[keyStatusInfo] != null &&
+                                      item[keyStatusInfo].isNotEmpty)
+                                    ...item[keyStatusInfo].map(
+                                      (label) {
+                                        if (label[keyText] != null &&
+                                            label[keyText].isNotEmpty) {
+                                          return Row(
+                                            children: <Widget>[
+                                              LabelCard(
+                                                text: label[keyText].toString(),
+                                                backgroundColor: Color(
+                                                  int.parse(
+                                                    hexToColor(
+                                                      label[keyBackgroundColor] ??
+                                                          '#FFFFFF',
+                                                    ),
+                                                  ),
+                                                ),
+                                                textSize: 16,
+                                                textColor: Color(
+                                                  int.parse(
+                                                    hexToColor(
+                                                      label[keyTextColor] ??
+                                                          '#FFFFFF',
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                              textSize: 16,
-                                              textColor: Color(
-                                                int.parse(
-                                                  hexToColor(
-                                                    label[keyTextColor] ??
-                                                        '#FFFFFF',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 8.w)
-                                          ],
-                                        );
-                                      } else {
-                                        return const Center();
-                                      }
-                                    },
-                                  ).toList(),
-                              ],
+                                              SizedBox(width: 8.w)
+                                            ],
+                                          );
+                                        } else {
+                                          return const Center();
+                                        }
+                                      },
+                                    ).toList(),
+                                ],
+                              ),
                             ),
                           ),
                           if (item[keyPrice] != null)
@@ -536,6 +558,23 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6.h),
+                      child: Container(
+                        width: 40.w,
+                        height: 40.h,
+                        child: withFavorite
+                            ? GestureDetector(
+                                onTap: onFavoritesPressed,
+                                child: SvgPicture.asset(
+                                  item[keyIsWishListed] == true
+                                      ? iconFav
+                                      : iconUnFav,
+                                ),
+                              )
+                            : Container(),
+                      ),
+                    )
                   ],
                 ),
               ],
@@ -666,7 +705,7 @@ class HorizontalProjectUnitCard extends StatelessWidget {
   Color getStatus(String? status) {
     if (status == 'Available') {
       return const Color(0xff97be5a);
-    } else if (status == 'Reserved') {
+    } else if (status == 'Reserved' || status == 'Booked') {
       return const Color(0xffFD9B63);
     } else {
       return const Color(0xffFF0000);

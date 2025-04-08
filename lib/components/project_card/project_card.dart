@@ -73,7 +73,7 @@ class ProjectCard extends StatelessWidget {
                     ),
                     child: SliderComponent(
                       items: images ?? <dynamic>[],
-                      height: 200.h,
+                      height: 222.h,
                       showIndicator: false,
                       fit: BoxFit.cover,
                       topGradient: false,

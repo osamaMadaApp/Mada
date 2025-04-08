@@ -24,7 +24,7 @@ class SideSheet {
           child: Material(
             color: Colors.white,
             elevation: 5,
-            child: Padding(
+            child:   Padding(
               padding: EdgeInsets.only(
                 top: 50.h,
               ),
@@ -46,30 +46,29 @@ class SideSheet {
                           Text(
                             title,
                             style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                           if (withCloseButton)
                             GestureDetector(
                               onTap: onClosingSheet ??
-                                  () => Navigator.pop(context),
+                                      () => Navigator.pop(context),
                               child: SvgPicture.asset(iconAix),
                             ),
                         ],
                       ),
                       SizedBox(height: 30.h),
                       Expanded(
-                        child: SingleChildScrollView(
-                          child: child,
-                        ),
+                        child: child,
                       ),
+                      SizedBox(height: 33.h),
                     ],
                   ),
                 ),
               ),
-            ),
+            ) ,
           ),
         );
       },

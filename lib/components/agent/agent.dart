@@ -38,13 +38,13 @@ class Agent extends StatelessWidget {
                             child: CachedImage(
                               image: agentInfo[keyProfilePIC] ?? testImage,
                               height: DEVICE_HEIGHT * 0.06,
-                              width: DEVICE_WIDTH * 0.06,
+                              width: DEVICE_WIDTH * 0.04,
                               placeholder: imageUser,
                               showPlaceHolder: true,
                             ),
                           ),
                           SizedBox(
-                            width: DEVICE_WIDTH * 0.02,
+                            width: DEVICE_WIDTH * 0.009,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

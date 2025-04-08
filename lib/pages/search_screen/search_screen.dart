@@ -282,6 +282,12 @@ class _SearchWidgetState extends State<Search> with TickerProviderStateMixin {
                                                           isPortrait(context)
                                                               ? 320
                                                               : 290,
+                                                          childAspectRatio: 400 / 350,
+                                                          mainAxisSpacing:
+                                                          DEVICE_HEIGHT * 0.02,
+                                                          // Increased spacing
+                                                          crossAxisSpacing:
+                                                          DEVICE_WIDTH * 0.009,
                                                     ),
                                                     itemCount: model
                                                         .projectResult.length,

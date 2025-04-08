@@ -70,7 +70,7 @@ class ProjectUnitsListviewFilterSheet extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            SizedBox(height: DEVICE_HEIGHT * 0.05),
+            SizedBox(height: DEVICE_HEIGHT * 0.02),
             RangeSlider(
               values: model.priceTemRange!,
               onChanged: model.onPriceRangeSliderChange,
@@ -83,72 +83,87 @@ class ProjectUnitsListviewFilterSheet extends StatelessWidget {
               ),
               divisions: masterData[keyBuyPriceDivision],
             ),
-            SizedBox(height: DEVICE_HEIGHT * 0.04),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText('min'),
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(
-                                AppColors.black,
-                              ),
+                SizedBox(height: DEVICE_HEIGHT * 0.008),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText('min'),
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(
+                              AppColors.black,
                             ),
-                      ),
-                      CustomInput(
-                        focusNode: model.minPriceFocusNode,
-                        controller: model.minPriceController,
-                        keyboardType: TextInputType.number,
-                        hint: getFormattedPrice(
-                          model.minPrice.toDouble(),
+                          ),
                         ),
-                        hintStyle:
-                            Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  color: const Color(AppColors.gray2),
-                                ),
-                        onChange: model.onMinPriceTextChange,
+                        CustomInput(
+                          focusNode: model.minPriceFocusNode,
+                          controller: model.minPriceController,
+                          keyboardType: TextInputType.number,
+                          hint: getFormattedPrice(
+                            model.minPrice.toDouble(),
+                          ),
+                          hintStyle:
+                          Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: const Color(AppColors.gray2),
+                          ),
+                          onChange: model.onMinPriceTextChange,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                        width: 22.w,
+                        color:FlutterMadaTheme.of(context).colorE1E1E1,
+                        height: 1,
                       ),
                     ],
                   ),
-                ),
-                SizedBox(width: DEVICE_WIDTH * 0.2),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText('max'),
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 13,
-                              color: const Color(
-                                AppColors.black,
-                              ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText('max'),
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13,
+                            color: const Color(
+                              AppColors.black,
                             ),
-                      ),
-                      CustomInput(
-                        focusNode: model.maxPriceFocusNode,
-                        controller: model.maxPriceController,
-                        keyboardType: TextInputType.number,
-                        hint: getFormattedPrice(
-                          model.maxPrice.toDouble(),
+                          ),
                         ),
-                        hintStyle:
-                            Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  color: const Color(AppColors.gray2),
-                                ),
-                        onChange: model.onMaxPriceTextChange,
-                      ),
-                    ],
+                        CustomInput(
+                          focusNode: model.maxPriceFocusNode,
+                          controller: model.maxPriceController,
+                          keyboardType: TextInputType.number,
+                          hint: getFormattedPrice(
+                            model.maxPrice.toDouble(),
+                          ),
+                          hintStyle:
+                          Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: const Color(AppColors.gray2),
+                          ),
+                          onChange: model.onMaxPriceTextChange,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],),
             SizedBox(height: DEVICE_HEIGHT * 0.04),
             Text(
               FFLocalizations.of(context).getText('area'),
@@ -156,7 +171,7 @@ class ProjectUnitsListviewFilterSheet extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            SizedBox(height: DEVICE_HEIGHT * 0.05),
+            SizedBox(height: DEVICE_HEIGHT * 0.02),
             RangeSlider(
               values: model.spaceTemRange!,
               onChanged: model.onSpaceRangeSliderChange,
@@ -168,7 +183,7 @@ class ProjectUnitsListviewFilterSheet extends StatelessWidget {
               ),
               divisions: masterData[keyAreaDivision],
             ),
-            SizedBox(height: DEVICE_HEIGHT * 0.04),
+            SizedBox(height: DEVICE_HEIGHT * 0.02),
             Row(
               children: [
                 Expanded(
@@ -201,7 +216,18 @@ class ProjectUnitsListviewFilterSheet extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: DEVICE_WIDTH * 0.2),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                      width: 22.w,
+                      color:FlutterMadaTheme.of(context).colorE1E1E1,
+                      height: 1,
+                    ),
+                  ],
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

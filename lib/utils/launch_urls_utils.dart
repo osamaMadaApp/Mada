@@ -85,3 +85,16 @@ Future<void> launchMaps(BuildContext context, double? lat, double? long) async {
     showToast(FFLocalizations.of(context).getText('error_maps'));
   }
 }
+
+
+Future<void> launchWeb(BuildContext context, String? url) async {
+  if(url==null){
+    showToast(FFLocalizations.of(context).getVariableText(enText: 'Error',arText: 'مشكلة'));
+    return;
+  }
+  final uri = Uri.parse(url);
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
+}
+
+
+

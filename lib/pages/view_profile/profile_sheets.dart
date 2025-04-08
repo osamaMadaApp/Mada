@@ -76,6 +76,7 @@ class ChangeProfileInfo extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               CustomInput(
+                enabled: false,
                 controller: emailController,
                 hint: FFLocalizations.of(context).getText('email_address'),
               ),

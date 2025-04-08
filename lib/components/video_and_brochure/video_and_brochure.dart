@@ -57,10 +57,9 @@ class VideoAndBrochure extends StatelessWidget {
                         child: Stack(
                           children: <Widget>[
                             SizedBox(
-                              height: DEVICE_WIDTH * 0.07,
-                              width: DEVICE_WIDTH * 0.07,
                               child: CachedImage(
                                 image: imageUrl,
+                                fit: BoxFit.contain,
                                 borderRadius: DEVICE_WIDTH * 0.01,
                               ),
                             ),
