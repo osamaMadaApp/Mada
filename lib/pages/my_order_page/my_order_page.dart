@@ -1,3 +1,5 @@
+import 'package:country_flags/country_flags.dart';
+
 import '../../general_exports.dart';
 
 class MyOrderPage extends StatelessWidget {
@@ -38,25 +40,68 @@ class MyOrders extends StatelessWidget {
                 )
               : Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 50.h,
+                    vertical: 40.h,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      const SizedBox(height: 20),
-                      Text(
-                        FFLocalizations.of(context).getText('my_orders'),
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                      Row(
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                FFLocalizations.of(context)
+                                    .getText('my_orders'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 18,
+                                      color: FlutterMadaTheme.of(context)
+                                          .color292D32,
+                                      fontFamily: AppFonts.workSans,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                              SizedBox(height: 10.h),
+                              Text(
+                                FFLocalizations.of(context)
+                                    .getText('mada_properties'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      fontFamily: AppFonts.workSans,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            // onTap: onCountryChange,
+                            child: Container(
+                              height: 50.w,
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                color: FlutterMadaTheme.of(context).colorE6EEF3,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 26.h,
+                                horizontal: 10.w,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: CountryFlag.fromCountryCode(
+                                  'sa',
+                                ),
+                              ),
                             ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        FFLocalizations.of(context).getText('mada_properties'),
-                        style:
-                            Theme.of(context).textTheme.bodySmall!.copyWith(),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 40),
                       Expanded(

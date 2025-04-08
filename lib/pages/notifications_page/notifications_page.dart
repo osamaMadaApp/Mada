@@ -33,7 +33,9 @@ class Notifications extends StatelessWidget {
       },
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 60.h),
+          padding: EdgeInsets.symmetric(
+            vertical: 40.h,
+          ),
           child: Column(
             children: <Widget>[
               Row(
@@ -44,13 +46,20 @@ class Notifications extends StatelessWidget {
                       Text(
                         FFLocalizations.of(context).getText('notifications'),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: FlutterMadaTheme.of(context).color292D32,
+                              fontFamily: AppFonts.workSans,
+                              fontWeight: FontWeight.w700,
                             ),
                       ),
                       SizedBox(height: 10.h),
                       Text(
                         FFLocalizations.of(context).getText('mada_properties'),
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontFamily: AppFonts.workSans,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
                     ],
                   ),

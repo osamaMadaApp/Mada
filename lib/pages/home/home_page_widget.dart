@@ -85,10 +85,7 @@ class Home extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 50.h,
-          ),
+          padding: const EdgeInsets.fromLTRB(0, 25, 20, 25),
           child: Consumer<HomePageModel>(
             builder: (BuildContext context, homePageModel, Widget? child) {
               return homePageModel.homeData == null
@@ -98,16 +95,17 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           HeaderWidget(
-                            profilePicture:
-                                FFAppState().userModel[keyProfilePic],
-                            title: FFAppState().userModel[keyFirstName],
-                          ),
+                              profilePicture:
+                                  FFAppState().userModel[keyProfilePic],
+                              title: FFAppState().userModel[keyFirstName],
+                              subTitle: FFLocalizations.of(context)
+                                  .getText('mada_properties')),
                           SizedBox(height: 25.h),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                height: 700.h,
+                                height: 740.h,
                                 constraints: BoxConstraints(
                                   maxWidth: 330.w,
                                 ),
@@ -250,7 +248,7 @@ class MostPopularProjects extends StatelessWidget {
           children: <Widget>[
             MadaText(
               FFLocalizations.of(context).getText(
-                'most_popular_projects',
+                'quickSearchCategory',
               ),
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,

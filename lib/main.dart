@@ -1,11 +1,9 @@
 import 'dart:io' show Platform;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import 'backend/schema/util/schema_util.dart';
 import 'components/forget_password_component/forget_password_component_model.dart';
 import 'components/login_side_component/login_side_component_model.dart';
@@ -33,9 +31,7 @@ void main() async {
 
   final appProvider = AppProvider.instance;
   SchedulerBinding.instance.addPostFrameCallback((_) async {});
-  await appProvider.init(onLogout: () {
-    // showLogoutDialog(cContext: NavigationService.navigatorKey.currentContext);
-  });
+  await appProvider.init();
 
   await Permission.notification.isDenied.then(
     (bool value) {

@@ -23,82 +23,39 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (controller.projectStatus != 'Lands')
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: DEVICE_HEIGHT * 0.02,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              FFLocalizations.of(context)
-                                  .getText('purpose_of_use'),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                    fontSize: 16,
-                                    fontFamily: AppFonts.outfit,
-                                    fontWeight: AppFonts.w500,
-                                  ),
-                            ),
-                            SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectListBottomList(
-                              isWrap: true,
-                              items: controller.filteredPropertyPurpose,
-                              selectedItem:  controller.selectedTemFilteredPropertyPurpose,
-                              onTap: controller .onTempFilteredPropertyPurposePressed,
-                              borderColor: FlutterMadaTheme.of(context).color97BE5A,
-                              unselectedBackgroundColor:  FlutterMadaTheme.of(context) .colorD2D2D2
-                                      .withOpacity(
-                                        0.25,
-                                      ),
-                              borderWidth: 1,
-                              borderRadius: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (controller.projectStatus == 'ready')
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: DEVICE_HEIGHT * 0.02,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              FFLocalizations.of(context)
-                                  .getText('project_categories'),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            SizedBox(height: DEVICE_HEIGHT * 0.02),
-                            SelectListBottomList(
-                              isProjectList: true,
-                              isWrap: true,
-                              items: controller.projectCategories,
-                              selectedItem:
-                                  controller.selectedTemProjectsCategories,
-                              onTap: controller.onTempProjectCategoriesPressed,
-                              borderColor:
-                                  FlutterMadaTheme.of(context).color97BE5A,
-                              textKey: keyName,
-                              unselectedBackgroundColor:
-                                  FlutterMadaTheme.of(context)
-                                      .colorD2D2D2
-                                      .withOpacity(
-                                        0.25,
-                                      ),
-                              borderWidth: 1,
-                              borderRadius: 22,
-                            ),
-                          ],
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context)
+                                .getText('purpose_of_use'),
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      fontSize: 16,
+                                      fontFamily: AppFonts.outfit,
+                                      fontWeight: AppFonts.w500,
+                                    ),
+                          ),
+                          SizedBox(height: DEVICE_HEIGHT * 0.02),
+                          SelectListBottomList(
+                            isWrap: true,
+                            items: controller.filteredPropertyPurpose,
+                            selectedItem:
+                                controller.selectedTemFilteredPropertyPurpose,
+                            onTap:
+                                controller.onTempFilteredPropertyPurposePressed,
+                            borderColor:
+                                FlutterMadaTheme.of(context).color97BE5A,
+                            unselectedBackgroundColor:
+                                FlutterMadaTheme.of(context)
+                                    .colorD2D2D2
+                                    .withOpacity(
+                                      0.25,
+                                    ),
+                            borderWidth: 1,
+                            borderRadius: 22,
+                          ),
+                        ],
                       ),
                     Text(
                       FFLocalizations.of(context).getText('please_select_city'),
@@ -233,7 +190,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    SizedBox(height: DEVICE_HEIGHT * 0.01),
+                    SizedBox(height: DEVICE_HEIGHT * 0.008),
                   ],
                 ),
                 SliderTheme(
@@ -267,7 +224,7 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height: DEVICE_HEIGHT * 0.02),
+                    SizedBox(height: DEVICE_HEIGHT * 0.008),
                     Row(
                       children: [
                         Expanded(
@@ -306,7 +263,18 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(width: 22.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                              width: 22.w,
+                              color:FlutterMadaTheme.of(context).colorE1E1E1,
+                              height: 1,
+                            ),
+                          ],
+                        ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,29 +313,29 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: DEVICE_HEIGHT * 0.02),
+                    SizedBox(height: DEVICE_HEIGHT * 0.03),
                     Text(
                       FFLocalizations.of(context).getText('area'),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    SizedBox(height: DEVICE_HEIGHT * 0.01),
+                    SizedBox(height: DEVICE_HEIGHT * 0.008),
                   ],
                 ),
                 SliderTheme(
-                  data: SliderThemeData().copyWith(
-                    activeTrackColor: Color(AppColors.green),
-                    inactiveTrackColor: Color(AppColors.gray2),
-                    thumbColor: Color(AppColors.black),
-                    overlayColor: Color(AppColors.transparent),
+                  data: const SliderThemeData().copyWith(
+                    activeTrackColor: const Color(AppColors.green),
+                    inactiveTrackColor: const Color(AppColors.gray2),
+                    thumbColor: const Color(AppColors.black),
+                    overlayColor: const Color(AppColors.transparent),
                     trackHeight: 2.0,
-                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
-                    overlayShape: RoundSliderOverlayShape(overlayRadius: 35.0),
-                    valueIndicatorColor: Color(AppColors.green3),
+                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 35.0),
+                    valueIndicatorColor: const Color(AppColors.green3),
                     rangeValueIndicatorShape:
-                        PaddleRangeSliderValueIndicatorShape(),
-                    overlappingShapeStrokeColor: Color(AppColors.black),
+                        const PaddleRangeSliderValueIndicatorShape(),
+                    overlappingShapeStrokeColor: const Color(AppColors.black),
                   ),
                   child: RangeSlider(
                     values: controller.spaceTemRange!,
@@ -383,10 +351,13 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: DEVICE_HEIGHT * 0.04),
+                    SizedBox(height: DEVICE_HEIGHT * 0.008),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
                           child: Column(
@@ -424,7 +395,18 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(width: 22.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                              width: 22.w,
+                              color:FlutterMadaTheme.of(context).colorE1E1E1,
+                              height: 1,
+                            ),
+                          ],
+                        ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -501,28 +483,6 @@ class ProjectListviewFilterSheet extends StatelessWidget {
                           ],
                         ),
                       ),
-                    // GestureDetector(
-                    //   onTap: controller.onShowAvailableUnitsToggled,
-                    //   child: Padding(
-                    //     padding: EdgeInsets.symmetric(vertical: DEVICE_WIDTH * 0.04),
-                    //     child: Row(
-                    //       children: <Widget>[
-                    //         SvgPicture.asset(
-                    //           controller.showAvailableUnits
-                    //               ? iconCheckboxChecked
-                    //               : iconCheckboxUnChecked,
-                    //           width: DEVICE_WIDTH * 0.05,
-                    //           height: DEVICE_WIDTH * 0.05,
-                    //         ),
-                    //         SizedBox(width: DEVICE_WIDTH * 0.04),
-                    //         Text(
-                    //           'show_available_projects_only'.tr,
-                    //           style: Theme.of(context).textTheme.bodyMedium!,
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(
                       width: DEVICE_WIDTH,
                       child: CustomButton(
@@ -702,9 +662,10 @@ class SelectListBottomList extends StatelessWidget {
                 margin: isProjectList == true
                     ? EdgeInsets.only(right: 20.w)
                     : EdgeInsets.zero,
+                width: 140,
                 child: RoundedContainer(
                   minWidth: isProjectList == true ? 140 : null,
-                  borderRadius: borderRadius ?? 0.1,
+                  borderRadius: borderRadius,
                   borderColor: isSelected ? borderColor : defaultBorderColor,
                   color: isSelected
                       ? FlutterMadaTheme.of(context)
@@ -721,16 +682,20 @@ class SelectListBottomList extends StatelessWidget {
                     children: <Widget>[
                       CachedImage(
                         image: item[keyImage],
-                        height: DEVICE_HEIGHT * 0.0525,
+                        height: 41,
                         borderRadius: DEVICE_WIDTH * 0.01,
                         fit: BoxFit.contain,
                         placeholder: imageGrayLogo,
                         showPlaceHolder: true,
                       ),
-                      SizedBox(height: 15.h,),
+                      SizedBox(
+                        height: 16.h,
+                      ),
                       Text(
                         item is String ? item : item[textKey] ?? '',
-                        maxLines: 2,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: isSelected
                                 ? FlutterMadaTheme.of(context).color000000
@@ -738,7 +703,7 @@ class SelectListBottomList extends StatelessWidget {
                             fontFamily: AppFonts.workSans,
                             fontSize: 14,
                             fontWeight: AppFonts.w400),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                       ),
                     ],
                   ),
@@ -752,7 +717,7 @@ class SelectListBottomList extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       RoundedContainer(
-                        borderRadius: borderRadius ?? 0.1,
+                        borderRadius: borderRadius,
                         borderWidth: borderWidth,
                         minHeight: minHeight ?? DEVICE_HEIGHT * 0.0001,
                         minWidth: minWidth,
@@ -808,7 +773,7 @@ class SelectListBottomList extends StatelessWidget {
                       SizedBox(width: DEVICE_WIDTH * 0.01),
                     ],
                   ),
-                  if (isWrap) SizedBox(height: DEVICE_WIDTH * 0.03),
+                  if (isWrap) SizedBox(height: DEVICE_WIDTH * 0.02),
                 ],
               );
       },

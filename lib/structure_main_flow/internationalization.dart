@@ -157,6 +157,10 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'en': 'Password',
       'ar': 'كلمة السر',
     },
+    'quickSearchCategory': <String, String>{
+      'en': 'Quick Search & Category',
+      'ar': 'البحث السريع والفئة',
+    },
     'bcdkouru': <String, String>{
       'en': 'Sign in',
       'ar': 'تسجيل دخول',
@@ -168,6 +172,18 @@ final Map<String, Map<String, String>> kTranslationsMap =
     'lggdo661': <String, String>{
       'en': 'Home',
       'ar': '',
+    },
+    'available': <String, String>{
+      'en': 'Available',
+      'ar': 'متاح',
+    },
+    'reserved': <String, String>{
+      'en': 'Reserved',
+      'ar': 'محجوز',
+    },
+    'soldOut': <String, String>{
+      'en': 'Sold out',
+      'ar': 'مباع',
     },
     'off': <String, String>{
       'en': 'of',
@@ -186,7 +202,7 @@ final Map<String, Map<String, String>> kTranslationsMap =
       'ar': 'اعادة ارسال الرمز',
     },
     'your_gateway_to_premium_life': <String, String>{
-      'en': 'Your gateway to premium life',
+      'en': 'Your Gateway to Premium Living',
       'ar': 'بوابتك إلى الحياة المتميزة',
     },
     'browse_out_main_categories': <String, String>{

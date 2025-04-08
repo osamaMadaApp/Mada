@@ -21,27 +21,38 @@ class NavBar extends StatelessWidget {
       builder: (context, provider, child) {
         return Scaffold(
           body: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Expanded(
-                    child: NavigationRail(
-                      selectedIndex: provider.currentIndex,
-                      onDestinationSelected: provider.changePage,
-                      labelType: NavigationRailLabelType.none,
-                      destinations: _buildNavDestinations(context, provider),
+              Padding(
+                  padding: const EdgeInsets.only(
+                      left: 24, bottom: 24, right: 24, top: 24),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: FlutterMadaTheme.of(context).colorFFFFFF,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                    child: SvgPicture.asset(
-                      logo,
-                      width: 56.0,
-                      height: 56.0,
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: NavigationRail(
+                            backgroundColor: Colors.transparent,
+                            selectedIndex: provider.currentIndex,
+                            onDestinationSelected: provider.changePage,
+                            labelType: NavigationRailLabelType.none,
+                            destinations:
+                                _buildNavDestinations(context, provider),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                          child: SvgPicture.asset(
+                            logo,
+                            height: 56.0,
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  )),
               Expanded(
                 child: provider.getCurrentPage(provider.currentIndex),
               ),

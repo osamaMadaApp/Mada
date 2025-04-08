@@ -47,6 +47,7 @@ const String iconArea = '${iconsPath}area.svg';
 const String iconBedrooms = '${iconsPath}bedrooms.svg';
 const String iconBathrooms = '${iconsPath}bathrooms.svg';
 const String iconRedRoundedClose = '${iconsPath}red_rounded_close.svg';
+const String iconFilterRemove = '${iconsPath}filter_remove.svg';
 const String iconSelected = '${iconsPath}selected_icon.svg';
 const String iconUnSelected = '${iconsPath}unselected_icon.svg';
 const String iconNewNotification = '${iconsPath}new_notification.svg';

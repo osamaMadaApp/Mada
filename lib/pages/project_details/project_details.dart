@@ -1,4 +1,4 @@
-import 'package:flutter_html/flutter_html.dart';
+import '../../components/two_line_html_preview/two_line_html_preview.dart';
 import '../../general_exports.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
@@ -513,38 +513,11 @@ class ProjectDescription extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Html(
-                      data: description,
-                      style: {
-                        'body': Style(
-                          maxLines: 2,
-                          textOverflow: TextOverflow.ellipsis,
-                          padding: HtmlPaddings.zero,
-                          fontSize: FontSize(14),
-                          margin: Margins.zero,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          color: const Color(AppColors.gray8),
-                          height: Height(DEVICE_HEIGHT * 0.08),
-                        ),
+                    TwoLineHtmlPreview(
+                      htmlContent: description,
+                      onReadMore: onDescriptionPressed ?? () {
+
                       },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText('read_more'),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: const Color(AppColors.primary),
-                                decoration: TextDecoration.underline,
-                                decorationColor: const Color(AppColors.primary),
-                              ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

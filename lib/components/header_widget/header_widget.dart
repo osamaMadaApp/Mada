@@ -43,7 +43,7 @@ class HeaderWidget extends StatelessWidget {
                     height: 50.w,
                     width: 50.w,
                     decoration: BoxDecoration(
-                      color: FlutterMadaTheme.of(context).info,
+                      color: Color(0x00FFE6EEF3),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
@@ -73,7 +73,9 @@ class HeaderWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     MadaText(
-                      title ?? '',
+                      title != null
+                          ? '${FFLocalizations.of(context).getText('hi')}, ${title!.toUpperCase() ?? ''}'
+                          : FFLocalizations.of(context).getText('hi_guest'),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: FlutterMadaTheme.of(context).color292D32,
                             fontWeight: FontWeight.w700,

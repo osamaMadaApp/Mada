@@ -44,7 +44,7 @@ class LabeledIconCard extends StatelessWidget {
           maxWidth: maxWidth ?? double.infinity,
         ),
         padding: EdgeInsets.symmetric(
-          vertical: verticalPadding ?? 12.h,
+          vertical: verticalPadding ?? 21.h,
           horizontal: horizontalPadding ?? 12.w,
         ),
         decoration: BoxDecoration(
@@ -56,7 +56,7 @@ class LabeledIconCard extends StatelessWidget {
           mainAxisAlignment: mainAxisAlignment,
           children: <Widget>[
             SizedBox(
-              height: iconHeight ?? 68.h,
+              height: iconHeight ?? 90.h,
               width: iconWidth ?? 52.h,
               child: icon != null && icon!.isNotEmpty
                   ? picType == PicType.svg
@@ -79,9 +79,10 @@ class LabeledIconCard extends StatelessWidget {
               title ?? '',
               style: textStyle ??
                   Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: FlutterMadaTheme.of(context).colorFFFFFF,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: FlutterMadaTheme.of(context).colorFFFFFF,
+                      fontWeight: AppFonts.w600,
+                      fontSize: 24,
+                      fontFamily: AppFonts.workSans),
               textAlign: TextAlign.center,
             ),
           ],

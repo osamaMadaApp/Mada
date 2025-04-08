@@ -8,6 +8,7 @@ class SortSheet extends StatelessWidget {
     this.onApply,
     this.isProjectSort = false,
   });
+
   final dynamic onSelectSortType;
   final Function(dynamic item)? onSelectSortKey;
   final Function()? onApply;
@@ -23,85 +24,92 @@ class SortSheet extends StatelessWidget {
       ) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              FFLocalizations.of(context).getText('please_select_the_sorting'),
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w500,
+            Column(
+              children: [
+                Text(
+                  FFLocalizations.of(context)
+                      .getText('please_select_the_sorting'),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                SizedBox(
+                  height: DEVICE_HEIGHT * 0.02,
+                ),
+                SelectList(
+                  isWrap: true,
+                  items: isProjectSort
+                      ? projectSortList(context)
+                      : sortList(context),
+                  selectedItem: model.selectedTemSortKey,
+                  onTap: (dynamic item) {
+                    onSelectSortKey!(item);
+                  },
+                  borderColor: const Color(AppColors.green2),
+                  unselectedBackgroundColor: const Color(AppColors.gray),
+                  borderWidth: 1,
+                ),
+                if (model.selectedTemSortKey != null &&
+                    (model.selectedTemSortKey['key'] == 'price' ||
+                        model.selectedTemSortKey['key'] == 'startingPrice'))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText('price'),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                      SizedBox(
+                        height: DEVICE_HEIGHT * 0.01,
+                      ),
+                      SelectList(
+                        isWrap: true,
+                        items: priceSortList(context),
+                        selectedItem: model.selectedTemSortType,
+                        onTap: (dynamic item) {
+                          onSelectSortType!(item);
+                        },
+                        borderColor: const Color(AppColors.green2),
+                        unselectedBackgroundColor: const Color(AppColors.gray),
+                        borderWidth: 1,
+                      ),
+                    ],
+                  )
+                else if (model.selectedTemSortKey != null &&
+                    model.selectedTemSortKey['key'] == 'createdAt')
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText('newest'),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                      SizedBox(
+                        height: DEVICE_HEIGHT * 0.01,
+                      ),
+                      SelectList(
+                        isWrap: true,
+                        items: createdAtSortList(context),
+                        selectedItem: model.selectedTemSortType,
+                        onTap: (dynamic item) {
+                          onSelectSortType!(item);
+                        },
+                        borderColor: const Color(AppColors.green2),
+                        unselectedBackgroundColor: const Color(AppColors.gray),
+                        borderWidth: 1,
+                      ),
+                    ],
                   ),
-            ),
-            SizedBox(
-              height: DEVICE_HEIGHT * 0.02,
-            ),
-            SelectList(
-              isWrap: true,
-              items:
-                  isProjectSort ? projectSortList(context) : sortList(context),
-              selectedItem: model.selectedTemSortKey,
-              onTap: (dynamic item) {
-                onSelectSortKey!(item);
-              },
-              borderColor: const Color(AppColors.green2),
-              unselectedBackgroundColor: const Color(AppColors.gray),
-              borderWidth: 1,
-            ),
-            if (model.selectedTemSortKey != null &&
-                (model.selectedTemSortKey['key'] == 'price' ||
-                    model.selectedTemSortKey['key'] == 'startingPrice'))
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText('price'),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                  SizedBox(
-                    height: DEVICE_HEIGHT * 0.01,
-                  ),
-                  SelectList(
-                    isWrap: true,
-                    items: priceSortList(context),
-                    selectedItem: model.selectedTemSortType,
-                    onTap: (dynamic item) {
-                      onSelectSortType!(item);
-                    },
-                    borderColor: const Color(AppColors.green2),
-                    unselectedBackgroundColor: const Color(AppColors.gray),
-                    borderWidth: 1,
-                  ),
-                ],
-              )
-            else if (model.selectedTemSortKey != null &&
-                model.selectedTemSortKey['key'] == 'createdAt')
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText('newest'),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                  SizedBox(
-                    height: DEVICE_HEIGHT * 0.01,
-                  ),
-                  SelectList(
-                    isWrap: true,
-                    items: createdAtSortList(context),
-                    selectedItem: model.selectedTemSortType,
-                    onTap: (dynamic item) {
-                      onSelectSortType!(item);
-                    },
-                    borderColor: const Color(AppColors.green2),
-                    unselectedBackgroundColor: const Color(AppColors.gray),
-                    borderWidth: 1,
-                  ),
-                ],
-              ),
-            SizedBox(
-              height: DEVICE_HEIGHT * 0.03,
+                SizedBox(
+                  height: DEVICE_HEIGHT * 0.03,
+                ),
+              ],
             ),
             CustomButton(
               text: FFLocalizations.of(context).getText('apply'),

@@ -5,7 +5,7 @@ class ServiceCard extends StatelessWidget {
     required this.name,
     super.key,
     this.icon,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
   });
   final String? icon;
   final String name;
@@ -33,19 +33,18 @@ class ServiceCard extends StatelessWidget {
             if (icon != null)
               SizedBox(
                 height: DEVICE_HEIGHT * 0.03,
-                width: DEVICE_WIDTH * 0.04,
                 child: CachedImage(
                   image: icon,
                   fit: BoxFit.contain,
                 ),
               ),
             SizedBox(
-              height: DEVICE_HEIGHT * 0.01,
+              height: DEVICE_HEIGHT * 0.02,
             ),
             MadaText(
               name,
-              maxLines: 2,
-              textAlign: TextAlign.center,
+              maxLines: 1,
+              textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontWeight: FontWeight.w400,
                     color: const Color(
