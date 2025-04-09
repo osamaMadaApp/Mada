@@ -59,7 +59,7 @@ class ProjectUnitCard extends StatelessWidget {
                 horizontal: 8.w,
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Column(
                 children: <Widget>[
@@ -67,6 +67,7 @@ class ProjectUnitCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
+                        spacing: 8.w,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CachedImage(
@@ -78,210 +79,188 @@ class ProjectUnitCard extends StatelessWidget {
                             width: 103.w,
                             height: 110.w,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.w,
-                              vertical: 16.h,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 120.w,
-                                      child: Text(
-                                        '${item[keyTitle]}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                            ),
-                                        maxLines: maxLines,
-                                        overflow: TextOverflow.ellipsis,
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 16.h,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: DEVICE_WIDTH * 0.13,
+                                        child: Text(
+                                          '${item[keyTitle]}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                          maxLines: maxLines,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                    ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        if (withFavorite)
-                                          GestureDetector(
-                                            onTap: onFavoritesPressed,
-                                            child: SvgPicture.asset(
-                                              item[keyIsWishListed] == true
-                                                  ? iconFav
-                                                  : iconUnFav,
-                                            ),
+                                      if (withFavorite)
+                                        GestureDetector(
+                                          onTap: onFavoritesPressed,
+                                          child: SvgPicture.asset(
+                                            item[keyIsWishListed] == true
+                                                ? iconFav
+                                                : iconUnFav,
                                           ),
-                                        SizedBox(height: 1.h),
+                                        ),
+                                    ],
+                                  ),
+                                  if (item[keyUnitNumber] != null &&
+                                      showUnitNumber)
+                                    Text(
+                                      '- ${item[keyUnitNumber]}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                                  FlutterMadaTheme.of(context)
+                                                      .primary),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  if (showComAndSub)
+                                    Column(
+                                      children: [
+                                        SizedBox(height: 16.h),
+                                        Text(
+                                          item[keySubCommunity] != null
+                                              ? '${item[keyCommunity] ?? ''} - ${item[keySubCommunity] ?? ''}'
+                                              : '${item[keyCommunity] ?? ''}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color:
+                                                    FlutterMadaTheme.of(context)
+                                                        .color989898,
+                                              ),
+                                        ),
+                                      ],
+                                    )
+                                  else
+                                    const Center(),
+                                  SizedBox(height: 16.h),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: <Widget>[
+                                        if (item[keyStatusInfo] != null &&
+                                            item[keyStatusInfo].isNotEmpty)
+                                          ...item[keyStatusInfo].map(
+                                            (label) {
+                                              if (label[keyText] != null &&
+                                                  label[keyText].isNotEmpty) {
+                                                return Row(
+                                                  children: <Widget>[
+                                                    LabelCard(
+                                                      text: label[keyText]
+                                                          .toString(),
+                                                      backgroundColor: Color(
+                                                        int.parse(
+                                                          hexToColor(
+                                                            label[keyBackgroundColor] ??
+                                                                '#FFFFFF',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      textSize: 16,
+                                                      textColor: Color(
+                                                        int.parse(
+                                                          hexToColor(
+                                                            label[keyTextColor] ??
+                                                                '#FFFFFF',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 3.w)
+                                                  ],
+                                                );
+                                              } else {
+                                                return const Center();
+                                              }
+                                            },
+                                          ).toList(),
                                       ],
                                     ),
-                                  ],
-                                ),
-                                if (item[keyUnitNumber] != null &&
-                                    showUnitNumber)
-                                  Text(
-                                    '- ${item[keyUnitNumber]}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: FlutterMadaTheme.of(context)
-                                                .primary),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                if (showComAndSub)
-                                  Column(
-                                    children: [
-                                      SizedBox(height: 16.h),
-                                      Text(
-                                        item[keySubCommunity] != null
-                                            ? '${item[keyCommunity] ?? ''} - ${item[keySubCommunity] ?? ''}'
-                                            : '${item[keyCommunity] ?? ''}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  FlutterMadaTheme.of(context)
-                                                      .color989898,
-                                            ),
-                                      ),
-                                    ],
-                                  )
-                                else
-                                  const Center(),
-                                SizedBox(height: 16.h),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: <Widget>[
-                                      if (item[keyStatusInfo] != null &&
-                                          item[keyStatusInfo].isNotEmpty)
-                                        ...item[keyStatusInfo].map(
-                                          (label) {
-                                            if (label[keyText] != null &&
-                                                label[keyText].isNotEmpty) {
-                                              return Row(
-                                                children: <Widget>[
-                                                  LabelCard(
-                                                    text: label[keyText]
-                                                        .toString(),
-                                                    backgroundColor: Color(
-                                                      int.parse(
-                                                        hexToColor(
-                                                          label[keyBackgroundColor] ??
-                                                              '#FFFFFF',
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    textSize: 16,
-                                                    textColor: Color(
-                                                      int.parse(
-                                                        hexToColor(
-                                                          label[keyTextColor] ??
-                                                              '#FFFFFF',
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 3.w)
-                                                ],
-                                              );
-                                            } else {
-                                              return const Center();
-                                            }
-                                          },
-                                        ).toList(),
-                                    ],
-                                  ),
-                                ),
-                                if (item[keyPrice] != null)
-                                  Column(
-                                    children: [
-                                      SizedBox(height: 16.h),
-                                      Text(
-                                        '${getFormattedPrice(item[keyPrice].toDouble())} ${getCurrency()}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w500,
-                                              color:
-                                                  FlutterMadaTheme.of(context)
-                                                      .primary,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                              ],
+                                  if (item[keyPrice] != null)
+                                    Column(
+                                      children: [
+                                        SizedBox(height: 16.h),
+                                        Text(
+                                          '${getFormattedPrice(item[keyPrice].toDouble())} ${getCurrency()}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                color:
+                                                    FlutterMadaTheme.of(context)
+                                                        .primary,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 8.h),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 14.h,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 14.h,
                       ),
-                      color: FlutterMadaTheme.of(context).colorD2D2D240,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            SvgPicture.asset(iconArea),
-                            SizedBox(width: 2.w),
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  item[keyArea].toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(width: 5.w),
-                                Text(
-                                  getUnitOfMeasure(context),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ],
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
                         ),
-                        if (showBedroom)
+                        color: FlutterMadaTheme.of(context).colorD2D2D240,
+                      ),
+                      child: Row(
+                        children: <Widget>[
                           Row(
                             children: <Widget>[
-                              SizedBox(width: 12.w),
+                              SvgPicture.asset(iconArea),
+                              SizedBox(width: 2.w),
                               Row(
                                 children: <Widget>[
-                                  SvgPicture.asset(iconBedrooms),
-                                  SizedBox(width: 2.w),
                                   Text(
-                                    item[keyBedrooms].toString(),
+                                    item[keyArea].toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  Text(
+                                    getUnitOfMeasure(context),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall!
@@ -293,24 +272,46 @@ class ProjectUnitCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        if (showBathroom && item[keyBathrooms] != null)
-                          Row(
-                            children: <Widget>[
-                              SizedBox(width: 12.w),
-                              SvgPicture.asset(iconBathrooms),
-                              SizedBox(width: 2.w),
-                              Text(
-                                item[keyBathrooms].toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w400,
+                          if (showBedroom)
+                            Row(
+                              children: <Widget>[
+                                SizedBox(width: 12.w),
+                                Row(
+                                  children: <Widget>[
+                                    SvgPicture.asset(iconBedrooms),
+                                    SizedBox(width: 2.w),
+                                    Text(
+                                      item[keyBedrooms].toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                     ),
-                              ),
-                            ],
-                          ),
-                      ],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          if (showBathroom && item[keyBathrooms] != null)
+                            Row(
+                              children: <Widget>[
+                                SizedBox(width: 12.w),
+                                SvgPicture.asset(iconBathrooms),
+                                SizedBox(width: 2.w),
+                                Text(
+                                  item[keyBathrooms].toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                   if (showContactIcons)
