@@ -1,6 +1,5 @@
 import '../../components/mada_header/mada_header.dart';
 import '../../components/projects_listview_filter/projects_listview_filter.dart';
-import '../../components/reset_filter/reset_filter.dart';
 import '../../components/select_list/mada_select_list.dart';
 import '../../general_exports.dart';
 import '../../structure_main_flow/flutter_mada_util.dart';
@@ -279,14 +278,12 @@ class _ProjectsListviewWidgetState extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: DEVICE_WIDTH * 0.02,
-                                  vertical: DEVICE_HEIGHT * 0.02,
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(height: DEVICE_HEIGHT * 0.025),
                                     Padding(
                                       padding: EdgeInsets.symmetric(
-                                        vertical: DEVICE_HEIGHT * 0.03,
+                                        vertical: DEVICE_HEIGHT * 0.02,
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
