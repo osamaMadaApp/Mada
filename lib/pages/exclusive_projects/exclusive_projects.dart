@@ -192,13 +192,11 @@ class _ExclusiveProjectsWidgetState extends StatelessWidget {
                                           )
                                         : SliverGridDelegateWithMaxCrossAxisExtent(
                                             maxCrossAxisExtent: 434,
-                                            mainAxisSpacing:
-                                                DEVICE_HEIGHT * 0.02,
+                                            mainAxisSpacing:DEVICE_HEIGHT * 0.02,
                                             // Increased spacing
-                                            crossAxisSpacing:
-                                                DEVICE_WIDTH * 0.02,
+                                            crossAxisSpacing:DEVICE_WIDTH * 0.02,
                                             // Increased spacing
-                                            childAspectRatio: 434 / 240,
+                                            childAspectRatio: 434 / 260,
                                           ),
                                     itemCount: _model.lastProjects.length,
                                     itemBuilder:
