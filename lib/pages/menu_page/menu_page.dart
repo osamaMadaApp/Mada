@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_util.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -62,11 +61,11 @@ class Menu extends StatelessWidget {
                         child: FavoritesScreen(),
                       ),
                     ),
-                    TabItem(
-                      label: FFLocalizations.of(context).getText('contact_us'),
-                      icon: iconCallCalling,
-                      content: const ContactUsScreen(),
-                    ),
+                    // TabItem(
+                    //   label: FFLocalizations.of(context).getText('contact_us'),
+                    //   icon: iconCallCalling,
+                    //   content: const ContactUsScreen(),
+                    // ),
                     TabItem(
                       label: FFLocalizations.of(context)
                           .getText('terms_and_conditions'),
