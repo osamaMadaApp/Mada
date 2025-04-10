@@ -363,7 +363,7 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                             SizedBox(
                               width: 120.w,
                               child: Text(
-                                'Alaa Alzibda Alaa s Alaa as ',
+                                '${item[keyTitle]}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
