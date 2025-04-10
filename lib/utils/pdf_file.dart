@@ -1,19 +1,18 @@
+// ignore_for_file: prefer_single_quotes
+
 import 'dart:typed_data' as U8;
-import 'dart:ui';
 
 import 'package:flutter/services.dart' as serv;
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:image/image.dart' as img;
-import 'dart:typed_data';
 
 import 'assets.dart';
 import 'pdf_utils.dart';
 
 Future<void> generateAndDownloadPdfFile() async {
-  Map<String, dynamic> jsonData = {
+  final Map<String, dynamic> jsonData = {
     "projectLogo": "url",
     "date": "11/01/2025 | 04:00 PM",
     "projectName": "Project Name",
@@ -59,19 +58,23 @@ Future<void> generateAndDownloadPdfFile() async {
         ]
       }
     ],
-    "offerValidation": "3"
+    "planTitle": "Layout Plan",
+    "plan":
+        'https://objectstorage.me-jeddah-1.oraclecloud.com/n/axxblwxnjwnb/b/mada-properties-live/o/uploads/1739800262066-6768901a-7a00-4830-a756-78cc3c5ec8bd.jpg',
+    "madaLogo":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMzLgCYwrJvvUH_LJ3p-VzMQZT1E0BCDLEqQ&s",
+    "offerValidation": "3",
   };
   final pdf = pw.Document();
   final date = jsonData['date'];
-  final projectName = jsonData['projectName'];
   final realEstateDeveloperName = jsonData['realEstateDeveloperName'];
   final companyName = jsonData['companyName'];
   final offerValidDays = jsonData['offerValidation'];
   final U8.Uint8List leftImageBytes =
       (await serv.rootBundle.load(coloredLogoImage)).buffer.asUint8List();
 
-  final Uint8List rightImage = await urlToUint8List("https://img.freepik.com/free-vector/abstract-logo-flame-shape_1043-44.jpg");
-
+  final Uint8List rightImage = await urlToUint8List(
+      "https://img.freepik.com/free-vector/abstract-logo-flame-shape_1043-44.jpg");
 
   int counter = 0;
   final fontOutfit500 = await rootBundle.load('assets/fonts/Outfit-Medium.ttf');
@@ -92,8 +95,9 @@ Future<void> generateAndDownloadPdfFile() async {
       await rootBundle.load('assets/fonts/IBMPlexSansArabic-SemiBold.ttf');
   final outIBM600 = pw.Font.ttf(fontIBM600);
 
-
-
+  final planTitle = jsonData['planTitle'];
+  final planImage = await urlToUint8List(jsonData['plan']);
+  final madaLogo = await urlToUint8List(jsonData['madaLogo']);
 
   pdf.addPage(
     pw.MultiPage(
@@ -129,12 +133,14 @@ Future<void> generateAndDownloadPdfFile() async {
                               fontSize: 10,
                               font: outfitFont500,
                             )),
-                        pw.Text('$date',
-                            style: pw.TextStyle(
-                              color: PdfColor.fromHex('#000000'),
-                              fontSize: 10,
-                              font: outfitFont300,
-                            )),
+                        pw.Text(
+                          '$date',
+                          style: pw.TextStyle(
+                            color: PdfColor.fromHex('#000000'),
+                            fontSize: 10,
+                            font: outfitFont300,
+                          ),
+                        ),
                       ])
                 ],
               ),
@@ -183,12 +189,14 @@ Future<void> generateAndDownloadPdfFile() async {
         pw.Padding(
           padding: const pw.EdgeInsets.only(left: 25, right: 25),
           child: pw.Center(
-            child: pw.Text('Sales Offer',
-                style: pw.TextStyle(
-                  color: PdfColor.fromHex('#000000'),
-                  fontSize: 30,
-                  font: outfitFont600,
-                )),
+            child: pw.Text(
+              'Sales Offer',
+              style: pw.TextStyle(
+                color: PdfColor.fromHex('#000000'),
+                fontSize: 30,
+                font: outfitFont600,
+              ),
+            ),
           ),
         ),
         pw.Padding(
@@ -258,7 +266,6 @@ Future<void> generateAndDownloadPdfFile() async {
                           ),
                           pw.Row(
                             mainAxisAlignment: pw.MainAxisAlignment.center,
-                            crossAxisAlignment: pw.CrossAxisAlignment.center,
                             children: [
                               if (isArabicText(item['value']))
                                 pw.Directionality(
@@ -312,24 +319,62 @@ Future<void> generateAndDownloadPdfFile() async {
         ),
         pw.Padding(
           padding: const pw.EdgeInsets.only(left: 25, right: 25, top: 30),
-          child: pw.Row(children: [
-            pw.Text('**',
-                style: pw.TextStyle(
-                  color: PdfColors.red,
-                  fontSize: 10,
-                  font: outfitFont600,
-                )),
-            pw.Text(
+          child: pw.Row(
+            children: [
+              pw.Text('**',
+                  style: pw.TextStyle(
+                    color: PdfColors.red,
+                    fontSize: 10,
+                    font: outfitFont600,
+                  )),
+              pw.Text(
                 'This Sales Offer is valid only for $offerValidDays days. Price and payment plan are subject to change without prior notice.',
                 style: pw.TextStyle(
                   color: PdfColor.fromHex('#000000'),
                   fontSize: 10,
                   font: outfitFont600,
-                ))
-          ]),
+                ),
+              )
+            ],
+          ),
+        ),
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(left: 25, right: 25, top: 70),
+          child: pw.Center(
+            child: pw.Text(
+              '$planTitle',
+              style: pw.TextStyle(
+                color: PdfColor.fromHex('#8EC24D'),
+                decoration: pw.TextDecoration.underline,
+                decorationColor: PdfColor.fromHex('#8EC24D'),
+                fontSize: 25,
+                font: outfitFont600,
+              ),
+            ),
+          ),
+        ),
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(left: 25, right: 25, top: 25),
+          child: pw.Center(
+            child: pw.Image(
+              pw.MemoryImage(planImage),
+              width: 300,
+              height: 300,
+            ),
+          ),
+        ),
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(left: 25, right: 25, top: 70),
+          child: pw.Center(
+            child: pw.Image(
+              pw.MemoryImage(madaLogo),
+              width: 200,
+              height: 100,
+            ),
+          ),
         ),
       ],
-      footer:  (con) {
+      footer: (con) {
         return pw.Container(
           height: 8,
           color: const PdfColor.fromInt(0xFF97BE5A),
@@ -343,15 +388,18 @@ Future<void> generateAndDownloadPdfFile() async {
 }
 
 bool isArabicText(String text) {
-  if (text.isEmpty) return false;
+  if (text.isEmpty) {
+    return false;
+  }
 
   // The Unicode range for Arabic characters is from 0x0600 to 0x06FF
   // Additional Arabic characters can be found in 0x0750-0x077F (Arabic Supplement)
   // and 0x08A0-0x08FF (Arabic Extended-A)
-  RegExp arabicRegex = RegExp(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]');
+  final RegExp arabicRegex =
+      RegExp(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]');
 
   // Count Arabic characters
-  int arabicCharCount = arabicRegex.allMatches(text).length;
+  final int arabicCharCount = arabicRegex.allMatches(text).length;
 
   // If more than 50% of the characters are Arabic, consider it Arabic text
   // This threshold can be adjusted based on your needs
