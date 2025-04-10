@@ -359,12 +359,11 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
                               width: 120.w,
                               child: Text(
-                                '${item[keyTitle]}',
+                                'Alaa Alzibda Alaa s Alaa as ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -376,21 +375,16 @@ class HorizontalProjectUnitCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                if (withFavorite)
-                                  GestureDetector(
-                                    onTap: onFavoritesPressed,
-                                    child: SvgPicture.asset(
-                                      item[keyIsWishListed] == true
-                                          ? iconFav
-                                          : iconUnFav,
-                                    ),
-                                  ),
-                                SizedBox(height: 1.h),
-                              ],
-                            ),
+                            SizedBox(width: 10.w),
+                            if (withFavorite)
+                              GestureDetector(
+                                onTap: onFavoritesPressed,
+                                child: SvgPicture.asset(
+                                  item[keyIsWishListed] == true
+                                      ? iconFav
+                                      : iconUnFav,
+                                ),
+                              ),
                           ],
                         ),
                         if (item[keyUnitNumber] != null && showUnitNumber)
