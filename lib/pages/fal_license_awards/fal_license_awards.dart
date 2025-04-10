@@ -1,5 +1,4 @@
 import '../../general_exports.dart';
-import '../../structure_main_flow/flutter_mada_util.dart';
 
 class FALLicenseAndAwards extends StatelessWidget {
   const FALLicenseAndAwards({
@@ -42,7 +41,7 @@ class FALLicenseAndAwards extends StatelessWidget {
                     height: 50.h,
                   ),
                   SizedBox(
-                    height: 200.h,
+                    height: 230.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: sliderSettings.length,
