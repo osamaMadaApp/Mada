@@ -426,11 +426,35 @@ class ProjectDetailsSection2 extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          Routes.routePayment,
-                          arguments: {
-                            keyUnitId: model.data[keyID],
+                        model.onOwnProperty(
+                          onContactPopUp: () {
+                            SideSheet.show(
+                              context,
+                              child: ContactTeamSheet(
+                                whatsappMsg:
+                                    '${model.data[keyTitle] ?? ''}\n${model.data[keyPropertyCategory] ?? ''}\n${model.data[keyPrice] ?? 0} ${getCurrency()}\n${model.data[keyCity] ?? ''} - ${model.data[keyCommunity] ?? ''} - ${model.data[keySubCommunity] ?? ''}',
+                              ),
+                              title: FFLocalizations.of(context)
+                                  .getText('confirm_your_data'),
+                            );
+                          },
+                          onNafathVerificationSheet: () {
+                            SideSheet.show(
+                              context,
+                              child: const ConfirmNafathSheet(),
+                              title: FFLocalizations.of(context).getText(
+                                'confirm_your_data',
+                              ),
+                            );
+                          },
+                          onPayment: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.routePayment,
+                              arguments: {
+                                keyUnitId: model.data[keyID],
+                              },
+                            );
                           },
                         );
                       },

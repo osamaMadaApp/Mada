@@ -141,4 +141,21 @@ class UnitDetailsModel extends ChangeNotifier {
       title: FFLocalizations.of(context).getText('project_description'),
     );
   }
+
+  void onOwnProperty({
+    Function()? onContactPopUp,
+    Function()? onNafathVerificationSheet,
+    Function()? onPayment,
+  }) {
+    if (data[keyOpenContactPopup]) {
+      onContactPopUp!();
+      return;
+    }
+    if (FFAppState().userModel[keyIsNafathVerified] == 0) {
+      onNafathVerificationSheet!();
+      return;
+    }
+
+    onPayment!();
+  }
 }
