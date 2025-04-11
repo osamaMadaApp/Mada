@@ -17,6 +17,7 @@ class ReportPropertySheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic masterData = FFAppState().masterDateJsonModel;
+    userType = masterData[keyUserTypeReason][2]['key'];
     return Column(
       children: [
         SizedBox(
@@ -54,13 +55,28 @@ class ReportPropertySheet extends StatelessWidget {
               SizedBox(
                 height: DEVICE_HEIGHT * 0.01,
               ),
-              MadaDropdownList(
-                label: FFLocalizations.of(context).getText('select_the_type'),
-                items: masterData[keyUserTypeReason],
-                onChanged: (value) {
-                  userType = value;
-                },
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(AppColors.gray6),
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    DEVICE_HEIGHT * 0.01,
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: DEVICE_WIDTH * 0.01,
+                  vertical: DEVICE_HEIGHT * 0.015,
+                ),
+                child: Text(userType),
               ),
+              // MadaDropdownList(
+              //   label: FFLocalizations.of(context).getText('select_the_type'),
+              //   items: masterData[keyUserTypeReason],
+              //   onChanged: (value) {
+              //     userType = value;
+              //   },
+              // ),
               SizedBox(
                 height: DEVICE_HEIGHT * 0.03,
               ),
